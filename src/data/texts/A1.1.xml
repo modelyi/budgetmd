@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  A1.1 表单整体登记簿 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="A1.1" name="表单整体登记簿">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['A1.1']） -->
+  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅汇总展示：表单整体登记簿，登记表单编码、名称与编制口径，不生成分录）。【法人口径】④不区分法人：总览登记簿，不按法人编制。]]></overview>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="A1.1 表单整体登记簿">
+      <point><![CDATA[汇总全系统所有编制表单的编码/名称/所属大类/是否参与凭证生成，是"表单整体登记"的唯一权威来源，只读展示，不可在此表内手工新增或修改表单。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['A1.1']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[全系统编制表单的编码/名称/所属大类/是否参与凭证生成的登记与只读查询（表单登记簿）]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[具体业务预算金额的填报（属各 BB/BF 编制表）]]></item>
+    </notApplies>
+  </scenarios>
+
+</form>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AA.5 行政部门 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="AA.5" name="行政部门">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['AA.5']） -->
+  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅参数/主数据维护：行政部门主数据字典，预算部门维度的值域来源（默认明细到二级部门），不生成分录）。【法人口径】④不区分法人：本表为主数据/参数维护表，不按法人归集或拆分。]]></overview>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="AA.5 行政部门">
+      <point><![CDATA[部门编码/名称为一级、二级部门下拉的统一来源；类型区分管理/普通部门。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['AA.5']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[行政部门主数据维护，供各表一级/二级/三级部门下拉引用]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[具体业务金额填报]]></item>
+    </notApplies>
+  </scenarios>
+
+</form>

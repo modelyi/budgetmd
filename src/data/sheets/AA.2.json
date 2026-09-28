@@ -1,0 +1,702 @@
+{
+  "grids": [
+    {
+      "name": "AA.2 法人组织架构主数据",
+      "rows": [
+        [
+          {
+            "text": "法人编码",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "法人名称",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "父组织",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "JT",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "甜甜圈集团公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "（顶级母公司）",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "A",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "草莓慕斯公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "甜甜圈集团公司 (JT)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "B",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "蓝莓蛋挞公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "甜甜圈集团公司 (JT)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "C",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "芒果班戟公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "甜甜圈集团公司 (JT)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "D",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "西瓜泡芙公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "甜甜圈集团公司 (JT)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "BA",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "抹茶曲奇公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "蓝莓蛋挞公司 (B)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "BB",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "樱桃华夫公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "蓝莓蛋挞公司 (B)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "BC",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "椰香可露丽公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "蓝莓蛋挞公司 (B)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "BD",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "海盐芝士公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "蓝莓蛋挞公司 (B)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "DA",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "蜜桃千层公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "西瓜泡芙公司 (D)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "DB",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "香橙舒芙蕾公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "西瓜泡芙公司 (D)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "DC",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "青提马卡龙公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "西瓜泡芙公司 (D)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 13,
+      "colCount": 3
+    },
+    {
+      "name": "AA.2.b 法人组织架构图",
+      "rows": [
+        [
+          {
+            "text": "法人编码",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "法人名称",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "法人类别",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "组织层级",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "说明",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "JT",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "甜甜圈集团公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "综合管理",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "一级（母公司）",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "集团总部/母公司本部",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "A",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　├─ 草莓慕斯公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "制造基地",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "二级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "一级全资子公司 (智能装备整机制造基地)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "B",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　├─ 蓝莓蛋挞公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "制造基地",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "二级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "一级全资子公司 (核心高精度装备制造)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "BA",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　　├─ 抹茶曲奇公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "制造基地",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "三级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "蓝莓蛋挞公司旗下二级子公司 (精致糖艺零部件)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "BB",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　　├─ 樱桃华夫公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "制造基地",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "三级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "蓝莓蛋挞公司旗下二级子公司 (高精度结构组件加工)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "BC",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　　├─ 椰香可露丽公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "销售主体",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "三级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "蓝莓蛋挞公司旗下二级子公司 (华南区域交付中心)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "BD",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　　└─ 海盐芝士公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "海外中心",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "三级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "蓝莓蛋挞公司旗下二级子公司 (海外及进出口业务)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "C",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　├─ 芒果班戟公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发中心",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "二级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "一级全资子公司 (前沿软件与算法研发中心)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "D",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　└─ 西瓜泡芙公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "销售主体",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "二级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "一级全资子公司 (国内综合销售与客户服务)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "DA",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　　├─ 蜜桃千层公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "销售主体",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "三级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "西瓜泡芙公司旗下二级子公司 (华北及华东工程服务)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "DB",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　　├─ 香橙舒芙蕾公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "销售主体",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "三级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "西瓜泡芙公司旗下二级子公司 (中西部客户服务)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "DC",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "　　└─ 青提马卡龙公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发中心",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "三级子公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "西瓜泡芙公司旗下二级子公司 (现场应用工程AE定制)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 13,
+      "colCount": 5
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BAA.9 资本性支出拆分比例表 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BAA.9" name="资本性支出拆分比例表">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BAA.9']） -->
+  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅参数：BAA.9.a 资产转换比例与 BAA.9.b 折旧费用拆分比例，为无PO 资本性支出拆分到法人（BB.3.1.C）与折旧按四大费用拆分（BB.4.5）提供比例，不生成分录）。【法人口径】④不区分法人：比例参数表本身，供 BB.3.1.C 无PO 拆分与 BB.4.5 折旧费用拆分取值，不按法人编制。]]></overview>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BAA.9 资本性支出拆分比例表">
+      <point><![CDATA[本表含两个Tab（同页切换）：资产转换比例（法人拆分）+ 折旧费用拆分比例（费用属性拆分）。]]></point>
+      <point><![CDATA[Tab1 资产转换比例：维度=预算项目+预算部门（预算部门默认二级部门），度量=各法人公司占比+合计列，比例按「预算项目×预算部门」维度逐行维护法人拆分，每行加和须=100%（仅文字说明提示，不强制校验/高亮）；为资本性支出法人拆分提供比例，仅由 BB.3.1.C 财务视角对 BB.3.1.B 无PO表样的采购按 BAA.9.a 拆分到法人（资本性支出法人拆分的唯一入口）。]]></point>
+      <point><![CDATA[Tab2 折旧费用拆分比例：维度=资产类别（层级=大类-小类，与AA.9对齐，已删除法人字段），度量=销售/管理/研发/制造费用比例+合计列；强校验规则：每行四大费用属性比例加和必须强等于100%（Sum=100%）。核心逻辑：专为本年增量资产折旧(BB.4.X)按资产类别拆分到四大费用科目提供比例（增量折旧=各类别新增折旧×对应费用比例）；而存量资产折旧(BB.4.4)依据资产领用部门属性映射(参考AM.2)直接归入对应费用科目，不经过本表拆分。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BAA.9']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[Tab1 资本性支出法人拆分比例（按预算项目×预算部门逐行维护各法人占比）：仅由 BB.3.1.C 在无PO采购时按 BAA.9.a 拆分到法人（设备无PO法人拆分的唯一入口，本年度只做一次）；Tab2 折旧费用拆分比例：供 BB.4.5 按 BAA.9.b 将全年及各月折旧拆入四大费用]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[资本性支出金额填报（属 BB.3.1/BB.3.2/BB.4.1/BB.4.3）]]></item>
+      <item><![CDATA[BB.4.5 的法人拆分（法人直接取 BB.3.1.C 拆分后结果，不重复拆分）]]></item>
+    </notApplies>
+  </scenarios>
+
+</form>

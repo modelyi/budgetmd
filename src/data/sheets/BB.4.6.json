@@ -1,0 +1,1687 @@
+{
+  "grids": [
+    {
+      "name": "BB.4.6 资产处置预算表",
+      "rows": [
+        [
+          {
+            "text": "法人公司",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "预算部门",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "资产类别",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "资产描述",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "处置方式",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "【全年合计】",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "1月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "2月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "3月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "4月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "5月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "6月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "7月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "8月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "9月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "10月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "11月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "12月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 6,
+            "bg": "#001e4a"
+          }
+        ],
+        [
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产原值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "资产净值(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-不含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置收款-含税(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "处置损益(万元)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          }
+        ],
+        [
+          {
+            "text": "草莓慕斯公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "制造工程部",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "固定资产-生产机器设备",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "高功率激光切割头测试台架（已使用 4 年，对外转让给第三方设备商）",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "对外出售",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "120.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "40.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "80.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "95.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "107.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "15.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "120.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "40.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "80.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "95.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "107.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "15.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "樱桃华夫公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "检测中心",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "固定资产-电子与办公设备",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "检测终端 12 台（到期报废，残值变卖给回收商）",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "报废变卖",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "30.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "27.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "-1.8",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "30.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "27.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "-1.8",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 4,
+      "colCount": 83
+    }
+  ]
+}

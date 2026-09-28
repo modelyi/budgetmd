@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  A2B 销售预算及内部交易处理方案 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="A2B" name="销售预算及内部交易处理方案">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['A2B']） -->
+  <overview><![CDATA[A2 专项方案下的方案文档（两列「章节｜内容」，共10章），白话讲清销售预算口径：三条线（签约额备查 BB.1.1 + 软硬件销售 BB.1.2 + 技术服务 BB.1.3）、收入与收款按「签约主体（法人公司）」出对外口径（销售订单不再区分内部供应商）、财务科目落点、手工三行（2203/2204/1407）、系统自动勾稽。本表为静态文档，不含示例数据、不新增报表行与科目，不参与取数、不生成分录。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='A2B'） -->
+  <fields>
+    <field code="section" name="章节" source="本方案文档固定章节"><![CDATA[固定 10 章：1.一句话结论 / 2.业务模块与涉及表单（四个模块）/ 3.业务流程（端到端七步）/ 4.表单 ER 关系 / 5.输入与输出（逐表）/ 6.财务视角：科目与落点（对外 vs 内部）/ 7.合并报表与抵销 / 8.勾稽与校验（系统自动）/ 9.价值 / 10.前提与风险；章节名固定、不随年度变化]]></field>
+    <field code="content" name="内容" source="本方案文档正文"><![CDATA[该章节的白话正文（销售预算及内部交易处理口径说明，含规则要点与前后衔接）；文档式表样不做金额、公式与示例数据，不参与任何表间取数]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="A2B 销售预算及内部交易处理方案">
+      <point><![CDATA[【三条线】销售预算＝签约额备查（BB.1.1，不进三表）+ 软硬件销售（BB.1.2：硬件销售/软件销售）+ 技术服务（BB.1.3），收入均按「签约主体（法人公司）」出对外口径。]]></point>
+      <point><![CDATA[【手工三行】2203 预收款项、2204 合同负债、1407 合同资产直接在三表手工调整列填报（默认 0），不与销售表自动联动。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['A2B']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[销售预算的整体方案说明：三条线（BB.1.1 合同签约额备查 + BB.1.2 软硬件销售（硬件销售/软件销售）+ BB.1.3 技术服务）、四个业务模块与端到端流程（签约→填报→财务视角合并→三表取数）的查阅与宣讲]]></item>
+      <item><![CDATA[表单 ER 关系、逐表输入输出、财务科目落点、系统自动勾稽、价值与落地前提风险（AB.4/AA.2 录准、预收比例默认 30%）的查阅与宣讲]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[具体金额填报（销量/单价/预收/回款 属 BB.1.2.a、BB.1.3.a）]]></item>
+      <item><![CDATA[加成比例与收入确认方式参数维护（属 BAA.11 / AB.4）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['A2B']） -->
+  <relation>
+    <summary><![CDATA[销售预算及内部交易处理方案是 A2 专项方案下的方案文档（文档式表样：两列「章节｜内容」，共 10 个章节），用白话把「三条销售线、对外口径、手工三行」的销售预算口径讲清楚：四个业务模块、端到端流程、表单 ER 关系、逐表输入输出、财务科目落点、系统自动勾稽、价值与前提；本表本身不做金额测算、不生成会计分录、不新增报表项目行与科目。]]></summary>
+    <dataSources>
+      <source code="BB.1.1" name="销售合同签约额" fields="合同编码、合同名称、区域、一级部门、签约额"><![CDATA[仅作预测口径与备查（不进三表）；同一合同编码可多行拆分]]></source>
+      <source code="BB.1.2.a" name="软硬件销售填报" fields="订单编号、销售产品、机台、签约主体（法人公司）、销量、单价、预收、验收回款"><![CDATA[收入=销量×单价；预收/验收回款按月填、进 CF-01]]></source>
+      <source code="BB.1.3.a" name="服务销售填报" fields="订单编号、项目、产品、机台、签约主体（法人公司）、销量、单价、服务收入（=销量×单价）、预收、验收回款"><![CDATA[服务收入按签约主体法人出对外口径；预收/验收回款进 CF-01]]></source>
+      <source code="AA.2/AA.6/AA.7/AB.4" name="前置引用与参数" fields="法人组织架构、预算项目、预算产品、收入确认方式"><![CDATA[签约主体（法人公司）取 AA.2 法人组织架构；收入确认方式取 AB.4 字典]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BO.PL 利润表"><![CDATA[6001.1 主营业务收入（600101 硬件/600103 软件/600105 技术服务）、6401 营业成本（按实际生产产品成本结转）；加成款与内部往来分录随关联交易表（BJ.C.a/BJ.C.e/BJ.C.d/BJ.C.f）处理]]></output>
+      <output target="BO.BS 资产负债表"><![CDATA[应收账款 1122、存货 1405；2203 预收款项、2204 合同负债、1407 合同资产三行直接手填]]></output>
+      <output target="BO.CF 现金流量表"><![CDATA[CF-01 销售商品、提供劳务收到的现金（预收+验收回款×适用税率）]]></output>
+    </outputs>
+    <keyRules>
+      <rule><![CDATA[三条线：签约额备查（BB.1.1）+ 软硬件销售（BB.1.2）+ 技术服务（BB.1.3），收入均按签约主体法人出对外口径。]]></rule>
+      <rule><![CDATA[手工三行：2203 预收款项、2204 合同负债、1407 合同资产直接手填，不与销售表自动联动。]]></rule>
+      <rule><![CDATA[合并抵销：6001.2↔6602、1221↔2241、1405 按成本两侧抵销；存货平价承接、无未实现内部损益倒剔。]]></rule>
+    </keyRules>
+  </relation>
+
+</form>

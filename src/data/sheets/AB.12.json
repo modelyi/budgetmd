@@ -1,0 +1,223 @@
+{
+  "grids": [
+    {
+      "name": "AB.12 职级字典",
+      "rows": [
+        [
+          {
+            "text": "职级编码",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "职级名称",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "状态",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "职级说明",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "RANK-01",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "职级1",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "启用",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "初级职级",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "RANK-02",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "职级2",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "启用",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "中级职级",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "RANK-03",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "T1",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "启用",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "技术序列一级",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "RANK-04",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "T2",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "启用",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "技术序列二级",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "RANK-05",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "T3",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "启用",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "技术序列三级",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "RANK-06",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "T4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "启用",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "技术序列四级",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "RANK-07",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "T5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "启用",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "技术序列五级",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 8,
+      "colCount": 4
+    }
+  ]
+}

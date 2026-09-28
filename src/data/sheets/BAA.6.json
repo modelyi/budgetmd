@@ -1,0 +1,641 @@
+{
+  "grids": [
+    {
+      "name": "BAA.6.a 场所基本信息维护",
+      "rows": [
+        [
+          {
+            "text": "场所编码",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "场所名称",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "地址",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "业主方(出租方)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "总面积 (㎡)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "启用状态",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "出租方类型",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "出租方名称",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "SITE-001",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "花果山园区",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "上海市浦东新区花果山路 1888 号",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "神盾局物业管理有限公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "12000",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "启用",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "内部持有",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "甜甜圈集团公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "SITE-002",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "史塔克大厦",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "上海市浦东新区史塔克工业园博云路 2 号",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "瓦坎达置业集团",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "6800",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "启用",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "外部租入",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "瓦坎达置业集团",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "SITE-003",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "瓦坎达科技园",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "上海市瓦坎达科技园大道 1550 号",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "瓦坎达产业区开发有限公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "24000",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "停用",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "外部租入",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "瓦坎达产业区开发有限公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 4,
+      "colCount": 8
+    },
+    {
+      "name": "BAA.6.b 年度租赁面积维护",
+      "rows": [
+        [
+          {
+            "text": "年度",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "场所选择",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "租赁期间(起止)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "租赁面积 (㎡)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "单价(元/㎡·月)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "备注说明",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "2027",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "花果山园区",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "甜甜圈集团公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2027/01/01-2029/12/31",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "8,000",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "120",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "集团总部办公与研发；场所出租方类型=内部持有，单价取市场单价",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "2027",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "花果山园区",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "草莓慕斯公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2027/01/01-2029/12/31",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "4,000",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "120",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "整机装配车间；场所出租方类型=内部持有，单价取市场单价",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 3,
+      "colCount": 7
+    },
+    {
+      "name": "BAA.6.c 场所法人比例查看",
+      "rows": [
+        [
+          {
+            "text": "年度",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "场所",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "甜甜圈集团公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "草莓慕斯公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "蓝莓蛋挞公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "芒果班戟公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "西瓜泡芙公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "抹茶曲奇公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "樱桃华夫公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "椰香可露丽公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "海盐芝士公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "蜜桃千层公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "香橙舒芙蕾公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "青提马卡龙公司",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "合计",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "2027",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 2,
+      "colCount": 15
+    },
+    {
+      "name": "BAA.6.e 租赁折现率维护",
+      "rows": [
+        [
+          {
+            "text": "年度",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "折现率 (%)",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "备注说明",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "2027",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "4.50%",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "默认取 BF.3 综合融资成本（2027 年度 4.50%）；本表可按年度覆盖",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "2028",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "4.75%",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2028 年度预测折现率（示例行，仅示意按年度维护、逐年覆盖的口径）",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 3,
+      "colCount": 3
+    }
+  ]
+}

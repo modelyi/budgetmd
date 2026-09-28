@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  _chart-of-accounts 统一预算科目与科目编码规则（科目说明） · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：src/data/unifiedBudgetChartOfAccounts.ts + src/data/expenseBudgetSubjectsData.ts
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="_chart-of-accounts" name="统一预算科目与科目编码规则（科目说明）">
+
+  <!-- 统一科目主数据（原 src/data/unifiedBudgetChartOfAccounts.ts UNIFIED_BUDGET_ACCOUNTS），
+       文字=科目名称/科目全称/核算范围说明/会计准则依据；结构化列（家族/层级/借贷方向/是否列报行等）留在 TS。 -->
+  <accounts>
+    <account code="6001" family="PL" name="营业收入合计" fullName="利润表-营业收入合计">
+      <description><![CDATA[= 6001.1 主营业务收入 + 6001.2 其他业务收入（按利润表表样行口径汇总，业务线明细不单列）；签约主体对客户确认]]></description>
+      <standardRef><![CDATA[企业会计准则第14号-收入]]></standardRef>
+    </account>
+    <account code="6401" family="PL" name="营业成本合计" fullName="利润表-营业成本合计">
+      <description><![CDATA[= 6401.1 主营业务成本 + 6401.2 其他业务成本（按利润表表样行口径汇总，成本构成明细不单列）；营业成本按实际生产产品成本结转、不含任何内部加成]]></description>
+      <standardRef><![CDATA[企业会计准则第1号-存货]]></standardRef>
+    </account>
+    <account code="6403" family="PL" name="税金及附加" fullName="利润表-税金及附加">
+      <description><![CDATA[直接取 BF.4.税费及附加合计(利润表口径)（=城建税+教育费附加+房产税+土地使用税+印花税+其他税费，BF.4 表内公式求和）；增值税为价外税不计入本行，即征即退退税收益计入其他收益(6117)不入本行]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="6601" family="PL" name="销售费用" fullName="利润表-销售费用">
+      <description><![CDATA[SUM(BB.5.1 财务视角.销售费用（人工，已剔除服务人工与资本化人工）) + SUM(BB.5.2.费用性质="销售费用"的各法人公司金额（非人工经营费用）) + BB.4.X.A.折旧费用汇总表「销售费用折旧」小计（已含存量资产、本年新增资产与使用权资产折旧，折旧唯一入口=BB.4.5/BB.4.X.A，按费用性质直接取用，不分两处取数）+ BB.4.2.a 外部职场租赁.费用化合同月租金（用途=销售，各月求和）（外部职场租赁费用，对外交易、非内部结算、不进内部往来、不参与集团合并抵销）+ SUM(BAP.2.月度消耗金额（领料用途=销售类）)（物料消耗，领料用途=销售类）；资本化人工已在 BB.5.1 财务视角剥离至「自制在建工程」列并计入 1604，本行不再扣减]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="6602" family="PL" name="管理费用" fullName="利润表-管理费用">
+      <description><![CDATA[SUM(BB.5.1 财务视角.管理费用（人工，已剔除服务人工与资本化人工）) + SUM(BB.5.2.费用性质="管理费用"的各法人公司金额（非人工经营费用）) + BB.4.X.A.折旧费用汇总表「管理费用折旧」小计（已含存量资产、本年新增资产与使用权资产折旧，折旧唯一入口=BB.4.5/BB.4.X.A，按费用性质直接取用，不分两处取数）；另加 BB.4.2.b 内部职场租赁.费用化合同内部租金+月度加成款（承租方内部租赁费用，集团合并层与出租方 6001.2 内部租金收入互抵）+ BB.4.2.a 外部职场租赁.费用化合同月租金（用途=管理，各月求和）（外部职场租赁费用，对外交易、不参与集团合并抵销）+ SUM(BAP.2.月度消耗金额（领料用途=管理类及其他）) + SUM(BB.3.3.D·BB.3.1.D.月度加成款，各月求和)（代采购加成款，接受方内部支出，集团合并层与提供方其他业务收入-内部往来互抵）+ SUM(BB.1.3.i 人工明细_财务查询.内部供应商加成款，各月求和)（销售线内部供应商提供的人工行，签约主体确认的内部支出：加成款=该行人工成本×BAA.11、人工成本=工时×BAA.3；物料行的加成款已按真实购销模型并入采购价计入 6401.1 服务成本-物料、本行不再取数；集团合并层与提供方其他业务收入-内部往来全额对冲）；资本化人工已在 BB.5.1 财务视角剥离至「自制在建工程」列并计入 1604，本行不再扣减]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="6602.1" family="PL" name="管理费用-内部往来" fullName="利润表-管理费用-内部往来">
+      <description><![CDATA[代采购加成款：接受方（实际使用方 B）加成支出，借方发生额计入 6602 管理费用；集团合并层与提供方其他业务收入-内部往来互抵，不进集团合并报表。另含销售线内部供应商提供的人工行加成款（BB.1.3.i 中「内部供应商」非空且≠签约主体的行：加成款=该行人工成本×BAA.11，签约主体为承担方）：借方发生额计入 6602，集团合并层与提供方 6001.2 其他业务收入-内部往来全额对冲；销售线物料明细（BB.1.3.f）的加成款按真实购销模型并入签约主体采购价、计入物料销售成本 6401.1（加成进成本），不再经本行]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="6603" family="PL" name="研发费用" fullName="利润表-研发费用">
+      <description><![CDATA[SUM(BB.5.1 财务视角.研发费用（人工，已剔除服务人工与资本化人工）) + SUM(BB.5.2.费用性质="研发费用"的各法人公司金额（非人工经营费用）) + BB.4.X.A.折旧费用汇总表「研发费用折旧」小计（已含存量资产、本年新增资产与使用权资产折旧，折旧唯一入口=BB.4.5/BB.4.X.A，按费用性质直接取用，不分两处取数）+ BB.4.2.a 外部职场租赁.费用化合同月租金（用途=研发，各月求和）（外部职场租赁费用，对外交易、不参与集团合并抵销）+ SUM(BAP.2.月度消耗金额（领料用途=研发类）)；资本化人工已在 BB.5.1 财务视角剥离至「自制在建工程」列并计入 1604，本行不再扣减]]></description>
+      <standardRef><![CDATA[企业会计准则第6号-无形资产]]></standardRef>
+    </account>
+    <account code="6604" family="PL" name="财务费用" fullName="利润表-财务费用">
+      <description><![CDATA[= BF.3.d.费用化融资费用 + BB.4.2.b.1 内部职场租赁·财务视角.利息费用（承担的内部租赁负债利息；内部租赁合并层与出租方内部收入互抵）+ BB.4.2.a.1 外部职场租赁·财务视角.月度利息（承担的外部租赁负债利息，BB.4.2.a.1 外部租赁为对外交易、不参与集团合并抵销）；其中利息费用见 6604.1、利息收入见 6604.2]]></description>
+      <standardRef><![CDATA[企业会计准则第17号-借款费用]]></standardRef>
+    </account>
+    <account code="6001.1" family="PL" name="其中：主营业务收入" fullName="利润表-其中：主营业务收入">
+      <description><![CDATA[= SUM(BB.1.2.预计销售收入(不含税)) + SUM(BB.1.3.确认收入)；硬件销售、软件销售（按产品类别财务口径区分）与技术服务三条业务线并入本行，不单列报表行；不含税、贷方发生额累计]]></description>
+      <standardRef><![CDATA[企业会计准则第14号-收入]]></standardRef>
+    </account>
+    <account code="6001.2" family="PL" name="其他业务收入" fullName="利润表-其他业务收入">
+      <description><![CDATA[代采购加成款（BB.3.3.D/BB.3.1.D）+ 销售线内部供应商供货收入（BB.1.3.f 物料明细_财务查询 / BB.1.3.i 人工明细_财务查询 中「内部供应商」非空且≠签约主体的行；「内部供应商」列由交易路径管理岗维护）：物料行按真实购销模型由提供方（内部供应商归属法人）确认完整内部销售价＝出库成本+加成款（出库成本=数量×BAA.4 标准成本，加成款=出库成本×BAA.11 加成比例），签约主体按采购价（出库成本+加成款）计入物料销售成本 6401.1（加成进成本），集团合并层 6001.2（出库成本+加成款）↔6401.1（出库成本+加成款）全额抵销、只保留内部供应商真实出库成本；人工行确认加成收入=人工成本×BAA.11 加成比例（人工成本=工时×BAA.3 工时标准成本），签约主体确认 6602 管理费用-内部往来，集团合并层 6001.2↔6602 全额对冲）+ 内部职场租赁出租方内部租金与加成款（BB.4.2.b）+ 内部借款借出方利息收入（BJ.C.f 内部借款预算表·借出方当月计提利息）；与日常活动相关的政府补助计入 6117 其他收益，同一笔记录不得两行同时取数]]></description>
+      <standardRef><![CDATA[企业会计准则第14号-收入]]></standardRef>
+    </account>
+    <account code="6001.2.1" family="PL" name="其他业务收入-内部往来" fullName="利润表-其他业务收入-内部往来">
+      <description><![CDATA[代采购加成款：提供方（下单主体 A）加成收入，贷方发生额计入 6001.2 其他业务收入；集团合并层与接受方管理费用-内部往来互抵，不进集团合并报表。另含销售线内部供应商提供的物料/人工行（BB.1.3.f/.i 中「内部供应商」非空且≠签约主体的行，提供方=内部供应商归属法人）：物料行按真实购销模型确认完整内部销售价＝出库成本+加成款（数量×BAA.4 标准成本 + 出库成本×BAA.11 加成比例）计入 6001.2，集团合并层与签约主体 6401.1（出库成本+加成款，加成进成本）全额抵销；人工行确认加成款=人工成本×BAA.11 计入 6001.2，集团合并层与签约主体 6602 管理费用-内部往来全额对冲]]></description>
+      <standardRef><![CDATA[企业会计准则第14号-收入]]></standardRef>
+    </account>
+    <account code="6401.1" family="PL" name="其中：主营业务成本" fullName="利润表-其中：主营业务成本">
+      <description><![CDATA[= SUM(BB.1.2.预计销售成本（硬件直接材料）) + SUM(BB.1.3.人工成本（服务直接人工）) + SUM(BB.1.3.物料成本（服务直接物料）) + 随产成品销售出库结转的制造费用（产成品标准成本中的制造费用段）；四项成本构成并入本行、不单列报表行；制造费用实际归集额只进存货线、不直取进本行；服务成本按签约主体（法人公司）归集、与对外收入同法人配比（BB.1.3.i 人工明细与 BB.1.3.f 物料明细仅作成本数据来源与测算依据）；物料/人工由内部供应商提供时（BB.1.3.f/.i「内部供应商」非空且≠签约主体的行；「内部供应商」列由交易路径管理岗维护）：物料行按真实购销模型由签约主体向内部供应商采购，本行物料销售成本=采购价=出库成本+加成款（加成进成本；出库成本=数量×BAA.4 标准成本，加成款=出库成本×BAA.11 加成比例），采购入库 1405 后随服务消耗结转本行；人工行签约主体平价承接人工成本（不含加成）后并入本行。集团合并层物料行 6001.2（出库成本+加成款）↔本行（出库成本+加成款）全额抵销、只保留内部供应商真实出库成本。]]></description>
+      <standardRef><![CDATA[企业会计准则第1号-存货]]></standardRef>
+    </account>
+    <account code="6401.2" family="PL" name="其他业务成本" fullName="利润表-其他业务成本">
+      <description><![CDATA[手工（三表手工调整）+ SUM(BB.1.3.f 物料明细_财务查询·内部供应商出料.出库成本(各月求和))：销售线物料明细内部供应商提供行的提供方（内部供应商归属法人）按出库成本（数量×BAA.4 标准成本）结转其他业务成本；真实购销模型下签约主体按采购价（出库成本+加成款）入库并计入 6401.1，集团合并层 6001.2（出库成本+加成款）↔6401.1（出库成本+加成款）全额抵销后，合并层只保留该真实出库成本]]></description>
+      <standardRef><![CDATA[企业会计准则第1号-存货]]></standardRef>
+    </account>
+    <account code="6604.1" family="PL" name="其中：利息费用" fullName="利润表-其中：利息费用">
+      <description><![CDATA[与 6604 财务费用同源：BF.3.d.费用化融资费用 + BB.4.2.b.1 内部职场租赁·财务视角.利息费用（承担的内部租赁负债利息，合并层与出租方内部收入互抵）+ BB.4.2.a.1 外部职场租赁·财务视角.月度利息（承担的外部租赁负债利息，外部租赁为对外交易、不参与合并抵销）；本行只作其中项展示，不重复计入；内部/外部利息测算的唯一出处=两张表（BB.4.2.b.1 / BB.4.2.a.1），主表 BB.4.2.b/BB.4.2.a 不含利息；另加 BJ.C.f 内部借款预算表·借入方当月计提利息（内部借款利息，按月归集、本年度统一费用化；集团合并层与借出方其他业务收入-内部往来 6001.2 按本方法人+对手方法人配对互抵）]]></description>
+      <standardRef><![CDATA[企业会计准则第17号-借款费用]]></standardRef>
+    </account>
+    <account code="6604.2" family="PL" name="利息收入" fullName="利润表-利息收入">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第17号-借款费用]]></standardRef>
+    </account>
+    <account code="6101" family="PL" name="公允价值变动收益" fullName="利润表-公允价值变动收益">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第22号-金融工具确认和计量]]></standardRef>
+    </account>
+    <account code="6701" family="PL" name="资产减值损失" fullName="利润表-资产减值损失">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第8号-资产减值]]></standardRef>
+    </account>
+    <account code="6702" family="PL" name="信用减值损失" fullName="利润表-信用减值损失">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第22号-金融工具确认和计量]]></standardRef>
+    </account>
+    <account code="6301.1" family="PL" name="其中：政府补助" fullName="利润表-其中：政府补助">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第16号-政府补助]]></standardRef>
+    </account>
+    <account code="6904" family="PL" name="五、其他综合收益的税后净额" fullName="利润表-五、其他综合收益的税后净额">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="6905" family="PL" name="六、综合收益总额" fullName="利润表-六、综合收益总额">
+      <description><![CDATA[= 净利润 + 其他综合收益的税后净额]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="6906.1" family="PL" name="七、每股收益：基本每股收益" fullName="利润表-七、每股收益：基本每股收益">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第34号-每股收益]]></standardRef>
+    </account>
+    <account code="6906.2" family="PL" name="稀释每股收益" fullName="利润表-稀释每股收益">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第34号-每股收益]]></standardRef>
+    </account>
+    <account code="6199" family="PL" name="营业利润" fullName="利润表-营业利润">
+      <description><![CDATA[= 营业收入 − 营业成本 − 税金及附加 − 销售费用 − 管理费用 − 研发费用 − 财务费用 + 资产处置收益 + 其他收益 + 投资收益]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="6115" family="PL" name="资产处置收益" fullName="利润表-资产处置收益">
+      <description><![CDATA[SUM(BB.4.6.处置损益)；处置损益 = 处置收款(不含税) − 资产净值（= 原值 − 累计折旧），正数为资产处置收益、负数为处置损失（报废净损失进 6302 营业外支出）；内部转卖部分在集团合并层消除未实现处置损益（细则见 A1.5 待确认事项第 3 项）]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报（资产处置收益单列）]]></standardRef>
+    </account>
+    <account code="6117" family="PL" name="其他收益" fullName="利润表-其他收益">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第16号-政府补助]]></standardRef>
+    </account>
+    <account code="6111" family="PL" name="投资收益" fullName="利润表-投资收益">
+      <description><![CDATA[BF.1.分红/利息收现合计（股权投资预算表） + BF.3.a 银行类金融工具投资收益 + BF.3.b 非银金融工具投资收益]]></description>
+      <standardRef><![CDATA[企业会计准则第2号-长期股权投资]]></standardRef>
+    </account>
+    <account code="6301" family="PL" name="营业外收入" fullName="利润表-营业外收入">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="6302" family="PL" name="营业外支出" fullName="利润表-营业外支出">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="6901" family="PL" name="利润总额" fullName="利润表-利润总额">
+      <description><![CDATA[= 营业利润 + 营业外收入 − 营业外支出]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="6801" family="PL" name="所得税费用" fullName="利润表-所得税费用">
+      <description><![CDATA[直接取 BF.4.企业所得税（计提列，利润表口径）]]></description>
+      <standardRef><![CDATA[企业会计准则第18号-所得税]]></standardRef>
+    </account>
+    <account code="6903" family="PL" name="净利润" fullName="利润表-净利润">
+      <description><![CDATA[= 利润总额 − 所得税费用]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="690301" family="PL" name="归属于母公司所有者的净利润" fullName="利润表-归属于母公司所有者的净利润">
+      <description><![CDATA[= 净利润 × AA.2.持股比例（法人组织架构中母公司持股比例，约96%）]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="690302" family="PL" name="少数股东损益" fullName="利润表-少数股东损益">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1001" family="BS" name="货币资金" fullName="资产负债表-货币资金">
+      <description><![CDATA[年初=上年末BO.BS.期末；发生=BO.CF.本年累计（经营/投资/筹资活动净现金流合计）；期末=年初+发生，与CF表本年累计现金净变动勾稽平衡]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="1101" family="BS" name="交易性金融资产" fullName="资产负债表-交易性金融资产">
+      <description><![CDATA[年初=上年末余额；发生=SUM(BF.3.a.新增投资额 + BF.3.b.新增投资额) − SUM(BF.3.a.减少投资额 + BF.3.b.减少投资额)（交易性金融资产=银行/非银短期理财等金融工具配置；减少=到期/赎回/处置收回；BF.1 为股权投资预算、非理财来源，不作为本行来源）]]></description>
+      <standardRef><![CDATA[企业会计准则第22号-金融工具确认和计量]]></standardRef>
+    </account>
+    <account code="1121" family="BS" name="应收票据" fullName="资产负债表-应收票据">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第22号-金融工具确认和计量]]></standardRef>
+    </account>
+    <account code="1122" family="BS" name="应收账款" fullName="资产负债表-应收账款">
+      <description><![CDATA[年初=上年末余额；发生=SUM(BB.1.2/1.4.预计销售收入(不含税)) − SUM(BB.1.2/1.4.验收回款(不含税口径))；期末=年初+发生]]></description>
+      <standardRef><![CDATA[企业会计准则第22号-金融工具确认和计量]]></standardRef>
+    </account>
+    <account code="1123" family="BS" name="预付款项" fullName="资产负债表-预付款项">
+      <description><![CDATA[年初=上年末余额；发生=SUM(BB.3.1.付款额) + SUM(BB.3.2.付款额) − 本期转为到货/验收部分；期末=年初+发生。付款节奏以 BB.3.1/BB.3.2 各月填报数为准（BAA.7 比例表本年度不启用，不参与测算）]]></description>
+      <standardRef><![CDATA[企业会计准则]]></standardRef>
+    </account>
+    <account code="1405" family="BS" name="存货" fullName="资产负债表-存货">
+      <description><![CDATA[年初=上年末余额；发生=SUM(BB.3.3.到货额) + SUM(完工生产成本：BB.2.1.完工生产成本) − SUM(BB.1.2.预计销售成本) − SUM(BB.1.3.直接物料成本) ± 代采购物料平价转移（BB.3.3.D 关联交易视角（物料类采购）：下单主体法人侧转出 (−) / 受益主体法人侧转入 (+)，按下单主体法人/受益主体法人分别取数，并按 BB.3.3.D.物料类别 对应到 BB.3.X 同类别行——下单主体法人该类别转出 − / 受益主体法人同类别转入 +；集团合并层抵消、不改变集团合并层存货净额）；勾稽约束：代采购转移额与提供方（下单主体 A）在 BB.3.3 物料采购的同月、同物料类别到货额勾稽（到货月全额转移口径下两者应相等），转移额不得超过 A 侧同月同类别到货额，编制时校验 A 侧该类别当月入库 − 转移额 ≥ 0（提供方单体不得因转移出现负存货余额）＋ 在制品人工与制费(BB.5.1.财务视角制造费用项) + 制造费用(BB.5.2.部门费用性质=制造费用) + 制造费用折旧(BB.4.X.A.制造费用折旧小计) − 领料转出(BB.4.1.c.领料金额合计) ± 存货调整净额(BB.3.X.调整转入 − 调整转出)；± 销售线物料明细内部供应商真实购销（BB.1.3.f 物料明细_财务查询 中「内部供应商」非空且≠签约主体的物料行）：提供方（内部供应商归属法人）侧存货按出库成本转出 (−)（＝数量×BAA.4 标准成本）并结转其他业务成本 6401.2；签约主体侧存货按采购价入库 (+)＝出库成本+加成款（加成进存货、随后随服务消耗结转 6401.1）；增值税为价外税、不进存货（货物 13%）；集团合并层双侧抵消（签约主体转入的加成款与提供方 6001.2 收入同步抵销）、不改变集团合并层存货净额（期末集团层只保留内部供应商真实出库成本随服务消耗的部分）]]></description>
+      <standardRef><![CDATA[企业会计准则第1号-存货]]></standardRef>
+    </account>
+    <account code="1407" family="BS" name="合同资产" fullName="资产负债表-合同资产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第14号-收入]]></standardRef>
+    </account>
+    <account code="1102" family="BS" name="衍生金融资产" fullName="资产负债表-衍生金融资产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1124" family="BS" name="应收款项融资" fullName="资产负债表-应收款项融资">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1221" family="BS" name="其他应收款" fullName="资产负债表-其他应收款">
+      <description><![CDATA[取 BB.3.3.D 关联交易视角（物料类采购）、BB.3.1.D 关联交易视角（设备及无形资产采购）的提供方内部往来（平价转移款+月度加成款，各月求和，为增加项）− 结算冲减（接受方向提供方的内部结算付款额，按月归集；结算款=月度到货额+月度加成款，加成随结算；按月足额结算时年内净发生额为 0、期末余额为 0，跨月未结部分构成期末余额）列报（集团合并层与接受方其他应付款-内部往来互抵）；如有调整需求，直接在三表手工调整列调整（默认 0）；内部职场租赁往来（BB.4.2.b 出租方应收租金）属余额滚动口径、本期未纳入取数，租赁往来口径待确认；另加 BJ.C.f 内部借款预算表·借出方当月新增（放款，增加项）− 当月还本（收本，冲减项）（按月归集）；内部往来 1221.1，集团合并层与借入方其他应付款-内部往来 2241.1 按本方法人+对手方法人配对互抵；内部借款 BJ.C.f 往来保持现有不含税本金口径（贷款服务利息的增值税：借入方取得的贷款服务进项税额不得抵扣，其利息往来亦不含税）；另含销售线内部供应商提供的物料/人工行（BB.1.3.f 物料明细_财务查询 / BB.1.3.i 人工明细_财务查询 中「内部供应商」非空且≠签约主体；「内部供应商」列由交易路径管理岗维护）：物料行为真实购销、真实现金结算——提供方（内部供应商归属法人）按含税内部销售价（＝不含税（出库成本+加成款）×(1+13%)，货物 13%）确认其他应收款-内部往来 1221.1 (+)（增加项），签约主体按合同账期真金白银付款、付款月份冲减该应收（冲减项），年内净发生额与期末余额按实际付款节奏保留真实余额，集团合并层 1221.1↔2241.1 互抵；人工行维持现行取数口径不变（本轮仅调整物料行）；【含税口径】内部交易（BB.3.3.D/BB.3.1.D）为应税交易（各法人为独立纳税人）：卖方/提供方计销项、买方/接受方计进项、同额同率（货物 13%、服务 6%、内部租赁 9%，税率取 AB.15）；内部交易往来的增加项与结算冲减均按含税取数＝不含税价 ×(1+适用税率)，增加项与结算冲减同额、按月足额结算时年内净发生额为 0、期末余额为 0；集团合并层销项与进项自然对冲（净 0）、内部结算现金流互抵（净 0），不影响集团应交税费净额与集团现金流净额]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1221.1" family="BS" name="其他应收款-内部往来" fullName="资产负债表-其他应收款-内部往来">
+      <description><![CDATA[代采购提供方（下单主体 A）内部往来应收：发生=增加项（平价转移款+加成款）− 结算冲减（接受方向提供方的内部结算付款额，按月归集；结算款=月度到货额+月度加成款，加成随结算）；按月足额结算时年内净发生额为 0、期末余额为 0，跨月未结部分构成期末余额；期末借方余额列报其他应收款 1221，集团合并层与接受方其他应付款-内部往来互抵归零；销售线内部供应商提供的物料/人工行（BB.1.3.f 物料明细_财务查询 / BB.1.3.i 人工明细_财务查询 中「内部供应商」非空且≠签约主体）：物料行为真实购销、真实现金结算——提供方（内部供应商归属法人）按含税内部销售价（＝不含税（出库成本+加成款）×(1+13%)）确认内部往来应收（增加项），签约主体按合同账期付款、付款月份冲减该应收（冲减项），期末保留真实未收余额，集团合并层 1221.1↔2241.1 互抵；人工行维持现行取数口径不变；内部借款借出方（BJ.C.f 内部借款预算表）：发生=当月新增（放款）− 当月还本（收本）（按月归集）；期末借方余额列报其他应收款 1221，集团合并层与借入方其他应付款-内部往来 2241.1 配对互抵归零；【含税口径】内部交易（BB.3.3.D/BB.3.1.D）为应税交易（各法人为独立纳税人）：卖方/提供方计销项、买方/接受方计进项、同额同率（货物 13%、服务 6%、内部租赁 9%，税率取 AB.15）；内部交易往来的增加项与结算冲减均按含税取数＝不含税价 ×(1+适用税率)，增加项与结算冲减同额、按月足额结算时年内净发生额为 0、期末余额为 0；集团合并层销项与进项自然对冲（净 0）、内部结算现金流互抵（净 0），不影响集团应交税费净额与集团现金流净额；内部借款 BJ.C.f 往来保持现有不含税本金口径（贷款服务利息的增值税：借入方取得的贷款服务进项税额不得抵扣，其利息往来亦不含税）]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1481" family="BS" name="持有待售资产" fullName="资产负债表-持有待售资产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1482" family="BS" name="一年内到期的非流动资产" fullName="资产负债表-一年内到期的非流动资产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1483" family="BS" name="其他流动资产" fullName="资产负债表-其他流动资产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1999" family="BS" name="流动资产合计" fullName="资产负债表-流动资产合计">
+      <description><![CDATA[= 货币资金 + 交易性金融资产 + 衍生金融资产 + 应收票据 + 应收账款 + 应收款项融资 + 预付款项 + 其他应收款 + 存货 + 合同资产 + 持有待售资产 + 一年内到期的非流动资产 + 其他流动资产]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1601" family="BS" name="固定资产" fullName="资产负债表-固定资产">
+      <description><![CDATA[年初=BB.4.4.存量资产原值汇总 − BB.4.4.累计折旧汇总（期初净值=原值−累计折旧，不得直接取原值）；发生=SUM(BB.3.1.到货额（按资产类别前缀「固定资产-…」归类后按法人汇总，资产类别在采购视角明细行 BB.3.1.A/.B 取数、值域 AA.9）)+SUM(BB.3.2.b.验收转固)+SUM(BB.4.1.d.转固转出)+SUM(BB.4.3.月度资产原值（仅资产类别≠使用权资产部分：资产类别=使用权资产的行计入 1621 使用权资产、不计入本行原值；其折旧与其它新增资产同链路，由 BB.4.5 计提、经 BB.4.X.A 归集）) − 本期折旧(BB.4.X.A.折旧费用汇总表折旧合计中「资产类别=固定资产」的部分——该合计含使用权资产与无形资产，使用权资产折旧在 1621、无形资产摊销在 1701 各自扣减、本行不重复扣减；含存量与本年新增) − 处置（BB.4.6.资产净值（对外出售/报废变卖/内部转卖，处置方式区分：内部转卖由卖方在 BB.4.6 手工填报减少、账面净值与 BJ.C.d 登记勾稽）；内部转卖在集团合并层按账面净值口径调回原始原值）± 代采购资产转移（BB.3.1.D.到货额·仅资产类别=固定资产部分：下单主体法人侧原值冲减 (−) / 受益主体法人侧原值增加 (+)，按各自法人分别取数；集团合并层按净值口径调回、净额不变）；勾稽约束：代采购资产转移额与提供方在 BB.3.1（经 BB.3.1.C 财务视角）的同月、同资产类别到货（原值）勾稽（到货月全额转移口径下两者应相等），转移额不得超过 A 侧同月同类别到货原值，编制时校验 A 侧当月到货原值 − 转移额 ≥ 0（提供方单体不得因转移出现负固定资产余额）；期末=年初+发生，须与「期末原值 − 期末累计折旧」口径一致（本期发生额与期末口径同步校验）；BB.3.1.A·BB.3.1.B 采购视角明细行按资产类别前缀归类后经 BB.3.1.C 按法人汇总；折旧经 BB.4.5 计提、由 BB.4.X.A 归集、参数取 AA.9]]></description>
+      <standardRef><![CDATA[企业会计准则第4号-固定资产]]></standardRef>
+    </account>
+    <account code="1604" family="BS" name="在建工程" fullName="资产负债表-在建工程">
+      <description><![CDATA[年初=BB.4.1.a.期初金额(自制在建工程年初余额) + BB.3.2.期初金额(基建在建工程年初余额)；发生=SUM(BB.3.2.验收额，工程验收确认在建工程)+SUM(BB.4.1.b.人工投入)+SUM(BB.4.1.c.领料金额合计)+SUM(BF.3.资本化利息) − 转固(基建=BB.3.2.b.验收转固，取基建转固明细表转固月份金额，自制=BB.4.1.d.转固转出)；期末=年初+发生；资本化人工只取 BB.5.1 自制在建工程列（BB.4.1.b 仅展示、不重复计入）]]></description>
+      <standardRef><![CDATA[企业会计准则第4号-固定资产]]></standardRef>
+    </account>
+    <account code="1503" family="BS" name="长期股权投资" fullName="资产负债表-长期股权投资">
+      <description><![CDATA[年初=上年末余额；发生=SUM(BF.1.月度投资金额) − 处置/减值]]></description>
+      <standardRef><![CDATA[企业会计准则第2号-长期股权投资]]></standardRef>
+    </account>
+    <account code="1701" family="BS" name="无形资产" fullName="资产负债表-无形资产">
+      <description><![CDATA[年初=上年末净值；发生=SUM(BB.3.1.C.原值（仅资产类别=无形资产部分，外购软件/专利/著作权；BB.3.1.C 无资产类别列，资产类别在采购视角明细行 BB.3.1.A/.B 按前缀「无形资产-…」归类后按法人汇总，取值域 AA.9）) − 本年无形资产摊销（经 BB.4.X.A 研发/管理/销售费用「折旧与摊销」小计中的摊销部分按法人公司归集）± 代采购资产转移（BB.3.1.D 到货额·仅资产类别=无形资产部分：下单主体法人侧原值冲减 (−) / 受益主体法人侧原值增加 (+)，按各自法人分别取数；集团合并层按净值口径调回、净额不变）；勾稽约束：代采购资产转移额与提供方在 BB.3.1（经 BB.3.1.C 财务视角）的同月、同资产类别到货（原值）勾稽（到货月全额转移口径下两者应相等），转移额不得超过 A 侧同月同类别到货原值，编制时校验 A 侧当月到货原值 − 转移额 ≥ 0（提供方单体不得因转移出现负无形资产余额）；资产类别=无形资产部分由 BB.3.1.A·BB.3.1.B 采购视角明细行按「无形资产-」前缀归类后经 BB.3.1.C 按法人汇总；摊销参数取 AA.9（年限按「月」维护、残值率 0%）]]></description>
+      <standardRef><![CDATA[企业会计准则第6号-无形资产]]></standardRef>
+    </account>
+    <account code="1501" family="BS" name="债权投资" fullName="资产负债表-债权投资">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1502" family="BS" name="其他债权投资" fullName="资产负债表-其他债权投资">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1531" family="BS" name="长期应收款" fullName="资产负债表-长期应收款">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1504" family="BS" name="其他权益工具投资" fullName="资产负债表-其他权益工具投资">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1505" family="BS" name="其他非流动金融资产" fullName="资产负债表-其他非流动金融资产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1521" family="BS" name="投资性房地产" fullName="资产负债表-投资性房地产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1623" family="BS" name="生产性生物资产" fullName="资产负债表-生产性生物资产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1624" family="BS" name="油气资产" fullName="资产负债表-油气资产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1625" family="BS" name="开发支出" fullName="资产负债表-开发支出">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1711" family="BS" name="商誉" fullName="资产负债表-商誉">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1801" family="BS" name="长期待摊费用" fullName="资产负债表-长期待摊费用">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1811" family="BS" name="递延所得税资产" fullName="资产负债表-递延所得税资产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1902" family="BS" name="其他非流动资产" fullName="资产负债表-其他非流动资产">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="1998" family="BS" name="非流动资产合计" fullName="资产负债表-非流动资产合计">
+      <description><![CDATA[= 债权投资 + 其他债权投资 + 长期应收款 + 长期股权投资 + 其他权益工具投资 + 其他非流动金融资产 + 投资性房地产 + 固定资产 + 在建工程 + 生产性生物资产 + 油气资产 + 使用权资产 + 无形资产 + 开发支出 + 商誉 + 长期待摊费用 + 递延所得税资产 + 其他非流动资产]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="19999" family="BS" name="资产总计" fullName="资产负债表-资产总计">
+      <description><![CDATA[= 流动资产合计 + 非流动资产合计]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2202" family="BS" name="应付账款" fullName="资产负债表-应付账款">
+      <description><![CDATA[年初=上年末余额；发生=SUM(BB.3.3.到货额)+SUM(BB.3.1.到货额) − 本期付款；期末=年初+发生。付款节奏以 BB.3.1/BB.3.3 各月填报数为准（BAA.7 比例表本年度不启用，不参与测算）]]></description>
+      <standardRef><![CDATA[企业会计准则]]></standardRef>
+    </account>
+    <account code="2204" family="BS" name="合同负债" fullName="资产负债表-合同负债">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第14号-收入]]></standardRef>
+    </account>
+    <account code="2211" family="BS" name="应付职工薪酬" fullName="资产负债表-应付职工薪酬">
+      <description><![CDATA[年初=上年末余额；发生=SUM(BB.5.1 人事视角计提合计（销售/研发/管理/制造，全口径含后续服务人工与资本化人工；等于财务视角 6 项计提之和，同一笔人工只计提一次）) − 本期实际发放；BB.5.1 为薪酬总包口径；本期实际发放=CF-06 职工薪酬支付现金；期末=年初+发生]]></description>
+      <standardRef><![CDATA[企业会计准则第9号-职工薪酬]]></standardRef>
+    </account>
+    <account code="2221" family="BS" name="应交税费" fullName="资产负债表-应交税费">
+      <description><![CDATA[年初=上年末余额；发生（贷方计提增加）= BF.4各税种计提列合计（增值税净应纳 + 企业所得税 + 城市维护建设税 + 教育费附加(含地方教育费附加) + 房产税 + 土地使用税 + 印花税 + 其他税费）；减少（借方缴纳）= BF.4对应税种实缴列合计；期末=年初+计提−实缴；增值税退税（即征即退）实际到账冲减本科目；留抵退税在实缴列直接冲减，不进CF-02；含内部交易增值税：各法人独立申报、内部交易销项与进项不对抵；集团合并层各法人加总后内部部分自然净 0（内部交易同为应税交易，卖方/提供方计销项、买方/接受方计进项，同额同率，税率取 AB.15）]]></description>
+      <standardRef><![CDATA[企业会计准则]]></standardRef>
+    </account>
+    <account code="2001" family="BS" name="短期借款" fullName="资产负债表-短期借款">
+      <description><![CDATA[年初=上年末余额；发生=BF.3.d 当期新增融资总额（1 年以内融资，含 CF-18 提款）− 本期归还]]></description>
+      <standardRef><![CDATA[企业会计准则]]></standardRef>
+    </account>
+    <account code="2101" family="BS" name="交易性金融负债" fullName="资产负债表-交易性金融负债">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2102" family="BS" name="衍生金融负债" fullName="资产负债表-衍生金融负债">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2201" family="BS" name="应付票据" fullName="资产负债表-应付票据">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2203" family="BS" name="预收款项" fullName="资产负债表-预收款项">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2241" family="BS" name="其他应付款" fullName="资产负债表-其他应付款">
+      <description><![CDATA[取 BB.3.3.D 关联交易视角（物料类采购）、BB.3.1.D 关联交易视角（设备及无形资产采购）的接受方内部往来（平价转移款+月度加成款，各月求和）列报（集团合并层与提供方其他应收款-内部往来互抵）；如有调整需求，直接在三表手工调整列调整（默认 0）；内部职场租赁往来（BB.4.2.b 承租方应付租金）属余额滚动口径、本期未纳入取数，租赁往来口径待确认；另加 BJ.C.f 内部借款预算表·借入方当月新增（提款，增加项）− 当月还本（冲减项）（按月归集）；内部往来 2241.1，集团合并层与借出方其他应收款-内部往来 1221.1 按本方法人+对手方法人配对互抵；内部借款 BJ.C.f 往来保持现有不含税本金口径（贷款服务利息的增值税：借入方取得的贷款服务进项税额不得抵扣，其利息往来亦不含税）；另含销售线内部供应商提供的物料/人工行（BB.1.3.f 物料明细_财务查询 / BB.1.3.i 人工明细_财务查询 中「内部供应商」非空且≠签约主体；「内部供应商」列由交易路径管理岗维护）：物料行为真实购销、真实现金结算——签约主体按含税采购价（＝不含税（出库成本+加成款）×(1+13%)，货物 13%）确认其他应付款-内部往来 2241.1 (+)（增加项），按合同账期真金白银付款、付款月份冲减该应付（冲减项），年内净发生额与期末余额按实际付款节奏保留真实余额，集团合并层 2241.1↔1221.1 互抵；人工行维持现行取数口径不变（本轮仅调整物料行）；【含税口径】内部交易（BB.3.3.D/BB.3.1.D）为应税交易（各法人为独立纳税人）：卖方/提供方计销项、买方/接受方计进项、同额同率（货物 13%、服务 6%、内部租赁 9%，税率取 AB.15）；内部交易往来的增加项与结算冲减均按含税取数＝不含税价 ×(1+适用税率)，增加项与结算冲减同额、按月足额结算时年内净发生额为 0、期末余额为 0；集团合并层销项与进项自然对冲（净 0）、内部结算现金流互抵（净 0），不影响集团应交税费净额与集团现金流净额]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2241.1" family="BS" name="其他应付款-内部往来" fullName="资产负债表-其他应付款-内部往来">
+      <description><![CDATA[代采购接受方（实际使用方 B）内部往来应付：发生=增加项（平价转移款+加成款）− 结算冲减（接受方向提供方的内部结算付款额，按月归集；结算款=月度到货额+月度加成款，加成随结算）；按月足额结算时年内净发生额为 0、期末余额为 0，跨月未结部分构成期末余额；期末贷方余额列报其他应付款 2241，集团合并层与提供方其他应收款-内部往来互抵归零；销售线内部供应商提供的物料/人工行（BB.1.3.f 物料明细_财务查询 / BB.1.3.i 人工明细_财务查询 中「内部供应商」非空且≠签约主体）：物料行为真实购销、真实现金结算——签约主体按含税采购价（＝不含税（出库成本+加成款）×(1+13%)）确认内部往来应付（增加项），按合同账期付款、付款月份冲减该应付（冲减项），期末保留真实未付余额，集团合并层 2241.1↔1221.1 互抵；人工行维持现行取数口径不变；内部借款借入方（BJ.C.f 内部借款预算表）：发生=当月新增（提款）− 当月还本（按月归集）；期末贷方余额列报其他应付款 2241，集团合并层与借出方其他应收款-内部往来 1221.1 配对互抵归零；【含税口径】内部交易（BB.3.3.D/BB.3.1.D）为应税交易（各法人为独立纳税人）：卖方/提供方计销项、买方/接受方计进项、同额同率（货物 13%、服务 6%、内部租赁 9%，税率取 AB.15）；内部交易往来的增加项与结算冲减均按含税取数＝不含税价 ×(1+适用税率)，增加项与结算冲减同额、按月足额结算时年内净发生额为 0、期末余额为 0；集团合并层销项与进项自然对冲（净 0）、内部结算现金流互抵（净 0），不影响集团应交税费净额与集团现金流净额；内部借款 BJ.C.f 往来保持现有不含税本金口径（贷款服务利息的增值税：借入方取得的贷款服务进项税额不得抵扣，其利息往来亦不含税）]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2245" family="BS" name="持有待售负债" fullName="资产负债表-持有待售负债">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2504" family="BS" name="一年内到期的非流动负债" fullName="资产负债表-一年内到期的非流动负债">
+      <description><![CDATA[发生=BF.3.d.当期流动性重分类金额（按到期日自动识别：依 BF.3.c 每笔融资的「期限/到期时间」判定剩余到期日落入预算年度内的长期借款本金，取该笔「已有期初净额（上年末余额）」中属长期的部分、扣除已列入当年偿还本金的部分，按融资主体(法人公司)+筹资产品维度按月归集）；本行与 2501 长期借款同额反向（重分类不产生现金流、不改变负债合计；本行只做列报重分类，不与 CF-20「偿还本金」（真实付现）混用）；重分类按 BF.3.c 每笔融资的「期限/到期时间」自动识别，取该笔「已有期初净额（上年末余额）」中属长期的部分]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2246" family="BS" name="其他流动负债" fullName="资产负债表-其他流动负债">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="29998" family="BS" name="流动负债合计" fullName="资产负债表-流动负债合计">
+      <description><![CDATA[= 短期借款 + 交易性金融负债 + 衍生金融负债 + 应付票据 + 应付账款 + 预收款项 + 合同负债 + 应付职工薪酬 + 应交税费 + 其他应付款 + 持有待售负债 + 一年内到期的非流动负债 + 其他流动负债]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2501" family="BS" name="长期借款" fullName="资产负债表-长期借款">
+      <description><![CDATA[年初=上年末余额；发生=BF.3.d.当期新增融资总额(长期借款/债券) − BF.3.d.当期偿还本金总额 − 当期流动性重分类至一年内到期的金额（BF.3.d 按到期日自动识别的长期借款本金，重分类不产生现金流、不改变负债合计，与 2504 同额反向）]]></description>
+      <standardRef><![CDATA[企业会计准则]]></standardRef>
+    </account>
+    <account code="2502" family="BS" name="应付债券" fullName="资产负债表-应付债券">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2701" family="BS" name="长期应付款" fullName="资产负债表-长期应付款">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2801" family="BS" name="预计负债" fullName="资产负债表-预计负债">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2401" family="BS" name="递延收益" fullName="资产负债表-递延收益">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2901" family="BS" name="递延所得税负债" fullName="资产负债表-递延所得税负债">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="2902" family="BS" name="其他非流动负债" fullName="资产负债表-其他非流动负债">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="29997" family="BS" name="非流动负债合计" fullName="资产负债表-非流动负债合计">
+      <description><![CDATA[= 长期借款 + 应付债券 + 租赁负债 + 长期应付款 + 预计负债 + 递延收益 + 递延所得税负债 + 其他非流动负债]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="29999" family="BS" name="负债合计" fullName="资产负债表-负债合计">
+      <description><![CDATA[= 流动负债合计 + 非流动负债合计]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="4001" family="BS" name="实收资本（或股本）" fullName="资产负债表-实收资本（或股本）">
+      <description><![CDATA[年初=上年末余额；发生=手工]]></description>
+      <standardRef><![CDATA[公司法及企业会计准则]]></standardRef>
+    </account>
+    <account code="4002" family="BS" name="资本公积" fullName="资产负债表-资本公积">
+      <description><![CDATA[年初=上年末余额；发生=手工]]></description>
+      <standardRef><![CDATA[企业会计准则]]></standardRef>
+    </account>
+    <account code="4101" family="BS" name="盈余公积" fullName="资产负债表-盈余公积">
+      <description><![CDATA[年初=上年末余额；发生=BO.PL.净利润 × 法定公积金提取比例(10%)]]></description>
+      <standardRef><![CDATA[企业会计准则]]></standardRef>
+    </account>
+    <account code="4103" family="BS" name="未分配利润" fullName="资产负债表-未分配利润">
+      <description><![CDATA[年初=上年末余额；发生=BO.PL.净利润 − 提取盈余公积 − 股利分配]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="4003" family="BS" name="其他权益工具" fullName="资产负债表-其他权益工具">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="4201" family="BS" name="减：库存股" fullName="资产负债表-减：库存股">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="4104" family="BS" name="其他综合收益" fullName="资产负债表-其他综合收益">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="4105" family="BS" name="少数股东权益" fullName="资产负债表-少数股东权益">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="49997" family="BS" name="归属于母公司所有者权益合计" fullName="资产负债表-归属于母公司所有者权益合计">
+      <description><![CDATA[= 实收资本（或股本） + 其他权益工具 + 资本公积 − 库存股 + 其他综合收益 + 盈余公积 + 未分配利润]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="49998" family="BS" name="所有者权益合计" fullName="资产负债表-所有者权益合计">
+      <description><![CDATA[= 归属于母公司所有者权益合计 + 少数股东权益]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="49999" family="BS" name="负债和所有者权益总计" fullName="资产负债表-负债和所有者权益总计">
+      <description><![CDATA[= 负债合计 + 所有者权益合计（须与资产总计平衡）]]></description>
+      <standardRef><![CDATA[企业会计准则第30号-财务报表列报]]></standardRef>
+    </account>
+    <account code="CF-01" family="CF" name="销售商品、提供劳务收到的现金" fullName="现金流量表-销售商品、提供劳务收到的现金">
+      <description><![CDATA[= SUM(BB.1.2.预收 + BB.1.2.验收回款) × (1 + AB.15.ASS-TAX-07 增值税法定标准税率 13%) + SUM(BB.1.3.预收款 + BB.1.3.验收回款) × (1 + AB.15.ASS-TAX-09 技术服务增值税率 6%)，含税现金口径；预收/回款列按不含税填报，销项税按业务线适用税率在本行单点乘入一次，其余链路不得再乘税]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-02" family="CF" name="收到的税费返还" fullName="现金流量表-收到的税费返还">
+      <description><![CDATA[仅统计BF.4「其中: 增值税退税」行中属于实际收到现金返还的部分（增值税即征即退/专项返还，取自 BF.4.b）；留抵退税/加计抵减不属于现金返还，应冲减CF-07实缴金额而非计入CF-02，防止虚增]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-03" family="CF" name="收到其他与经营活动有关的现金" fullName="现金流量表-收到其他与经营活动有关的现金">
+      <description><![CDATA[押金保证金收回及政府补助等（在三表手工调整列录入）+ BB.4.2.b 内部职场租赁.出租方月度结算收款（含税＝内部租金×(1+9%)＋加成款×(1+6%)，取 AB.15；单体口径；集团合并层与承租方付款互抵）；另加 BB.3.3.D 代采购方（收款方）结算收款（含税＝月度到货额×(1+13%)＋月度加成款×(1+6%)，加成随结算，集团合并层互抵）+ BB.3.1.D 代采购方结算收款·加成部分（含税＝月度加成款×(1+6%)，代购服务费，内部结算，集团合并层互抵）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-04" family="CF" name="经营活动现金流入小计" fullName="现金流量表-经营活动现金流入小计">
+      <description><![CDATA[= CF-01 + CF-02 + CF-03]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-05" family="CF" name="购买商品、接受劳务支付的现金" fullName="现金流量表-购买商品、接受劳务支付的现金">
+      <description><![CDATA[仅含经营性物料采购付款：=SUM(BB.3.3.预付款 + BB.3.3.验收付款)，到货额按100%确认为验收付款、预付款=下单额×当月预付款比例；付款节奏以 BB.3.1 / BB.3.3 各月填报的预付款与验收付款为准（BAA.7 比例表为长期规划，本年度不启用，不参与测算）；付款列按不含税填报，进项税额仅在此单点乘入一次（×1.13=1+13%增值税率），且进项税只在CF-05出现一次、不得再进CF-07；设备/基建等资本性付款不在此列，归入CF-14投资活动；税率取 AB.15.ASS-TAX-07（增值税法定标准税率），进项税仅在本行单点乘入一次；BAA.7 比例表本年度不启用]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-06" family="CF" name="支付给职工以及为职工支付的现金" fullName="现金流量表-支付给职工以及为职工支付的现金">
+      <description><![CDATA[SUM(BB.5.1.实际发放)，取实际发放付现项（人事视角与财务视角同口径）；服务人工成本为标准成本重分类、不产生现金流，不得计入 CF-06]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-07" family="CF" name="支付的各项税费" fullName="现金流量表-支付的各项税费">
+      <description><![CDATA[直接取 BF.4.各项税费合计(现金流口径)（=增值税净应纳+税金及附加合计+企业所得税，BF.4 表内公式求和）；销项/进项已内嵌于CF-01/CF-05的含税收付，本行只缴净额，不重复；留抵退税/加计抵减直接冲减本行实缴]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-08" family="CF" name="支付其他与经营活动有关的现金" fullName="现金流量表-支付其他与经营活动有关的现金">
+      <description><![CDATA[SUM(BB.5.2.各月度费用金额) + BB.4.2.b 内部职场租赁.承租方费用化租赁（整体租期≤12 个月）月度结算付款（含税＝内部租金×(1+9%)＋加成款×(1+6%)，取 AB.15；单体口径；集团合并层与出租方 CF-03 收款互抵） + BB.4.2.a 外部职场租赁.费用化合同租金付现（外部第三方付款，对外交易、单体与集团合并层同额保留、不抵销）；由BB.5.2经营费用转换结果表根据月度金额全额按月付现驱动（源头BA.5为外部模块不直接影响现金流）；资本化租赁的租金付款不属本行（本金 CF-22.1、利息 CF-21）；另加 BB.3.3.D 委托方（付款方）结算付款（含税＝月度到货额×(1+13%)＋月度加成款×(1+6%)，加成随结算，集团合并层互抵）+ BB.3.1.D 委托方结算付款·加成部分（含税＝月度加成款×(1+6%)，代购服务费，内部结算，集团合并层互抵）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-09" family="CF" name="经营活动现金流出小计" fullName="现金流量表-经营活动现金流出小计">
+      <description><![CDATA[= CF-05 + CF-06 + CF-07 + CF-08]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-10" family="CF" name="经营活动产生的现金流量净额" fullName="现金流量表-经营活动产生的现金流量净额">
+      <description><![CDATA[= CF-04 − CF-09]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-11" family="CF" name="收回投资收到的现金" fullName="现金流量表-收回投资收到的现金">
+      <description><![CDATA[取数规则口径=BF.3.a/BF.3.b.减少投资额（到期/赎回/处置收回的部分；BF.1 股权投资预算未设处置/收回列，不作为本行来源）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-12" family="CF" name="取得投资收益收到的现金" fullName="现金流量表-取得投资收益收到的现金">
+      <description><![CDATA[BF.1.分红/利息收现合计（实际到账部分） + BF.3.a 银行理财投资收益（收现） + BF.3.b 非银金融工具计划分红/利息流入]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-13.1" family="CF" name="处置固定资产、无形资产和其他长期资产收回的现金净额" fullName="现金流量表-处置固定资产、无形资产和其他长期资产收回的现金净额">
+      <description><![CDATA[对外出售/报废变卖：SUM(BB.4.6.处置收款-含税)，按处置月份列取数；内部转卖：SUM(BB.4.6.处置收款-含税)（处置方式=内部转卖，卖方收款）；单体口径计入本行，集团合并层与买方 CF-14 受让付款互抵（内部转卖未对外部产生现金流）；内部转卖部分与 BJ.C.d 按法人+资产+月份勾稽一致，不重复叠加；单体分录与合并抵销细则见 A1.5 待确认事项第 3 项]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-13.2" family="CF" name="处置子公司及其他营业单位收到的现金净额" fullName="现金流量表-处置子公司及其他营业单位收到的现金净额">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-13.3" family="CF" name="收到其他与投资活动有关的现金" fullName="现金流量表-收到其他与投资活动有关的现金">
+      <description><![CDATA[取 BB.3.1.D 关联交易视角（设备及无形资产采购）·月度到货额（平价部分）按下单主体法人侧、按月归集的内部结算收款（代采购方 A 侧）；加成部分（代购服务费，随结算）不走本行、计入 CF-03 收到其他与经营活动有关的现金，不得重复；集团合并层与委托方 B 侧 CF-16.2 付款互抵、不体现；如有调整需求，直接在三表手工调整列调整（默认 0）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-13" family="CF" name="投资活动现金流入小计" fullName="现金流量表-投资活动现金流入小计">
+      <description><![CDATA[= CF-11 + CF-12 + CF-13.1 + CF-13.2 + CF-13.3（表样各流入行均已配行编码）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-14" family="CF" name="购建固定资产、无形资产和其他长期资产支付的现金" fullName="现金流量表-购建固定资产、无形资产和其他长期资产支付的现金">
+      <description><![CDATA[投资活动现金流出，=SUM(BB.3.1.设备付款额 + BB.3.2.基建付款额 + BB.4.3.月度预付款额 + BB.4.3.月度付款额)；BB.4.3 的预付款与付款是两个独立的付款度量（预付款=先付部分、付款=验收付款等），二者合计形成现金流出；付款列按不含税填报、进项税额随资本性付款单点乘入一次（×1.13）；设备/基建等资本性付款只在CF-14列示、不再计入CF-05经营活动，避免双计；自制在建工程(BB.4.1)为领料投入+人工投入的非现金投入，不产生购建固定资产现金流出；内部转卖买方付款由 BB.4.3 付款承载（原值=转卖价）、按受让方所在法人计入本行单点乘税（×1.13）；集团合并层与卖方 CF-13.1 互抵；税率取 AB.15.ASS-TAX-07（设备/物料 13%）、ASS-TAX-10（基建工程 9%），进项税仅在本行单点乘入一次]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-16.1" family="CF" name="取得子公司及其他营业单位支付的现金净额" fullName="现金流量表-取得子公司及其他营业单位支付的现金净额">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-15" family="CF" name="投资支付的现金" fullName="现金流量表-投资支付的现金">
+      <description><![CDATA[BF.1.月度投资金额中标注为新增投资支出的部分；取数规则口径= BF.1.投资金额 + BF.3.a/BF.3.b.新增投资额（标注为新增投资支出的部分）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-16.2" family="CF" name="支付其他与投资活动有关的现金" fullName="现金流量表-支付其他与投资活动有关的现金">
+      <description><![CDATA[取 BB.3.1.D 关联交易视角（设备及无形资产采购）·月度到货额（平价部分）按受益主体法人侧、按月归集的内部结算付款（委托方 B 侧）；加成部分（代购服务费，随结算）不走本行、计入 CF-08 支付其他与经营活动有关的现金，不得重复；集团合并层与代采购方 A 侧 CF-13.3 收款互抵、不体现；如有调整需求，直接在三表手工调整列调整（默认 0）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-16" family="CF" name="投资活动现金流出小计" fullName="现金流量表-投资活动现金流出小计">
+      <description><![CDATA[= CF-14 + CF-16.1 + CF-15 + CF-16.2（按表样行序）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-17" family="CF" name="投资活动产生的现金流量净额" fullName="现金流量表-投资活动产生的现金流量净额">
+      <description><![CDATA[= CF-13 − CF-16]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-18" family="CF" name="取得借款收到的现金" fullName="现金流量表-取得借款收到的现金">
+      <description><![CDATA[BF.3相关本期新增短期/长期借款交易（融资安排口径反映为新增投资额）；另加 BJ.C.f 内部借款预算表·借入方当月新增（内部借款提款，单体口径计入本行；集团合并层与借出方 CF-22.1（放款）按本方法人+对手方法人配对互抵）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-19.1" family="CF" name="吸收投资收到的现金" fullName="现金流量表-吸收投资收到的现金">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-19.2" family="CF" name="收到其他与筹资活动有关的现金" fullName="现金流量表-收到其他与筹资活动有关的现金">
+      <description><![CDATA[BJ.C.f 内部借款预算表·借出方当月还本（收本）+ 当月实付利息（借出方口径＝当月实收利息）：内部借款收本收息为借出方筹资活动现金流入，单体口径计入本行；集团合并层与借入方 CF-20 偿还债务支付的现金、CF-21 分配股利、利润或偿付利息支付的现金按本方法人+对手方法人配对互抵；本行无其他预算编制来源，如需调整直接在三表手工调整列录入（默认 0）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-19" family="CF" name="筹资活动现金流入小计" fullName="现金流量表-筹资活动现金流入小计">
+      <description><![CDATA[= CF-18 + CF-19.1 + CF-19.2（按表样行序）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-20" family="CF" name="偿还债务支付的现金" fullName="现金流量表-偿还债务支付的现金">
+      <description><![CDATA[BF.3相关本期归还到期借款本金交易（融资安排口径反映为减少投资额）；另加 BJ.C.f 内部借款预算表·借入方当月还本（内部借款还本，单体口径计入本行；集团合并层与借出方 CF-19.2（收本）按本方法人+对手方法人配对互抵）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-21" family="CF" name="分配股利、利润或偿付利息支付的现金" fullName="现金流量表-分配股利、利润或偿付利息支付的现金">
+      <description><![CDATA[股利分配(董事会决议，AA.2.持股比例测算) + BF.3.c.实付利息合计（利息支出付现部分）+ BB.4.2.b.1 内部职场租赁·财务视角.利息费用付现部分（内部租赁，合并层与出租方内部收入互抵）+ BB.4.2.a.1 外部职场租赁·财务视角.月度利息付现部分（外部租赁为对外付款、不参与合并抵销）；费用化租赁租金付现走 CF-08、本金付现走 CF-22.1，均不在本行重复；另加 BJ.C.f 内部借款预算表·借入方当月实付利息（内部借款付息，单体口径计入本行；集团合并层与借出方 CF-19.2（收息）按本方法人+对手方法人配对互抵）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-22.1" family="CF" name="支付其他与筹资活动有关的现金" fullName="现金流量表-支付其他与筹资活动有关的现金">
+      <description><![CDATA[BJ.C.f 内部借款预算表·借出方当月新增（内部借款放款流出，单体口径计入本行；集团合并层与借入方 CF-18（提款）按本方法人+对手方法人配对互抵）+ BB.4.2.b.1 内部职场租赁·财务视角的本金偿付按月合计（内部租赁负债本金部分；单体口径计入本行，集团合并层与出租方 CF-03 收款互抵）+ BB.4.2.a.1 外部职场租赁·财务视角的月度本金偿付（外部租赁负债本金部分，对外付款、单体与集团合并层同额保留、不抵销）；利息支付部分计入 CF-21，费用化租赁（整体租期≤12 个月；内部 BB.4.2.b / 外部 BB.4.2.a）租金付款属经营活动计入 CF-08，均不在本行重复]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-22" family="CF" name="筹资活动现金流出小计" fullName="现金流量表-筹资活动现金流出小计">
+      <description><![CDATA[= CF-20 + CF-21 + CF-22.1（按表样行序）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-23" family="CF" name="筹资活动产生的现金流量净额" fullName="现金流量表-筹资活动产生的现金流量净额">
+      <description><![CDATA[= CF-19 − CF-22]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-23.1" family="CF" name="汇率变动对现金及现金等价物的影响" fullName="现金流量表-汇率变动对现金及现金等价物的影响">
+      <description><![CDATA[手工]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-24" family="CF" name="现金及现金等价物净增加额" fullName="现金流量表-现金及现金等价物净增加额">
+      <description><![CDATA[= CF-10 + CF-17 + CF-23 + CF-23.1（经营净额 + 投资净额 + 筹资净额 + 汇率变动对现金及现金等价物的影响）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-25" family="CF" name="期初现金及现金等价物余额" fullName="现金流量表-期初现金及现金等价物余额">
+      <description><![CDATA[上年末BO.BS.期末（货币资金科目1001）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="CF-26" family="CF" name="期末现金及现金等价物余额" fullName="现金流量表-期末现金及现金等价物余额">
+      <description><![CDATA[= 期初余额 + 净增加额（须与BO.BS.期末货币资金1001勾稽平衡）]]></description>
+      <standardRef><![CDATA[企业会计准则第31号-现金流量表]]></standardRef>
+    </account>
+    <account code="2602" family="BS" name="租赁负债" fullName="资产负债表-租赁负债">
+      <description><![CDATA[承租方资本化租赁（整体租期>12 个月＝一年以上；一年以下（含 12 个月）的费用化合同不进本行）的租赁负债：内部租赁来源 BB.4.2.b.1 内部职场租赁·财务视角（合并时与出租方内部收入互抵、整体消除）；外部租赁来源 BB.4.2.a.1 外部职场租赁·财务视角（对外交易、不参与集团合并抵销、单体与合并同额保留）。初始确认=租赁付款额现值；按月付租金减少+利息增加；到期终止（＝租赁期结束月，按租赁期终止月自动判定）将剩余租赁负债一次性结转（提前终止/退租直接在三表手工调整列录入）；资本化判定取 AB.16「租赁期限」、租赁类型系统带出；资本化判定参数取 AB.16「租赁期限」（一年以上→资本化进本行、一年及以下→费用化不进本行）]]></description>
+      <standardRef><![CDATA[企业会计准则第21号-租赁 (CAS 21)]]></standardRef>
+    </account>
+    <account code="1621" family="BS" name="使用权资产" fullName="资产负债表-使用权资产">
+      <description><![CDATA[承租方资本化租赁确认的使用权资产（整体租期>12 个月＝一年以上；一年以下（含 12 个月）的费用化合同不进本行，其租金按用途直接进费用）；按净值列示（净值=原值−累计折旧）；初始确认=租赁负债现值；按月计提折旧减少净值；到期终止（＝租赁期结束月，按租赁期终止月自动判定）将剩余净值一次性结转（提前终止/退租直接在三表手工调整列录入）；资本化判定取 AB.16「租赁期限」、租赁类型系统带出；折旧参数取 AA.9 默认账簿（固定资产-使用权资产）参数计提（每月折旧额=原值×(1−残值率)÷剩余年限(月数)，剩余年限(月数)=租赁期月数、残值率取账簿默认 0%、方法=年限平均法）；折旧在 BB.4.5 增量资产折旧计算表计提（经 BB.4.X.A 归集，管理/销售/研发用途分别归 6602/6601/6603、制造用途经 BB.3.X 在制品「费」腿，只取一次）；BB.4.2.b.1/BB.4.2.a.1 只提供原值（=租赁负债初始）与剩余租赁月数，不再计提折旧；内部租赁合并时整体消除，外部租赁为对外交易、不参与合并抵销、单体与合并同额保留；资本化判定参数取 AB.16「租赁期限」（一年以上→资本化、一年及以下→费用化）；使用权资产折旧由 BB.4.5 计提、经 BB.4.X.A 归集]]></description>
+      <standardRef><![CDATA[企业会计准则第21号-租赁 (CAS 21)]]></standardRef>
+    </account>
+  </accounts>
+
+  <!-- 科目编码规则（原 BUDGET_ACCOUNT_CODING_RULES），文字=家族名/编码结构/示例/说明/层级定义/准则依据。 -->
+  <codingRules>
+    <rule family="PL" prefix="6001/6401/6601/6111…" familyName="利润表科目（会计准则科目编码）" exampleCode="6001 营业收入 / 6601 销售费用">
+      <codePattern><![CDATA[新企业会计准则科目编码（6001 营业收入/6401 营业成本/6601 销售费用/6602 管理费用/6603 研发费用/6604 财务费用/6111 投资收益/6801 所得税费用等）+ 4 位明细（如 640101）]]></codePattern>
+      <description><![CDATA[用于编制软硬件销售收入、技术服务收入、制造成本、期间费用(销管研财)、税金及利润总额等损益要素。]]></description>
+      <governingStandards><![CDATA[企业会计准则第30号-财务报表列报]]></governingStandards>
+      <associatedStatements><![CDATA[利润表 (Income Statement) / 综合经营透视表]]></associatedStatements>
+    </rule>
+    <rule family="BS" prefix="1001/1101/1601/2001…" familyName="资产负债表科目（会计准则科目编码）" exampleCode="1001 货币资金 / 1601 固定资产">
+      <codePattern><![CDATA[新企业会计准则科目编码（1001 货币资金/1122 应收账款/1405 存货/1601 固定资产/2202 应付账款/4001 实收资本等）]]></codePattern>
+      <description><![CDATA[用于编制期末货币资金、应收款项、存货、固定资产、在建工程、借款负债、应付款项及权益未分配利润。]]></description>
+      <governingStandards><![CDATA[企业会计准则第30号-财务报表列报]]></governingStandards>
+      <associatedStatements><![CDATA[资产负债表 (Balance Sheet) / 资金出入池与资产配置表]]></associatedStatements>
+    </rule>
+    <rule family="CF" prefix="CF-" familyName="现金流量表科目（直接法报表项目编号）" exampleCode="CF-01 销售商品提供劳务收到的现金 / CF-05 购买商品接受劳务支付的现金">
+      <codePattern><![CDATA[CF-01~CF-26（现金流量表直接法报表项目编号）]]></codePattern>
+      <description><![CDATA[用于编制三大活动（经营、投资、筹资）现金流入与流出预算，实现期初期末现金勾稽闭环。]]></description>
+      <governingStandards><![CDATA[企业会计准则第31号-现金流量表 (直接法编制)]]></governingStandards>
+      <associatedStatements><![CDATA[现金流量表 (Cash Flow) / 资金出入池预算表 / 月度资金头寸表]]></associatedStatements>
+    </rule>
+    <rule family="FY" prefix="E" familyName="费用与支出预算科目 (Expense &amp; CapEx Items)" exampleCode="E01 费用科目合计 / E0101 人员费用 / E0102 差旅费用">
+      <codePattern><![CDATA[E + 2位中类 (+2位子目)（费用科目主数据，明细见 AA.3.b）]]></codePattern>
+      <description><![CDATA[费用科目用于业务部门按人员、差旅、外包、折旧、资产采购等编制预算，并按科目默认映射汇集至利润表/资产负债表/现金流量表。明细科目以 AA.3.b「费用明细科目(FY)」为准，不在总表重复列示。]]></description>
+      <governingStandards><![CDATA[企业会计准则第9号-职工薪酬 / 第4号-固定资产 / 财税研发加计扣除政策]]></governingStandards>
+      <associatedStatements><![CDATA[BB.5 期间费用(OPEX) / BB.4 资本性支出(CAPEX) / 利润表/资产负债表]]></associatedStatements>
+    </rule>
+  </codingRules>
+
+  <!-- 费用明细科目 FY（原 src/data/expenseBudgetSubjectsData.ts FIXED_EXPENSE_BUDGET_SUBJECTS），
+       文字=科目名称/科目全称/业务核算范围与口径说明（AA.3.b 渲染列）。 -->
+  <expenseSubjects>
+    <item code="YSKM01" name="预算科目合计" fullName="预算科目合计">
+      <description><![CDATA[全面预算体系顶层综合支出汇总科目]]></description>
+    </item>
+    <item code="E01" name="费用科目合计" fullName="预算科目合计-费用科目合计">
+      <description><![CDATA[集团所有经营性费用与资本性支出的一级分类汇总项]]></description>
+    </item>
+    <item code="E0101" name="人员费用" fullName="费用科目合计-人员费用">
+      <description><![CDATA[全职员工及兼职人员的基本工资、绩效奖金、津贴补贴、五险一金等]]></description>
+    </item>
+    <item code="E0102" name="差旅费用" fullName="费用科目合计-差旅费用">
+      <description><![CDATA[员工因公出差产生的交通费（飞机/高铁）、住宿费、出差伙食补贴等]]></description>
+    </item>
+    <item code="E0103" name="低值易耗品费用" fullName="费用科目合计-低值易耗品费用">
+      <description><![CDATA[单位价值较低、使用期限不足一年或不作为固定资产核算的工器具与用品]]></description>
+    </item>
+    <item code="E0104" name="业务外包费（除外）" fullName="费用科目合计-业务外包费（除外）">
+      <description><![CDATA[除特定核心自研业务外的专业化第三方外包服务支出汇总]]></description>
+    </item>
+    <item code="E010401" name="业务外包费（除外）-维修服务" fullName="业务外包费（除外）-业务外包费（除外）-维修服务">
+      <description><![CDATA[委托外部专业厂商对设备设施进行维护、抢修与保养服务]]></description>
+    </item>
+    <item code="E010402" name="业务外包费（除外）-委托开发" fullName="业务外包费（除外）-业务外包费（除外）-委托开发">
+      <description><![CDATA[委托外部高校、科研院所或软件公司定制开发特定功能模块]]></description>
+    </item>
+    <item code="E010403" name="业务外包费（除外）-外协加工" fullName="业务外包费（除外）-业务外包费（除外）-外协加工">
+      <description><![CDATA[委托外部配套工厂完成非核心工序的机械加工、表面处理或SMT贴片]]></description>
+    </item>
+    <item code="E010404" name="业务外包费（除外）-检测校准" fullName="业务外包费（除外）-业务外包费（除外）-检测校准">
+      <description><![CDATA[第三方国家计量院或权威检测机构出具检测校准证书的合规服务]]></description>
+    </item>
+    <item code="E010405" name="业务外包费（除外）-其他第三方技术服务（设计/评审/实验及测试等）" fullName="业务外包费（除外）-业务外包费（除外）-其他第三方技术服务（设计/评审/实验及测试等）">
+      <description><![CDATA[外部专家评审、工程方案仿真设计、可靠性试验与EMC环境测试等]]></description>
+    </item>
+    <item code="E010406" name="业务外包费（除外）-IT运维/IT服务" fullName="业务外包费（除外）-业务外包费（除外）-IT运维/IT服务">
+      <description><![CDATA[企业ERP、OA、MES、云服务器托管与桌面终端外包运维保障服务]]></description>
+    </item>
+    <item code="E010407" name="业务外包费（境内）-研发" fullName="业务外包费（除外）-业务外包费（境内）-研发">
+      <description><![CDATA[境内实体开展的研发技术委托服务，可按规定享受研发费用加计扣除]]></description>
+    </item>
+    <item code="E0105" name="市场推广费" fullName="费用科目合计-市场推广费">
+      <description><![CDATA[品牌宣传、媒体投放、展会搭建、行业峰会赞助与精准获客投放]]></description>
+    </item>
+    <item code="E010501" name="市场推广费（境内）-B2B推广" fullName="市场推广费-市场推广费（境内）-B2B推广">
+      <description><![CDATA[针对国内工业装备客户的垂直门户、采购目录与专业论坛专项推广]]></description>
+    </item>
+    <item code="E0106" name="中介服务费" fullName="费用科目合计-中介服务费">
+      <description><![CDATA[会计师事务所年报审计、律所法务合规咨询、资产评估及税务顾问]]></description>
+    </item>
+    <item code="E0107" name="业务招待费" fullName="费用科目合计-业务招待费">
+      <description><![CDATA[生产经营业务合理需要发生的商务宴请、客户接待与商务礼品]]></description>
+    </item>
+    <item code="E0108" name="产品认证费" fullName="费用科目合计-产品认证费">
+      <description><![CDATA[CE、UL、RoHS、ISO9001、工业装备标准等国内外产品质量及安全体系认证]]></description>
+    </item>
+    <item code="E0109" name="车费" fullName="费用科目合计-车费">
+      <description><![CDATA[市内公务出行、客户拜访及加班交通出行打车费用汇总]]></description>
+    </item>
+    <item code="E010901" name="车费（日常车费）" fullName="车费-车费（日常车费）">
+      <description><![CDATA[日常工作时间段内拜访客户、政府事务办理等产生的出租车及公共交通费]]></description>
+    </item>
+    <item code="E010902" name="车费（夜间加班打车）" fullName="车费-车费（夜间加班打车）">
+      <description><![CDATA[符合公司人事考勤制度规定晚于21:00加班后产生的安全出行报销]]></description>
+    </item>
+    <item code="E0110" name="办公费" fullName="费用科目合计-办公费">
+      <description><![CDATA[办公文具、打印纸张、硒鼓墨盒、图书报刊、名片印制及办公日用品]]></description>
+    </item>
+    <item code="E0111" name="设备类" fullName="费用科目合计-设备类">
+      <description><![CDATA[符合固定资产确认条件的各类生产、研发、办公硬件设备采购总额]]></description>
+    </item>
+    <item code="E011101" name="设备类-办公设备" fullName="设备类-设备类-办公设备">
+      <description><![CDATA[员工办公台式电脑、笔记本、高端平板、智能会议大屏及工位一体机]]></description>
+    </item>
+    <item code="E011102" name="设备类-办公相关公用设备" fullName="设备类-设备类-办公相关公用设备">
+      <description><![CDATA[大型商用复合打印机、碎纸机、饮水机、茶水间咖啡机、门禁监控]]></description>
+    </item>
+    <item code="E011103" name="设备类-服务器" fullName="设备类-设备类-服务器">
+      <description><![CDATA[机架式核心计算服务器、GPU加速计算节点、SAN/NAS分布式存储阵列]]></description>
+    </item>
+    <item code="E011104" name="设备类-研发设备" fullName="设备类-设备类-研发设备">
+      <description><![CDATA[示波器、逻辑分析仪、功率参数测试仪、高低温冲击试验箱等]]></description>
+    </item>
+    <item code="E011105" name="设备类-其他" fullName="设备类-设备类-其他">
+      <description><![CDATA[厂区UPS不间断电源系统、专用温控空调、防静电地坪及其他机电设备]]></description>
+    </item>
+    <item code="E0112" name="软件购置类" fullName="费用科目合计-软件购置类">
+      <description><![CDATA[工业CAD/PLM软件永久License、ERP系统商业套件及工艺设计工具]]></description>
+    </item>
+    <item code="E0113" name="折旧费-折旧摊销" fullName="费用科目合计-折旧费-折旧摊销">
+      <description><![CDATA[固定资产（房屋、机器、办公设备）及无形资产的月度计提折旧与摊销]]></description>
+    </item>
+    <item code="E0114" name="团队建设费" fullName="费用科目合计-团队建设费">
+      <description><![CDATA[部门团建、生日会、文体联谊、年会庆典及员工关怀活动]]></description>
+    </item>
+    <item code="E0115" name="招聘费" fullName="费用科目合计-招聘费">
+      <description><![CDATA[猎头招聘佣金、网络招聘平台年度会员费、校园招聘宣讲会场地及物料]]></description>
+    </item>
+    <item code="E0116" name="培训费" fullName="费用科目合计-培训费">
+      <description><![CDATA[外部专业技术培训、内训师资课酬、职业资格认证及行业技能进修]]></description>
+    </item>
+    <item code="E0117" name="房屋使用费" fullName="费用科目合计-房屋使用费">
+      <description><![CDATA[总部写字楼、研发中心、各地分公司办事处及库房的场地租赁费用]]></description>
+    </item>
+    <item code="E0118" name="通讯费" fullName="费用科目合计-通讯费">
+      <description><![CDATA[员工移动话费补贴、互联网企业宽带、数据专线及固定电话线路费用]]></description>
+    </item>
+    <item code="E011801" name="通讯费-手机补贴" fullName="通讯费-通讯费-手机补贴">
+      <description><![CDATA[依据职级和岗位标准按月随薪发放或据实报销的手机话费通讯补贴]]></description>
+    </item>
+    <item code="E011802" name="通讯费-网络使用费" fullName="通讯费-通讯费-网络使用费">
+      <description><![CDATA[办公室及厂区光纤宽带、企业专用Wi-Fi接入及公网IP租用服务费]]></description>
+    </item>
+    <item code="E011803" name="通讯费-固话线路费" fullName="通讯费-通讯费-固话线路费">
+      <description><![CDATA[总机400客服热线、各部门固定座机月租费及长途通话费]]></description>
+    </item>
+    <item code="E0119" name="维修费" fullName="费用科目合计-维修费">
+      <description><![CDATA[办公场地、生产设备、IT硬件的日常维护维修与零配件更换费用]]></description>
+    </item>
+    <item code="E011901" name="维修费-办公设备" fullName="维修费-维修费-办公设备">
+      <description><![CDATA[打印机清灰换件、办公电脑硬件检测更换、会议投影仪灯泡更换等]]></description>
+    </item>
+    <item code="E011902" name="维修费-房屋" fullName="维修费-维修费-房屋">
+      <description><![CDATA[办公区门窗隔断修补、照明灯具更换、给排水管路维护等零星工程]]></description>
+    </item>
+    <item code="E011903" name="维修费-IT设备" fullName="维修费-维修费-IT设备">
+      <description><![CDATA[机房交换机、路由器、防火墙、NAS存储硬件过保后的单次故障维修]]></description>
+    </item>
+    <item code="E0120" name="物业管理" fullName="费用科目合计-物业管理">
+      <description><![CDATA[产业园区或写字楼物业公司收取的日常保洁、保安、绿化及公共维护费]]></description>
+    </item>
+    <item code="E0121" name="水电气暖费" fullName="费用科目合计-水电气暖费">
+      <description><![CDATA[办公场地与生产测试车间的自来水、高低压动力电、天然气及冬季供暖费]]></description>
+    </item>
+    <item code="E0122" name="关税运费" fullName="费用科目合计-关税运费">
+      <description><![CDATA[产成品发货发往客户现场的干线物流、空运快递、出口报关及进出口关税]]></description>
+    </item>
+    <item code="E0123" name="办公费" fullName="费用科目合计-办公费">
+      <description><![CDATA[综合办公与日常行政公杂开支]]></description>
+    </item>
+    <item code="E0125" name="杂费" fullName="费用科目合计-杂费">
+      <description><![CDATA[未单独列明的零星经营性开支、公证费、档案管理费、快递及场地变动费]]></description>
+    </item>
+    <item code="E012501" name="杂费-办公场地搬迁" fullName="杂费-杂费-办公场地搬迁">
+      <description><![CDATA[办公工位整体迁址、跨区域办公区搬迁产生的搬家运输与打包费用]]></description>
+    </item>
+    <item code="E012502" name="杂费-信函快递" fullName="杂费-杂费-信函快递">
+      <description><![CDATA[发票寄送、合同签章原件流转、重要公文信函及样品日常快递费用]]></description>
+    </item>
+    <item code="E012503" name="杂费-非采购及非销售的业务相关的杂费" fullName="杂费-杂费-非采购及非销售的业务相关的杂费">
+      <description><![CDATA[企业登记年检、银行开户变更、企业印章刻制、非经营性政府规费等]]></description>
+    </item>
+    <item code="E0126" name="知识产权费" fullName="费用科目合计-知识产权费">
+      <description><![CDATA[发明专利申请代理费、软件著作权登记费、商标注册维护及PCT国际专利年费]]></description>
+    </item>
+    <item code="E0127" name="业务宣传费" fullName="费用科目合计-业务宣传费">
+      <description><![CDATA[企业宣传片制作、宣传画册样本印制、易拉宝展架及商务礼品定制]]></description>
+    </item>
+    <item code="E0128" name="咨询服务费" fullName="费用科目合计-咨询服务费">
+      <description><![CDATA[企业战略咨询、精益生产辅导、人力资源绩效咨询及数字化转型专家顾问]]></description>
+    </item>
+    <item code="E0129" name="工程建设费" fullName="费用科目合计-工程建设费">
+      <description><![CDATA[自建厂房、装备装调车间主体土建工程、动力站房工程及监理设计费]]></description>
+    </item>
+    <item code="E0130" name="装修工程费用" fullName="费用科目合计-装修工程费用">
+      <description><![CDATA[新租办公大楼整体精装修工程、消防系统改造、实验室防微振防尘工程]]></description>
+    </item>
+    <item code="E0131" name="土地购置" fullName="费用科目合计-土地购置">
+      <description><![CDATA[产业园区工业用地出让金、土地契税、征地补偿款及相关权证取得规费]]></description>
+    </item>
+    <item code="E0132" name="房屋购置费" fullName="费用科目合计-房屋购置费">
+      <description><![CDATA[购置自用写字楼整层、产业园标准厂房或员工公寓产权及相关交易契税]]></description>
+    </item>
+    <item code="E0134" name="营销活动费" fullName="费用科目合计-营销活动费">
+      <description><![CDATA[新产品全国巡回发布会、行业高端沙龙、客户答谢会及技术推介交流会]]></description>
+    </item>
+    <item code="E0135" name="劳务费" fullName="费用科目合计-劳务费">
+      <description><![CDATA[临时用工劳务派遣报酬、短期兼职实习生劳务补贴及临时装卸搬运劳务]]></description>
+    </item>
+    <item code="E0133" name="其他" fullName="费用科目合计-其他">
+      <description><![CDATA[无法归入以上特定科目的其他零星经营性开支]]></description>
+    </item>
+  </expenseSubjects>
+
+</form>

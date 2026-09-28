@@ -1,0 +1,2344 @@
+{
+  "grids": [
+    {
+      "name": "BB.5.1 雇员费用编制/导入",
+      "rows": [
+        [
+          {
+            "text": "法人公司",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "预算项目",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "预算部门",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "预算科目",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "【全年合计】",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "1月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "2月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "3月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "4月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "5月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "6月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "7月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "8月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "9月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "10月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "11月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "12月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 5,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "甜甜圈集团公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "年度人工费用预算",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "多部门汇总",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2211 应付职工薪酬",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "45.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "80.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "30.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "60.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "215.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "45.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "80.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "30.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "62.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "217.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "45.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "80.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "30.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "65.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "220.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "48.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "85.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "30.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "65.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "228.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "48.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "85.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "30.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "68.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "231.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "48.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "85.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "30.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "70.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "233.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "50.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "90.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "32.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "72.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "244.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "50.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "90.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "32.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "75.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "247.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "50.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "90.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "32.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "75.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "247.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "52.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "95.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "32.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "78.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "257.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "52.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "95.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "32.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "80.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "259.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "55.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "100.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "35.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "82.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "272.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 3,
+      "colCount": 69
+    },
+    {
+      "name": "BB.5.1 财务视角",
+      "rows": [
+        [
+          {
+            "text": "法人公司",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "预算项目",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "预算部门",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "预算科目",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "【全年合计】",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "1月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "2月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "3月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "4月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "5月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "6月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "7月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "8月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "9月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "10月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "11月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "12月",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 7,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "销售费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "研发费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "管理费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "制造费用",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "服务人工成本",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "自制在建工程",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "实际发放",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "甜甜圈集团公司",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "年度人工费用预算",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "多部门汇总",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2211 应付职工薪酬",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "552.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1,031.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "363.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "686.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "122.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "166.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2,870.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "42.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "78.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "29.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "48.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "8.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "12.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "215.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "42.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "78.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "29.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "50.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "8.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "12.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "217.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "42.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "78.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "29.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "52.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "9.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "13.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "220.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "45.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "83.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "29.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "52.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "9.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "13.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "228.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "45.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "83.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "29.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "55.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "9.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "13.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "231.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "45.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "83.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "29.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "56.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "10.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "14.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "233.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "47.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "88.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "31.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "58.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "10.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "14.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "244.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "47.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "88.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "31.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "60.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "11.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "15.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "247.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "47.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "88.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "31.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "60.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "11.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "15.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "247.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "49.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "93.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "31.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "63.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "12.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "15.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "257.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "49.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "93.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "31.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "65.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "12.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "15.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "259.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "52.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "98.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "34.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "67.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "13.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "15.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "272.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 3,
+      "colCount": 95
+    }
+  ]
+}

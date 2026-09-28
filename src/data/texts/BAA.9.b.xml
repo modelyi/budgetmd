@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BAA.9.b BAA.9.b · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BAA.9.b" name="BAA.9.b">
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BAA.9.b'） -->
+  <fields>
+    <field code="entity" name="法人公司" source="AA.2 法人组织架构"><![CDATA[]]></field>
+    <field code="salesExpenseRatio" name="销售费用比例" source="本表录入"><![CDATA[百分比]]></field>
+    <field code="adminExpenseRatio" name="管理费用比例" source="本表录入"><![CDATA[百分比]]></field>
+    <field code="rndExpenseRatio" name="研发费用比例" source="本表录入"><![CDATA[百分比]]></field>
+    <field code="mfgExpenseRatio" name="制造费用比例" source="本表录入"><![CDATA[百分比]]></field>
+    <field code="totalRatio" name="合计" source="本表公式"><![CDATA[销售+管理+研发+制造费用比例加和，须=100%]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BAA.9 资本性支出拆分比例表">
+      <point><![CDATA[本表含两个Tab（同页切换）：资产转换比例（法人拆分）+ 折旧费用拆分比例（费用属性拆分）。]]></point>
+      <point><![CDATA[Tab1 资产转换比例：维度=预算项目+预算部门（预算部门默认二级部门），度量=各法人公司占比+合计列，比例按「预算项目×预算部门」维度逐行维护法人拆分，每行加和须=100%（仅文字说明提示，不强制校验/高亮）；为资本性支出法人拆分提供比例，仅由 BB.3.1.C 财务视角对 BB.3.1.B 无PO表样的采购按 BAA.9.a 拆分到法人（资本性支出法人拆分的唯一入口）。]]></point>
+      <point><![CDATA[Tab2 折旧费用拆分比例：维度=资产类别（层级=大类-小类，与AA.9对齐，已删除法人字段），度量=销售/管理/研发/制造费用比例+合计列；强校验规则：每行四大费用属性比例加和必须强等于100%（Sum=100%）。核心逻辑：专为本年增量资产折旧(BB.4.X)按资产类别拆分到四大费用科目提供比例（增量折旧=各类别新增折旧×对应费用比例）；而存量资产折旧(BB.4.4)依据资产领用部门属性映射(参考AM.2)直接归入对应费用科目，不经过本表拆分。]]></point>
+    </rule>
+  </rules>
+
+</form>

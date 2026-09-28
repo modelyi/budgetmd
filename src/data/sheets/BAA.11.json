@@ -1,0 +1,34 @@
+{
+  "grids": [
+    {
+      "name": "BAA.11 关联交易加成比例",
+      "rows": [
+        [
+          {
+            "text": "内部交易类型",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "预算项目",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "加成比例",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ]
+      ],
+      "rowCount": 1,
+      "colCount": 3
+    }
+  ]
+}

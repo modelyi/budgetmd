@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BO.CF-① BO.CF-① · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BO.CF-①" name="BO.CF-①">
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BO.PL / BO.BS / BO.CF 预算三表">
+      <point><![CDATA[1~12月预算数：由底层编制表按科目映射自动归集，只读不可编辑。]]></point>
+      <point><![CDATA[调整项：供财务人员直接手工调节报表结果，允许编辑。]]></point>
+      <point><![CDATA[全年合计 = SUM(1~12月预算数) + 调整项，公式自动计算（此为 BO.PL 损益表口径）。]]></point>
+      <point><![CDATA[BO.BS 资产负债表按年处理，不展开到月：列结构为「年初(期初余额) → 发生(本期发生额) → 调整(调整额) → 期末」，期末 = 年初 + 发生 + 调整，需做勾稽校验。]]></point>
+      <point><![CDATA[BO.CF 现金流量表按年处理，不展开到月：仅保留「本年累计」一列（全年现金流合计，流量口径，非年末时点数）。]]></point>
+      <point><![CDATA[往来科目（应收账款 1122、预付账款 1123、应付账款 2202、合同负债 2204）按权责发生制滚动（年初 + 发生 = 期末），在 BO.BS 中正常列报余额并做期末余额勾稽；资产、存货仍按到货额/验收额（权责发生制）确认，预付款与验收付款是独立付款度量，仅驱动 CF-05/CF-14 现金流。]]></point>
+    </rule>
+  </rules>
+
+</form>

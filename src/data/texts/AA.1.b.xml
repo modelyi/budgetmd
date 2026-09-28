@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AA.1.b AA.1.b · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="AA.1.b" name="AA.1.b">
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="AA.1 预算年度与期间">
+      <point><![CDATA[预算年度与月度期间为全系统统一时间轴；期间锁定后不可再编辑已锁定月份的数据。]]></point>
+    </rule>
+    <rule form="AA.10 供应商主数据">
+      <point><![CDATA[供应商类型与归属主体供BB.3.1"供应商"下拉引用。]]></point>
+    </rule>
+    <rule form="AA.11 物料主数据">
+      <point><![CDATA[物料编码为唯一身份来源，不区分法人；供BAA.4标准成本引用。]]></point>
+    </rule>
+    <rule form="BAA.10 进销存按法人拆分比例表">
+      <point><![CDATA[参考 BAA.9.a 资产转换比例：维度=预算项目+预算部门（预算部门默认二级部门），度量=各法人公司占比+合计列，比例按「预算项目×预算部门」逐行维护一套统一法人拆分比例，每行加和须=100%（仅文字说明提示，不强制校验/高亮）。]]></point>
+      <point><![CDATA[本预算年度该比例表不需要实现和使用：BB.3.X 进销存预算已改为法人级单表（法人公司×存货类别，一表到底），各品类的转入/转出逐来源按法人取数、不乘比例，本表不再参与 BB.3.X 的任何拆分；本表仅作为「无来源品类」的兜底比例予以保留，后续年度启用该规则时再由本表统一提供兜底比例口径（与 BAA.7 采购付款额测算比例附表「本年度不启用、后续年度启用」的处理方式一致）。]]></point>
+      <point><![CDATA[表样与字段登记保留不变：仍按「预算项目×预算部门」逐行维护 12 家法人公司占比 + 合计列（每行加和须=100%，仅文字提示）；兜底口径启用前，分法人存货直接由 BB.3.X 法人级单表按法人列示，不再引用本表比例。]]></point>
+    </rule>
+    <rule form="BAA.11 关联交易加成比例">
+      <point><![CDATA[本表由原 BJ.C.a 加成比例表迁移而来，归入 BAA 编制假设组（编号 BAA.11），现重构为按关联交易表拆分、关键信息为内部交易类型×预算项目→加成比例。]]></point>
+      <point><![CDATA[维度=内部交易类型×预算项目；度量=加成比例(%)。]]></point>
+      <point><![CDATA[用途：为 BJ.C.a 代采购物料、BJ.C.e 代采购资产、BB.4.2.b 内部职场租赁、BJ.C.d 资产转卖四张关联交易表测算加成金额提供定价参数（加成款＝基础金额×加成比例）；本表仅作参数登记，不单独生成会计分录，实际分录与合并抵销在四张交易表生成。]]></point>
+    </rule>
+  </rules>
+
+</form>

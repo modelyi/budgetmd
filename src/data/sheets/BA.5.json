@@ -1,0 +1,445 @@
+{
+  "grids": [
+    {
+      "name": "BA.5 费用预算汇总表",
+      "rows": [
+        [
+          {
+            "text": "预算项目",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "预算部门",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "费用科目",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "【全年合计】",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#001e4a"
+          },
+          {
+            "text": "1月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "2月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "3月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "4月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "5月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "6月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "7月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "8月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "9月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "10月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "11月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "12月",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "备注说明",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [],
+        [
+          {
+            "text": "P1 高功率平板光纤激光切割机",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "销售一部",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "差旅费",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1.8",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2.2",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2.1",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1.9",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2.3",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "2.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "销售工程师驻场差旅",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "P1 高功率平板光纤激光切割机",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "销售一部",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "招待费",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.8",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.7",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.9",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.8",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1.1",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.7",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.9",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "客户接待与商务宴请",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "集团统筹",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发中心",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "广告费",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1.2",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.8",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.8",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.9",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "1.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "行业展会与线上投放",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 5,
+      "colCount": 17
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BAA.11 关联交易加成比例 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BAA.11" name="关联交易加成比例">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BAA.11']） -->
+  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅参数：关联交易加成比例，按「内部交易类型×预算项目」登记加成比例，供 BJ.C.a~e 五张关联交易表测算加成金额，不生成分录）。【法人口径】④不区分法人：加成比例参数按内部交易类型×预算项目登记，本表本身不参与法人归集计算，仅作为下游关联交易金额的定价参数；关联交易的分录与抵销在各交易表（BJ.C.a~e）生成。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BAA.11'） -->
+  <fields>
+    <field code="internalTransactionType" name="内部交易类型" source="本表枚举：代采购物料/代采购资产/内部职场租赁/资产转卖"><![CDATA[对应四张关联交易表的交易类型]]></field>
+    <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据"><![CDATA[加成比例适用的预算项目]]></field>
+    <field code="markupRatePct" name="加成比例(%)" source="本表录入"><![CDATA[加成比例，供五张关联交易表带出]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BAA.11 关联交易加成比例">
+      <point><![CDATA[本表由原 BJ.C.a 加成比例表迁移而来，归入 BAA 编制假设组（编号 BAA.11），现重构为按关联交易表拆分、关键信息为内部交易类型×预算项目→加成比例。]]></point>
+      <point><![CDATA[维度=内部交易类型×预算项目；度量=加成比例(%)。]]></point>
+      <point><![CDATA[用途：为 BJ.C.a 代采购物料、BJ.C.e 代采购资产、BB.4.2.b 内部职场租赁、BJ.C.d 资产转卖四张关联交易表测算加成金额提供定价参数（加成款＝基础金额×加成比例）；本表仅作参数登记，不单独生成会计分录，实际分录与合并抵销在四张交易表生成。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BAA.11']） -->
+  <relation>
+    <summary><![CDATA[关联交易加成比例登记：按内部交易类型×预算项目维护加成比例，供四张关联交易表（代采购物料/代采购资产/内部职场租赁/资产转卖）带出。]]></summary>
+    <dataSources>
+      <source code="AA.6" name="预算项目主数据" fields="预算项目"><![CDATA[加成比例适用的预算项目，下拉选择]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BJ.C.a/BJ.C.e/BJ.C.d/BJ.C.f/BB.4.2.b 关联交易表"><![CDATA[加成比例按「内部交易类型×预算项目」带出到各关联交易表（转移价/转卖价＝基础金额×(1+加成比例)）]]></output>
+    </outputs>
+    <keyRules>
+
+    </keyRules>
+  </relation>
+
+</form>

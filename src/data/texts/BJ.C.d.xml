@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BJ.C.d BJ.C.d · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BJ.C.d" name="BJ.C.d">
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BJ.C.d'） -->
+  <fields>
+    <field code="sellerEntity" name="卖方(法人)" source="AA.2 法人组织架构"><![CDATA[转卖标的原持有法人（卖方）]]></field>
+    <field code="buyerEntity" name="买方(法人)" source="AA.2 法人组织架构"><![CDATA[集团内受让法人（买方）]]></field>
+    <field code="assetDesc" name="资产描述" source="本表录入"><![CDATA[文本字段，仅人眼识别资产（设备名称/规格），不参与测算与分录]]></field>
+    <field code="assetCategory" name="资产类别" source="AA.9 资产类别与折旧字典"><![CDATA[资产细分类别，与 BB.4.4/BB.4.5 同口径]]></field>
+    <field code="markupRatePct" name="加成比例(%)" source="BAA.11 关联交易加成比例（内部交易类型=资产转卖）"><![CDATA[由 BAA.11 按「内部交易类型=资产转卖×预算项目」带出；本表不作参数登记]]></field>
+    <field code="remainingDeprMonths" name="剩余折旧期限(月)" source="本表录入"><![CDATA[受让后剩余可折旧月数（＝受让时剩余可折旧年限×12，全局折旧年限统一按「月」表达）]]></field>
+    <field code="netBookValue" name="账面净值(万元)" source="本表录入"><![CDATA[存量转卖=原值−累计折旧；度量子列，按【全年合计】+ 1~12月在转让月份填列]]></field>
+    <field code="markupRevenue" name="加成收入(万元)" source="本表公式"><![CDATA[= 账面净值 × 加成比例%，即卖方确认的资产处置加成收益（6115），在集团合并层全额抵销]]></field>
+    <field code="transferPrice" name="转卖价(不含税)(万元)" source="本表公式"><![CDATA[= 账面净值 + 加成收入，不含税口径（遵循全局不含税标准）；度量子列，按【全年合计】+ 1~12月计算]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BJ.C 关联交易与内部抵销">
+      <point><![CDATA[本组含四类关联交易：代采购物料（BJ.C.a）、代采购资产（BJ.C.e）、资产转卖（BJ.C.d）、内部借款（BJ.C.f）。]]></point>
+      <point><![CDATA[BJ.C.a 代采购物料查询表、BJ.C.e 代采购资产查询表均为查询表（只读镜像关联交易视角，表样分别与 BB.3.3.D / BB.3.1.D 完全一致）：不做业务生成、不做会计分录生成，只做汇总展示与集团合并抵销——由 BB.3.3.D / BB.3.1.D 关联交易视角驱动（两岗接力代采购模型：采购人员在采购视角填下单主体、关联交易预算员在关联交易视角补填受益主体、系统比对两侧法人判定跨法人代采购）。]]></point>
+      <point><![CDATA[BJ.C.d 资产转卖、BJ.C.f 内部借款仍为逐笔登记表（一行一笔，登记协议价/加成收入与内部借款要素）。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BJ.C.d'].items） -->
+  <events>
+    <event event="加成收入确认（6115）" field="卖方(法人)/买方(法人)/资产描述/资产类别/加成比例%(BAA.11带出)/各月账面净值(万元)/各月转卖价(万元)">
+      <pl><![CDATA[资产处置收益 6115 (+)（加成收入 = 账面净值 × 加成比例% = 转卖价 − 账面净值）]]></pl>
+      <bs><![CDATA[—（卖方资产减少、买方资产增加、现金流均随 BB.4.6/BB.4.3 变动，本表不重复）]]></bs>
+      <cf><![CDATA[—（卖方 CF-13.1、买方 CF-14 随 BB.4.6/BB.4.3 变动）]]></cf>
+      <source><![CDATA[BJ.C.d 资产转卖预算表·账面净值(万元)+加成收入(万元)（加成收入取数源）]]></source>
+      <entry><![CDATA[贷：资产处置收益(6115)（加成收入，随 BB.4.6 卖方处置收款）]]></entry>
+      <note><![CDATA[本表只承载内部转卖的加成收入（6115）；卖方资产减少与处置收款随 BB.4.6（处置方式=内部转卖）、买方资产增加与付款随 BB.4.3 变动，资产增减与现金流分录随那两张表，本表不重复。]]></note>
+    </event>
+    <event event="合并抵销（6115 加成 + 现金流互抵）" field="按卖方+买方+资产勾稽的账面净值/加成收入/转卖价">
+      <pl><![CDATA[抵销卖方 6115 加成收入]]></pl>
+      <bs><![CDATA[抵销买方资产增值（=加成收入），资产按账面净值延续；卖方 CF-13.1 ↔ 买方 CF-14 互抵]]></bs>
+      <cf><![CDATA[卖方 CF-13.1 (+) ↔ 买方 CF-14 (−) 全额互抵（合并层现金流为 0）]]></cf>
+      <source><![CDATA[BJ.C.d 资产转卖预算表（加成收入抵销）]]></source>
+      <entry><![CDATA[借：资产处置收益(6115)（卖方加成收入）；贷：固定资产(1601)（买方资产增值=加成收入）]]></entry>
+      <note><![CDATA[内部转卖不改变集团合并层账面净值，仅抵销 6115 加成与现金流互抵。增值税：本表交易为应税交易——内部转卖为资产（货物）应税交易 13%（取 AB.15），卖方计销项、买方计进项（同额同率）；价外税不影响损益与资产成本（1601/1701 保持不含税）；含税现金流为结算额 ×(1+13%)（随 BB.4.6 处置收款-含税 / BB.4.3 付款承载）；集团合并层销项与进项自然对冲（净 0）。]]></note>
+    </event>
+  </events>
+
+</form>

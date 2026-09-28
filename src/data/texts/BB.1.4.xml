@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BB.1.4 销售费用预算明细表 (经营) · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BB.1.4" name="销售费用预算明细表 (经营)">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BB.1.4']） -->
+  <overview><![CDATA[销售费用预算表，按产品/客户/区域/项目/预算部门/费用科目填报（部门维度为单列「预算部门」，默认明细到二级部门），独立于预算三表体系，仅供销售预算汇总分析引用。表内不设「法人公司」维度列，不按法人编制或拆分；本表不涉及会计处理、不生成分录。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BB.1.4'） -->
+  <fields>
+    <field code="product" name="产品" source="AA.7 预算产品主数据"><![CDATA[]]></field>
+    <field code="customer" name="客户" source="AA.4.a 客户主数据"><![CDATA[]]></field>
+    <field code="region" name="区域" source="区域主数据"><![CDATA[]]></field>
+    <field code="project" name="项目" source="AA.6 预算项目主数据"><![CDATA[]]></field>
+    <field code="department" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[预算部门默认明细到二级部门（如"生产一部"，而非仅"制造工程部"）；值域 AA.5 一级部门-二级部门]]></field>
+    <field code="expenseSubject" name="费用科目" source="费用科目字典"><![CDATA[差旅/招待/广告/佣金等]]></field>
+    <field code="monthlyAmount" name="月度金额" source="本表录入"><![CDATA[按月手工填报；全年合计=SUM(1~12月)]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BB.1.4 销售费用预算明细表 (经营)">
+      <point><![CDATA[维度=产品、客户、区域、项目、预算部门（默认明细到二级部门）、费用科目（差旅/招待/广告/佣金等）；度量=全年合计+1~12月金额，手工填报。]]></point>
+      <point><![CDATA[独立于预算三表体系（不与凭证/科目余额/三表挂钩）。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.1.4']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[按产品/客户/区域/项目/预算部门（默认明细到二级部门）/费用科目填报销售费用，供销售预算多维汇总分析（BB.1.X）引用]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[管理/研发/制造费用（属 BB.5.1/BB.5.2）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BB.1.4']） -->
+  <relation>
+    <summary><![CDATA[销售费用明细是"卖东西要花多少钱"的账，登记差旅、招待、广告、佣金等销售费用，按月填报，全年合计自动汇总；独立于预算三表体系，不参与财务结果生成，仅供销售预算多维汇总分析（BB.1.X）的"销售直接费用"列取数。]]></summary>
+    <dataSources>
+      <source code="AA.7" name="预算产品主数据" fields="产品"><![CDATA[费用归属的产品]]></source>
+      <source code="AA.4.a" name="客户主数据" fields="客户"><![CDATA[费用归属的客户]]></source>
+      <source code="区域" name="区域主数据" fields="区域"><![CDATA[费用发生的区域]]></source>
+      <source code="AA.6" name="预算项目主数据" fields="项目"><![CDATA[费用归属的项目]]></source>
+      <source code="AA.5" name="行政部门字典" fields="预算部门"><![CDATA[费用归属的预算部门，默认明细到二级部门（如"生产一部"而非仅"制造工程部"）]]></source>
+      <source code="费用科目" name="费用科目字典" fields="费用科目"><![CDATA[差旅/招待/广告/佣金等费用科目]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BB.1.X 销售预算多维汇总分析—销售直接费用"><![CDATA[按产品/客户/区域/项目/预算部门/费用科目汇总 → 销售直接费用列]]></output>
+    </outputs>
+    <keyRules>
+      <rule><![CDATA[按月手工填报，全年合计 = SUM(1~12月)。]]></rule>
+      <rule><![CDATA[费用科目覆盖差旅/招待/广告/佣金等销售费用类别。]]></rule>
+    </keyRules>
+  </relation>
+
+</form>

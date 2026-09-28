@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BJ.A BJ.A · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BJ.A" name="BJ.A">
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BJ.A 法人预算报表通用调整与补录">
+      <point><![CDATA[该表不针对具体逻辑，是法人预算报表的通用调整与补录入口；本表调整项为前置调整：在报表汇总前按关联报表项（三表全部 92 个报表项：PL 31 / BS 26 / CF 35，逐行对应，一个不漏，含表样「其中：」子行）叠加进三表对应行的「上游自动取数」列；录入时可填更明细的信息（业务类型+法人公司+摘要说明+关联报表项+调整原因/调整依据+1~12月金额），便于逐条追溯；三表的「编制手工调整」列仍为本表（报表）直接录入，两者不混用；维度=业务类型（报表调整/其他业务收入/其他业务支出/营业外收入/营业外支出/其他关联项）+法人公司+摘要说明+关联报表行(业务类型=报表调整、其他关联项时必填)；度量=全年合计+1~12月每月金额。]]></point>
+      <point><![CDATA[业务类型=其他业务收入/其他业务支出/营业外收入/营业外支出时仍驱动会计分录（科目增减、PL/BS/CF去向按各自业务逻辑，统一由BJ.A承载）；业务类型=报表调整/其他关联项时不生成会计分录，仅报表汇总环节按法人+关联报表行叠加调整数。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BJ.A']） -->
+  <relation>
+    <summary><![CDATA[法人预算报表的通用调整与补录入口，不针对具体逻辑；财务三表的每一个报表项都可在本表取到对应调整/补录，按「业务类型+法人公司+摘要说明+关联报表行」登记月度金额。其他业务/营业外收支驱动会计分录，报表调整/其他关联项不生成分录、仅报表汇总环节作为前置调整项叠加至对应报表项的「上游自动取数」。]]></summary>
+    <dataSources>
+      <source code="A1.4.b" name="财务三表取数与科目汇总规则库" fields="财务三表报表项清单（PL/BS/CF 逐行）"><![CDATA[关联报表行的取值来源：财务三表的每一个报表项都可在此被对应调整/补录（含表样「其中：」子行）]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BO.PL 利润表"><![CDATA[其他业务收支/营业外收支按各自 PL 去向计入；报表调整/其他关联项按关联报表行（每个报表项逐行对应）作为前置调整项叠加至该行「上游自动取数」]]></output>
+      <output target="BO.BS 资产负债表"><![CDATA[其他业务收支/营业外收支按各自 BS 去向计入；报表调整/其他关联项按关联报表行（每个报表项逐行对应）作为前置调整项叠加至该行「上游自动取数」]]></output>
+      <output target="BO.CF 现金流量表"><![CDATA[其他业务收支/营业外收支按各自 CF 去向计入；报表调整/其他关联项按关联报表行（每个报表项逐行对应）作为前置调整项叠加至该行「1~12月自动取数」]]></output>
+    </outputs>
+    <keyRules>
+
+    </keyRules>
+  </relation>
+
+</form>

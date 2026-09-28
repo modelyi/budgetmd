@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BO.CF.M BO.CF.M · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BO.CF.M" name="BO.CF.M">
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BO.CF.M 筹资试算表">
+      <point><![CDATA[按 DOC_FS/cz.png 原样构建的筹资试算表：列结构为「项目名称 | 取数规则(引用/计算/手工填写) | 2027年本年预算数 | 1月~12月各月份」，两行制表头，顶部带有「预算组织：法人公司 / 预算期间：2027年 / 单位：元」。]]></point>
+      <point><![CDATA[第一~五部分（经营/投资/筹资活动的现金流入与流出）按月展示现金收支走势；期初现金=上年末 BO.BS 货币资金。]]></point>
+      <point><![CDATA[期末可用账户余额=期初现金 + 现金流入小计(不含筹资) − 现金流出小计；为负即该月存在资金缺口。]]></point>
+      <point><![CDATA[六、资金补充方案（吸收投资收到的现金 / 其中项目资本金 / 取得借款收到的现金 / 收到其他与筹资活动有关的现金）为手工填写，用于平衡资金缺口。]]></point>
+      <point><![CDATA[期末现金及现金等价物余额=期末可用账户余额 + 资金补充方案流入 + 汇率变动影响，须与 BO.BS 期末货币资金勾稽平衡。]]></point>
+    </rule>
+  </rules>
+
+</form>

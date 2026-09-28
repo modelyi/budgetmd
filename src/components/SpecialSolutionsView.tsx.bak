@@ -1,0 +1,295 @@
+﻿import React, { useState } from 'react';
+
+/**
+ * 专项方案说明页：跨表单的业务专题方案汇总。
+ * 卡片式分层表达，让财务人员一眼看懂业务方案；细节在对应表单页展开。
+ */
+
+interface Topic { key: string; no: string; title: string; oneLiner: string; }
+
+const TOPICS: Topic[] = [
+  { key: 'product', no: '一', title: '对外软硬件销售预算方案', oneLiner: 'BB.1.2 · 卖产品的收入成本账（整机/软件）' },
+  { key: 'service', no: '二', title: '对外服务销售预算方案', oneLiner: 'BB.1.3 · 卖服务的收入成本账' },
+  { key: 'intercompany', no: '三', title: '集团内部关联交易', oneLiner: 'BJ.C · 单体计损益、合并全额抵销' },
+  { key: 'labor', no: '四', title: '雇员费用与人工成本', oneLiner: 'BB.5.1 · 不重复计提、按部门属性冲减' },
+  { key: 'inventory', no: '五', title: '存货流转与成本结转', oneLiner: 'BB.3.X · 料工费→产成品→销售领用' },
+  { key: 'vat', no: '六', title: '增值税集中测算', oneLiner: 'BF.4.b · 业务表不含税、税金表统一算' },
+  { key: 'capex', no: '七', title: '资本化与折旧方案', oneLiner: 'BB.4.X · 资本性支出形成长期资产、折旧进成本' },
+];
+
+export const SpecialSolutionsView: React.FC = () => {
+  const [active, setActive] = useState<string>('service');
+  return (
+    <main className="flex-1 min-h-0 min-w-0 flex overflow-hidden">
+      <aside className="w-56 shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-y-auto custom-scrollbar">
+        <div className="px-3 py-3 border-b border-slate-100 dark:border-slate-800">
+          <div className="text-xs font-bold text-slate-900 dark:text-slate-100">专项方案</div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">面向 CFO / 预算主管 · 业务方案速览</div>
+        </div>
+        <nav className="p-2 space-y-0.5">
+          {TOPICS.map((t) => (
+            <button key={t.key} onClick={() => setActive(t.key)}
+              className={`w-full text-left px-2.5 py-2 rounded-md text-xs transition-colors cursor-pointer ${active === t.key ? 'bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 font-semibold' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'}`}>
+              <div>{t.no}、{t.title}</div>
+              <div className="text-[10px] text-slate-400 mt-0.5 font-normal">{t.oneLiner}</div>
+            </button>
+          ))}
+        </nav>
+      </aside>
+      <div className="flex-1 min-w-0 overflow-y-auto custom-scrollbar">
+        {active === 'product' && <ProductTopic />}
+        {active === 'service' && <ServiceTopic />}
+        {active === 'intercompany' && <IntercompanyTopic />}
+        {active === 'labor' && <LaborTopic />}
+        {active === 'inventory' && <InventoryTopic />}
+        {active === 'vat' && <VatTopic />}
+        {active === 'capex' && <CapitalTopic />}
+      </div>
+    </main>
+  );
+};
+
+/* ── 通用卡片组件 ── */
+const LayerLabel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div style={{ marginTop: 14, fontSize: 12, fontWeight: 600, color: '#6B7280', letterSpacing: 1 }}>{children}</div>
+);
+
+const Card: React.FC<{ title: React.ReactNode; desc?: string; accent?: 'teal' | 'blue' | 'white'; children?: React.ReactNode }> = ({ title, desc, accent = 'white', children }) => {
+  const bg = accent === 'teal' ? 'linear-gradient(135deg,rgba(148,212,208,0.18),rgba(148,212,208,0.32))'
+    : accent === 'blue' ? 'linear-gradient(135deg,rgba(155,187,244,0.18),rgba(155,187,244,0.32))' : '#fff';
+  const border = accent === 'white' ? '0.5px solid rgba(0,0,0,0.08)' : 'none';
+  return (
+    <div style={{ flex: '1 1 220px', padding: 12, background: bg, border: border, borderRadius: 12, boxSizing: 'border-box' }}>
+      <div style={{ fontSize: 13.5, fontWeight: 600, color: '#1A1B1C' }}>{title}</div>
+      {desc && <div style={{ fontSize: 12, color: '#6B7280', marginTop: 4, lineHeight: 1.6 }}>{desc}</div>}
+      {children && <div style={{ fontSize: 12, color: '#1A1B1C', marginTop: 6, lineHeight: 1.7 }}>{children}</div>}
+    </div>
+  );
+};
+
+const EntryCard: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
+  <div style={{ flex: '1 1 260px', padding: '10px 12px', background: '#fff', border: '0.5px solid rgba(0,0,0,0.08)', borderRadius: 10, fontSize: 12, lineHeight: 1.7, color: '#1A1B1C' }}>
+    <b>{title}</b><br />{children}
+  </div>
+);
+
+const WarnBox: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
+  <div style={{ marginTop: 14, padding: 12, background: 'rgba(228,212,143,0.18)', borderRadius: 12, boxSizing: 'border-box' }}>
+    <div style={{ fontSize: 13, fontWeight: 600, color: '#1A1B1C' }}>{title}</div>
+    <div style={{ fontSize: 12, color: '#1A1B1C', marginTop: 6, lineHeight: 1.7 }}>{children}</div>
+  </div>
+);
+
+const TopicHeader: React.FC<{ title: string; tagline: string }> = ({ title, tagline }) => (
+  <div style={{ padding: '20px 20px 0' }}>
+    <div style={{ fontSize: 16, fontWeight: 600, color: '#1A1B1C' }}>{title}</div>
+    <div style={{ fontSize: 12, color: '#6B7280', marginTop: 4 }}>{tagline}</div>
+  </div>
+);
+
+const FlowRow: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 6 }}>{children}</div>
+);
+
+/* ============ 一、对外软硬件销售 ============ */
+const ProductTopic: React.FC = () => (
+  <div style={{ paddingBottom: 24 }}>
+    <TopicHeader title="BB.1.2 软硬件收入与成本预算" tagline="定位：「卖产品」的收入成本账（整机硬件/软件销售）；成本只认综合产品成本，不拆料工" />
+    <div style={{ padding: '0 20px' }}>
+      <LayerLabel>① 填报层（业务岗录入）</LayerLabel>
+      <FlowRow>
+        <Card title="BB.1.2.a 软硬件销售填报 〔销售岗〕" desc="存量订单期初导入 + 增量手工新增（同表，订单编号区分）" accent="teal">
+          销量 × 单价(不含税) = <b>确认收入</b><br />月度：预收 / 验收回款
+        </Card>
+      </FlowRow>
+      <div style={{ textAlign: 'center', color: '#94D4D0', fontSize: 18, lineHeight: 1, margin: '6px 0' }}>↓ 系统汇总（只读）</div>
+      <LayerLabel>② 财务视角（合并存量+增量，出分录）</LayerLabel>
+      <FlowRow>
+        <Card title="BB.1.2.c 财务视角主表" accent="blue">
+          收入（带出）＋ <b>预计销售成本</b>（财务按月填，=销量×BAA.2标准成本）<br />自动合并存量+增量
+        </Card>
+      </FlowRow>
+      <LayerLabel>③ 单体分录 → 三表落点（按签约主体法人归集）</LayerLabel>
+      <FlowRow>
+        <EntryCard title="收入确认">借 1122 应收 ／ 贷 6001.1 主营业务收入（硬件600101/软件600103）<br />→ PL <b>6001.1</b> ／ BS <b>1122</b></EntryCard>
+        <EntryCard title="销售成本结转">借 6401.1 主营业务成本 ／ 贷 1405 存货<br />→ PL <b>6401.1</b> ／ BS <b>1405</b></EntryCard>
+        <EntryCard title="回款">预收 / 验收回款<br />借 1001 ／ 贷 2204 / 1122<br />→ CF <b>CF-01</b>（货物回款×1.13）</EntryCard>
+      </FlowRow>
+      <WarnBox title="跨法人调货（产品从兄弟法人调入）">
+        <b>提供方</b>：借 1221.1 ／ 贷 6001.2（出库成本+加成）；借 6401.2 ／ 贷 1405（出库成本）。<br />
+        <b>签约主体</b>：借 6401.1 主营业务成本（出库成本+加成，<b>加成进成本</b>）／ 贷 2241.1。<br />
+        往来真实现金结算；增值税 13% 在 BF.4.b。<b>合并层</b>：6001.2↔6401.1 全额对冲，6401.2 保留为集团真实成本。
+      </WarnBox>
+    </div>
+  </div>
+);
+/* ============ 一、技术服务交易 ============ */
+const ServiceTopic: React.FC = () => (
+  <div style={{ paddingBottom: 24 }}>
+    <TopicHeader title="BB.1.3 技术服务收入与成本预算" tagline="定位：「卖服务」的收入成本账（维保、软件授权升级等）；与整机不同，只有现场服务才拆人工+物料" />
+    <div style={{ padding: '0 20px' }}>
+      <LayerLabel>① 填报层（业务岗录入）</LayerLabel>
+      <FlowRow>
+        <Card title="BB.1.3.a 服务销售填报 〔销售岗〕" desc="存量订单导入 + 增量手工新增（同表，订单编号区分）" accent="teal">
+          销量 × 单价(不含税) = <b>确认收入</b><br />月度：预收款 / 验收回款
+        </Card>
+        <Card title="BB.1.3.d 物料明细 〔交易路径岗〕" desc="好件/坏件分行，物料编码带出">
+          <b>内部供应商</b>列（非必填）：留空=自供；填=跨法人
+        </Card>
+        <Card title="BB.1.3.g 人工明细 〔交易路径岗〕" desc="岗位 × 月度工时(小时)">
+          同样设 <b>内部供应商</b> 列判定跨法人
+        </Card>
+      </FlowRow>
+      <div style={{ textAlign: 'center', color: '#94D4D0', fontSize: 18, lineHeight: 1, margin: '6px 0' }}>↓ 系统汇总（只读）</div>
+      <LayerLabel>② 财务视角（合并存量+增量，出分录）</LayerLabel>
+      <FlowRow>
+        <Card title="BB.1.3.c 财务视角主表" accent="blue">
+          收入（带出）＋ <b>人工成本</b>（.i 汇总）＋ <b>物料成本</b>（.f 汇总）＋ 其他费用（手工）
+        </Card>
+        <Card title="BB.1.3.f / .i" desc="物料 / 人工财务查询" />
+      </FlowRow>
+      <LayerLabel>③ 单体分录 → 三表落点（按签约主体法人归集）</LayerLabel>
+      <FlowRow>
+        <EntryCard title="收入确认">借 1122 应收 ／ 贷 6001.1 主营业务收入<br />→ PL <b>6001.1</b> ／ BS <b>1122</b></EntryCard>
+        <EntryCard title="物料成本">好件×好件成本 − 坏件×坏件成本<br />借 6401.1 ／ 贷 1405 存货<br />→ PL <b>6401.1</b> ／ BS <b>1405</b></EntryCard>
+        <EntryCard title="人工成本">工时×BAA.3 费率<br />借 6401.1 ／ 贷 6601/6602/6603/5001（按部门属性冲减，<b>不重复计提 2211</b>）<br />→ PL <b>6401.1</b></EntryCard>
+        <EntryCard title="回款">预收 / 验收回款<br />借 1001 ／ 贷 2204 / 1122<br />→ CF <b>CF-01</b>（服务回款×1.06）</EntryCard>
+      </FlowRow>
+      <WarnBox title="跨法人内部供货（明细行「内部供应商」列登记）">
+        <b>内部调货统一真实购销模型</b>（BB.1.2 软硬件 / BB.1.3 服务物料·人工同构）：提供方记 6001.2 完整销售价（成本+加成）、按成本结转 6401.2；接受方（签约主体）按采购价（出库成本+加成）计入 <b>6401.1 主营业务成本（加成进成本，不走期间费用）</b>。<br />
+        往来 1221.1/2241.1 真实现金结算；增值税物料 13%/人工 6% 在 BF.4.b。集团合并层 6001.2↔6401.1 专门对冲、6401.2 保留为集团真实成本。
+      </WarnBox>
+    </div>
+  </div>
+);
+
+/* ============ 二、集团内部关联交易 ============ */
+const IntercompanyTopic: React.FC = () => (
+  <div style={{ paddingBottom: 24 }}>
+    <TopicHeader title="BJ.C 关联交易与内部抵销" tagline="定位：集团内法人间的买卖/拆借/租赁，单体各自计损益，合并层全额抵销不留痕" />
+    <div style={{ padding: '0 20px' }}>
+      <LayerLabel>① 五类关联交易</LayerLabel>
+      <FlowRow>
+        <Card title="代采购物料" desc="BB.3.3.D 驱动 → BJ.C.a 只读镜像" accent="teal">
+          两岗接力：采购岗填下单主体、关联交易岗补受益主体；到货额平价转移 + 加成款(BAA.11)
+        </Card>
+        <Card title="代采购资产" desc="BB.3.1.D 驱动 → BJ.C.e 只读镜像">
+          同上；资产原值平移到 B 侧，折旧由 BB.4.5 按 B 侧剩余年限计提
+        </Card>
+        <Card title="资产转卖" desc="BJ.C.d 逐笔登记">
+          账面净值平移 + 加成进 6115；买方按转卖价续提折旧
+        </Card>
+        <Card title="内部借款" desc="BJ.C.f 逐笔登记">
+          本金挂 1221.1/2241.1；利息提供方 6001.2 ↔ 借入方 6604.1
+        </Card>
+        <Card title="内部职场租赁" desc="BB.4.2.b / .b.1">
+          一年以上资本化(1621/2602)，一年以下费用化；租金+加成款
+        </Card>
+      </FlowRow>
+      <LayerLabel>② 单体分录模板</LayerLabel>
+      <FlowRow>
+        <EntryCard title="提供方">借 1221.1 其他应收-内部往来 ／ 贷 6001.2 其他业务收入-内部往来（加成部分）</EntryCard>
+        <EntryCard title="接受方">借 存货/费用/资产 ／ 贷 2241.1 其他应付-内部往来</EntryCard>
+      </FlowRow>
+      <WarnBox title="集团合并抵销（CAS 33）">
+        提供方收入 ↔ 接受方成本/费用全额对冲；1221.1 ↔ 2241.1 往来对冲；内部结算现金流对冲。<b>合并口径对三表 0 影响</b>。含税结算：货物 13%、服务 6%、租赁 9%（AB.15），合并层销项进项自然对冲。
+      </WarnBox>
+    </div>
+  </div>
+);
+
+/* ============ 三、雇员费用与人工成本 ============ */
+const LaborTopic: React.FC = () => (
+  <div style={{ paddingBottom: 24 }}>
+    <TopicHeader title="BB.5.1 雇员费用与项目人工不重复计提" tagline="定位：HR 统一计提工资，项目型人工从部门费用里冲出来进成本，一笔工资只出一次" />
+    <div style={{ padding: '0 20px' }}>
+      <LayerLabel>① HR 统一计提（BB.5.1 四列）</LayerLabel>
+      <FlowRow>
+        <Card title="销售费用人工" accent="teal">→ 6601</Card>
+        <Card title="管理费用人工" accent="teal">→ 6602</Card>
+        <Card title="研发费用人工" accent="teal">→ 6603</Card>
+        <Card title="制造费用人工" accent="teal">→ 5001</Card>
+      </FlowRow>
+      <LayerLabel>② 项目型人工冲减路由（按部门属性 AM.2→AB.14）</LayerLabel>
+      <FlowRow>
+        <EntryCard title="技术服务人工（BB.1.3.i）">借 6401.1 ／ 贷 6601/6602/6603/5001（按服务人员所属部门路由）</EntryCard>
+        <EntryCard title="自制设备人工（BB.4.1.b）">借 1604 在建工程 ／ 贷 对应费用科目（资本化）</EntryCard>
+      </FlowRow>
+      <WarnBox title="三条铁律">
+        <b>① 不重复计提 2211</b>：本事件只是费用重分类，不新增应付职工薪酬。<br />
+        <b>② 付现只走一次</b>：实际发薪在 BB.5.1 CF-06 归集，本表不再驱动付现。<br />
+        <b>③ 跨法人人工</b>：与物料同构（提供方 6001.2/6401.2、接受方 6401.1 含加成），见专题一。
+      </WarnBox>
+    </div>
+  </div>
+);
+
+/* ============ 四、存货流转 ============ */
+const InventoryTopic: React.FC = () => (
+  <div style={{ paddingBottom: 24 }}>
+    <TopicHeader title="BB.3.X 存货周转" tagline="定位：按法人×存货类别滚动结转，料工费→产成品→销售/服务领用" />
+    <div style={{ padding: '0 20px' }}>
+      <LayerLabel>① 流转路径</LayerLabel>
+      <FlowRow>
+        <Card title="原材料入库" desc="BB.3.3.C 到货额 + 代采购平价转入" accent="teal" />
+        <Card title="在制品" desc="料←领料；工←BB.5.1 制造人工；费←BB.5.2+折旧" />
+        <Card title="产成品" desc="在制品结转 = 产量×BAA.2 标准成本" />
+        <Card title="出库消耗" desc="BB.1.2 销售成本 / BB.1.3 服务物料" />
+      </FlowRow>
+      <WarnBox title="关键口径">
+        所有出入库<b>按法人逐来源取数、不按比例拆分</b>；代采购平价转移合并层对冲、<b>不含加成</b>（加成走 6001.2↔6602/6401.1，不进存货）。各法人加总 = 集团存货列报。
+      </WarnBox>
+    </div>
+  </div>
+);
+
+/* ============ 五、增值税 ============ */
+const VatTopic: React.FC = () => (
+  <div style={{ paddingBottom: 24 }}>
+    <TopicHeader title="BF.4.b 增值税集中测算" tagline="定位：业务表一律不含税，销项−进项在税金表统一算，不散落各业务表" />
+    <div style={{ padding: '0 20px' }}>
+      <LayerLabel>① 结构</LayerLabel>
+      <FlowRow>
+        <Card title="BF.4.a 税金主表" desc="增值税行不手填，从 BF.4.b 带出；附加税按实缴基数联动" accent="teal" />
+        <Card title="BF.4.b 增值税附表" desc="销项 − 进项 ± 留抵 = 净应纳；基数×税率（货物13%/服务6%/租赁9%，AB.15）" />
+      </FlowRow>
+      <WarnBox title="内部交易增值税">
+        提供方计销项、接受方计进项（同额同率），价外税不影响损益；含税现金 = 结算额×(1+税率)。<b>集团合并层销项与进项自然对冲（净0）</b>。例外：内部借款利息进项不得抵扣。
+      </WarnBox>
+    </div>
+  </div>
+);
+
+/* ============ 六、资本化与折旧 ============ */
+const CapitalTopic: React.FC = () => (
+  <div style={{ paddingBottom: 24 }}>
+    <TopicHeader title="BB.4.X 资本化与折旧方案" tagline="定位：资本性支出形成长期资产（固定资产/使用权资产），折旧按使用部门进成本；与费用化(OPEX)切清" />
+    <div style={{ padding: '0 20px' }}>
+      <LayerLabel>① 哪些支出资本化</LayerLabel>
+      <FlowRow>
+        <Card title="外购固定资产" desc="BB.4.1 外购" accent="teal">
+          借 1601 固定资产 / 1604 在建工程（需安装）
+        </Card>
+        <Card title="自制设备" desc="BB.4.1.b 自制">
+          料工费归集进 1604 在建工程；人工从 BB.5.1 费用科目冲减
+        </Card>
+        <Card title="一年以上职场租赁" desc="BB.4.2.b / .b.1">
+          使用权资产 1621 / 租赁负债 2602；一年以下直接费用化
+        </Card>
+        <Card title="代采购资产" desc="BB.3.1.D → BJ.C.e">
+          原值平移到受益方法人；折旧按 B 侧剩余年限计提
+        </Card>
+      </FlowRow>
+      <LayerLabel>② 资产路径与折旧</LayerLabel>
+      <FlowRow>
+        <EntryCard title="在建工程→转固">借 1601 固定资产 ／ 贷 1604 在建工程（完工转固次月起折旧）</EntryCard>
+        <EntryCard title="月度折旧">借 5101/6601/6602/6603（按使用部门）／ 贷 1602 累计折旧<br />→ PL 对应费用/成本行</EntryCard>
+      </FlowRow>
+      <WarnBox title="与费用化(OPEX)切分原则">
+        <b>资本化条件</b>：使用周期 &gt; 1 年、单位价值达 AA.9 资产类别门槛、形成可长期使用的经济资源。<br />
+        日常维修、低值易耗品、短期租赁（≤1年）直接走 BB.5.2 费用化，不进 1601。<br />
+        <b>资产类别</b>全库唯一字段（取 AA.9 层级，如"固定资产-生产机器设备"），不拆大类小类。
+      </WarnBox>
+    </div>
+  </div>
+);

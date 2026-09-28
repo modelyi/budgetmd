@@ -1,0 +1,41 @@
+{
+  "grids": [
+    {
+      "name": "AB.7 预算项目类型字典",
+      "rows": [
+        [
+          {
+            "text": "编码",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "项目类型",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "适用范围说明",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "引用表单",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ]
+      ],
+      "rowCount": 1,
+      "colCount": 4
+    }
+  ]
+}

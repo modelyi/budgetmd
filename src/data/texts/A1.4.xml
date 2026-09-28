@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  A1.4 表项与财务报表转换规则总览 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="A1.4" name="表项与财务报表转换规则总览">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['A1.4']） -->
+  <overview><![CDATA[基于会计规则引擎总结的权威规则总览，含A1.4.a业务事件与财务三表转换规则库（覆盖全量21张编制表）+A1.4.b财务三表取数与科目汇总规则库（三表行项加总公式与准则依据）。本表本身为规则文档、不生成分录；法人归属与集团合并不互抵口径在各业务表规则行内分别写明，本表不按法人编制。]]></overview>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="A1.4 表项与财务报表转换规则总览">
+      <point><![CDATA[基于会计规则引擎总结的权威规则库，含两个Tab：A1.4.a业务事件与财务三表转换规则库（全量21张编制表凭证与三表流向）+ A1.4.b财务三表取数与科目汇总规则库（三表行项加总公式与准则依据）。全面、精确、易读。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['A1.4']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[业务事件与财务三表转换规则库、三表取数与科目汇总规则库的权威查阅]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[具体编制数据的录入]]></item>
+    </notApplies>
+  </scenarios>
+
+</form>
