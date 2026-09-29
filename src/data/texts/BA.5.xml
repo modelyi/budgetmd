@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BA.5 费用预算汇总表 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BA.5" name="费用预算汇总表">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BA.5']） -->
+  <overview><![CDATA[（显示为BAP.1）整表数据来自于费用预算模块的编制结果，本表为汇总展示。【会计处理】本表不涉及会计处理（仅汇总展示：整表数据来自费用预算模块的编制结果，本表为汇总展示，不生成分录）。【法人口径】④不区分法人：费用预算汇总展示表（预算项目/预算部门/费用科目），不按法人编制。]]></overview>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BA.5 费用预算汇总表（显示为BAP.1）">
+      <point><![CDATA[归属编制前提(BAP)；按预算项目、预算部门（默认明细到二级部门）、费用科目维度录入全年及1~12月费用金额。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BA.5']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[费用预算编制结果汇总展示（数据来自外部费用预算系统）]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[费用明细填报（属外部系统）]]></item>
+    </notApplies>
+  </scenarios>
+
+</form>

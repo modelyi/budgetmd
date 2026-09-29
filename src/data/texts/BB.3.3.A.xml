@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BB.3.3.A BB.3.3.A · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BB.3.3.A" name="BB.3.3.A">
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BB.3.3.A'） -->
+  <fields>
+    <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据"><![CDATA[]]></field>
+    <field code="department" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[预算部门原则上明细到二级部门]]></field>
+    <field code="orderingEntity" name="下单主体" source="AA.8 管理单元主数据"><![CDATA[选择管理单元；后续根据管理单元与法人的对应关系，得到所属法人公司的订单]]></field>
+    <field code="poFlag" name="PO标记" source="本表录入"><![CDATA[固定值列：本表恒为「有PO」，不可修改（原 PO标记 枚举「有PO/无PO」已按 PO 拆为 BB.3.3.A 有PO / BB.3.3.B 无PO 两张采购视角表样，本表为有PO表样）]]></field>
+    <field code="materialCategory" name="物料类别" source="ERP 物料类别字典"><![CDATA[来自 ERP 字典；结构与BB.3.1资产类别一致，仅字典来源不同]]></field>
+    <field code="supplier" name="供应商" source="AA.10 供应商主数据"><![CDATA[]]></field>
+    <field code="monthlyArrival" name="月度到货额" source="本表录入"><![CDATA[]]></field>
+    <field code="monthlyOrder" name="月度下单额" source="本表录入"><![CDATA[]]></field>
+    <field code="advancePayment" name="预付款" source="本表录入"><![CDATA[付款节奏以本表各月填报的预付款与验收付款为准（BAA.7 比例表本年度不启用，不参与测算），按月手工填报]]></field>
+    <field code="advancePaymentRatio" name="预付款比例" source="本表录入"><![CDATA[按月填报（每月子列，位于下单额之后、预付款之前）；各月预付款=当月下单额×当月预付款比例]]></field>
+    <field code="acceptancePayment" name="验收付款" source="本表录入"><![CDATA[付款节奏以本表各月填报的预付款与验收付款为准（BAA.7 比例表本年度不启用，不参与测算），按月手工填报]]></field>
+    <field code="annualArrival" name="全年到货额合计" source="本表公式"><![CDATA[=SUM(12个月到货额)]]></field>
+    <field code="annualOrder" name="全年下单额合计" source="本表公式"><![CDATA[=SUM(12个月下单额)]]></field>
+    <field code="remark" name="备注说明" source="本表录入"><![CDATA[]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BB.3.3.A 有PO-物料类采购预算">
+      <point><![CDATA[采购视角：PO标记固定=有PO；维度=预算项目/预算部门/下单主体/物料类别/供应商（受益主体列已按两岗接力代采购模型移除，改在 .D 关联交易视角补填）。]]></point>
+      <point><![CDATA[度量=到货额/下单额/预付款比例/预付款/验收付款（共 72 列）；按下单主体直接指认法人，不生成会计分录。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.3.3.A']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[有PO物料类采购填报（下单主体直接指认法人）]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[无PO采购（属 .B）]]></item>
+      <item><![CDATA[财务分录（属 .C）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BB.3.3.A']） -->
+  <relation>
+    <summary><![CDATA[有PO物料类采购填报（下单主体直接指认法人）。]]></summary>
+    <dataSources>
+      <source code="AA.8" name="管理单元主数据" fields="下单主体"><![CDATA[按管理单元与法人一一对应直接指认法人]]></source>
+      <source code="AB.9" name="存货物料类别字典" fields="物料类别"><![CDATA[到货额按类别转入 BB.3.X 各物料大类]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BB.3.3.C 财务视角"><![CDATA[有PO行按下单主体直接指认法人，汇入财务视角]]></output>
+    </outputs>
+    <keyRules>
+      <rule><![CDATA[PO标记固定=有PO；不生成会计分录（分录由 .C 生成）。]]></rule>
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BB.3.3.A']） -->
+  <noVoucher><![CDATA[不涉及财报转换（采购视角不生成会计分录，法人分录由财务视角 .C 生成）。]]></noVoucher>
+
+</form>

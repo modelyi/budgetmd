@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BAP.3 物料消耗需求汇总表_研发长期 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BAP.3" name="物料消耗需求汇总表_研发长期">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BAP.3']） -->
+  <overview><![CDATA[物料消耗需求汇总表_研发长期，表样逻辑与BAP.2一致，维度=预算部门/物料编码/物料名称/物料类别（固定「研发物料」，关联AB.9存货物料类别字典）。定位是先在需求采集模块做「研发长期物料消耗需求采集」再抽取汇总；配套的前置模块尚未开发，本表当前暂无实际数据来源，暂不参与BB.3.X进销存表与BB.3.3物料采购预算取数。不生成分录，不设「法人公司」维度、不做拆分。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BAP.3'） -->
+  <fields>
+    <field code="department" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[研发长期物料消耗需求归属的预算部门，默认明细到二级部门]]></field>
+    <field code="materialCode" name="物料编码" source="AA.11 物料主数据"><![CDATA[研发长期消耗物料编码，从物料主数据选择]]></field>
+    <field code="materialName" name="物料名称" source="AA.11 物料主数据"><![CDATA[按物料编码自动带出]]></field>
+    <field code="materialCategory" name="物料类别" source="AB.9 存货物料类别字典"><![CDATA[固定值「研发物料」：本表仅承载研发长期物料消耗需求，物料类别恒为研发物料，不可修改]]></field>
+    <field code="monthlyAmount" name="月度消耗金额" source="本表录入"><![CDATA[按月手工填报；全年合计=SUM(1~12月)；金额不含税、单位万元、精度 0.1]]></field>
+    <field code="annualTotal" name="全年合计" source="本表公式"><![CDATA[=SUM(1~12月消耗金额)]]></field>
+    <field code="notes" name="备注说明" source="本表录入"><![CDATA[补充研发长期物料消耗的业务假设或特殊事项]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BAP.3 物料消耗需求汇总表_研发长期">
+      <point><![CDATA[归属编制前提(BAP)；表样逻辑与BAP.2一致（维度=预算部门、物料编码、物料名称、物料类别（固定「研发物料」，关联 AB.9 存货物料类别字典）；度量=全年合计+1~12月分月金额）。]]></point>
+      <point><![CDATA[核心定位：需要在需求采集模块专门做「研发长期物料消耗需求采集」功能，待研发长期物料消耗需求数据采集后，再抽取汇总生成此表。]]></point>
+      <point><![CDATA[物料类别固定为「研发物料」（关联 AB.9 存货物料类别字典），本表仅承载研发长期物料消耗需求、不承载其他物料类别消耗，无需逐行判断。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BAP.3']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[研发长期物料消耗需求汇总（表样占位；前置模块未开发，暂无数据来源）]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[生产/销售/管理类物料消耗（属 BAP.2）]]></item>
+    </notApplies>
+  </scenarios>
+
+</form>

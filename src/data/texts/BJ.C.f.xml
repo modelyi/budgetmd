@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BJ.C.f BJ.C.f · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BJ.C.f" name="BJ.C.f">
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BJ.C.f'） -->
+  <fields>
+    <field code="direction" name="借款方向" source="本表录入（枚举：借入/借出）"><![CDATA[下拉（借入/借出）；本列决定分录路由、无第二种走法——借入方进 2241.1/6604.1/CF-18/CF-20/CF-21，借出方进 1221.1/6001.2/CF-22.1/CF-19.2]]></field>
+    <field code="legalEntity" name="本方法人" source="AA.2 法人组织架构"><![CDATA[AA.2 法人组织架构取值；本表按本方法人编制，三表落点按本方法人归集]]></field>
+    <field code="counterpartyEntity" name="对手方法人" source="AA.2 法人组织架构"><![CDATA[AA.2 法人组织架构取值；集团合并层按「本方法人 + 对手方法人」配对互抵（1221.1↔2241.1、6001.2↔6604.1、现金流收付对冲）]]></field>
+    <field code="interestRate" name="利率" source="本表录入"><![CDATA[内部借款约定年利率；月度利息=本金×利率÷12]]></field>
+    <field code="termMonths" name="期限（月）" source="本表录入"><![CDATA[单位：月；与到期时间配套登记]]></field>
+    <field code="maturityDate" name="到期时间" source="本表录入"><![CDATA[内部借款到期时间（如 2027-12-31）]]></field>
+    <field code="openingNet" name="期初净额" source="本表录入"><![CDATA[上年末未偿还内部借款本金余额，不含应付未付利息]]></field>
+    <field code="monthlyNewAmount" name="当月新增" source="本表录入"><![CDATA[按月填报；借入方=提款流入、借出方=放款流出；【全年合计】=SUM(1~12月)，不重复录入]]></field>
+    <field code="monthlyRepayment" name="当月还本" source="本表录入"><![CDATA[按月填报；借入方=还本流出、借出方=收本流入；不含利息，【全年合计】=SUM(1~12月)]]></field>
+    <field code="interestPayable" name="当月计提利息" source="本表录入"><![CDATA[本期计提发生额（非应付未付余额）；借入方进 6604.1 其中：利息费用、借出方（收息）进 6001.2 其他业务收入-内部往来]]></field>
+    <field code="interestPaid" name="当月实付利息" source="本表录入"><![CDATA[按付息计划填报、可与计提利息不同额；借入方=付息付现（CF-21）、借出方=当月实收利息（CF-19.2）]]></field>
+    <field code="financingFee" name="融资费用" source="本表录入"><![CDATA[手续费类登记额；统一费用化进 6604，不与计提利息、实付利息重复归集]]></field>
+    <field code="notes" name="备注" source="本表录入"><![CDATA[补充内部借款的预算假设或差异说明]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BJ.C.f 内部借款预算表">
+      <point><![CDATA[【定位】集团内部法人之间的资金借贷预算，归属关联交易组（BJ.C），融资类型固定为 XYZ-16 内部借款；一行＝一笔内部借款。]]></point>
+      <point><![CDATA[【维度与度量】维度 7 列（借款方向｜本方法人｜对手方法人｜利率｜期限(月)｜到期时间｜期初净额）+ 时间组 13 组（【全年合计】+ 1~12月，每组 5 个度量子列：当月新增｜当月还本｜当月计提利息｜当月实付利息｜融资费用），两行制表头共 72 列。]]></point>
+      <point><![CDATA[【借款方向路由】借入方：当月新增进 2241.1（CF-18）、还本冲 2241.1（CF-20）、计提利息进 6604.1、实付利息进 CF-21；借出方：当月新增（放款）进 1221.1（CF-22.1）、收本冲 1221.1（CF-19.2）、计提利息进 6001.2 其他业务收入-内部往来、实收利息收现进 CF-19.2。]]></point>
+      <point><![CDATA[【合并抵销】集团合并层按「本方法人 + 对手方法人」配对互抵：1221.1 ↔ 2241.1 互抵归零、6001.2 ↔ 6604.1 互抵归零、现金流收付全额对冲。]]></point>
+    </rule>
+  </rules>
+
+</form>

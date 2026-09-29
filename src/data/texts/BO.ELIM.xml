@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BO.ELIM 集团合并抵销工作底稿 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BO.ELIM" name="集团合并抵销工作底稿">
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BO.ELIM'） -->
+  <fields>
+    <field code="elimCode" name="抵销事项编号" source="系统编号"><![CDATA[一行一个抵销事项；编号规则 ELIM-01 起，按抵销类型顺序连续编号]]></field>
+    <field code="elimName" name="抵销事项" source="本表"><![CDATA[如「内部代采购销售与成本对冲」「内部往来余额对冲」「期末存货中未实现利润抵销」等]]></field>
+    <field code="elimType" name="抵销类型" source="本表枚举"><![CDATA[五类：①内部购销对冲（收入↔成本费用）②内部往来对冲（1221.1↔2241.1）③内部现金流对冲（收↔付）④未实现利润-存货（BB.3.X 期末内部加成余额变动）⑤未实现利润-长期资产（代采购资产/转卖资产/资本化租赁 加成×剩余折旧比例）]]></field>
+    <field code="plItem" name="影响利润表项目" source="会计规则引擎"><![CDATA[本抵销事项调整的利润表报表项目（如 其他业务收入/营业成本/管理费用/折旧/资产处置收益）；合并 PL 在对应报表项上加本数]]></field>
+    <field code="bsItem" name="影响资产负债表项目" source="会计规则引擎"><![CDATA[本抵销事项调整的资产负债表项目（如 存货/固定资产净值/使用权资产/其他应收款/其他应付款）；合并 BS 在对应报表项上加本数]]></field>
+    <field code="cfItem" name="影响现金流量表项目" source="会计规则引擎"><![CDATA[本抵销事项调整的现金流量表项目（如 销售收现/采购付现/投资付现/筹资收付）；合并 CF 在对应报表项上加本数]]></field>
+    <field code="monthlyAmount" name="1~12月抵销金额" source="BJ.C 各表 + BB.3.X + BB.4.5 自动计算"><![CDATA[全年合计+1~12月各一列；正数=调减集团合并数（抵销内部虚增），负数=调增；①类按 BJ.C.a/d/f 当月内部交易额自动算；②类按期初期末内部往来余额轧差；③类按 BJ.C 各表现金收付对冲；④类=BB.3.X「内部加成期末余额」当月变动；⑤类=各代采购/转卖/资本化租赁卡片加成×当月折旧比例]]></field>
+    <field code="annualTotal" name="全年合计" source="本表公式"><![CDATA[=SUM(1~12月抵销金额)]]></field>
+    <field code="source" name="取数来源" source="本表"><![CDATA[本抵销事项的数据来源表（BJ.C.a/BJ.C.d/BJ.C.f/BB.4.2.b/BB.3.X/BB.4.5 等），供实施核对]]></field>
+    <field code="remark" name="说明" source="本表录入"><![CDATA[抵销口径与特殊事项备注]]></field>
+  </fields>
+
+</form>

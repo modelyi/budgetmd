@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BAA.10 进销存按法人拆分比例表 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BAA.10" name="进销存按法人拆分比例表">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BAA.10']） -->
+  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅参数：进销存按法人兜底拆分比例，供 BB.3.3.C 无PO 兜底拆分到法人取值，不生成分录）。【法人口径】④不区分法人：兜底比例参数表本身（本年度不启用、为后续年度预留），不按法人编制。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BAA.10'） -->
+  <fields>
+    <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据字典"><![CDATA[进销存按法人拆分比例对应的预算项目]]></field>
+    <field code="budgetDepartment" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[默认取二级部门（预算部门原则上明细到二级部门颗粒度）；不归属具体部门的项目可为空]]></field>
+    <field code="entityRatioJT" name="甜甜圈集团公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 JT，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioA" name="草莓慕斯公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 A，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioB" name="蓝莓蛋挞公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 B，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioC" name="芒果班戟公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 C，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioD" name="西瓜泡芙公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 D，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioBA" name="抹茶曲奇公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 BA，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioBB" name="樱桃华夫公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 BB，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioBC" name="椰香可露丽公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 BC，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioBD" name="海盐芝士公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 BD，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioDA" name="蜜桃千层公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 DA，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioDB" name="香橙舒芙蕾公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 DB，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="entityRatioDC" name="青提马卡龙公司占比" source="本表录入"><![CDATA[各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 DC，按「预算项目×预算部门」逐行维护]]></field>
+    <field code="totalRatio" name="合计" source="本表公式"><![CDATA[各法人公司占比自动加总，强等于100%（系统计算列、不可手工修改；每行加和须=100%）]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BAA.10 进销存按法人拆分比例表">
+      <point><![CDATA[参考 BAA.9.a 资产转换比例：维度=预算项目+预算部门（预算部门默认二级部门），度量=各法人公司占比+合计列，比例按「预算项目×预算部门」逐行维护一套统一法人拆分比例，每行加和须=100%（仅文字说明提示，不强制校验/高亮）。]]></point>
+      <point><![CDATA[本预算年度该比例表不需要实现和使用：BB.3.X 进销存预算已改为法人级单表（法人公司×存货类别，一表到底），各品类的转入/转出逐来源按法人取数、不乘比例，本表不再参与 BB.3.X 的任何拆分；本表仅作为「无来源品类」的兜底比例予以保留，后续年度启用该规则时再由本表统一提供兜底比例口径（与 BAA.7 采购付款额测算比例附表「本年度不启用、后续年度启用」的处理方式一致）。]]></point>
+      <point><![CDATA[表样与字段登记保留不变：仍按「预算项目×预算部门」逐行维护 12 家法人公司占比 + 合计列（每行加和须=100%，仅文字提示）；兜底口径启用前，分法人存货直接由 BB.3.X 法人级单表按法人列示，不再引用本表比例。]]></point>
+    </rule>
+  </rules>
+
+</form>

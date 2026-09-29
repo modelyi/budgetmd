@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  A1.RACI 预算编制责任RACI总览 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="A1.RACI" name="预算编制责任RACI总览">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['A1.RACI']） -->
+  <overview><![CDATA[预算编制责任RACI总览：关联总体十步流程（1.1维护/导入基础数据、1.2预算启动、2.1预算假设项维护、2.2前置信息收集、3.1业务编制、3.2财务编制、3.3税费填报、3.4内部往来处理、3.5手工填调整、3.6出表与调整），逐项界定R（主责编制执行）、A（终审把关）、C（协同咨询输入）、I（知情报送抄送）四类角色责任主体，可一键导出4张Sheet的标准化Excel报表。本表为管理职责与协同分工总览，不生成凭证或分录，属集团统一制度、不按法人公司编制。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='A1.RACI'） -->
+  <fields>
+    <field code="stage" name="编制阶段" source="全面预算管理制度"><![CDATA[贯通准备与目标、基础假设、业务预算、财务汇总、审批下达五大阶段]]></field>
+    <field code="formCode" name="表单编码" display="对应表单编码" source="A1.1 表单整体登记簿"><![CDATA[预算表单标准编码（如 BB.1.1, BB.3.1）]]></field>
+    <field code="taskName" name="核心编制事项" source="预算责任清单"><![CDATA[对应表单的核心填报/测算/审议业务事项]]></field>
+    <field code="roleR" name="Responsible (主责编制)" source="岗位职责"><![CDATA[主责完成填报与测算的实际业务执行部门/岗位]]></field>
+    <field code="roleA" name="Accountable (终审把关)" source="管理授权手册"><![CDATA[对该项预算具有最终核准权与目标达成责任的单一分管高管]]></field>
+    <field code="roleC" name="Consulted (协同咨询)" source="跨部门协作机制"><![CDATA[提供前置定额、技术参数、价格评估的双向咨询协作方]]></field>
+    <field code="roleI" name="Informed (知情报送)" source="信息报送规范"><![CDATA[成果出炉后接收报送的知情方]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="A1.RACI 预算编制责任RACI总览">
+      <point><![CDATA[覆盖全系统五大阶段（目标下达、编制前提、业务预算、财务预算、审议下达）共 43 项核心表单与管理事项，逐项明确界定 RACI 角色责任主体。]]></point>
+      <point><![CDATA[RACI 角色规范：R（Responsible，主责编制执行部门/岗位）、A（Accountable，单一终审把关人，对预算达成负最终责任）、C（Consulted，跨部门协同咨询/定额输入方）、I（Informed，成果报送知情方）。]]></point>
+      <point><![CDATA[单一终审原则 (Single Accountable)：每一项预算事项仅设立唯一 A 责任人，杜绝双头管理与责任真空。]]></point>
+      <point><![CDATA[支持多维检索过滤（按阶段、责任部门、关键词）与标准 Excel 导出，一键生成包含 4 个工作表（编制责任总清单、RACI交叉矩阵、编审日历、治理规范）的标准化交付件。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['A1.RACI']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[全面预算编制全流程中各表单与关键事项的责任矩阵（RACI）查阅与对齐]]></item>
+      <item><![CDATA[明确 12 个关键编审部门/岗位在各预算环节的主责(R)、终审(A)、协同(C)、知情(I)边界]]></item>
+      <item><![CDATA[支持按编制阶段筛选、关键词检索、部门职责负荷统计以及一键导出为四表合一的专业 Excel 报表 (.xlsx)]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[具体业务预算金额的填报与计算（属各 BB/BF 编制表）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['A1.RACI']） -->
+  <relation>
+    <summary><![CDATA[预算编制责任RACI总览是全面预算编制流程的组织与治理保障底座。全景式覆盖全面预算全周期各项核心表单与管理事项，逐项明确界定 R（主责编制执行）、A（终审把关责任）、C（协同咨询输入）、I（知情报送抄送）四类角色责任主体，解决企业预算推行中普遍存在的「推诿扯皮、口径打架、责任真空」痛点。支持一键导出包含4张Sheet的标准化 Excel 报表。]]></summary>
+    <dataSources>
+      <source code="A1.1" name="表单整体登记簿" fields="表单编码、表单名称、所属分组"><![CDATA[作为RACI事项的主体清单来源，确保全表单无遗漏]]></source>
+      <source code="AA.3" name="统一会计科目体系" fields="一级/二级科目"><![CDATA[界定各科目归口责任部门（如人力对应660201，销售对应6601xx）]]></source>
+      <source code="AA.2/AA.5" name="法人组织与部门架构" fields="法人公司、行政部门"><![CDATA[界定 12 大编审责任主体与职能分工]]></source>
+    </dataSources>
+    <outputs>
+      <output target="Excel 导出工作簿"><![CDATA[一键生成包含「全量清单、RACI矩阵、编审日历、治理规范」的四表合一 Excel 文档]]></output>
+      <output target="预算管理委员会"><![CDATA[作为预算下达前组织动员、编审答辩与权限考核的制度依据]]></output>
+      <output target="各业务模块编制表"><![CDATA[明确各模块填报的主责部门/岗位（R）与必须协同征询的专业部门（C）]]></output>
+    </outputs>
+    <keyRules>
+      <rule><![CDATA[单一终审人原则 (Single Accountable)：各模块有且仅有一位分管高管对目标达成负责。]]></rule>
+      <rule><![CDATA[业财融合贯通：业务部门对业务发生量（销量、产量、工时、采购量）的真实合理性主责，财务对会计准则转换、资金及税金统筹把关。]]></rule>
+      <rule><![CDATA[全表不含税口径，金额单位统一为万元（精度0.1），增值税与附加税集中统筹。]]></rule>
+    </keyRules>
+  </relation>
+
+</form>

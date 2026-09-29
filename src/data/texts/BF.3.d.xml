@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BF.3.d BF.3.d · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BF.3.d" name="BF.3.d">
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BF.3.d'） -->
+  <fields>
+    <field code="legalEntity" name="融资主体(法人公司)" source="BF.3.c 融资预算明细表"><![CDATA[按同一法人及融资类型/产品对应关系汇总，不在本表重复录入]]></field>
+    <field code="financingType" name="筹资类型" source="BF.3.c 融资预算明细表"><![CDATA[按同一法人及融资类型/产品对应关系汇总，不在本表重复录入]]></field>
+    <field code="product" name="筹资产品" source="BF.3.c 融资预算明细表"><![CDATA[按同一法人及融资类型/产品对应关系汇总，不在本表重复录入]]></field>
+    <field code="monthlyNewFinancing" name="当期新增融资总额" source="BF.3.c 月度新增融资金额"><![CDATA[取 BF.3.c 同月新增融资金额；全年=各月之和]]></field>
+    <field code="monthlyRepayment" name="当期偿还本金总额" source="BF.3.c 月度偿还本金"><![CDATA[取 BF.3.c 同月偿还本金；不含利息，全年=各月之和]]></field>
+    <field code="capitalizedFee" name="资本化融资费用" source="BF.3.c 计提利息/融资费用类型"><![CDATA[取 BF.3.c 资本化类型的当月计提利息；其他融资费用分月口径待确认，不混入实付利息]]></field>
+    <field code="expensedFee" name="费用化融资费用" source="BF.3.c 计提利息/融资费用类型"><![CDATA[取 BF.3.c 费用化类型的当月计提利息；其他融资费用分月口径待确认，不累加应付未付余额]]></field>
+    <field code="liquidityReclassification" name="当期流动性重分类金额" source="BF.3.c 融资预算明细表·期限/到期时间、已有期初净额（上年末余额）"><![CDATA[系统带出（按到期日自动识别，不可手工填）：按 BF.3.c 每笔融资的期限/到期时间判定剩余到期日落入预算年度内的长期借款本金（取该笔「已有期初净额（上年末余额）」中属长期的部分、扣除已列入当年偿还本金的部分），按融资主体(法人公司)+筹资产品维度按月归集；不产生现金流、不改变负债合计，报表落点为 BO.BS 2504 一年内到期的非流动负债 (+) / 2501 长期借款 (−) 同额，不与「偿还本金」（CF-20 真实付现）混用]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BF.3 金融工具投融资与授信预算">
+      <point><![CDATA[包含 BF.3.a 银行类金融资产、BF.3.b 非银金融资产、BF.3.c 融资预算明细表、BF.3.d 融资预算汇总表、BF.3.e 授信预算表共 5 个子 TAB。]]></point>
+      <point><![CDATA[BF.3.a/b 保留原投资本金、利率、收益等业务字段；b 的投资收益与计划分红/利息分别按确认与收现口径填报。a 未单设收益收现列，不扩列，仅在确认与收现同期同额的明确预算假设下共用；差额经既有 BJ.A 调整入口处理，避免重复计入。]]></point>
+      <point><![CDATA[BF.3.c 保留融资性质、类型、期初本金、利率、期限、到期时间、融资费用等原字段；每月新增「新增融资金额」「偿还本金」两个入口，原年度新增/减少改为「全年新增融资金额」「全年偿还本金」，均由月度汇总，不重复录入。]]></point>
+      <point><![CDATA[BF.3.c「应付利息」规范为「计提利息」，指本月计提发生额而非应付未付余额；「实付利息」仍按付息计划填报。计提与实付可不同，费用按计提发生额归集，不按未付余额逐月求和。融资费用与利息不得重复归集。]]></point>
+      <point><![CDATA[BF.3.d 按同一法人及融资类型/产品对应关系取 c 的月度新增、还本和分类型计提利息汇总，不双填、不重复生成分录；「当期流动性重分类金额」由系统按到期日自动识别（依据 BF.3.c 每笔融资的期限/到期时间，取剩余到期日落入预算年度内的长期借款本金、扣除已列入当年偿还本金的部分），系统带出、不可手工填、不产生现金流，报表落点为 BO.BS 2504 一年内到期的非流动负债 (+) / 2501 长期借款 (−) 同额；其他融资费用的分月归属待确认。]]></point>
+      <point><![CDATA[示例口径：1月提款100、6月还本40、12月还本60，则全年新增100、偿还本金100；某月计提利息1、实付0，次月实付2，费用仍按各月计提数，不按付款额重复确认。金额单位万元。]]></point>
+      <point><![CDATA[BF.3.e 保留现有授信预算列（上年末剩余+本年新增=合计），供同一法人、授信品种与有效期限下的融资安排参考；不同授信不可无条件互用，不作为全集团借款统一硬上限，不扩展授信台账。]]></point>
+      <point><![CDATA[BF.3.e 除法人层面逐笔填报外，还需有集团汇总口径：本表样用「法人层面填报 + 集团汇总（按授信类型口径）」两段示例说明这一要求，集团汇总可集中在同一张表内实现、也可由系统按需另设汇总视图，不作为强制表样结构。交叉校验：集团授信总额 = 各法人小计之和 = 各授信类型小计之和。本表为授信额度的登记与上限参考，不生成会计分录。]]></point>
+    </rule>
+  </rules>
+
+</form>

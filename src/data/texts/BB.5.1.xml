@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BB.5.1 雇员费用编制/导入 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BB.5.1" name="雇员费用编制/导入">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BB.5.1']） -->
+  <overview><![CDATA[薪酬预算表（HR）：按法人×部门×费用项目（销售/研发/管理/制造费用/实际发放）填报，含人事视角与财务视角两个 Tab；财务视角把因 BB.4.1 自制设备工程人工投入而减少的雇员费用体现到「自制在建工程」列（资本化人工，借1604贷2211），该资本化人工的科目转换唯一由本表触发。分录：期间费用薪酬 660101/660201/660301 对 2211，制造费用薪酬只进存货线（1405 对 2211）、不直接进损益，实际发放 2211 对 1001（代扣个税/社保走 2221/2211）、进 CF-06；计提非付现、不产生现金流。两个 Tab 均以法人公司为第一维度，按法人分别归集入账、集团合并时各法人间不互抵。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BB.5.1'） -->
+  <fields>
+    <field code="entity" name="法人公司" source="AA.2 法人组织架构"><![CDATA[]]></field>
+    <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据"><![CDATA[雇员费用归属的预算项目]]></field>
+    <field code="department" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[预算部门默认明细到二级部门（如"生产一部"，而非仅"制造工程部"）；值域 AA.5 一级部门-二级部门]]></field>
+    <field code="budgetSubject" name="预算科目" source="统一预算科目"><![CDATA[默认带出 2211 应付职工薪酬，计提与发放往来统一科目]]></field>
+    <field code="salesExpense" name="销售费用" source="本表录入(HR填报)"><![CDATA[按月计提销售费用人工；直接计入BO.PL 6601销售费用]]></field>
+    <field code="rndExpense" name="研发费用" source="本表录入(HR填报)"><![CDATA[按月计提研发费用人工；直接计入BO.PL 6603研发费用]]></field>
+    <field code="adminExpense" name="管理费用" source="本表录入(HR填报)"><![CDATA[按月计提管理费用人工；直接计入BO.PL 6602管理费用]]></field>
+    <field code="mfgExpense" name="制造费用" source="本表录入(HR填报)"><![CDATA[按月计提车间生产相关人工；计入制造费用与生产成本]]></field>
+    <field code="actualPayment" name="实际发放" source="本表录入(HR填报)"><![CDATA[按月填报实际发放金额（付现口径）；计入BO.CF CF-06职工薪酬支付现金并冲减BO.BS 2211应付职工薪酬]]></field>
+    <field code="serviceLaborCost" name="服务人工成本（财务视角）" source="BB.1.3.i 人工明细_财务查询（工时×BAA.3工时标准成本）"><![CDATA[人事口径雇员费用含全部人工费用；参与技术服务交付的人员人工不单独计提，按BB.1.3.i工时×费率自雇员费用冲减后单列本列（BB.1.3.i 汇总 .g 人工明细的存量+增量，.b 销售填报_增量不参与 BAA.3 费率关联）（财务视角），进 6401.1 主营业务成本（服务直接人工构成）营业成本—直接人工，与期间费用不重复计提]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BB.5.1 雇员费用编制/导入">
+      <point><![CDATA[本表含两个Tab（同页切换）：人事视角 + 财务视角。]]></point>
+      <point><![CDATA[人事视角：主要字段=法人公司、预算项目、预算部门（预算部门默认明细到二级部门）、预算科目（默认带出 2211 应付职工薪酬，计提与发放往来统一科目）；度量=全年合计(5子列)+1~12月(每月5子列)，按列展开（两行制表头，共70列）。]]></point>
+      <point><![CDATA[人事视角5个数据项列：①销售费用（计提）、②研发费用（计提）、③管理费用（计提）、④制造费用（计提，车间生产人工，计入制造费用与生产成本）、⑤实际发放（付现）。人事部门编制的雇员费用为全口径人工费用——包括后续参与自制设备工程（资本化）与技术服务交付（服务人工）的人员，不在人事视角拆分。]]></point>
+      <point><![CDATA[财务视角：同一主要字段（法人公司、预算项目、预算部门、预算科目），度量=全年合计(7子列)+1~12月(每月7子列)，共95列；7个数据项列=销售费用/研发费用/管理费用/制造费用/服务人工成本/自制在建工程/实际发放。]]></point>
+      <point><![CDATA[财务视角数据处理：销售/研发/管理/制造四项费用计提数，均以人事视角全口径计提数为基础，扣除 BB.4.1 资本化人工和 BB.1.3 技术服务人工；扣除后的四项费用与两类人工分别列示，避免重复归集。]]></point>
+      <point><![CDATA[服务人工单独列示：工时×BAA.3 工时标准成本，按法人公司×预算部门×月份汇总，并等额冲减原费用计提；资本化人工单独列示：按人工投入明细汇总。人事视角只呈现全口径人工费用，不显示「服务人工成本」「自制在建工程」两列。]]></point>
+      <point><![CDATA[关键规则仅承载业务处理与数据处理口径；会计分录、BO.PL/BO.BS/BO.CF 取数及报表勾稽规则统一放在后续「报表规则/财务报表取数规则」区块。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.5.1']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[HR按法人×部门×费用项目（销售/研发/管理/制造费用/实际发放）填报薪酬预算；财务视角另含自制在建工程列，体现 BB.4.1 资本化人工导致的雇员费用减少]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[非薪酬经营费用（属 BB.5.2）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BB.5.1']） -->
+  <relation>
+    <summary><![CDATA[雇员费用编制/导入表（人事视角 + 财务视角两个 Tab），HR 按法人×部门×费用项目填报销售/研发/管理/制造费用薪酬计提与实际发放；财务视角将自制设备资本化人工与服务人工成本从费用计提中冲减并单列，实际发放进 CF-06。]]></summary>
+    <dataSources>
+      <source code="BB.4.1.b" name="自制设备工程预算—人工投入明细" fields="人工投入金额"><![CDATA[自动汇总至 BB.5.1 财务视角「自制在建工程」列（资本化人工）]]></source>
+      <source code="BB.1.3.i" name="技术服务收入与成本预算—人工明细_财务查询" fields="工时(小时)×BAA.3 费率"><![CDATA[自动汇总至「服务人工成本」列，等额冲减该人员原归属费用计提项（BB.1.3.i 汇总 .g 人工明细的存量+增量）]]></source>
+      <source code="BAA.3" name="岗位工时费率设置" fields="工时标准成本"><![CDATA[服务人工成本 = 工时数量 × BAA.3 工时费率]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BO.PL 利润表—期间费用"><![CDATA[销售/研发/管理费用计提 → 6601/6602/6603]]></output>
+      <output target="BO.PL 利润表—主营业务成本构成：服务直接人工（并入 6401.1）"><![CDATA[服务人工成本单列进 6401.1 主营业务成本，随技术服务收入配比结转]]></output>
+      <output target="BO.BS 资产负债表—应付职工薪酬(2211)"><![CDATA[计提贷方增加；实际发放冲减借方]]></output>
+      <output target="BO.BS 资产负债表—在建工程(1604)"><![CDATA[资本化人工借 1604，贷应付职工薪酬]]></output>
+      <output target="BB.3.X 进销存预算"><![CDATA[制造费用计提项 → 在制品「工」转入数]]></output>
+      <output target="BB.4.1 自制设备工程预算"><![CDATA[「自制在建工程」列 → BB.4.1.a 人工投入]]></output>
+      <output target="BO.CF 现金流量表—CF-06"><![CDATA[实际发放 → 支付给职工以及为职工支付的现金]]></output>
+    </outputs>
+    <keyRules>
+
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.5.1'].items） -->
+  <events>
+    <event event="期间费用薪酬计提" field="销售/研发/管理费用计提项">
+      <pl><![CDATA[销售费用→6601 (+)；研发费用→6603 (+)；管理费用→6602 (+)]]></pl>
+      <bs><![CDATA[应付职工薪酬 (+)，2211 贷方增加]]></bs>
+      <cf><![CDATA[—（计提非付现）]]></cf>
+      <source><![CDATA[HR 按法人/部门/费用项目填报；直接计入对应损益科目]]></source>
+      <entry><![CDATA[销售费用—职工薪酬(660101) (+)、管理费用—职工薪酬(660201) (+)、研发费用—职工薪酬(660301) (+)；应付职工薪酬(2211) (+)]]></entry>
+      <note><![CDATA[直接计入对应损益科目。]]></note>
+    </event>
+    <event event="制造费用薪酬计提" field="制造费用计提项">
+      <pl><![CDATA[—（计入制造费用/生产成本，结转存货）]]></pl>
+      <bs><![CDATA[存货 1405 (+) / 应付职工薪酬 2211 (+)]]></bs>
+      <cf><![CDATA[—（计提非付现）]]></cf>
+      <source><![CDATA[车间生产相关人工，计入制造费用与生产成本并随完工销售结转]]></source>
+      <entry><![CDATA[存货(1405) (+)；应付职工薪酬(2211) (+)]]></entry>
+      <note><![CDATA[车间生产相关人工进入制造费用，随完工产品销售结转进入营业成本。]]></note>
+    </event>
+    <event event="自制设备人工投入资本化（财务视角）" field="自制在建工程列（BB.4.1.b人工投入明细按法人×部门×月度汇总）">
+      <pl><![CDATA[—（资本化，不进损益）]]></pl>
+      <bs><![CDATA[在建工程 1604 (+)；应付职工薪酬 2211 (+)（与期间费用计提共用贷方）]]></bs>
+      <cf><![CDATA[—（计提非付现；支付时归入 CF-06 实际发放）]]></cf>
+      <source><![CDATA[系统从 BB.4.1.b 人工投入明细自动汇总至 BB.5.1 财务视角「自制在建工程」列]]></source>
+      <entry><![CDATA[在建工程(1604) (+)；应付职工薪酬(2211) (+)]]></entry>
+      <note><![CDATA[财务视角下，销售/研发/管理/制造费用计提数=人事视角计提数−资本化人工，避免资本化人工重复计入期间费用；人事视角不含此列。]]></note>
+    </event>
+    <event event="服务人工成本冲减（财务视角）" field="服务人工成本列（BB.1.3.i 人工明细_财务查询按法人×部门×月度汇总）">
+      <pl><![CDATA[营业成本—直接人工 (+)，计入 6401.1 主营业务成本]]></pl>
+      <bs><![CDATA[—（应付职工薪酬 2211 已在人事口径计提，本事件为费用重分类，不重复计提）]]></bs>
+      <cf><![CDATA[—（付现已由实际发放 CF-06 统一归集）]]></cf>
+      <source><![CDATA[系统从 BB.1.3.i 人工明细_财务查询（工时×BAA.3工时标准成本，汇总 .g 人工明细的存量+增量，订单编号区分）自动汇总至 BB.5.1 财务视角「服务人工成本」列，同时等额冲减该人员原归属的费用计提项]]></source>
+      <entry><![CDATA[费用重分类（不新增应付职工薪酬）：主营业务成本(6401.1) (+)；原计提费用科目（按人员原归属冲减销售/研发/管理/制造费用）(−)]]></entry>
+      <note><![CDATA[人事部门编制的雇员费用包括全部人工费用，技术服务人工不单独计提：参与技术服务交付的人员人工按 BB.1.3.i 工时×费率从雇员费用冲减，单列为「服务人工成本」计入 6401.1 主营业务成本（服务直接人工构成），随技术服务收入配比结转；避免服务人工同时计入期间费用与营业成本的双重计提。]]></note>
+    </event>
+    <event event="实际薪酬发放" field="实际发放项">
+      <pl><![CDATA[—]]></pl>
+      <bs><![CDATA[应付职工薪酬 2211 (−)，冲减应付借方]]></bs>
+      <cf><![CDATA[经营活动现金流出：支付给职工以及为职工支付的现金 CF-06 (+)]]></cf>
+      <source><![CDATA[HR 按月填报实际发放金额（付现口径）]]></source>
+      <entry><![CDATA[应付职工薪酬(2211) (−)；货币资金(1001) (−)；应交税费(2221)/应付职工薪酬(2211) (+)]]></entry>
+      <note><![CDATA[包含工资、奖金、津贴及企业缴纳的社保公积金付现总额，按实际发放月份归集入 CF-06。]]></note>
+    </event>
+  </events>
+
+</form>

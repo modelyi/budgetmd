@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AA.6 预算项目主数据 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="AA.6" name="预算项目主数据">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['AA.6']） -->
+  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅参数/主数据维护：预算项目主数据，预算项目维度的值域来源，不生成分录）。【法人口径】④不区分法人：本表为主数据/参数维护表，不按法人归集或拆分。]]></overview>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="AA.6 预算项目主数据">
+      <point><![CDATA[项目类型引用AB.7字典；同一项目编码可被多张编制表引用（如BB.3.1、BAA.8）。]]></point>
+    </rule>
+    <rule form="BAA.6 办公场所租赁维护">
+      <point><![CDATA[本表由「办公场所租赁面积维护」更名为「办公场所租赁维护」，含四个子Tab（同页切换）：BAA.6.a 场所基本信息维护 / BAA.6.b 年度租赁面积维护 / BAA.6.c 场所法人比例查看 / BAA.6.e 租赁折现率维护（单价并入 BAA.6.b 维护，不再单独维护子表）。]]></point>
+      <point><![CDATA[维度与度量：①. a 维度=场所编码/场所名称/地址/业主方(出租方)/总面积(㎡)/启用状态；②. b 维度=年度/场所/公司/租赁期间(起止)/租赁面积(㎡)/单价(元/㎡·月)/备注说明（「租赁期间(起止)」= 租赁合同的起止日期区间，自由文本；仅人眼识别，不参与判定与测算，与 AB.16 租赁期限字典口径无关；「单价(元/㎡·月)」= 按「年度×场所×公司」维护的单价（精度 2 位小数），内部持有场所=市场单价（内部定价基准）；外部租入场所不在此维护）；③. c 维度=年度/场所×各法人公司，度量=面积占比(%)（合计恒为 100%）；④. e 维度=年度，度量=折现率(%)（精度 2 位小数）。]]></point>
+      <point><![CDATA[关键口径：场所法人比例仅供查看与核对、不由本表反算；单价在 BAA.6.b 按「年度×场所×公司」维护（单位 元/㎡·月），仅供 BB.4.2.b 内部职场租赁取面积与单价（内部租金 = 单价 × 租赁面积 ÷ 10000 × 当月在租期内；内部持有场所=市场单价）；BB.4.2.a 外部职场租赁的租赁面积与合同单价按对外租赁合同在本表直接录入、不引用 BAA.6.b；折现率默认取 BF.3 综合融资成本、可按年度覆盖，供 BB.4.2.b.1 内部职场租赁·财务视角折现计算租赁负债初始与各月利息。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['AA.6']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[预算项目主数据维护，供采购/研发/费用等表的预算项目下拉引用]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[具体业务金额填报]]></item>
+    </notApplies>
+  </scenarios>
+
+</form>

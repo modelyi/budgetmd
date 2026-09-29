@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BJ.C 关联交易与内部抵销 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BJ.C" name="关联交易与内部抵销">
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BJ.C 关联交易与内部抵销">
+      <point><![CDATA[本组含四类关联交易：代采购物料（BJ.C.a）、代采购资产（BJ.C.e）、资产转卖（BJ.C.d）、内部借款（BJ.C.f）。]]></point>
+      <point><![CDATA[BJ.C.a 代采购物料查询表、BJ.C.e 代采购资产查询表均为查询表（只读镜像关联交易视角，表样分别与 BB.3.3.D / BB.3.1.D 完全一致）：不做业务生成、不做会计分录生成，只做汇总展示与集团合并抵销——由 BB.3.3.D / BB.3.1.D 关联交易视角驱动（两岗接力代采购模型：采购人员在采购视角填下单主体、关联交易预算员在关联交易视角补填受益主体、系统比对两侧法人判定跨法人代采购）。]]></point>
+      <point><![CDATA[BJ.C.d 资产转卖、BJ.C.f 内部借款仍为逐笔登记表（一行一笔，登记协议价/加成收入与内部借款要素）。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BJ.C']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[集团内部关联方之间的采购、销售、租赁、资产转移等交易预算及抵销处理]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[对外部第三方的正常业务预算（分别归属 BB/BF 各表）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BJ.C']） -->
+  <relation>
+    <summary><![CDATA[关联交易与内部抵销预算覆盖集团内部关联方之间的采购/租赁/资产转移等交易；单体表分别计入损益与资产负债，集团合并表全额抵销（0影响）。其中 BJ.C.a 代采购物料查询表、BJ.C.e 代采购资产查询表均为查询表（只读镜像关联交易视角，表样分别与 BB.3.3.D / BB.3.1.D 完全一致）：不做业务生成、不做会计分录生成，只做汇总展示与集团合并抵销——由 BB.3.3.D / BB.3.1.D 关联交易视角驱动（两岗接力代采购模型：采购视角填下单主体、关联交易视角补填受益主体、系统比对法人判定跨法人代采购）。]]></summary>
+    <dataSources>
+
+    </dataSources>
+    <outputs>
+      <output target="BO.PL 利润表（单体/合并）"><![CDATA[提供方内部收入与接受方内部成本在单体表分别计入损益；集团合并口径全额抵销]]></output>
+      <output target="BO.BS 资产负债表（单体/合并）"><![CDATA[内部往来科目单体对冲、合并口径抵销]]></output>
+    </outputs>
+    <keyRules>
+
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BJ.C'].items） -->
+  <events>
+    <event event="关联交易" field="月度交易金额">
+      <pl><![CDATA[集团层面抵销：内部收入/费用全额抵销，合并口径不进三表]]></pl>
+      <bs><![CDATA[内部往来科目对冲，合并口径抵销]]></bs>
+      <cf><![CDATA[内部结算现金流入/流出在合并层面抵销]]></cf>
+      <source><![CDATA[BJ.C.a 代采购物料查询表 / BJ.C.e 代采购资产查询表均为查询表（只读镜像关联交易视角，表样分别与 BB.3.3.D / BB.3.1.D 完全一致），不做业务生成、不做会计分录生成：由 BB.3.3.D / BB.3.1.D 关联交易视角驱动（判定跨法人代采购并登记到货额/加成款/预付款/验收付款）；本组只做汇总展示与集团合并抵销；BJ.C.d 资产转卖、BJ.C.f 内部借款仍为逐笔登记表]]></source>
+      <entry><![CDATA[提供方：其他应收款-内部往来(1221.1) (+)、主营业务收入(6001)/其他业务收入-内部往来(6001.2.1) (+)。接受方：存货/费用(1405/6602) (+)、其他应付款-内部往来(2241.1) (+)。合并抵销：营业收入 (−)、营业成本 (−)、内部往来应收↔应付互抵]]></entry>
+      <note><![CDATA[实施引擎必须强制校验：提供方收入 ≡ 接受方成本/资产；单体表分别计入损益与资产负债，集团合并表全额抵销（0影响）。]]></note>
+    </event>
+  </events>
+
+</form>

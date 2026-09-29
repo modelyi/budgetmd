@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BB.1.X 销售预算多维汇总分析 (经营) · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BB.1.X" name="销售预算多维汇总分析 (经营)">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BB.1.X']） -->
+  <overview><![CDATA[经营分析用报表，不区分法人，不参与预算三表的引用与计算。BB.1.X.a 透视基表按客户×项目×产品×部门给明细数据（含示例数据）；BB.1.X.b 透视表为 Excel 式交互透视，可切换客户/项目/产品/部门行维度即时汇总销售成果。度量列=收入、成本、毛利润、销售直接费用、贡献利润（万元，不含税；毛利润=收入−成本，贡献利润=毛利润−销售直接费用）。本表不生成分录。]]></overview>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.1.X']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[销售预算按客户/项目/产品/部门多维透视基表（BB.1.X.a），以及 Excel 式交互透视表（BB.1.X.b，可切换客户/项目/产品/部门行维度汇总收入/成本/毛利/销售费用/贡献利润），经营分析用、不区分法人]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[财务三表（属 BO.PL/BS/CF）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BB.1.X']） -->
+  <relation>
+    <summary><![CDATA[经营分析用报表，不区分法人、不涉及预算三表的引用与计算；以透视基表与 Excel 式交互透视表按客户/项目/产品/部门维度汇总销售成果（收入、成本、毛利润、销售直接费用、贡献利润），其中「销售直接费用」列明确取自 BB.1.4。]]></summary>
+    <dataSources>
+      <source code="BB.1.4" name="销售费用预算明细表" fields="销售直接费用（差旅/招待/广告/佣金等费用科目）"><![CDATA[按产品/客户/区域/项目/预算部门/费用科目汇总（跨费用科目合计）→ BB.1.X「销售直接费用」列]]></source>
+    </dataSources>
+    <outputs>
+
+    </outputs>
+    <keyRules>
+
+    </keyRules>
+  </relation>
+
+</form>
