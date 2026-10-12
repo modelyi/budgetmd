@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BO.BS 资产负债表 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BO.BS" name="资产负债表">
+
+  <!-- 表概述（业务说明版） -->
+  <overview><![CDATA[【是什么】预算资产负债表，反映集团期末财务状况与资产负债结构。
+【谁填】系统汇总生成，由各项资产、负债和权益预算表自动驱动，财务人员审核平衡。
+【怎么填】按“年初余额、本年发生额、调整额、期末余额”年度四列展开；期末余额=年初余额+本年发生额+调整额，往来款按权责发生制滚动。
+【系统怎么处理】单体出具各子公司资产负债表，净利润滚入未分配利润。
+【合并时】内部应收与应付款（1221.1 对应 2241.1）两两对冲清零，冲减存货和设备里的内部加成，资产还原为原始成本。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BO.BS'） -->
+  <fields>
+    <field code="itemName" name="项目名称" source="本表"><![CDATA[资产负债表项目名称]]></field>
+    <field code="openingBalance" name="年初余额" source="本表录入"><![CDATA[预算年度年初余额，即上年末资产负债表期末余额；位于项目名称之后]]></field>
+    <field code="annualOccurrence" name="本年发生额" source="各业务与财务编制表"><![CDATA[本年影响资产、负债、权益余额的发生净额，来自 BA、BB、BF 等预算编制表按报表项目年度归集；不展开到月]]></field>
+    <field code="adjustmentAmount" name="调整额" source="本表录入"><![CDATA[预算编制阶段年度调整额，财务人员按报表项目手工录入；不展开到月]]></field>
+    <field code="closingBalance" name="期末余额" source="本表公式"><![CDATA[=年初余额+本年发生额+调整额；用于资产=负债+所有者权益勾稽]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BO.BS 资产负债表">
+      <point><![CDATA[【T3B 多主体与往来轧差架构】多主体编制模式下，资产负债表对跨法人内部往来（“其他应收款—内部往来”与“其他应付款—内部往来”）执行两两配对轧差对冲，合并资产负债表不保留任何内部往来余额。同时消除存货与长期资产中的内部加成未实现利润，将资产还原为原始成本；相关税层面影响由财务人工判断/处理，本预算表不自动测算。]]></point>
+      <point><![CDATA[BO.BS 资产负债表按年处理，不展开到月：列结构为「年初余额 → 本年发生额 → 调整额 → 期末余额」，期末余额 = 年初余额 + 本年发生额 + 调整额，需做勾稽校验。]]></point>
+      <point><![CDATA[往来科目（应收账款 1122、预付账款 1123、应付账款 2202、合同负债 2204）按权责发生制滚动（年初余额 + 本年发生额 + 调整额 = 期末余额），在 BO.BS 中正常列报余额并做期末余额勾稽；资产、存货仍按到货额/验收额（权责发生制）确认，预付款与验收付款是独立付款度量，仅驱动 CF-05/CF-14 现金流。]]></point>
+    </rule>
+    <rule form="BO.B 业务预算汇总表">
+      <point><![CDATA[销售多维汇总、存货进销存汇总、资本化支出汇总、费用汇总。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BO.BS']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[汇总各科目余额形成预算资产负债表并校验勾稽]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[损益（属 BO.PL）、现金流（属 BO.CF）]]></item>
+    </notApplies>
+  </scenarios>
+
+</form>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>全面预算范围体系</title>
+<style>
+  body{margin:0;padding:24px;background:#f5f5f5;font-family:"Microsoft YaHei",Arial,sans-serif;color:#222}
+  .page{width:1320px;margin:0 auto;background:#fff;border:1px solid #cfcfcf;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:18px 20px 24px}
+  .title{background:#8b0000;color:#fff;text-align:center;font-size:28px;font-weight:700;letter-spacing:2px;padding:14px 0;margin-bottom:18px}
+  .flow{display:grid;grid-template-columns:180px 205px 250px 225px 220px 210px;gap:10px;align-items:center;margin-bottom:12px}
+  .blank{height:42px}.phase{height:42px;background:#d9d9d9;border:1px solid #999;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;position:relative}
+  .phase:not(:last-child)::after{content:"";position:absolute;right:-19px;border-left:18px solid #b00000;border-top:10px solid transparent;border-bottom:10px solid transparent;z-index:3}
+  .grid{display:grid;grid-template-columns:180px 205px 250px 225px 220px 210px;gap:10px;align-items:stretch}
+  .row-title{color:#b00000;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.35;border-right:2px dashed #aaa;padding:8px}
+  .box{border:2px solid #3f65c9;background:#fff;min-height:92px;padding:10px 12px;line-height:1.55;font-size:15px}
+  .box h3{font-size:17px;margin:0 0 6px;color:#003b80}.box ul{margin:0;padding-left:18px}.box li{margin:2px 0}
+  .soft-blue{background:#eef5ff}.soft-green{background:#effaf0}.soft-yellow{background:#fff9e8}.soft-red{background:#fff1f1}.soft-purple{background:#f6f0ff}
+  .tech{grid-row:1 / span 4;background:#f28c28;color:#fff;border:none;font-size:17px;font-weight:700;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:16px;line-height:1.55}
+  .tech span{display:block;border-bottom:1px dashed rgba(255,255,255,.55);padding-bottom:10px}.tech span:last-child{border-bottom:none}
+  .note{margin-top:14px;font-size:14px;color:#555;line-height:1.6}.small{font-size:13px;color:#555}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="title">全面预算范围体系</div>
+  <div class="flow">
+    <div class="blank"></div>
+    <div class="phase">基础与假设</div>
+    <div class="phase">业务预算</div>
+    <div class="phase">资金与税金</div>
+    <div class="phase">预算输出</div>
+    <div class="phase">分析与调整</div>
+  </div>
+
+  <div class="grid">
+    <div class="row-title">基础口径<br/>与主数据</div>
+    <div class="box soft-yellow"><h3>预算主数据</h3><ul><li>组织、法人、部门</li><li>客户、供应商、项目</li><li>预算产品、物料、资产类别</li><li>预算科目与报表项目</li></ul></div>
+    <div class="box soft-blue"><h3>业务范围定义</h3><ul><li>销售业务：合同、订单、收入、回款</li><li>采购业务：物料、设备、工程</li><li>制造业务：产量、成本、存货</li><li>费用业务：部门费用、人工费用</li></ul></div>
+    <div class="box soft-yellow"><h3>资金税金边界</h3><ul><li>现金流按收付口径归集</li><li>增值税在税金表集中测算</li><li>所得税等集团税务影响由财务人工判断</li></ul></div>
+    <div class="box soft-green"><h3>出表基础</h3><ul><li>利润表：全年合计 + 月度</li><li>资产负债表：年初 / 发生 / 调整 / 期末</li><li>现金流量表：本年累计</li></ul></div>
+    <div class="tech"><span>权限与流程<br/><small>按角色填报、审核、查看</small></span><span>数据导入导出<br/><small>基础数据、模板、版本归档</small></span><span>报表与看板<br/><small>预算、实际、预测对比</small></span></div>
+
+    <div class="row-title">收入<br/>与成本预算</div>
+    <div class="box soft-yellow"><h3>关键假设</h3><ul><li>产品价格、成本、费率</li><li>收入确认方式</li><li>回款与预收安排</li></ul></div>
+    <div class="box soft-blue"><h3>销售与服务预算</h3><ul><li>合同签约预算</li><li>软硬件收入与成本</li><li>技术服务收入与成本</li><li>销售费用预算</li></ul></div>
+    <div class="box soft-green"><h3>收款与现金流</h3><ul><li>预收、验收回款</li><li>经营现金流入</li><li>合同负债和应收余额</li></ul></div>
+    <div class="box soft-green"><h3>财务报表影响</h3><ul><li>营业收入、营业成本</li><li>存货结转、应收、合同负债</li><li>经营现金流</li></ul></div>
+
+    <div class="row-title">采购<br/>制造与资产</div>
+    <div class="box soft-yellow"><h3>标准与比例</h3><ul><li>产品标准成本</li><li>物料标准成本</li><li>资产折旧规则</li><li>内部交易加成比例</li></ul></div>
+    <div class="box soft-blue"><h3>采购、制造、资产预算</h3><ul><li>物料采购、设备采购、工程采购</li><li>产量计划、生产成本、进销存</li><li>资产新增、折旧、处置、租赁</li></ul></div>
+    <div class="box soft-green"><h3>付款与投资现金流</h3><ul><li>预付款、验收付款</li><li>购建长期资产支付</li><li>存货采购现金流</li></ul></div>
+    <div class="box soft-green"><h3>财务报表影响</h3><ul><li>存货、固定资产、使用权资产</li><li>应付、预付、折旧费用</li><li>投资活动现金流</li></ul></div>
+
+    <div class="row-title">费用<br/>资金与合并</div>
+    <div class="box soft-yellow"><h3>费用与资金假设</h3><ul><li>部门费用规则</li><li>人员与薪酬假设</li><li>融资利率、还本付息</li></ul></div>
+    <div class="box soft-blue"><h3>费用、人工、融资预算</h3><ul><li>销售、管理、研发、财务费用</li><li>雇员费用与人工成本</li><li>融资、股权投资、分红</li><li>内部交易与抵销事项</li></ul></div>
+    <div class="box soft-green"><h3>付款与筹资现金流</h3><ul><li>费用付款、薪酬发放</li><li>借款、还本、付息</li><li>投资支付、分红收付</li></ul></div>
+    <div class="box soft-red"><h3>合并预算输出</h3><ul><li>单体三表与集团合并三表</li><li>内部往来、收入成本、现金流抵销</li><li>期末未实现加成抵销</li><li>税层面影响供财务人工测算</li></ul></div>
+  </div>
+  <div class="note">边界说明：本范围图用于预算编制，不覆盖 ERP 凭证、发票三单匹配、账龄销账、税务筹划和纳税申报执行。集团税务相关合并影响只提供基础信息，具体调整由财务人工判断。</div>
+</div>
+</body>
+</html>

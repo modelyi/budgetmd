@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form code="BJ.C.d" name="资产转卖预算表">
+
+  <!-- 表概述（业务说明版） -->
+  <overview><![CDATA[【是什么】集团子公司之间转让存量二手设备或无形资产的预算表。
+【谁填】资产管理岗填报。
+【怎么填】按笔登记转让双方、资产名称、类别和剩余折旧月数，在转让月份填入账面净值；系统按 BAA.11 计算加成收入和转卖价。
+【系统怎么处理】卖方在 BB.4.6 登记处置减少，买方在 BB.4.3 登记新增并在 BB.4.5 续提折旧；本表只负责核算卖方的资产处置收益。
+【合并时】合并冲销卖方的资产处置收益，买方资产原值相应调减，资产在集团层面仍按原账面净值延续折旧。]]></overview>
+
+  <!-- ② 字段与值说明 -->
+  <fields>
+    <field code="sellerEntity" name="卖方(法人)" source="AA.2 法人组织架构"><![CDATA[转卖资产的原持有法人（资产出让方）]]></field>
+    <field code="buyerEntity" name="买方(法人)" source="AA.2 法人组织架构"><![CDATA[受让该资产的集团内法人（资产接收方）]]></field>
+    <field code="assetDesc" name="资产描述" source="本表录入"><![CDATA[转让资产的名称及规格型号，仅人眼识别，不参与测算]]></field>
+    <field code="assetCategory" name="资产类别" source="AA.9 资产类别与折旧字典"><![CDATA[资产类别（大类-小类），与 BB.4.5 同口径]]></field>
+    <field code="markupRatePct" name="加成比例(%)" source="BAA.11 关联交易加成比例（内部交易类型=资产转卖）"><![CDATA[系统按内部交易类型=资产转卖自动带出]]></field>
+    <field code="remainingDeprMonths" name="剩余折旧期限(月)" source="本表录入"><![CDATA[买方受让后尚可计提折旧的月数]]></field>
+    <field code="netBookValue" name="账面净值(万元)" source="本表录入"><![CDATA[资产转让时的账面净值（原值−累计折旧），在交易发生月份填列；全年合计自动求和]]></field>
+    <field code="markupRevenue" name="加成收入(万元)" source="本表公式"><![CDATA[= 账面净值 × 加成比例%，即卖方确认的资产处置收益]]></field>
+    <field code="transferPrice" name="转卖价(不含税)(万元)" source="本表公式"><![CDATA[= 账面净值 + 加成收入，买方受让该资产的入账金额]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点 -->
+  <rules>
+    <rule form="BJ.C.d 资产转卖预算表">
+      <point><![CDATA[【业务定位】专门针对已在卖方账上计提折旧的二手存量资产转卖。业务分工明确：卖方账面资产减少走 BB.4.6 资产处置表；买方资产增加与付款走 BB.4.3 及 BB.4.5 续提折旧；本表只负责核算内部转卖加成收益。]]></point>
+      <point><![CDATA[【表样结构】Row 0 为 6 个固定业务维度列（卖方法人、买方法人、资产描述、资产类别、加成比例、剩余折旧期限）与 13 组时间大表头（【全年合计】置前，接 1~12 月）；Row 1 每组展开 3 个度量子列（账面净值、加成收入、转卖价），共 45 列。]]></point>
+      <point><![CDATA[【合并抵销】内部转卖不改变集团合并层账面净值：合并层借记“资产处置收益”、贷记“固定资产”全额抵销加成增值；卖方处置收款现金流与买方资本开支付现全额互抵为 0。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形 -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[集团内部子公司之间调配、转让已有折旧记录的旧设备、旧办公设施及无形资产]]></item>
+      <item><![CDATA[合并报表层面对二手设备转让加成收益与现金流的抵销核对]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[外部新购设备的代采购流转（归入 BJ.C.e 资产代采，A 侧零折旧平价流转）]]></item>
+      <item><![CDATA[同一法人内部车间或产线之间的设备搬迁调拨（不跨法人，不产生转卖损益）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结 -->
+  <relation>
+    <summary><![CDATA[二手资产转卖表只承载交易定价与加成收益，与 BB.4.6（卖方减少）和 BB.4.3（买方增加）联动，数据流向 BO.ELIM 驱动合并抵销。]]></summary>
+    <dataSources>
+      <source code="BAA.11" name="关联交易加成比例" fields="加成比例(%)"><![CDATA[按资产转卖交易类型带出加成参数]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BO.PL 利润表"><![CDATA[卖方单体确认资产处置收益，合并层由 BO.ELIM 全额冲销]]></output>
+      <output target="BO.BS 资产负债表"><![CDATA[买方资产原值包含加成部分，合并层调减买方资产增值，还原至账面净值]]></output>
+      <output target="BO.CF 现金流量表"><![CDATA[卖方 CF-13.1 处置收现与买方 CF-14 投资付现全额对冲]]></output>
+    </outputs>
+    <keyRules>
+      <rule><![CDATA[转卖价 = 账面净值 + 加成收入；交易在发生月份填列，全年合计自动汇总。]]></rule>
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 财务报表项转换规则 -->
+  <events>
+    <event event="转卖加成收益确认" field="月度加成收入">
+      <pl><![CDATA[卖方：资产处置收益(6115)增加（= 账面净值 × 加成比例%）]]></pl>
+      <bs><![CDATA[—（卖方资产减少由 BB.4.6 承载，买方资产增加由 BB.4.3 承载，本表不重复）]]></bs>
+      <cf><![CDATA[—（现金收付随 BB.4.6/BB.4.3 承载）]]></cf>
+      <source><![CDATA[BJ.C.d 资产转卖预算表·月度加成收入]]></source>
+      <entry><![CDATA[卖方：贷 资产处置收益(6115)（加成收益）]]></entry>
+      <note><![CDATA[本表只确认卖方的转让加成溢价，基础资产的出账与入账随资产专业表处理。]]></note>
+    </event>
+    <event event="合并全额抵销" field="转卖价与加成收入">
+      <pl><![CDATA[全额抵销卖方 6115 资产处置收益]]></pl>
+      <bs><![CDATA[调减买方固定资产净值（消除加成增值，按原账面净值延续）]]></bs>
+      <cf><![CDATA[卖方 CF-13.1 处置收现 ↔ 买方 CF-14 投资付现全额对冲为0]]></cf>
+      <source><![CDATA[BJ.C.d 资产转卖预算表]]></source>
+      <entry><![CDATA[借：资产处置收益(6115) / 贷：固定资产(1601)]]></entry>
+      <note><![CDATA[内部转让不改变集团整体资产价值，增值与现金流全额消除。]]></note>
+    </event>
+  </events>
+
+</form>

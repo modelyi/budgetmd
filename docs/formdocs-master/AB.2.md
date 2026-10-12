@@ -1,0 +1,265 @@
+# AB.2 国资委行业字典
+
+<style>
+table{border-collapse:collapse;font-size:12px;font-family:"Microsoft YaHei",Arial,sans-serif}
+table th{background:#002f6c;color:#fff;font-weight:600;text-align:center;border:1px solid #cbd5e1;padding:6px 10px;white-space:nowrap}
+table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
+.t3a-html-sheet th,.t3a-html-sheet td{white-space:nowrap}
+.t3a-html-sheet th.t3a-th--time{background:#001e4a}
+.t3a-html-sheet td.t3a-num{text-align:right}
+.t3a-html-sheet tbody tr:nth-child(2n){background:#f8fafc}
+.t3a-sheet-scroll{max-width:100%;overflow-x:auto;transform:rotateX(180deg)}
+.t3a-sheet-scroll > table.t3a-html-sheet{transform:rotateX(180deg)}
+.t3a-html-sheet{display:block;width:max-content}
+.t3a-sheet-scroll::-webkit-scrollbar{height:10px}
+.t3a-sheet-scroll::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-sheet-scroll::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+.t3a-html-sheet::-webkit-scrollbar{height:10px}
+.t3a-html-sheet::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-html-sheet::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+</style>
+
+## ① 预算表样
+
+### AB.2 国资委行业分类字典
+
+<div class="t3a-sheet-scroll">
+<table class="t3a-html-sheet">
+  <tbody>
+    <tr>
+      <th class="t3a-th">编码</th>
+      <th class="t3a-th">行业门类</th>
+      <th class="t3a-th">行业大类</th>
+      <th class="t3a-th">战略新兴产业标识</th>
+      <th class="t3a-th">说明</th>
+    </tr>
+    <tr>
+      <td>SASAC-01</td>
+      <td>农、林、牧、渔业</td>
+      <td>第一产业</td>
+      <td>否</td>
+      <td>农业、林业、畜牧业、渔业及相关专业服务</td>
+    </tr>
+    <tr>
+      <td>SASAC-02</td>
+      <td>采矿业</td>
+      <td>基础产业</td>
+      <td>否</td>
+      <td>能源矿产、金属矿产和非金属矿产采选</td>
+    </tr>
+    <tr>
+      <td>SASAC-03</td>
+      <td>食品与农副产品加工制造业</td>
+      <td>制造业</td>
+      <td>否</td>
+      <td>粮油、食品、饮料、烟草及农副产品加工</td>
+    </tr>
+    <tr>
+      <td>SASAC-04</td>
+      <td>纺织服装与皮革制造业</td>
+      <td>制造业</td>
+      <td>否</td>
+      <td>纺织、服装、鞋帽、皮革及相关制品制造</td>
+    </tr>
+    <tr>
+      <td>SASAC-05</td>
+      <td>石油化工与材料制造业</td>
+      <td>制造业</td>
+      <td>否</td>
+      <td>石油加工、化学原料、化学制品、橡胶和塑料制品制造</td>
+    </tr>
+    <tr>
+      <td>SASAC-06</td>
+      <td>钢铁与有色金属冶炼加工</td>
+      <td>制造业</td>
+      <td>否</td>
+      <td>黑色金属、有色金属冶炼及压延加工</td>
+    </tr>
+    <tr>
+      <td>SASAC-07</td>
+      <td>通用及专用设备制造业</td>
+      <td>高端装备制造</td>
+      <td>是</td>
+      <td>工业母机、工程机械、专用装备及关键基础零部件</td>
+    </tr>
+    <tr>
+      <td>SASAC-08</td>
+      <td>汽车与交通装备制造业</td>
+      <td>高端装备制造</td>
+      <td>是</td>
+      <td>汽车、轨道交通、船舶、航空航天及其他交通装备</td>
+    </tr>
+    <tr>
+      <td>SASAC-09</td>
+      <td>电气机械与器材制造业</td>
+      <td>高端装备制造</td>
+      <td>是</td>
+      <td>电机、电气设备、输配电设备及相关器材</td>
+    </tr>
+    <tr>
+      <td>SASAC-10</td>
+      <td>电子设备与智能制造业</td>
+      <td>新一代信息技术</td>
+      <td>是</td>
+      <td>电子设备、智能制造系统、工业自动化及智能工厂</td>
+    </tr>
+    <tr>
+      <td>SASAC-11</td>
+      <td>新能源与储能产业</td>
+      <td>新能源与绿色低碳</td>
+      <td>是</td>
+      <td>风电、光伏、储能、氢能及新能源汽车相关产业</td>
+    </tr>
+    <tr>
+      <td>SASAC-12</td>
+      <td>节能环保与资源循环利用业</td>
+      <td>节能环保产业</td>
+      <td>是</td>
+      <td>节能技术、环保装备、污染治理和资源循环利用</td>
+    </tr>
+    <tr>
+      <td>SASAC-13</td>
+      <td>建筑业</td>
+      <td>建筑业</td>
+      <td>否</td>
+      <td>房屋建筑、土木工程、建筑安装及装饰装修</td>
+    </tr>
+    <tr>
+      <td>SASAC-14</td>
+      <td>电力、热力、燃气及水生产供应业</td>
+      <td>公用事业</td>
+      <td>否</td>
+      <td>电力、热力、燃气、自来水生产和供应</td>
+    </tr>
+    <tr>
+      <td>SASAC-15</td>
+      <td>交通运输、仓储和邮政业</td>
+      <td>现代服务业</td>
+      <td>否</td>
+      <td>铁路、公路、水运、航空、仓储、物流和邮政服务</td>
+    </tr>
+    <tr>
+      <td>SASAC-16</td>
+      <td>批发和零售业</td>
+      <td>现代服务业</td>
+      <td>否</td>
+      <td>商品批发、零售、供应链和商业综合服务</td>
+    </tr>
+    <tr>
+      <td>SASAC-17</td>
+      <td>住宿和餐饮业</td>
+      <td>现代服务业</td>
+      <td>否</td>
+      <td>住宿、餐饮及相关生活服务</td>
+    </tr>
+    <tr>
+      <td>SASAC-18</td>
+      <td>信息传输、软件和信息技术服务业</td>
+      <td>新一代信息技术</td>
+      <td>是</td>
+      <td>通信、软件、信息系统、数据服务和数字化解决方案</td>
+    </tr>
+    <tr>
+      <td>SASAC-19</td>
+      <td>金融业</td>
+      <td>现代金融</td>
+      <td>否</td>
+      <td>银行、证券、保险、信托、基金及其他金融服务</td>
+    </tr>
+    <tr>
+      <td>SASAC-20</td>
+      <td>房地产业</td>
+      <td>现代服务业</td>
+      <td>否</td>
+      <td>房地产开发经营、物业管理及不动产服务</td>
+    </tr>
+    <tr>
+      <td>SASAC-21</td>
+      <td>租赁和商务服务业</td>
+      <td>现代服务业</td>
+      <td>否</td>
+      <td>融资租赁、企业管理、咨询、广告和人力资源服务</td>
+    </tr>
+    <tr>
+      <td>SASAC-22</td>
+      <td>科学研究和技术服务业</td>
+      <td>科技服务业</td>
+      <td>是</td>
+      <td>研发试验、技术推广、检验检测、工程技术和知识产权服务</td>
+    </tr>
+    <tr>
+      <td>SASAC-23</td>
+      <td>水利、环境和公共设施管理业</td>
+      <td>公共服务业</td>
+      <td>否</td>
+      <td>水利管理、生态保护、环境治理和公共设施管理</td>
+    </tr>
+    <tr>
+      <td>SASAC-24</td>
+      <td>居民服务、修理和其他服务业</td>
+      <td>现代服务业</td>
+      <td>否</td>
+      <td>居民服务、机动车及设备修理和其他服务</td>
+    </tr>
+    <tr>
+      <td>SASAC-25</td>
+      <td>教育</td>
+      <td>公共服务业</td>
+      <td>否</td>
+      <td>学前教育、基础教育、职业教育、高等教育及培训</td>
+    </tr>
+    <tr>
+      <td>SASAC-26</td>
+      <td>卫生和社会工作</td>
+      <td>生物医药与健康</td>
+      <td>是</td>
+      <td>医疗卫生、健康服务、养老和社会工作</td>
+    </tr>
+    <tr>
+      <td>SASAC-27</td>
+      <td>文化、体育和娱乐业</td>
+      <td>现代服务业</td>
+      <td>否</td>
+      <td>新闻出版、广播影视、文化艺术、体育和娱乐服务</td>
+    </tr>
+    <tr>
+      <td>SASAC-28</td>
+      <td>公共管理、社会保障和社会组织</td>
+      <td>公共服务业</td>
+      <td>否</td>
+      <td>公共管理、社会保障、群众团体和社会组织</td>
+    </tr>
+    <tr>
+      <td>SASAC-29</td>
+      <td>国际组织及其他行业</td>
+      <td>其他</td>
+      <td>否</td>
+      <td>国际组织及未列入上述分类的其他行业</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+## ② 字段与值说明
+
+| 字段 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| 行业代码 | 本表维护 | 国资委行业分类 |
+| 行业分类名称 | 本表维护 |  |
+| 战略新兴产业 | 本表维护 |  |
+
+## ③ 关键规则要点
+
+**AB.2 行业代码**
+
+- 行业代码(AB.2)为固定值域字典（国资委行业分类），供对应编制表「行业」字段下拉引用，不可在编制表内新增值。
+
+## ④ 适用业务情形
+
+**适用于**
+
+- 国资委行业分类字典维护，供客户/产品行业归属下拉引用
+
+**不适用于**
+
+- 具体业务金额填报

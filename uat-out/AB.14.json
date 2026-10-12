@@ -1,0 +1,43 @@
+{
+  "md": "docs/formdocs-master/AB.14.md",
+  "viewport": 1440,
+  "htmlPath": "d:\\budgetmd\\uat-out\\AB.14\\uat-rendered.html",
+  "doc": {
+    "docHeight": 992,
+    "bodyWidth": 1392,
+    "tables": 2,
+    "styleBlockPrintedAsText": false
+  },
+  "tables": [
+    {
+      "firstHeader": "费用属性编码",
+      "headerBg": "rgb(0, 47, 108)",
+      "headerColor": "rgb(255, 255, 255)",
+      "headerBorderTop": "1px",
+      "dataCellWrap": "nowrap",
+      "tableWidth": 592,
+      "overflowPx": 0,
+      "clippedAtViewport": false,
+      "contentUpright": true,
+      "scrollbarBandPx": 0
+    },
+    {
+      "firstHeader": "字段",
+      "headerBg": "rgb(0, 47, 108)",
+      "headerColor": "rgb(255, 255, 255)",
+      "headerBorderTop": "1px",
+      "dataCellWrap": "normal",
+      "tableWidth": 1006,
+      "overflowPx": 0,
+      "clippedAtViewport": false,
+      "contentUpright": true,
+      "scrollbarBandPx": 496
+    }
+  ]
+}
+
+截图:
+d:\budgetmd\uat-out\AB.14\uat-01-top.png
+d:\budgetmd\uat-out\AB.14\uat-02-full.png
+d:\budgetmd\uat-out\AB.14\uat-table-0.png
+d:\budgetmd\uat-out\AB.14\uat-table-1.png

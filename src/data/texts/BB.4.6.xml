@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BB.4.6 资产处置预算表 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BB.4.6" name="资产处置预算表">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BB.4.6']） -->
+  <overview><![CDATA[资产处置预算表：登记本年固定资产与无形资产的处置，一行一笔，按处置月份列填列资产原值、累计折旧、处置收款（不含税/含税），系统按行内公式计算资产净值与处置损益。处置方式分对外出售、报废变卖、内部转卖三类：对外出售与报废变卖进 6115 资产处置收益（报废净损失进 6302）、收款进 CF-13.1；存量资产内部买卖由卖方通过本表手工填报减少，买方通过 BB.4.3 其他固定资产新增表手工填报增加（原值汇入 BB.4.5 续提折旧），BJ.C.d 资产转卖预算表负责登记双方定价与集团合并抵销。本表不计提折旧、不单独计提增值税。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BB.4.6'） -->
+  <fields>
+    <field code="legalEntity" name="法人公司" source="AA.2 法人组织架构"><![CDATA[处置主体（资产卡片所在法人公司）；各法人单体分别入账]]></field>
+    <field code="budgetDepartment" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[资产原领用部门（默认明细到二级部门），仅作费用/资产归属识别]]></field>
+    <field code="category" name="资产类别" source="AA.9 资产类别与折旧"><![CDATA[资产类别（代表大类-小类层级）；与 BB.4.4 / BB.4.5 同口径，便于按资产勾稽]]></field>
+    <field code="assetDesc" name="资产描述" source="本表录入"><![CDATA[文本字段，仅用于人眼识别资产（设备名称/规格/编号），不参与任何测算与分录]]></field>
+    <field code="disposalType" name="处置方式" source="本表枚举：对外出售 / 报废变卖 / 内部转卖"><![CDATA[处置方式三类（枚举）：对外出售、报废变卖、内部转卖（存量资产内部买卖由卖方通过本表手工填报减少；买方通过 BB.4.3 手工填报增加；双方在 BJ.C.d 登记定价并执行合并抵销）]]></field>
+    <field code="originalValue" name="资产原值" source="本表录入或按资产卡片带出"><![CDATA[全年合计+1~12月；金额填在处置月份列；对应 BO.BS 固定资产原值减少]]></field>
+    <field code="accumulatedDep" name="累计折旧" source="本表录入或按资产卡片带出"><![CDATA[全年合计+1~12月；填在处置月份列；对应 BO.BS 累计折旧减少（与 BB.4.4/BB.4.5 计提口径分开列示）]]></field>
+    <field code="netBookValue" name="资产净值" source="本表公式"><![CDATA[= 资产原值 − 累计折旧；对应 BO.BS 固定资产净值减少]]></field>
+    <field code="disposalRevenueExTax" name="处置收款(不含税)" source="本表录入"><![CDATA[全年合计+1~12月；处置损益测算基数]]></field>
+    <field code="disposalRevenueIncTax" name="处置收款(含税)" source="本表录入"><![CDATA[全年合计+1~12月；含税与不含税差额即增值税；含税列驱动 BO.CF CF-13.1 处置长期资产收回的现金净额]]></field>
+    <field code="disposalGainLoss" name="处置损益" source="本表公式"><![CDATA[= 处置收款(不含税) − 资产净值；正数进 6115 资产处置收益，负数（报废净损失）进 6302 营业外支出]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BB.4.6 资产处置预算表">
+      <point><![CDATA[定位：固定资产与无形资产处置的编制入口，一行一笔处置。维度=法人公司、预算部门、资产类别、资产描述、处置方式（5 列）；度量=【全年合计】+1~12月，每月 6 个子列：资产原值、累计折旧、资产净值、处置收款-不含税、处置收款-含税、处置损益（两行制表头共 83 列）。]]></point>
+      <point><![CDATA[处置方式三类（枚举）：对外出售、报废变卖、内部转卖。存量资产内部买卖由卖方通过本表手工填报减少（资产原值、累计折旧与净值），买方通过 BB.4.3 其他固定资产新增表手工填报增加（原值自动汇入 BB.4.5 续提折旧）；双方在 BJ.C.d 登记定价并由系统在集团合并层全额抵销加成与现金流。]]></point>
+      <point><![CDATA[行内公式：资产净值 = 资产原值 − 累计折旧；处置损益 = 处置收款(不含税) − 资产净值（正数收益、负数损失）。金额一律填在处置月份列，全年合计自动求和；不足一年的资产不另设折旧口径，折旧已在 BB.4.4/BB.4.5 计提，本表不计提折旧。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.4.6']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[本年度固定资产与无形资产的对外出售、报废变卖（含残值变卖）]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[资产新增（BB.3.1/BB.3.2/BB.4.1/BB.4.3）]]></item>
+      <item><![CDATA[折旧与摊销计提（BB.4.4/BB.4.5）]]></item>
+      <item><![CDATA[存货处置与盘亏报废（在 BB.3.X 进销存表直接调整）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BB.4.6']） -->
+  <relation>
+    <summary><![CDATA[资产处置预算表（独立表单，5 维度列 + 6×13=78 度量列，共 83 列）：一行一笔处置，登记处置资产的原值、累计折旧与处置收款（不含税/含税），按行内公式计算资产净值与处置损益；覆盖对外出售、报废变卖两类处置方式，是固定资产/无形资产减少与资产处置现金流入的唯一编制入口。]]></summary>
+    <dataSources>
+      <source code="AA.9" name="资产类别与折旧" fields="资产类别（大类-小类）、折旧参数"><![CDATA[资产类别取 AA.9，与 BB.4.4/BB.4.5 同口径，便于按资产勾稽]]></source>
+      <source code="AA.2" name="法人组织架构" fields="法人公司、持股比例"><![CDATA[处置主体（法人公司）来源；各法人单体分别入账]]></source>
+      <source code="BB.4.4" name="存量资产折旧计算表" fields="原值、累计折旧、资产领用部门"><![CDATA[按资产卡片带出原值与累计折旧（可选：手工填报时可参照存量台账取数）]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BO.BS 资产负债表—固定资产(净值)1601"><![CDATA[资产净值减少（= 原值 − 累计折旧），与 BB.4.X.A 折旧合计并列为本期减少项（单体口径）]]></output>
+      <output target="BO.PL 利润表—资产处置收益(6115) / 营业外支出(6302)"><![CDATA[处置损益 = 处置收款(不含税) − 资产净值；正数进 6115，报废净损失进 6302]]></output>
+      <output target="BO.CF 现金流量表—CF-13.1 处置固定资产、无形资产和其他长期资产收回的现金净额"><![CDATA[取本表处置收款-含税（含税现金口径），按处置月份列归集]]></output>
+      <output target="BO.BS 资产负债表—应交税费(2221)"><![CDATA[处置收款含税与不含税的差额即增值税销项税额（在收付时点内含，不在 CF-07 重复计提）]]></output>
+    </outputs>
+    <keyRules>
+      <rule><![CDATA[一行一笔处置；金额填在处置月份列，全年合计 = 各月求和；资产净值与处置损益为行内公式，不允许手工改数。]]></rule>
+      <rule><![CDATA[本表不计提折旧（属 BB.4.4/BB.4.5）、不单独计提增值税（含税−不含税即增值税）；法人归属按处置主体（资产卡片所在法人）。]]></rule>
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.4.6'].items） -->
+  <events>
+    <event event="对外出售资产（处置收款与处置损益确认）" field="处置方式=对外出售：资产原值 / 累计折旧 / 处置收款-不含税 / 处置收款-含税">
+      <pl><![CDATA[资产处置收益 6115 (+)：处置损益 = 处置收款(不含税) − 资产净值（= 原值 − 累计折旧）]]></pl>
+      <bs><![CDATA[固定资产(净值) 1601 (−)；货币资金 1001 (+)；应交税费—应交增值税(销项税额) 2221 (+)]]></bs>
+      <cf><![CDATA[CF-13.1 处置固定资产、无形资产和其他长期资产收回的现金净额 (+)（取含税收款，按处置月份）]]></cf>
+      <source><![CDATA[BB.4.6 资产处置预算表·处置方式=对外出售（按法人公司+处置月份取数）]]></source>
+      <entry><![CDATA[借：货币资金(1001)（含税收款）、累计折旧（已提部分）；贷：固定资产—原值(1601)、应交税费—应交增值税(销项税额)；差额借/贷：资产处置收益(6115)]]></entry>
+      <note><![CDATA[按法人公司汇总生成分录，各法人单体报表分别入账；处置收款按含税列进 CF-13.1，增值税内含于含税收款、不在 CF-07 重复计提；本表不计提折旧。]]></note>
+    </event>
+    <event event="报废变卖清理" field="处置方式=报废变卖：资产原值 / 累计折旧 / 残值变卖款-不含税 / 残值变卖款-含税">
+      <pl><![CDATA[报废净损失计入 6302 营业外支出 (−)：= 残值变卖款(不含税) − 资产净值（为负）；如为净收益计入 6115]]></pl>
+      <bs><![CDATA[固定资产(净值) 1601 (−)；货币资金 1001 (+)（残值变卖款）]]></bs>
+      <cf><![CDATA[CF-13.1 (+)（残值变卖款含税；无变卖款时本行为 0）]]></cf>
+      <source><![CDATA[BB.4.6 资产处置预算表·处置方式=报废变卖]]></source>
+      <entry><![CDATA[借：货币资金(1001)（残值变卖款含税）、累计折旧、营业外支出(6302)（净损失）；贷：固定资产—原值(1601)、应交税费—应交增值税(销项税额)]]></entry>
+      <note><![CDATA[报废无变卖款时处置收款为 0，仅减少固定资产净值并确认损失；不产生额外现金流；残值变卖款仍按含税列进 CF-13.1。]]></note>
+    </event>
+  </events>
+
+</form>

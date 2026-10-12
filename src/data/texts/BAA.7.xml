@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BAA.7 采购付款额测算比例附表 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BAA.7" name="采购付款额测算比例附表">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BAA.7']） -->
+  <overview><![CDATA[采购付款额测算比例表的长期规划登记：按「预算项目×预算部门」维护预付款与验收付款的分月比例，含设备类/物料类采购付款比例表两个子Tab，是后续年度采购付款节奏比例的统一登记入口。本预算年度不需要实现和使用——BB.3.1设备及无形资产采购预算、BB.3.3物料类采购预算的预付款比例与验收付款金额由各表按月自行填报，不强制从本表取数、不做公式联动。仅参数、不生成分录，不区分法人。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BAA.7'） -->
+  <fields>
+    <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据"><![CDATA[预算项目主数据选择]]></field>
+    <field code="department" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[预算部门原则上明细到二级部门]]></field>
+    <field code="prepayM0Ratio" name="预付款首月(0月)比例" source="本表录入"><![CDATA[百分比]]></field>
+    <field code="prepayM1Ratio" name="预付款次月(1月)比例" source="本表录入"><![CDATA[百分比]]></field>
+    <field code="acceptM0Ratio" name="验收付款首月(0月)比例" source="本表录入"><![CDATA[百分比]]></field>
+    <field code="acceptM1Ratio" name="验收付款第1月比例" source="本表录入"><![CDATA[百分比]]></field>
+    <field code="acceptM2Ratio" name="验收付款第2月比例" source="本表录入"><![CDATA[百分比]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BAA.7 采购付款额测算比例附表">
+      <point><![CDATA[本表拆分为两个子Tab（同页切换）：设备类采购付款比例表 + 物料类采购付款比例表，去掉了原表中的「类别」字段。]]></point>
+      <point><![CDATA[两张附表均按「序号、预算项目、预算部门」展开（预算部门原则上明细到二级部门），维护预付款首月(0月)/次月(1月)及验收付款首月(0月)/第1月/第2月的比例，是后续年度采购付款节奏比例的统一登记入口。]]></point>
+      <point><![CDATA[本预算年度该比例表不需要实现和使用：BB.3.1 设备及无形资产采购预算、BB.3.3 物料类采购预算的预付款比例与验收付款由各表按月自行填报，不强制从本表取数、不做公式联动；后续年度启用该规则时，再由本表统一提供比例口径。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BAA.7']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[设备/物料采购预付款、验收付款各月比例的长期规划登记（维度=预算项目×预算部门，后续年度启用）]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[本年度 BB.3.1/BB.3.3 付款节奏测算取数（本年度不启用本表，付款由各表按月填报）]]></item>
+      <item><![CDATA[采购金额填报（属 BB.3.1/BB.3.3）]]></item>
+    </notApplies>
+  </scenarios>
+
+</form>

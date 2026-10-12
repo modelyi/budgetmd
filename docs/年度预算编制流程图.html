@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>年度预算编制流程图</title>
+<style>
+  body{margin:0;padding:24px;background:#f5f5f5;font-family:"Microsoft YaHei",Arial,sans-serif;color:#222}
+  .page{width:1400px;margin:0 auto;background:#fff;border:1px solid #cfcfcf;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:18px 20px 24px}
+  .title{background:#1f3b73;color:#fff;text-align:center;font-size:27px;font-weight:700;letter-spacing:2px;padding:13px 0;margin-bottom:16px}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12.5px;color:#475569;margin-bottom:12px;justify-content:flex-end}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .swatch{width:13px;height:13px;border-radius:3px;border:1px solid rgba(15,23,42,.15)}
+  svg{display:block;background:#fff;border:1px solid #e2e8f0;border-radius:10px}
+  .lane{stroke:#d8dee6;stroke-width:1}
+  .lane-label{font-size:16px;font-weight:700;fill:#1f3b73}
+  .phase-label{font-size:15px;font-weight:700;fill:#0f172a}
+  .node-title{font-size:14px;font-weight:700;fill:#0f172a}
+  .node-sub{font-size:12px;fill:#374151}
+  .arrow{stroke:#64748b;stroke-width:2;fill:none}
+  .arrowdash{stroke:#64748b;stroke-width:1.5;fill:none;stroke-dasharray:5 5}
+  .note{margin-top:14px;font-size:14px;color:#555;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="title">年度预算编制流程图</div>
+  <div class="legend">
+    <span><i class="swatch" style="background:#dbeafe"></i>启动 / 定稿</span>
+    <span><i class="swatch" style="background:#fef3c7"></i>假设与准备</span>
+    <span><i class="swatch" style="background:#dcfce7"></i>业务编制</span>
+    <span><i class="swatch" style="background:#e0f2fe"></i>资金与税金</span>
+    <span><i class="swatch" style="background:#fee2e2"></i>汇总与审核</span>
+  </div>
+
+  <svg viewBox="0 0 1400 700" role="img" aria-label="年度预算编制流程图">
+    <defs>
+      <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"></path>
+      </marker>
+      <filter id="sh" x="-10%" y="-10%" width="120%" height="130%">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/>
+      </filter>
+    </defs>
+
+    <!-- phase header -->
+    <rect x="150" y="40" width="150" height="46" rx="10" fill="#dbeafe" stroke="#60a5fa" />
+    <text x="225" y="68" text-anchor="middle" class="phase-label">① 启动与准备</text>
+    <rect x="300" y="40" width="196" height="46" rx="10" fill="#fef3c7" stroke="#f59e0b" />
+    <text x="398" y="68" text-anchor="middle" class="phase-label">② 假设与参数</text>
+    <rect x="496" y="40" width="226" height="46" rx="10" fill="#dcfce7" stroke="#16a34a" />
+    <text x="609" y="68" text-anchor="middle" class="phase-label">③ 业务预算编制</text>
+    <rect x="722" y="40" width="226" height="46" rx="10" fill="#e0f2fe" stroke="#0284c7" />
+    <text x="835" y="68" text-anchor="middle" class="phase-label">④ 资金与税金</text>
+    <rect x="948" y="40" width="210" height="46" rx="10" fill="#fee2e2" stroke="#dc2626" />
+    <text x="1053" y="68" text-anchor="middle" class="phase-label">⑤ 汇总·审核·平衡</text>
+    <rect x="1158" y="40" width="150" height="46" rx="10" fill="#dbeafe" stroke="#60a5fa" />
+    <text x="1233" y="68" text-anchor="middle" class="phase-label">⑥ 定稿下发</text>
+
+    <!-- lane backgrounds -->
+    <rect x="20" y="100" width="1358" height="118" rx="10" fill="#fbfdff" stroke="#e2e8f0" />
+    <rect x="20" y="218" width="1358" height="156" rx="10" fill="#ffffff" stroke="#e2e8f0" />
+    <rect x="20" y="374" width="1358" height="152" rx="10" fill="#fbfdff" stroke="#e2e8f0" />
+    <rect x="20" y="526" width="1358" height="132" rx="10" fill="#ffffff" stroke="#e2e8f0" />
+
+    <!-- vertical phase separators -->
+    <line x1="300" y1="92" x2="300" y2="658" stroke="#cbd5e1" stroke-dasharray="5 5" />
+    <line x1="496" y1="92" x2="496" y2="658" stroke="#cbd5e1" stroke-dasharray="5 5" />
+    <line x1="722" y1="92" x2="722" y2="658" stroke="#cbd5e1" stroke-dasharray="5 5" />
+    <line x1="948" y1="92" x2="948" y2="658" stroke="#cbd5e1" stroke-dasharray="5 5" />
+    <line x1="1158" y1="92" x2="1158" y2="658" stroke="#cbd5e1" stroke-dasharray="5 5" />
+
+    <!-- lane labels -->
+    <text x="72" y="160" text-anchor="middle" class="lane-label">决策层</text>
+    <text x="72" y="296" text-anchor="middle" class="lane-label">业务中心</text>
+    <text x="72" y="450" text-anchor="middle" class="lane-label">财经中心</text>
+    <text x="72" y="592" text-anchor="middle" class="lane-label">职能支持</text>
+
+    <!-- arrows -->
+    <path d="M 205 150 H 265" class="arrow" marker-end="url(#arw)" />
+    <path d="M 425 150 H 470" class="arrow" marker-end="url(#arw)" />
+    <path d="M 655 150 H 695" class="arrow" marker-end="url(#arw)" />
+    <path d="M 900 150 H 925" class="arrow" marker-end="url(#arw)" />
+    <path d="M 1130 150 C 1170 150 1170 640 1190 640" class="arrow" marker-end="url(#arw)" />
+    <path d="M 205 286 H 268" class="arrow" marker-end="url(#arw)" />
+    <path d="M 445 286 H 498" class="arrow" marker-end="url(#arw)" />
+    <path d="M 680 286 H 700" class="arrow" marker-end="url(#arw)" />
+    <path d="M 760 286 H 820" class="arrow" marker-end="url(#arw)" />
+    <path d="M 480 442 H 700" class="arrowdash" marker-end="url(#arw)" />
+    <path d="M 820 442 H 930" class="arrow" marker-end="url(#arw)" />
+    <path d="M 1090 442 C 1130 442 1130 640 1190 640" class="arrow" marker-end="url(#arw)" />
+    <path d="M 480 580 H 820" class="arrowdash" marker-end="url(#arw)" />
+    <path d="M 920 580 C 980 580 980 442 1010 442" class="arrowdash" marker-end="url(#arw)" />
+
+    <!-- 决策层 lane -->
+    <g filter="url(#sh)"><rect x="168" y="124" width="92" height="60" rx="12" fill="#dbeafe" stroke="#2563eb" /><text x="214" y="150" text-anchor="middle" class="node-title">启动</text><text x="214" y="171" text-anchor="middle" class="node-sub">年度预算启动</text></g>
+    <g filter="url(#sh)"><rect x="1240" y="610" width="116" height="56" rx="12" fill="#dbeafe" stroke="#2563eb" /><text x="1298" y="634" text-anchor="middle" class="node-title">终审定稿</text><text x="1298" y="654" text-anchor="middle" class="node-sub">总裁 / 预算会签批</text></g>
+
+    <!-- 业务中心 lane -->
+    <g filter="url(#sh)"><rect x="180" y="252" width="120" height="74" rx="12" fill="#fef3c7" stroke="#f59e0b" /><text x="240" y="276" text-anchor="middle" class="node-title">经营假设</text><text x="240" y="297" text-anchor="middle" class="node-sub">客户 / 项目 / 产能</text><text x="240" y="315" text-anchor="middle" class="node-sub">销售目标 / 机台</text></g>
+    <g filter="url(#sh)"><rect x="498" y="246" width="184" height="96" rx="12" fill="#dcfce7" stroke="#16a34a" /><text x="590" y="268" text-anchor="middle" class="node-title">业务预算编制</text><text x="590" y="290" text-anchor="middle" class="node-sub">销售 BB.1 ／ 采购 BB.3</text><text x="590" y="310" text-anchor="middle" class="node-sub">制造 BB.2 ／ 资产 BB.4</text><text x="590" y="330" text-anchor="middle" class="node-sub">费用 BB.5</text></g>
+    <g filter="url(#sh)"><rect x="820" y="270" width="150" height="62" rx="12" fill="#fee2e2" stroke="#dc2626" /><text x="895" y="294" text-anchor="middle" class="node-title">业务初审</text><text x="895" y="316" text-anchor="middle" class="node-sub">目标、资源、口径</text></g>
+
+    <!-- 财经中心 lane -->
+    <g filter="url(#sh)"><rect x="306" y="402" width="176" height="66" rx="12" fill="#fef3c7" stroke="#f59e0b" /><text x="394" y="424" text-anchor="middle" class="node-title">模板与参数维护</text><text x="394" y="446" text-anchor="middle" class="node-sub">科目 / 税率 / 加成率</text></g>
+    <g filter="url(#sh)"><rect x="722" y="398" width="104" height="90" rx="12" fill="#e0f2fe" stroke="#0284c7" /><text x="774" y="420" text-anchor="middle" class="node-title">资金预算</text><text x="774" y="442" text-anchor="middle" class="node-sub">融资 / 投资</text><text x="774" y="462" text-anchor="middle" class="node-sub">税金 / 内部交易</text></g>
+    <g filter="url(#sh)"><rect x="930" y="398" width="152" height="90" rx="12" fill="#fee2e2" stroke="#dc2626" /><text x="1006" y="420" text-anchor="middle" class="node-title">汇总与合并</text><text x="1006" y="442" text-anchor="middle" class="node-sub">三表出数 + 勾稽</text><text x="1006" y="462" text-anchor="middle" class="node-sub">内部交易抵销 BO.ELIM</text></g>
+
+    <!-- 职能支持 lane -->
+    <g filter="url(#sh)"><rect x="498" y="552" width="120" height="66" rx="12" fill="#fef3c7" stroke="#f59e0b" /><text x="558" y="576" text-anchor="middle" class="node-title">人力 / 资产</text><text x="558" y="598" text-anchor="middle" class="node-sub">人员、薪酬、折旧</text></g>
+    <g filter="url(#sh)"><rect x="820" y="552" width="132" height="66" rx="12" fill="#e0f2fe" stroke="#0284c7" /><text x="886" y="576" text-anchor="middle" class="node-title">职能部门预算</text><text x="886" y="598" text-anchor="middle" class="node-sub">人工、费用、资产</text></g>
+    <g filter="url(#sh)"><rect x="1008" y="580" width="90" height="50" rx="12" fill="#fee2e2" stroke="#dc2626" /><text x="1053" y="606" text-anchor="middle" class="node-title">配合复审</text></g>
+
+    <text x="40" y="680" font-size="13" fill="#64748b">主线：启动 → 假设参数 → 业务编制 → 资金税金 → 汇总审核 → 定稿下发　　虚线：职能支持与财务复审提供基础数据、参数与复核</text>
+  </svg>
+
+  <div class="note">
+    说明：按责任泳道（决策层 / 业务中心 / 财经中心 / 职能支持）× 编制阶段（启动准备 → 假设参数 → 业务编制 → 资金税金 → 汇总审核 → 定稿下发）组织。
+    实际落地时，业务中心可再拆销售、采购、制造、费用等更细泳道，审批层级可替换为客户现行组织。
+  </div>
+</div>
+</body>
+</html>

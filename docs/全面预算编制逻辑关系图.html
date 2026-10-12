@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>全面预算编制逻辑关系图</title>
+<style>
+  body{margin:0;padding:24px;background:#f5f5f5;font-family:"Microsoft YaHei",Arial,sans-serif;color:#222}
+  .page{width:1360px;margin:0 auto;background:#fff;border:1px solid #cfcfcf;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:18px 20px 24px}
+  .title{background:#1f3b73;color:#fff;text-align:center;font-size:27px;font-weight:700;letter-spacing:2px;padding:13px 0;margin-bottom:16px}
+  .flow{display:grid;grid-template-columns:205px 205px 205px 205px 205px 205px;gap:10px;align-items:center;margin-bottom:12px}
+  .phase{height:44px;background:#d9d9d9;border:1px solid #999;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;position:relative}
+  .phase:not(:last-child)::after{content:"";position:absolute;right:-19px;border-left:18px solid #1f3b73;border-top:10px solid transparent;border-bottom:10px solid transparent;z-index:3}
+  .grid{display:grid;grid-template-columns:205px 205px 205px 205px 205px 205px;gap:10px;align-items:stretch}
+  .row-title{color:#1f3b73;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.35;border-right:2px dashed #aaa;padding:8px}
+  .box{border:2px solid #3f65c9;background:#fff;min-height:88px;padding:9px 11px;line-height:1.5;font-size:14px}
+  .box h3{font-size:16px;margin:0 0 5px;color:#003b80}.box ul{margin:0;padding-left:17px}.box li{margin:2px 0}
+  .soft-blue{background:#eef5ff}.soft-green{background:#effaf0}.soft-yellow{background:#fff9e8}.soft-red{background:#fff1f1}.soft-purple{background:#f6f0ff}
+  .feed{margin-top:4px;font-size:12.5px;color:#8a5a00;border-top:1px dashed #d0a050;padding-top:4px}
+  .note{margin-top:14px;font-size:14px;color:#555;line-height:1.7}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12.5px;color:#475569;margin-bottom:10px;justify-content:flex-end}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .swatch{width:13px;height:13px;border-radius:3px;border:1px solid rgba(15,23,42,.15)}
+  b.chk{color:#b00000}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="title">全面预算编制逻辑关系图（复核用）</div>
+  <div class="legend">
+    <span><i class="swatch" style="background:#eef5ff"></i>主数据/假设</span>
+    <span><i class="swatch" style="background:#effaf0"></i>业务编制</span>
+    <span><i class="swatch" style="background:#fff9e8"></i>测算与取数说明</span>
+    <span><i class="swatch" style="background:#fff1f1"></i>输出与勾稽</span>
+    <span><i class="swatch" style="background:#f6f0ff"></i>内部交易与合并</span>
+  </div>
+
+  <div class="flow">
+    <div class="phase">主数据与前提</div>
+    <div class="phase">销售与收入链</div>
+    <div class="phase">采购·制造·存货链</div>
+    <div class="phase">资产·费用·资金链</div>
+    <div class="phase">内部交易与合并</div>
+    <div class="phase">预算输出三表</div>
+  </div>
+
+  <div class="grid">
+    <!-- 第1行：起点层 -->
+    <div class="box soft-blue"><h3>主数据与字典</h3><ul><li>组织法人（AA.2）、部门（AA.5）</li><li>客户（AA.4）、供应商（AA.10）</li><li>项目（AA.6）、产品（AA.7）</li><li>物料（AA.11）、资产类别（AA.9）</li></ul><div class="feed">全部业务表的维度来源</div></div>
+    <div class="box soft-blue"><h3>合同签约预算</h3><ul><li>合同签约额（BB.1.1）</li><li>签约≠收入≠回款，仅作预测参考</li></ul><div class="feed">喂给销售预算的商机口径</div></div>
+    <div class="box soft-blue"><h3>标准成本与假设</h3><ul><li>产品标准成本（BAA.2）</li><li>物料标准成本（BAA.4）</li><li>人工费率（BAA.3）</li></ul><div class="feed">成本链唯一出口参数</div></div>
+    <div class="box soft-blue"><h3>折旧与租赁参数</h3><ul><li>折旧规则（AA.9）</li><li>场所与面积（BAA.6）</li><li>付款比例（BAA.7，本年不启用）</li></ul><div class="feed">资产链的计提依据</div></div>
+    <div class="box soft-blue"><h3>关联交易参数</h3><ul><li>加成比例（BAA.11）</li><li>内部交易类型×预算项目</li></ul><div class="feed">八类内部交易统一定价</div></div>
+    <div class="box soft-red"><h3>报表科目体系</h3><ul><li>统一科目表（AA.3）</li><li>三表取数规则（_statement-rules）</li></ul><div class="feed">所有分录的落点边界（止于报表项目行）</div></div>
+
+    <!-- 第2行：销售链 -->
+    <div class="box soft-yellow"><h3>编制假设</h3><ul><li>年度假设与前提（BA.5）</li><li>费用规则、薪酬假设</li></ul><div class="feed">给全部 BB 表提供前提</div></div>
+    <div class="box soft-green"><h3>销售预算</h3><ul><li>软硬件收入成本（BB.1.2）</li><li>技术服务收入成本（BB.1.3）</li><li>销售费用（BB.1.4）</li></ul><div class="feed">收入=销量×单价；成本按标准成本；带出财务视角（.c）</div></div>
+    <div class="box soft-yellow"><h3>进销存归集</h3><ul><li>存货预算（BB.3.X）法人级单表</li><li>产成品转出=对外销售成本</li></ul><div class="feed">销售成本从存货转出，不重复计</div></div>
+    <div class="box soft-yellow"><h3>雇员费用</h3><ul><li>人工与薪酬（BB.5.1）</li><li>只计提一次、只支付一次</li></ul><div class="feed">服务/制造/自建资产只做用途重分类</div></div>
+    <div class="box soft-purple"><h3>内部销售登记</h3><ul><li>内部产品销售（BJ.C.g）</li><li>物料/人工供货（BB.1.3.d/.f/.g/.i）</li></ul><div class="feed">「内部供应商」列判定跨法人购销</div></div>
+    <div class="box soft-red"><h3>利润表（BO.PL）</h3><ul><li>全年合计+1~12月</li><li>收入、成本、费用按科目映射归集</li></ul><div class="feed">净利润 → 滚入未分配利润</div></div>
+
+    <!-- 第3行：采购制造 -->
+    <div class="box soft-yellow"><h3>价格与费率假设</h3><ul><li>采购价格、制造费率</li><li>进项税率（AB.15）</li></ul><div class="feed">量价计算的前提</div></div>
+    <div class="box soft-green"><h3>产量计划</h3><ul><li>生产制造（BB.2.1）</li><li>完工成本=产量×标准成本</li></ul><div class="feed">在制品→产成品同法人结转，跨法人走内部交易</div></div>
+    <div class="box soft-green"><h3>采购预算</h3><ul><li>物料（BB.3.3）、设备（BB.3.1）、工程（BB.3.2）</li><li>度量=到货额/预付款/验收付款</li></ul><div class="feed">到货进存货，付款只驱动现金流</div></div>
+    <div class="box soft-yellow"><h3>资本性支出</h3><ul><li>新增（BB.4.3）、折旧（BB.4.5）</li><li>处置（BB.4.6）、租赁（BB.4.2）</li></ul><div class="feed">折旧进费用/制造费用，赎回原值期初净值</div></div>
+    <div class="box soft-purple"><h3>代采购与转卖</h3><ul><li>物料（BB.3.3.D）、设备（BB.3.1.D）</li><li>资产转卖（BJ.C.d）</li></ul><div class="feed">净额法：提供方只确认代采购服务费</div></div>
+    <div class="box soft-red"><h3>资产负债表（BO.BS）</h3><ul><li>年初/本年发生/调整/期末</li><li>期末=年初+本年发生+调整</li></ul><div class="feed"><b class="chk">勾稽：资产=负债+所有者权益</b></div></div>
+
+    <!-- 第4行：资金与输出 -->
+    <div class="box soft-yellow"><h3>税金测算</h3><ul><li>增值税（BF.4.b→BF.4.a）</li><li>按法人申报，进销同率</li></ul><div class="feed">价外税：不进成本，只影响现金流</div></div>
+    <div class="box soft-green"><h3>融资与投资</h3><ul><li>融资（BF.3）、投资（BF.1）</li><li>还本付息、分红</li></ul><div class="feed">筹资/投资现金流唯一来源</div></div>
+    <div class="box soft-green"><h3>资金预算</h3><ul><li>资金流入流出（BF.1/BF.2）</li><li>现金余额滚动</li></ul><div class="feed">经营+投资+筹资三段汇总</div></div>
+    <div class="box soft-yellow"><h3>关联交易汇总</h3><ul><li>关联交易与内部抵销（BJ.C）</li><li>内部借款（BJ.C.f）</li></ul><div class="feed">税层面合并影响由财务人工判断</div></div>
+    <div class="box soft-purple"><h3>合并抵销（BO.ELIM）</h3><ul><li>内部购销/往来/现金流抵销</li><li>期末未实现加成冲减</li></ul><div class="feed">合并数=各单体加总−抵销数</div></div>
+    <div class="box soft-red"><h3>现金流量表（BO.CF）</h3><ul><li>本年累计（流量口径）</li><li>期末货币资金与 BO.BS 勾稽</li></ul><div class="feed"><b class="chk">勾稽：CF 期末现金 = BS 货币资金</b></div></div>
+  </div>
+
+  <div class="note">
+    <b>复核要点（全年闭环）：</b>
+    ① 收入链：销量×单价 → 收入 → BO.PL；成本链：标准成本 → 进销存转出 → 营业成本，两条链只各计一次；
+    ② 存货：年初+采购入库+完工入库−对外转出−消耗 = 期末，内部领用转在制品不改变集团存货总额；
+    ③ 往来：预收/预付有期初、发生、收付、结转、期末五段，期末=年初+发生+调整；
+    ④ 现金：合同负债/应收余额变化与 CF 收付一致，预收结转不重复计收入；
+    ⑤ 合并：BO.ELIM 只做内部购销、内部往来、内部现金流、存货未实现加成、长期资产未实现加成五类抵销；递延所得税等税层面影响由财务人工测算，系统不自动处理；
+    ⑥ 三表勾稽：PL 净利润 ↔ BS 未分配利润变动；CF 期末现金 ↔ BS 货币资金；BS 资产=负债+权益。
+  </div>
+</div>
+</body>
+</html>

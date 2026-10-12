@@ -1,0 +1,74 @@
+{
+  "grids": [
+    {
+      "name": "AB.16 租赁期限字典",
+      "rows": [
+        [
+          {
+            "text": "租赁期限编码",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "租赁期限名称",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "适用范围与资本化判定说明",
+            "isHeader": true,
+            "rowSpan": 1,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          }
+        ],
+        [
+          {
+            "text": "LSE-01",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "一年以内",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "租赁期限 ≤ 12 个月（含 12 个月）→ 费用化：不确认使用权资产与租赁负债，租金按用途直接进损益（外部租赁进 BB.4.2.a 月租金、内部租赁进 BB.4.2.b 内部租金），不进资本化测算表。",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "LSE-02",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "一年以上",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "租赁期限 > 12 个月 → 资本化：确认使用权资产 1621 与租赁负债 2602，进资本化测算表（外部 BB.4.2.a.1 / 内部 BB.4.2.b.1）。",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ]
+      ],
+      "rowCount": 3,
+      "colCount": 3
+    }
+  ]
+}

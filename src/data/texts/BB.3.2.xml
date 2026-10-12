@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BB.3.2 基建工程采购预算 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BB.3.2" name="基建工程采购预算">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BB.3.2']） -->
+  <overview><![CDATA[基建工程采购预算，两个 Tab：主表（含期初金额、验收额/付款额/转固金额，维度含法人公司）+ 附表 BB.3.2.b 基建转固明细表（参照 BB.4.1.d 逻辑，7列，度量=原值，末列资产描述仅人眼识别，与 BB.4.3/BB.4.4.b/BB.4.5 同口径）。三口径分离：验收额→在建工程 1604 发生额增加（分录 160401/2202，确认 1604 原值）；付款额→仅驱动 CF-14 购建固定资产支付的现金（分录 2202/1001，不构成 1604 原值）；转固金额→按附表转固月份从 1604 转入 1601 原值（折旧经 BB.4.X 计提后进费用）。分录按法人公司汇总生成、各法人单体入账、集团合并时各法人间不互抵；期初金额与 BB.4.1.a 期初金额共同构成 BO.BS 1604 在建工程年初余额。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BB.3.2'） -->
+  <fields>
+    <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据"><![CDATA[]]></field>
+    <field code="department" name="部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[默认二级部门；基建工程预算编制到二级部门]]></field>
+    <field code="entity" name="法人公司" source="AA.2 法人组织架构"><![CDATA[]]></field>
+    <field code="infraType" name="业务类型" source="本表录入"><![CDATA[可选值：土建/装修/土地购买]]></field>
+    <field code="supplier" name="供应商" source="AA.10 供应商主数据"><![CDATA[]]></field>
+    <field code="openingAmount" name="期初金额" source="本表录入"><![CDATA[基建在建工程年初余额（上年末在建工程余额），全年口径单列，与BB.4.1.a.期初金额共同构成BO.BS 1604在建工程年初余额]]></field>
+    <field code="monthlyAcceptance" name="月度验收额" source="本表录入"><![CDATA[]]></field>
+    <field code="monthlyPayment" name="月度付款额" source="本表录入"><![CDATA[]]></field>
+    <field code="monthlyTransferAmount" name="月度转固金额" source="BB.3.2.b 基建转固明细表"><![CDATA[按月汇总基建转固明细表(BB.3.2.b)同月转固原值；转固资产下月起提折旧进入BB.4.X]]></field>
+    <field code="annualAcceptance" name="全年验收额合计" source="本表公式"><![CDATA[=SUM(12个月验收额)]]></field>
+    <field code="annualPayment" name="全年付款额合计" source="本表公式"><![CDATA[=SUM(12个月付款额)]]></field>
+    <field code="annualTransferAmount" name="全年转固金额合计" source="本表公式"><![CDATA[=SUM(12个月转固金额)]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BB.3.2 基建工程采购预算">
+      <point><![CDATA[主表：维度=预算项目、部门（默认二级部门）、法人公司、业务类型（土建/装修/土地购买，位于法人公司之后、供应商之前）、供应商；月度验收额/付款额手工填报；转固金额为公式字段（按月汇总基建转固明细表同月转固原值）。]]></point>
+      <point><![CDATA[附表（参照BB.4.1.d自制设备转固明细表逻辑）：基建转固明细表，维度=序号/预算项目(基建工程)/部门/转固月份/资产类别，度量=原值，末列=资产描述（转固资产的描述（建筑物/工程名称、用途），仅用于人眼识别、不参与任何测算与分录，与 BB.4.1.d/BB.4.3/BB.4.4.b/BB.4.5 的资产描述同口径）；用户直接填报各笔基建工程达到可使用状态的转固原值，按月合计自动汇总至主表转固金额，转固资产按AA.9资产类别参数下月起提折旧。]]></point>
+      <point><![CDATA[【三口径分离】验收额 → 在建工程 1604 发生额增加（工程验收确认在建工程原值）；付款额 → 仅驱动 CF-14 购建固定资产支付的现金，不构成在建工程原值；转固金额 → 1604 转出、1601 固定资产原值增加（按 BB.3.2.b 基建转固明细表的转固月份），三者不得互相引用为金额来源。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.3.2']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[基建项目采购预算，按预算项目、预算部门跟踪验收额与付款额]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[设备类资本性支出（属 BB.3.1）]]></item>
+      <item><![CDATA[自制类在建工程（属 BB.4.1）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BB.3.2']） -->
+  <relation>
+    <summary><![CDATA[基建工程采购预算（土建/装修/土地购买），按月填报验收额与付款额，转固金额按月汇总自基建转固明细表；验收额 → 在建工程 1604 发生额增加（工程验收确认在建工程原值），付款额 → 仅驱动 CF-14 现金流出（不构成在建工程原值），转固金额 → 1604 转出、1601 固定资产原值增加并进 BB.4.X（次月起提折旧）；期初金额构成 BO.BS 1604 在建工程年初余额。]]></summary>
+    <dataSources>
+      <source code="AA.9" name="资产类别及折旧参数" fields="资产类别"><![CDATA[基建转固明细表资产类别对齐 AA.9，转固资产按 AA.9 参数下月起提折旧进入 BB.4.X]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BB.4.X 资本性支出汇总表"><![CDATA[验收转固金额达到可使用状态后按房屋建筑物/辅助设施小类归集入 BB.4.X（次月起提折旧）]]></output>
+      <output target="BO.BS 资产负债表—在建工程(1604)/固定资产(1601)"><![CDATA[期初金额与 BB.4.1.a 期初金额共同构成 1604 年初余额；验收额按工程验收确认 1604 发生额增加（借 1604 / 贷 2202）；转固按 BB.3.2.b 转固月份使 1604 转出、1601 原值增加（两侧同额）]]></output>
+      <output target="BO.CF 现金流量表—CF-14"><![CDATA[基建付款额 → 购建固定资产支付的现金（投资活动现金流出）；付款额不构成在建工程原值]]></output>
+    </outputs>
+    <keyRules>
+
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.2'].items） -->
+  <events>
+    <event event="基建验收（在建工程按验收额确认）" field="1~12月验收额">
+      <pl><![CDATA[—（验收确认在建工程，不进损益；折旧经 BB.4.X 计提后进费用）]]></pl>
+      <bs><![CDATA[在建工程 1604 (+)（按验收额确认原值）；应付账款 2202 (+)]]></bs>
+      <cf><![CDATA[—（工程验收不直接产生现金流）]]></cf>
+      <source><![CDATA[取自本表月度验收额手工填报值；工程验收确认在建工程原值（借 1604 / 贷 2202）；按本表「法人公司」列直接归属法人，按法人公司汇总生成分录]]></source>
+      <entry><![CDATA[借：在建工程(1604)；贷：应付账款(2202)]]></entry>
+      <note><![CDATA[验收额是本表对 BO.BS 1604 在建工程原值的确认口径；付款额只驱动 CF-14（购建固定资产支付的现金），不构成在建工程原值；转固金额按 BB.3.2.b 转固明细表把 1604 转入 1601。三者不得互相引用为金额来源。期初金额 BB.3.2.openingAmount 与 BB.4.1.a.openingAmount 共同构成 BO.BS 1604 在建工程年初余额。本表不处理增值税，验收额均为不含税口径。]]></note>
+    </event>
+    <event event="基建付款" field="1~12月付款额">
+      <pl><![CDATA[—]]></pl>
+      <bs><![CDATA[货币资金(1001) (−)；应付账款 2202 (−)]]></bs>
+      <cf><![CDATA[投资活动现金流出：CF-14 (+)]]></cf>
+      <source><![CDATA[取自本表月度工程付款额手工填报值；付款额只驱动 CF-14（购建固定资产支付的现金），不构成在建工程原值（1604 增加以验收额确认）；按本表「法人公司」列直接归属法人，按法人公司汇总生成付款分录与 CF-14 现金流出]]></source>
+      <entry><![CDATA[借：应付账款(2202)；贷：货币资金(1001)]]></entry>
+      <note><![CDATA[含建筑安装工程预付款与质保金支付节点，归入 CF-14。本表不处理增值税，付款额均为不含税口径。付款分录与验收、转固分录均按本表「法人公司」列分别汇总到各法人单体报表，集团合并时各法人间不得互抵。验收额为 1604 确认口径、付款额为 CF-14 度量、转固额为 1601 来源。]]></note>
+    </event>
+    <event event="基建验收转固" field="1~12月转固金额（公式）">
+      <pl><![CDATA[—（转固不进损益；折旧经 BB.4.X 计提后进费用）]]></pl>
+      <bs><![CDATA[在建工程 (−) 1604 转固转出；固定资产 (+) 1601 原值增加]]></bs>
+      <cf><![CDATA[—（转固为非现金事件）]]></cf>
+      <source><![CDATA[转固金额为公式字段（按月汇总基建转固明细表 BB.3.2.b 同月转固原值）；转固按 BB.3.2.b 的转固月份把 1604 转入 1601，转固金额同时构成 1604 在建工程减少与 1601 固定资产增加（两侧同额）；转固后按转固月份进入 BB.4.X 在建工程来源，次月起提折旧；转固原值按本表「法人公司」列归属，按法人公司汇总生成转固分录（借固定资产贷在建工程）]]></source>
+      <entry><![CDATA[固定资产—专用设备(1601) (+)；在建工程—基建工程(160401/1604) (−)]]></entry>
+      <note><![CDATA[转固原值合计需与验收累计额勾稽一致；转固月份=资产启用月份，次月开始计提折旧影响费用。转固明细表 BB.3.2.b 亦带「法人公司」列，与主表同口径。]]></note>
+    </event>
+  </events>
+
+</form>

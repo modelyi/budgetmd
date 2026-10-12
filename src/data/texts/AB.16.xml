@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AB.16 租赁期限字典 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="AB.16" name="租赁期限字典">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['AB.16']） -->
+  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅字典参数维护：租赁期限字典，为 BB.4.2.a 外部职场租赁与 BB.4.2.b 内部职场租赁「租赁期限」列提供值域，并承载资本化判定取值——一年以上→资本化：形成使用权资产 1621 与租赁负债 2602，由 BB.4.2.b.1 / BB.4.2.a.1 按月测算利息与负债（折旧由 BB.4.5 计提）；一年以下（含 12 个月）→费用化：月租金直接进费用，不进 1621/2602；两张登记表的「租赁类型」列由本档位派生、系统带出、不可手工改），本表不生成分录）。【法人口径】④不区分法人：静态数据字典，不按法人编制。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='AB.16'） -->
+  <fields>
+    <field code="leaseTermCode" name="租赁期限编码" source="本表维护"><![CDATA[固定值域字典；供 BB.4.2.a 外部职场租赁与 BB.4.2.b 内部职场租赁「租赁期限」列共同引用，不可在编制表内新增值]]></field>
+    <field code="leaseTermName" name="租赁期限名称" source="本表维护"><![CDATA[可选值：一年以内 / 一年以上（边界＝租赁期限月数：≤12 个月→一年以内＝费用化；>12 个月→一年以上＝资本化）]]></field>
+    <field code="scope" name="适用范围与资本化判定说明" source="本表维护"><![CDATA[取值边界：租赁期限月数 ≤12 个月→一年以内（费用化）；>12 个月→一年以上（资本化）；与③资本化判据一一对应。判定结果口径：一年以上→资本化（形成使用权资产 1621 与租赁负债 2602，由 BB.4.2.b.1 / BB.4.2.a.1 按月测算折旧与利息）；一年以下（含 12 个月）→费用化（月租金直接进费用，不形成使用权资产、不确认租赁负债）]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="AB.16 租赁期限">
+      <point><![CDATA[租赁期限(AB.16)为租赁期限固定值域字典（一年以内/一年以上），供 BB.4.2.a 外部职场租赁与 BB.4.2.b 内部职场租赁「租赁期限」列共同引用（两表同名、同说明、同录入方式）——系统按「租赁期终止月 − 租赁期起始月 + 1」的月数自动落档、不可手工选，并作为资本化判定依据（≤12 个月→一年以内＝费用化、>12 个月→一年以上＝资本化，与③资本化判据一一对应；结果口径：一年以上→资本化：形成使用权资产 1621 与租赁负债 2602，由 BB.4.2.b.1 / BB.4.2.a.1 按月测算利息与负债（折旧由 BB.4.5 计提）；一年以下（含 12 个月）→费用化：月租金直接进费用，不进 1621/2602），不可在编制表内新增值。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['AB.16']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[租赁期限字典维护（一年以内/一年以上），供 BB.4.2.a 外部职场租赁与 BB.4.2.b 内部职场租赁「租赁期限」列共同引用；系统按「租赁期终止月 − 租赁期起始月 + 1」的月数自动落档、不可手工选，并作为资本化判定依据（≤12 个月→一年以内＝费用化、>12 个月→一年以上＝资本化）——结果口径：一年以上→资本化（形成使用权资产 1621 与租赁负债 2602，由 BB.4.2.b.1 / BB.4.2.a.1 按月测算利息与负债（折旧由 BB.4.5 计提））；一年以下（含 12 个月）→费用化（月租金直接进费用，不形成使用权资产、不确认租赁负债）；两张登记表的「租赁类型」列由本档位派生、系统带出、不可手工改]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[具体合同与金额填报（属 BB.4.2.a 外部职场租赁 / BB.4.2.b 内部职场租赁）]]></item>
+      <item><![CDATA[租赁类型（资本化/费用化）字段本身的取值（属两张登记表）]]></item>
+    </notApplies>
+  </scenarios>
+
+</form>

@@ -1,0 +1,43 @@
+{
+  "md": "docs/formdocs-master/AB.16.md",
+  "viewport": 1440,
+  "htmlPath": "d:\\budgetmd\\uat-out\\AB.16\\uat-rendered.html",
+  "doc": {
+    "docHeight": 1142,
+    "bodyWidth": 1392,
+    "tables": 2,
+    "styleBlockPrintedAsText": false
+  },
+  "tables": [
+    {
+      "firstHeader": "租赁期限编码",
+      "headerBg": "rgb(0, 47, 108)",
+      "headerColor": "rgb(255, 255, 255)",
+      "headerBorderTop": "1px",
+      "dataCellWrap": "nowrap",
+      "tableWidth": 1210,
+      "overflowPx": 0,
+      "clippedAtViewport": false,
+      "contentUpright": true,
+      "scrollbarBandPx": 0
+    },
+    {
+      "firstHeader": "字段",
+      "headerBg": "rgb(0, 47, 108)",
+      "headerColor": "rgb(255, 255, 255)",
+      "headerBorderTop": "1px",
+      "dataCellWrap": "normal",
+      "tableWidth": 1392,
+      "overflowPx": 0,
+      "clippedAtViewport": false,
+      "contentUpright": true,
+      "scrollbarBandPx": 451
+    }
+  ]
+}
+
+截图:
+d:\budgetmd\uat-out\AB.16\uat-01-top.png
+d:\budgetmd\uat-out\AB.16\uat-02-full.png
+d:\budgetmd\uat-out\AB.16\uat-table-0.png
+d:\budgetmd\uat-out\AB.16\uat-table-1.png

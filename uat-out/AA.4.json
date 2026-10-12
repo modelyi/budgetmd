@@ -1,0 +1,30 @@
+{
+  "md": "docs/formdocs-master/AA.4.md",
+  "viewport": 1440,
+  "htmlPath": "d:\\budgetmd\\uat-out\\AA.4\\uat-rendered.html",
+  "doc": {
+    "docHeight": 1174,
+    "bodyWidth": 1392,
+    "tables": 1,
+    "styleBlockPrintedAsText": false
+  },
+  "tables": [
+    {
+      "firstHeader": "客户",
+      "headerBg": "rgb(0, 47, 108)",
+      "headerColor": "rgb(255, 255, 255)",
+      "headerBorderTop": "1px",
+      "dataCellWrap": "nowrap",
+      "tableWidth": 187,
+      "overflowPx": 0,
+      "clippedAtViewport": false,
+      "contentUpright": true,
+      "scrollbarBandPx": 0
+    }
+  ]
+}
+
+截图:
+d:\budgetmd\uat-out\AA.4\uat-01-top.png
+d:\budgetmd\uat-out\AA.4\uat-02-full.png
+d:\budgetmd\uat-out\AA.4\uat-table-0.png

@@ -1,0 +1,30 @@
+{
+  "md": "docs/formdocs-master/AB.15.md",
+  "viewport": 1440,
+  "htmlPath": "d:\\budgetmd\\uat-out\\AB.15\\uat-rendered.html",
+  "doc": {
+    "docHeight": 1013,
+    "bodyWidth": 1392,
+    "tables": 1,
+    "styleBlockPrintedAsText": false
+  },
+  "tables": [
+    {
+      "firstHeader": "税费/参数分类",
+      "headerBg": "rgb(0, 47, 108)",
+      "headerColor": "rgb(255, 255, 255)",
+      "headerBorderTop": "1px",
+      "dataCellWrap": "nowrap",
+      "tableWidth": 2257,
+      "overflowPx": 865,
+      "clippedAtViewport": true,
+      "contentUpright": true,
+      "scrollbarBandPx": 0
+    }
+  ]
+}
+
+截图:
+d:\budgetmd\uat-out\AB.15\uat-01-top.png
+d:\budgetmd\uat-out\AB.15\uat-02-full.png
+d:\budgetmd\uat-out\AB.15\uat-table-0.png

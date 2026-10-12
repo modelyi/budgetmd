@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  A1.4.b A1.4.b · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="A1.4.b" name="A1.4.b">
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='A1.4.b'） -->
+  <fields>
+    <field code="cat" name="报表类别" source="会计规则引擎"><![CDATA[利润表/资产负债表/现金流量表]]></field>
+    <field code="code" name="报表行编码" source="会计规则引擎"><![CDATA[]]></field>
+    <field code="name" name="报表项目名称" source="会计规则引擎"><![CDATA[]]></field>
+    <field code="rule" name="取数规则与加总公式" source="会计规则引擎"><![CDATA[]]></field>
+    <field code="src" name="来源编制表与字段" source="会计规则引擎"><![CDATA[]]></field>
+    <field code="ref" name="准则依据与业务说明" source="会计准则"><![CDATA[]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="A1.4 表项与财务报表转换规则总览">
+      <point><![CDATA[基于会计规则引擎总结的权威规则库，含两个Tab：A1.4.a业务事件与财务三表转换规则库（全量21张编制表凭证与三表流向）+ A1.4.b财务三表取数与科目汇总规则库（三表行项加总公式与准则依据）。全面、精确、易读。]]></point>
+    </rule>
+  </rules>
+
+</form>

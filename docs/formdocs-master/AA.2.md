@@ -1,0 +1,212 @@
+# AA.2 法人组织架构
+
+<style>
+table{border-collapse:collapse;font-size:12px;font-family:"Microsoft YaHei",Arial,sans-serif}
+table th{background:#002f6c;color:#fff;font-weight:600;text-align:center;border:1px solid #cbd5e1;padding:6px 10px;white-space:nowrap}
+table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
+.t3a-html-sheet th,.t3a-html-sheet td{white-space:nowrap}
+.t3a-html-sheet th.t3a-th--time{background:#001e4a}
+.t3a-html-sheet td.t3a-num{text-align:right}
+.t3a-html-sheet tbody tr:nth-child(2n){background:#f8fafc}
+.t3a-sheet-scroll{max-width:100%;overflow-x:auto;transform:rotateX(180deg)}
+.t3a-sheet-scroll > table.t3a-html-sheet{transform:rotateX(180deg)}
+.t3a-html-sheet{display:block;width:max-content}
+.t3a-sheet-scroll::-webkit-scrollbar{height:10px}
+.t3a-sheet-scroll::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-sheet-scroll::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+.t3a-html-sheet::-webkit-scrollbar{height:10px}
+.t3a-html-sheet::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-html-sheet::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+</style>
+
+## ① 预算表样
+
+### AA.2 法人组织架构主数据
+
+<div class="t3a-sheet-scroll">
+<table class="t3a-html-sheet">
+  <tbody>
+    <tr>
+      <th class="t3a-th">法人编码</th>
+      <th class="t3a-th">法人名称</th>
+      <th class="t3a-th">父组织</th>
+    </tr>
+    <tr>
+      <td>JT</td>
+      <td>甜甜圈集团公司</td>
+      <td>（顶级母公司）</td>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>草莓慕斯公司</td>
+      <td>甜甜圈集团公司 (JT)</td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td>蓝莓蛋挞公司</td>
+      <td>甜甜圈集团公司 (JT)</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>芒果班戟公司</td>
+      <td>甜甜圈集团公司 (JT)</td>
+    </tr>
+    <tr>
+      <td>D</td>
+      <td>西瓜泡芙公司</td>
+      <td>甜甜圈集团公司 (JT)</td>
+    </tr>
+    <tr>
+      <td>BA</td>
+      <td>抹茶曲奇公司</td>
+      <td>蓝莓蛋挞公司 (B)</td>
+    </tr>
+    <tr>
+      <td>BB</td>
+      <td>樱桃华夫公司</td>
+      <td>蓝莓蛋挞公司 (B)</td>
+    </tr>
+    <tr>
+      <td>BC</td>
+      <td>椰香可露丽公司</td>
+      <td>蓝莓蛋挞公司 (B)</td>
+    </tr>
+    <tr>
+      <td>BD</td>
+      <td>海盐芝士公司</td>
+      <td>蓝莓蛋挞公司 (B)</td>
+    </tr>
+    <tr>
+      <td>DA</td>
+      <td>蜜桃千层公司</td>
+      <td>西瓜泡芙公司 (D)</td>
+    </tr>
+    <tr>
+      <td>DB</td>
+      <td>香橙舒芙蕾公司</td>
+      <td>西瓜泡芙公司 (D)</td>
+    </tr>
+    <tr>
+      <td>DC</td>
+      <td>青提马卡龙公司</td>
+      <td>西瓜泡芙公司 (D)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+### AA.2.b 法人组织架构图
+
+<div class="t3a-sheet-scroll">
+<table class="t3a-html-sheet">
+  <tbody>
+    <tr>
+      <th class="t3a-th">法人编码</th>
+      <th class="t3a-th">法人名称</th>
+      <th class="t3a-th">法人类别</th>
+      <th class="t3a-th">组织层级</th>
+      <th class="t3a-th">说明</th>
+    </tr>
+    <tr>
+      <td>JT</td>
+      <td>甜甜圈集团公司</td>
+      <td>综合管理</td>
+      <td>一级（母公司）</td>
+      <td>集团总部/母公司本部</td>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>　├─ 草莓慕斯公司</td>
+      <td>制造基地</td>
+      <td>二级子公司</td>
+      <td>一级全资子公司 (智能装备整机制造基地)</td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td>　├─ 蓝莓蛋挞公司</td>
+      <td>制造基地</td>
+      <td>二级子公司</td>
+      <td>一级全资子公司 (核心高精度装备制造)</td>
+    </tr>
+    <tr>
+      <td>BA</td>
+      <td>　　├─ 抹茶曲奇公司</td>
+      <td>制造基地</td>
+      <td>三级子公司</td>
+      <td>蓝莓蛋挞公司旗下二级子公司 (精致糖艺零部件)</td>
+    </tr>
+    <tr>
+      <td>BB</td>
+      <td>　　├─ 樱桃华夫公司</td>
+      <td>制造基地</td>
+      <td>三级子公司</td>
+      <td>蓝莓蛋挞公司旗下二级子公司 (高精度结构组件加工)</td>
+    </tr>
+    <tr>
+      <td>BC</td>
+      <td>　　├─ 椰香可露丽公司</td>
+      <td>销售主体</td>
+      <td>三级子公司</td>
+      <td>蓝莓蛋挞公司旗下二级子公司 (华南区域交付中心)</td>
+    </tr>
+    <tr>
+      <td>BD</td>
+      <td>　　└─ 海盐芝士公司</td>
+      <td>海外中心</td>
+      <td>三级子公司</td>
+      <td>蓝莓蛋挞公司旗下二级子公司 (海外及进出口业务)</td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>　├─ 芒果班戟公司</td>
+      <td>研发中心</td>
+      <td>二级子公司</td>
+      <td>一级全资子公司 (前沿软件与算法研发中心)</td>
+    </tr>
+    <tr>
+      <td>D</td>
+      <td>　└─ 西瓜泡芙公司</td>
+      <td>销售主体</td>
+      <td>二级子公司</td>
+      <td>一级全资子公司 (国内综合销售与客户服务)</td>
+    </tr>
+    <tr>
+      <td>DA</td>
+      <td>　　├─ 蜜桃千层公司</td>
+      <td>销售主体</td>
+      <td>三级子公司</td>
+      <td>西瓜泡芙公司旗下二级子公司 (华北及华东工程服务)</td>
+    </tr>
+    <tr>
+      <td>DB</td>
+      <td>　　├─ 香橙舒芙蕾公司</td>
+      <td>销售主体</td>
+      <td>三级子公司</td>
+      <td>西瓜泡芙公司旗下二级子公司 (中西部客户服务)</td>
+    </tr>
+    <tr>
+      <td>DC</td>
+      <td>　　└─ 青提马卡龙公司</td>
+      <td>研发中心</td>
+      <td>三级子公司</td>
+      <td>西瓜泡芙公司旗下二级子公司 (现场应用工程AE定制)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+## ③ 关键规则要点
+
+**AA.2 法人组织架构**
+
+- 法人编码全局唯一，是各编制表"归属法人/主体"下拉的唯一取值来源。
+
+## ④ 适用业务情形
+
+**适用于**
+
+- 法人公司主数据维护，供各编制表「法人公司」下拉引用
+
+**不适用于**
+
+- 具体业务金额填报

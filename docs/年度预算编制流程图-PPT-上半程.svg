@@ -1,0 +1,113 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/></marker>
+    <marker id="arwBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/></marker>
+    <filter id="sh" x="-3%" y="-3%" width="106%" height="110%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/></filter>
+  </defs>
+
+  <text x="800" y="65" text-anchor="middle" font-size="28" font-weight="700" fill="#0f172a">年度预算编制流程 · 上半程</text>
+  <text x="800" y="98" text-anchor="middle" font-size="15" fill="#64748b">编制启动 → 假设与准备 → 业务编制</text>
+
+  <!-- 阶段列标题 -->
+  <rect x="100" y="140" width="360" height="36" rx="8" fill="#dbeafe" stroke="#60a5fa"/>
+  <text x="280" y="164" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">① 编制启动</text>
+  <rect x="560" y="140" width="360" height="36" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="740" y="164" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">② 假设与准备</text>
+  <rect x="1020" y="140" width="380" height="36" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="1210" y="164" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">③ 业务编制</text>
+
+  <!-- P1: 年度预算启动 -->
+  <g filter="url(#sh)">
+    <rect x="130" y="290" width="300" height="80" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="280" y="322" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">年度预算启动</text>
+    <text x="280" y="346" text-anchor="middle" font-size="12.5" fill="#475569">下达编制指引与时间表</text>
+  </g>
+
+  <!-- P2: 经营假设确认 -->
+  <g filter="url(#sh)">
+    <rect x="590" y="220" width="300" height="70" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="740" y="250" text-anchor="middle" font-size="14.5" font-weight="700" fill="#0f172a">经营假设确认</text>
+    <text x="740" y="272" text-anchor="middle" font-size="12" fill="#475569">客户 / 项目 / 产能 / 目标</text>
+  </g>
+
+  <!-- P2: 模板·主数据·假设 -->
+  <g filter="url(#sh)">
+    <rect x="590" y="330" width="300" height="100" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+    <text x="740" y="358" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">模板·主数据·假设（手工）</text>
+    <text x="740" y="380" text-anchor="middle" font-size="12" fill="#475569">主数据 AA / AB / AM</text>
+    <text x="740" y="400" text-anchor="middle" font-size="12" fill="#475569">假设 BA：标准成本 / 费率 / 税率</text>
+  </g>
+
+  <!-- P2: 主数据维护 -->
+  <g filter="url(#sh)">
+    <rect x="590" y="470" width="300" height="70" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="740" y="500" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">主数据维护（手工）</text>
+    <text x="740" y="522" text-anchor="middle" font-size="12" fill="#475569">组织 / 法人 / 人员 / 资产卡片</text>
+  </g>
+
+  <!-- P3: 业务预算填报 -->
+  <g filter="url(#sh)">
+    <rect x="1050" y="230" width="320" height="160" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="1210" y="260" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">业务预算填报（手工）</text>
+    <text x="1210" y="286" text-anchor="middle" font-size="12" fill="#1f2937">销售 BB.1 · 生产 BB.2</text>
+    <text x="1210" y="306" text-anchor="middle" font-size="12" fill="#1f2937">采购 BB.3 · 资产 BB.4 CAPEX</text>
+    <text x="1210" y="326" text-anchor="middle" font-size="12" fill="#1f2937">人工费用 BB.5.1 · 费用 BB.5.2</text>
+    <text x="1210" y="356" text-anchor="middle" font-size="11" fill="#16a34a">一上填报：数量 × 单价 · 金额不含税</text>
+    <text x="1210" y="374" text-anchor="middle" font-size="11" fill="#16a34a">主数据 / 假设参数下拉带出，允许覆盖固化</text>
+  </g>
+
+  <!-- P3: 职能预算 -->
+  <g filter="url(#sh)">
+    <rect x="1050" y="430" width="320" height="90" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="1210" y="460" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">职能预算（手工）</text>
+    <text x="1210" y="482" text-anchor="middle" font-size="12" fill="#475569">人工 BB.5.1 / 折旧 / 一般费用</text>
+    <text x="1210" y="502" text-anchor="middle" font-size="12" fill="#475569">按费用属性归集进 PL / 存货</text>
+  </g>
+
+  <!-- 出口节点 -->
+  <g filter="url(#sh)">
+    <rect x="1430" y="340" width="130" height="70" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="1495" y="368" text-anchor="middle" font-size="13" font-weight="600" fill="#475569">业务数齐套</text>
+    <text x="1495" y="388" text-anchor="middle" font-size="11.5" fill="#64748b">（→ 进入财务汇总）</text>
+  </g>
+
+  <!-- 主线箭头 -->
+  <path d="M 430 330 L 590 255" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <path d="M 890 255 L 1050 290" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <path d="M 1370 310 L 1430 365" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+
+  <!-- 蓝虚线：主数据供给 -->
+  <path d="M 740 470 L 740 430" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)"/>
+  <text x="755" y="455" font-size="11" fill="#2563eb">主数据供给</text>
+
+  <!-- 蓝虚线：模板假设 → 业务填报 -->
+  <path d="M 890 380 C 960 380 980 310 1050 310" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)"/>
+  <text x="950" y="365" font-size="11" fill="#2563eb">模板·假设</text>
+
+  <!-- 蓝虚线：职能预算 → 出口 -->
+  <path d="M 1370 475 C 1410 475 1410 410 1430 410" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)"/>
+  <text x="1375" y="455" font-size="11" fill="#2563eb">人工/资产数据</text>
+
+  <!-- 底部图例 -->
+  <rect x="100" y="680" width="1400" height="160" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="125" y="715" font-size="15" font-weight="700" fill="#0f172a">图例与说明</text>
+  <line x1="125" y1="745" x2="175" y2="745" stroke="#475569" stroke-width="2.2" marker-end="url(#arw)"/>
+  <text x="190" y="750" font-size="12.5" fill="#334155">业务主线</text>
+  <line x1="290" y1="745" x2="340" y2="745" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#arwBlue)"/>
+  <text x="355" y="750" font-size="12.5" fill="#334155">主数据 / 假设供给</text>
+  <rect x="480" y="733" width="22" height="22" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="512" y="750" font-size="12.5" fill="#334155">决策层</text>
+  <rect x="590" y="733" width="22" height="22" rx="4" fill="#fef3c7" stroke="#d97706"/>
+  <text x="622" y="750" font-size="12.5" fill="#334155">业务中心</text>
+  <rect x="710" y="733" width="22" height="22" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="742" y="750" font-size="12.5" fill="#334155">业务编制</text>
+  <rect x="830" y="733" width="22" height="22" rx="4" fill="#ffffff" stroke="#d97706"/>
+  <text x="862" y="750" font-size="12.5" fill="#334155">财经经营组·预算办公室（手工）</text>
+  <rect x="1070" y="733" width="22" height="22" rx="4" fill="#ffffff" stroke="#16a34a"/>
+  <text x="1102" y="750" font-size="12.5" fill="#334155">职能支持</text>
+  <rect x="1200" y="733" width="22" height="22" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="4 3"/>
+  <text x="1232" y="750" font-size="12.5" fill="#334155">跨页出口</text>
+
+  <text x="125" y="790" font-size="12.5" fill="#475569">编制节奏：一上（10月）下达编制指引 → 业务报业务数（销量/产量/采购/人头），财务只定假设参数；一下（11月中）财务反馈初步测算，业务按反馈调整。</text>
+  <text x="125" y="812" font-size="12.5" fill="#475569">口径：金额不含税 · 单位万元 · 精度 0.1；代采购按净额法（CAS 14）。</text>
+</svg>

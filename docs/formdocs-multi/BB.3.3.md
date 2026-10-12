@@ -1,0 +1,1322 @@
+# BB.3.3 物料类采购预算
+
+<style>
+table{border-collapse:collapse;font-size:12px;font-family:"Microsoft YaHei",Arial,sans-serif}
+table th{background:#002f6c;color:#fff;font-weight:600;text-align:center;border:1px solid #cbd5e1;padding:6px 10px;white-space:nowrap}
+table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
+.t3a-html-sheet th,.t3a-html-sheet td{white-space:nowrap}
+.t3a-html-sheet th.t3a-th--time{background:#001e4a}
+.t3a-html-sheet td.t3a-num{text-align:right}
+.t3a-html-sheet tbody tr:nth-child(2n){background:#f8fafc}
+.t3a-sheet-scroll{max-width:100%;overflow-x:auto;transform:rotateX(180deg)}
+.t3a-sheet-scroll > table.t3a-html-sheet{transform:rotateX(180deg)}
+.t3a-html-sheet{display:block;width:max-content}
+.t3a-sheet-scroll::-webkit-scrollbar{height:10px}
+.t3a-sheet-scroll::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-sheet-scroll::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+.t3a-html-sheet::-webkit-scrollbar{height:10px}
+.t3a-html-sheet::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-html-sheet::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+</style>
+
+## ① 预算表样
+
+### BB.3.3.A 有PO-物料类采购预算
+
+<div class="t3a-sheet-scroll">
+<table class="t3a-html-sheet">
+  <tbody>
+    <tr>
+      <th class="t3a-th" rowspan="2">预算项目</th>
+      <th class="t3a-th" rowspan="2">预算部门</th>
+      <th class="t3a-th" rowspan="2">下单主体</th>
+      <th class="t3a-th" rowspan="2">PO标记</th>
+      <th class="t3a-th" rowspan="2">物料类别</th>
+      <th class="t3a-th" rowspan="2">供应商</th>
+      <th class="t3a-th t3a-th--time" colspan="5">【全年合计】</th>
+      <th class="t3a-th" colspan="5">1月</th>
+      <th class="t3a-th" colspan="5">2月</th>
+      <th class="t3a-th" colspan="5">3月</th>
+      <th class="t3a-th" colspan="5">4月</th>
+      <th class="t3a-th" colspan="5">5月</th>
+      <th class="t3a-th" colspan="5">6月</th>
+      <th class="t3a-th" colspan="5">7月</th>
+      <th class="t3a-th" colspan="5">8月</th>
+      <th class="t3a-th" colspan="5">9月</th>
+      <th class="t3a-th" colspan="5">10月</th>
+      <th class="t3a-th" colspan="5">11月</th>
+      <th class="t3a-th" colspan="5">12月</th>
+      <th class="t3a-th" rowspan="2">备注说明</th>
+    </tr>
+    <tr>
+      <th class="t3a-th t3a-th--time">到货额</th>
+      <th class="t3a-th t3a-th--time">下单额</th>
+      <th class="t3a-th t3a-th--time">预付款比例</th>
+      <th class="t3a-th t3a-th--time">预付款</th>
+      <th class="t3a-th t3a-th--time">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+    </tr>
+    <tr>
+      <td>P1 高功率平板光纤激光切割机</td>
+      <td>采购与供应链管理部</td>
+      <td>草莓慕斯-泛烘焙装备制造单元</td>
+      <td>有PO</td>
+      <td>生产物料</td>
+      <td>普雷茨特光学核心件供应商</td>
+      <td class="t3a-num">484.0</td>
+      <td class="t3a-num">514.0</td>
+      <td></td>
+      <td class="t3a-num">154.2</td>
+      <td class="t3a-num">484.0</td>
+      <td class="t3a-num">36.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">12.0</td>
+      <td class="t3a-num">36.0</td>
+      <td class="t3a-num">38.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">12.6</td>
+      <td class="t3a-num">38.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">44.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">13.2</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">12.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">38.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">12.6</td>
+      <td class="t3a-num">38.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">44.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">13.2</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">12.6</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">44.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">13.2</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">44.0</td>
+      <td class="t3a-num">46.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">13.8</td>
+      <td class="t3a-num">44.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">44.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">13.2</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">12.6</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">44.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">13.2</td>
+      <td class="t3a-num">42.0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>整机总装与联调产线扩建（一期）</td>
+      <td>采购与供应链管理部</td>
+      <td>草莓慕斯-泛烘焙装备制造单元</td>
+      <td>有PO</td>
+      <td>生产物料</td>
+      <td>柏楚数控核心部件供应商</td>
+      <td class="t3a-num">309.0</td>
+      <td class="t3a-num">325.0</td>
+      <td></td>
+      <td class="t3a-num">97.5</td>
+      <td class="t3a-num">309.0</td>
+      <td class="t3a-num">22.0</td>
+      <td class="t3a-num">24.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">7.2</td>
+      <td class="t3a-num">22.0</td>
+      <td class="t3a-num">25.0</td>
+      <td class="t3a-num">26.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">7.8</td>
+      <td class="t3a-num">25.0</td>
+      <td class="t3a-num">26.0</td>
+      <td class="t3a-num">28.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">8.4</td>
+      <td class="t3a-num">26.0</td>
+      <td class="t3a-num">24.0</td>
+      <td class="t3a-num">25.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">7.5</td>
+      <td class="t3a-num">24.0</td>
+      <td class="t3a-num">26.0</td>
+      <td class="t3a-num">27.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">8.1</td>
+      <td class="t3a-num">26.0</td>
+      <td class="t3a-num">28.0</td>
+      <td class="t3a-num">30.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">9.0</td>
+      <td class="t3a-num">28.0</td>
+      <td class="t3a-num">25.0</td>
+      <td class="t3a-num">26.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">7.8</td>
+      <td class="t3a-num">25.0</td>
+      <td class="t3a-num">27.0</td>
+      <td class="t3a-num">28.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">8.4</td>
+      <td class="t3a-num">27.0</td>
+      <td class="t3a-num">28.0</td>
+      <td class="t3a-num">30.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">9.0</td>
+      <td class="t3a-num">28.0</td>
+      <td class="t3a-num">26.0</td>
+      <td class="t3a-num">27.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">8.1</td>
+      <td class="t3a-num">26.0</td>
+      <td class="t3a-num">25.0</td>
+      <td class="t3a-num">26.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">7.8</td>
+      <td class="t3a-num">25.0</td>
+      <td class="t3a-num">27.0</td>
+      <td class="t3a-num">28.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">8.4</td>
+      <td class="t3a-num">27.0</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+### BB.3.3.B 无PO-物料类采购预算
+
+<div class="t3a-sheet-scroll">
+<table class="t3a-html-sheet">
+  <tbody>
+    <tr>
+      <th class="t3a-th" rowspan="2">预算项目</th>
+      <th class="t3a-th" rowspan="2">预算部门</th>
+      <th class="t3a-th" rowspan="2">下单主体</th>
+      <th class="t3a-th" rowspan="2">PO标记</th>
+      <th class="t3a-th" rowspan="2">物料类别</th>
+      <th class="t3a-th" rowspan="2">供应商</th>
+      <th class="t3a-th t3a-th--time" colspan="5">【全年合计】</th>
+      <th class="t3a-th" colspan="5">1月</th>
+      <th class="t3a-th" colspan="5">2月</th>
+      <th class="t3a-th" colspan="5">3月</th>
+      <th class="t3a-th" colspan="5">4月</th>
+      <th class="t3a-th" colspan="5">5月</th>
+      <th class="t3a-th" colspan="5">6月</th>
+      <th class="t3a-th" colspan="5">7月</th>
+      <th class="t3a-th" colspan="5">8月</th>
+      <th class="t3a-th" colspan="5">9月</th>
+      <th class="t3a-th" colspan="5">10月</th>
+      <th class="t3a-th" colspan="5">11月</th>
+      <th class="t3a-th" colspan="5">12月</th>
+      <th class="t3a-th" rowspan="2">备注说明</th>
+    </tr>
+    <tr>
+      <th class="t3a-th t3a-th--time">到货额</th>
+      <th class="t3a-th t3a-th--time">下单额</th>
+      <th class="t3a-th t3a-th--time">预付款比例</th>
+      <th class="t3a-th t3a-th--time">预付款</th>
+      <th class="t3a-th t3a-th--time">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+      <th class="t3a-th">到货额</th>
+      <th class="t3a-th">下单额</th>
+      <th class="t3a-th">预付款比例</th>
+      <th class="t3a-th">预付款</th>
+      <th class="t3a-th">验收付款</th>
+    </tr>
+    <tr>
+      <td>集团统筹</td>
+      <td>制造工程部</td>
+      <td></td>
+      <td>无PO</td>
+      <td>其他物料</td>
+      <td></td>
+      <td class="t3a-num">95.0</td>
+      <td class="t3a-num">0.0</td>
+      <td></td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">95.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">9.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">9.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">9.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">9.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>产品化项目</td>
+      <td>研发中心</td>
+      <td></td>
+      <td>无PO</td>
+      <td>研发物料</td>
+      <td>新代伺服驱动系统供应商</td>
+      <td class="t3a-num">180.0</td>
+      <td class="t3a-num">198.0</td>
+      <td></td>
+      <td class="t3a-num">59.4</td>
+      <td class="t3a-num">180.0</td>
+      <td class="t3a-num">12.0</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">4.5</td>
+      <td class="t3a-num">12.0</td>
+      <td class="t3a-num">13.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">4.8</td>
+      <td class="t3a-num">13.0</td>
+      <td class="t3a-num">14.0</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">4.5</td>
+      <td class="t3a-num">14.0</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">17.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">5.1</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">4.8</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">18.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">5.4</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">4.8</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">17.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">5.1</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">17.0</td>
+      <td class="t3a-num">18.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">5.4</td>
+      <td class="t3a-num">17.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">17.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">5.1</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">4.8</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">17.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">5.1</td>
+      <td class="t3a-num">16.0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>集团统筹</td>
+      <td>智能制造与交付中心</td>
+      <td></td>
+      <td>无PO</td>
+      <td>服务物料</td>
+      <td>柏楚数控核心部件供应商</td>
+      <td class="t3a-num">62.0</td>
+      <td class="t3a-num">68.0</td>
+      <td></td>
+      <td class="t3a-num">20.4</td>
+      <td class="t3a-num">62.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.5</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.5</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.5</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.5</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>集团统筹</td>
+      <td>采购与供应链管理部</td>
+      <td></td>
+      <td>无PO</td>
+      <td>专项储备</td>
+      <td>战略备件合作厂商</td>
+      <td class="t3a-num">20.0</td>
+      <td class="t3a-num">20.0</td>
+      <td></td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">20.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">3.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">30.00%</td>
+      <td class="t3a-num">3.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.00%</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+### BB.3.3.D 关联交易视角（物料类采购）
+
+<div class="t3a-sheet-scroll">
+<table class="t3a-html-sheet">
+  <tbody>
+    <tr>
+      <th class="t3a-th" rowspan="2">下单主体</th>
+      <th class="t3a-th" rowspan="2">受益主体</th>
+      <th class="t3a-th" rowspan="2">预算项目</th>
+      <th class="t3a-th" rowspan="2">预算部门</th>
+      <th class="t3a-th" rowspan="2">物料类别</th>
+      <th class="t3a-th" rowspan="2">代采购对象</th>
+      <th class="t3a-th" rowspan="2">加成比例%(BAA.11带出)</th>
+      <th class="t3a-th t3a-th--time" colspan="2">【全年合计】</th>
+      <th class="t3a-th t3a-th--time" colspan="2">1月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">2月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">3月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">4月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">5月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">6月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">7月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">8月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">9月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">10月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">11月</th>
+      <th class="t3a-th t3a-th--time" colspan="2">12月</th>
+    </tr>
+    <tr>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">加成款(万元)</th>
+    </tr>
+    <tr>
+      <td>草莓慕斯-泛烘焙装备制造单元</td>
+      <td>蓝莓蛋挞-核心制造单元</td>
+      <td>P1 高功率平板光纤激光切割机</td>
+      <td>机械与电气采购部</td>
+      <td>生产物料</td>
+      <td>高功率光纤激光切割头组件</td>
+      <td class="t3a-num">10.0%</td>
+      <td class="t3a-num">1,000.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">100.0</td>
+      <td class="t3a-num">10.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+    </tr>
+    <tr>
+      <td>甜甜圈集团公司</td>
+      <td>草莓慕斯-泛烘焙装备制造单元</td>
+      <td>P2 三维五轴激光切管机</td>
+      <td>研发中心本部</td>
+      <td>研发物料</td>
+      <td>三维五轴激光切管机功能部件样件（研发试制）</td>
+      <td class="t3a-num">8.0%</td>
+      <td class="t3a-num">500.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">50.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">50.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">50.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">50.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">50.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">50.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">50.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">50.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">50.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">50.0</td>
+      <td class="t3a-num">4.0</td>
+    </tr>
+    <tr>
+      <td>甜甜圈集团公司</td>
+      <td>甜甜圈集团公司</td>
+      <td>集团统筹</td>
+      <td>信息技术部</td>
+      <td>服务物料</td>
+      <td>机房耗材与备品备件（自购自用，不触发代采购）</td>
+      <td>—</td>
+      <td class="t3a-num">60.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">20.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">20.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">20.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+### BB.3.3.C 财务视角
+
+<div class="t3a-sheet-scroll">
+<table class="t3a-html-sheet">
+  <tbody>
+    <tr>
+      <th class="t3a-th" rowspan="2">法人公司</th>
+      <th class="t3a-th" rowspan="2">预算项目</th>
+      <th class="t3a-th" rowspan="2">预算部门</th>
+      <th class="t3a-th" rowspan="2">PO标记</th>
+      <th class="t3a-th" rowspan="2">物料类别</th>
+      <th class="t3a-th t3a-th--time" colspan="3">【全年合计】</th>
+      <th class="t3a-th" colspan="3">1月</th>
+      <th class="t3a-th" colspan="3">2月</th>
+      <th class="t3a-th" colspan="3">3月</th>
+      <th class="t3a-th" colspan="3">4月</th>
+      <th class="t3a-th" colspan="3">5月</th>
+      <th class="t3a-th" colspan="3">6月</th>
+      <th class="t3a-th" colspan="3">7月</th>
+      <th class="t3a-th" colspan="3">8月</th>
+      <th class="t3a-th" colspan="3">9月</th>
+      <th class="t3a-th" colspan="3">10月</th>
+      <th class="t3a-th" colspan="3">11月</th>
+      <th class="t3a-th" colspan="3">12月</th>
+    </tr>
+    <tr>
+      <th class="t3a-th t3a-th--time">到货额(万元)</th>
+      <th class="t3a-th t3a-th--time">预付款(万元)</th>
+      <th class="t3a-th t3a-th--time">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+      <th class="t3a-th">到货额(万元)</th>
+      <th class="t3a-th">预付款(万元)</th>
+      <th class="t3a-th">验收付款(万元)</th>
+    </tr>
+    <tr>
+      <td>草莓慕斯公司</td>
+      <td>P1 高功率平板光纤激光切割机</td>
+      <td>采购与供应链管理部</td>
+      <td>有PO</td>
+      <td>生产物料</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">36.0</td>
+      <td class="t3a-num">12.0</td>
+      <td class="t3a-num">36.0</td>
+      <td class="t3a-num">38.0</td>
+      <td class="t3a-num">12.6</td>
+      <td class="t3a-num">38.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">13.2</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">12.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">38.0</td>
+      <td class="t3a-num">12.6</td>
+      <td class="t3a-num">38.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">13.2</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">12.6</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">13.2</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">44.0</td>
+      <td class="t3a-num">13.8</td>
+      <td class="t3a-num">44.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">13.2</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">12.6</td>
+      <td class="t3a-num">40.0</td>
+      <td class="t3a-num">42.0</td>
+      <td class="t3a-num">13.2</td>
+      <td class="t3a-num">42.0</td>
+    </tr>
+    <tr>
+      <td>芒果班戟公司</td>
+      <td>产品化项目</td>
+      <td>研发中心</td>
+      <td>无PO</td>
+      <td>研发物料</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">12.0</td>
+      <td class="t3a-num">4.5</td>
+      <td class="t3a-num">12.0</td>
+      <td class="t3a-num">13.0</td>
+      <td class="t3a-num">4.8</td>
+      <td class="t3a-num">13.0</td>
+      <td class="t3a-num">14.0</td>
+      <td class="t3a-num">4.5</td>
+      <td class="t3a-num">14.0</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">5.1</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">4.8</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">5.4</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">4.8</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">5.1</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">17.0</td>
+      <td class="t3a-num">5.4</td>
+      <td class="t3a-num">17.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">5.1</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">4.8</td>
+      <td class="t3a-num">15.0</td>
+      <td class="t3a-num">16.0</td>
+      <td class="t3a-num">5.1</td>
+      <td class="t3a-num">16.0</td>
+    </tr>
+    <tr>
+      <td>甜甜圈集团公司</td>
+      <td>集团统筹</td>
+      <td>制造工程部</td>
+      <td>无PO</td>
+      <td>其他物料</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">9.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">9.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">9.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">9.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">7.0</td>
+      <td class="t3a-num">8.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">8.0</td>
+    </tr>
+    <tr>
+      <td>蓝莓蛋挞公司</td>
+      <td>集团统筹</td>
+      <td>智能制造与交付中心</td>
+      <td>无PO</td>
+      <td>服务物料</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">1.5</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">1.5</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">1.5</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">6.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">1.5</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">1.8</td>
+      <td class="t3a-num">5.0</td>
+    </tr>
+    <tr>
+      <td>草莓慕斯公司</td>
+      <td>P3 超快激光与复合加工预研</td>
+      <td>研发工程部</td>
+      <td>无PO</td>
+      <td>研发物料</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">5.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+    </tr>
+    <tr>
+      <td>芒果班戟公司</td>
+      <td>P3 超快激光与复合加工预研</td>
+      <td>研发工程部</td>
+      <td>无PO</td>
+      <td>研发物料</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">4.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+      <td class="t3a-num">0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+## 表概述
+
+物料类采购预算，四个 Tab：BB.3.3.A 有PO + BB.3.3.B 无PO（采购视角，维度含下单主体/PO标记（A 恒为有PO、B 恒为无PO），不设受益主体列；该列已按两岗接力代采购模型移除、改在 .D 关联交易视角补填）+ BB.3.3.D 关联交易视角（物料类采购，关联交易预算员在本视角补填受益主体，系统比对下单主体/受益主体法人判定跨法人代采购即带出 BAA.11 加成比例与加成款；本视角是代采购填报源（两岗接力第二岗），据此生成资产/存货/三表后续处理与会计分录）+ BB.3.3.C 财务视角（按法人汇总，共44列）。有PO按下单主体（AA.8）与法人一一对应；无PO无法指认的按 BAA.10 进销存按法人兜底拆分比例拆分到法人（BAA.10 本年度不启用、为后续年度预留），拆分唯一入口在 BB.3.3.C。付款口径同 BB.3.1（到货额按100%确认为验收付款；BAA.7 不启用）。数据来源：采购订单导入（有PO）与 BAP.2、BAP.3 及其他手工增加（无PO）。分录仅 .C：物料到货入库 1405 对 2202（按到货额确认、增加 BB.3.X 采购入库），预付款 1123 对 1001，验收付款 2202 对 1001，合计驱动经营活动现金流出 CF-05；.A/.B 不涉及会计处理。
+
+## ② 字段与值说明
+
+**BB.3.3.A 有PO-物料类采购预算**
+
+| 字段 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| 预算项目 | AA.6 预算项目主数据 |  |
+| 预算部门 | AA.5 行政部门主数据字典（一级部门-二级部门） | 预算部门原则上明细到二级部门 |
+| 下单主体 | AA.8 管理单元主数据 | 选择管理单元；后续根据管理单元与法人的对应关系，得到所属法人公司的订单 |
+| PO标记 | 本表录入 | 固定值列：本表恒为「有PO」，不可修改（原 PO标记 枚举「有PO/无PO」已按 PO 拆为 BB.3.3.A 有PO / BB.3.3.B 无PO 两张采购视角表样，本表为有PO表样） |
+| 物料类别 | ERP 物料类别字典 | 来自 ERP 字典；结构与BB.3.1资产类别一致，仅字典来源不同 |
+| 供应商 | AA.10 供应商主数据 |  |
+| 月度到货额 | 本表录入 |  |
+| 月度下单额 | 本表录入 |  |
+| 预付款 | 本表录入 | 付款节奏以本表各月填报的预付款与验收付款为准（BAA.7 比例表本年度不启用，不参与测算），按月手工填报 |
+| 预付款比例 | 本表录入 | 按月填报（每月子列，位于下单额之后、预付款之前）；各月预付款=当月下单额×当月预付款比例 |
+| 验收付款 | 本表录入 | 付款节奏以本表各月填报的预付款与验收付款为准（BAA.7 比例表本年度不启用，不参与测算），按月手工填报 |
+| 全年到货额合计 | 本表公式 | =SUM(12个月到货额) |
+| 全年下单额合计 | 本表公式 | =SUM(12个月下单额) |
+| 备注说明 | 本表录入 |  |
+
+**BB.3.3.B 无PO-物料类采购预算**
+
+| 字段 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| 预算项目 | AA.6 预算项目主数据 |  |
+| 预算部门 | AA.5 行政部门主数据字典（一级部门-二级部门） | 预算部门原则上明细到二级部门 |
+| 下单主体 | AA.8 管理单元主数据 | 选择管理单元；无PO行无法从下单主体指认法人的，按 BAA.10 进销存按法人兜底拆分比例拆分到法人（物料类采购法人拆分的唯一入口在 BB.3.3.C 财务视角；BAA.10 本年度不启用，兜底口径为后续年度预留） |
+| PO标记 | 本表录入 | 固定值列：本表恒为「无PO」，不可修改（原 PO标记 枚举「有PO/无PO」已按 PO 拆为 BB.3.3.A 有PO / BB.3.3.B 无PO 两张采购视角表样，本表为无PO表样） |
+| 物料类别 | ERP 物料类别字典 | 来自 ERP 字典；结构与BB.3.1资产类别一致，仅字典来源不同 |
+| 供应商 | AA.10 供应商主数据 |  |
+| 月度到货额 | 本表录入 |  |
+| 月度下单额 | 本表录入 |  |
+| 预付款 | 本表录入 | 付款节奏以本表各月填报的预付款与验收付款为准（BAA.7 比例表本年度不启用，不参与测算），按月手工填报 |
+| 预付款比例 | 本表录入 | 按月填报（每月子列，位于下单额之后、预付款之前）；各月预付款=当月下单额×当月预付款比例 |
+| 验收付款 | 本表录入 | 付款节奏以本表各月填报的预付款与验收付款为准（BAA.7 比例表本年度不启用，不参与测算），按月手工填报 |
+| 全年到货额合计 | 本表公式 | =SUM(12个月到货额) |
+| 全年下单额合计 | 本表公式 | =SUM(12个月下单额) |
+| 备注说明 | 本表录入 |  |
+
+**BB.3.3.D 关联交易视角（物料类采购）**
+
+| 字段 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| 下单主体 | AA.8 管理单元主数据 | 下单主体（对外下单签约付款方）；系统带出自 BB.3.3.A/.B 采购视角，本视角只读 |
+| 受益主体 | AA.8 管理单元主数据 | 受益主体（实际使用方）；由关联交易预算员补填；系统比对下单主体与本列的法人公司，同法人=自购自用不触发代采购，不同法人=跨法人代采购（带出 BAA.11 加成比例、测算加成款） |
+| 预算项目 | AA.6 预算项目主数据 | 系统带出自 BB.3.3.A/.B 采购视角同一明细行 |
+| 预算部门 | AA.5 行政部门主数据字典（一级部门-二级部门） | 系统带出自采购视角同一明细行；预算部门原则上明细到二级部门 |
+| 物料类别 | AB.9 存货物料类别字典 | 系统带出自采购视角同一明细行；决定内部转移在 BB.3.X 进销存的存货类别归属（下单方法人该类别转出 − / 受益方法人同类别转入 +）；取值：生产物料/研发物料/服务物料/专项储备/其他物料/自制设备用料 |
+| 代采购对象 | AA.11 物料主数据（采购视角 BB.3.3.A/.B 无物料名称列，本列在本视角选取） | 物料名称/备注；仅人眼识别内部转移标的（标的的存货类别由「物料类别」列决定，据以对应到 BB.3.X 同类别行的转出/转入），不参与金额测算 |
+| 加成比例%(BAA.11带出) | BAA.11 关联交易加成比例（内部交易类型=代采购物料 × 预算项目） | 仅判定为跨法人代采购（下单主体法人 ≠ 受益主体法人）时带出；同法人=自购自用不触发代采购，本列留「—」 |
+| 到货额(万元) | 本表录入（对外采购到货额（平价）） | 到货额=对外采购到货额（平价），与采购视角 BB.3.3.A/.B 同月、同物料类别到货额勾稽一致；受益方法人该物料类别存货入账成本=内部结算=到货额+加成款；1~12月逐月填报，全年合计=SUM(1~12月)；加成部分随存货滚动（见 BB.3.X internal* 列），对外销售/领用时实现；本列为跨法人代采购行专用（同法人自购自用行留 0） |
+| 到货额(万元)全年合计 | 本表公式 | =SUM(1~12月到货额) |
+| 加成款(万元) | 本表公式 | =当月到货额×加成比例（同法人不触发代采购时为 0）；单体口径：下单方到货额（平价）平移转出、仅按加成款确认其他业务收入—内部往来（6001.2，净额法，不买断虚增购销）；受益方加成部分计入存货成本（内部结算=到货额+加成款），随后续生产领用或销售结转成本；集团合并层由 BO.ELIM 抵销 |
+| 加成款(万元)全年合计 | 本表公式 | =SUM(1~12月加成款)=全年到货额×加成比例 |
+
+**BB.3.3.C 财务视角**
+
+| 字段 | 来源 | 说明 |
+| :--- | :--- | :--- |
+| 法人公司 | 法人指认规则 | 有PO（BB.3.3.A 有PO表样）按下单主体（AA.8 管理单元）对应法人直接带出；无PO（BB.3.3.B 无PO表样）按 BAA.10 进销存按法人兜底拆分比例拆分到法人；物料类采购法人拆分的唯一入口在本表（BAA.10 本年度不启用，兜底口径为后续年度预留） |
+| 预算项目 | AA.6 预算项目主数据 | 从两张采购视角表样（BB.3.3.A 有PO / BB.3.3.B 无PO）按法人×项目×部门×物料类别汇总 |
+| 预算部门 | AA.5 行政部门主数据字典（一级部门-二级部门） | 从两张采购视角表样（BB.3.3.A 有PO / BB.3.3.B 无PO）按法人×项目×部门×物料类别汇总；默认明细到二级部门 |
+| PO标记 | BB.3.3.A/BB.3.3.B 采购视角 PO标记 | 维度列（位于法人公司/预算项目/预算部门之后、物料类别之前）；下拉枚举：有PO/无PO，本列为非固定值列（与采购视角两张表样的固定值列不同）——区分本行金额是按下单主体（AA.8 管理单元）直接指认法人（有PO，同一法人行），还是按 BAA.10 进销存按法人兜底拆分比例拆分到法人（无PO，同一预算项目/预算部门可能落到多个法人行；BAA.10 本年度不启用） |
+| 物料类别 | AB.9 存货物料类别字典 | 维度列（位于 PO标记 之后）；从两张采购视角表样（BB.3.3.A 有PO / BB.3.3.B 无PO）按法人×项目×部门×物料类别汇总 |
+| 到货额(万元) | BB.3.3.A/BB.3.3.B 采购视角到货额 | 全年合计+1~12月；到货额入库（存货 1405 增加）为非现金事件，不形成现金流出 |
+| 预付款(万元) | BB.3.3.A/BB.3.3.B 采购视角预付款 | 全年合计+1~12月；现金流出，进 CF-05（同时增加预付账款 1123） |
+| 验收付款(万元) | BB.3.3.A/BB.3.3.B 采购视角验收付款 | 全年合计+1~12月；现金流出，进 CF-05（同时减少应付账款 2202） |
+
+## ③ 关键规则要点
+
+**BB.3.3 物料类采购预算**
+
+- 本表含四个Tab（同页切换）：BB.3.3.A 有PO-物料类采购预算（采购视角）+ BB.3.3.B 无PO-物料类采购预算（采购视角）+ BB.3.3.D 关联交易视角（物料类采购，两岗接力代采购模型的第二岗填报表）+ BB.3.3.C 财务视角（按法人汇总、生成分录）。
+- 两张采购视角表样（BB.3.3.A / BB.3.3.B）列结构完全相同：维度=预算项目｜预算部门｜下单主体（受益主体列已按两岗接力代采购模型移除，改在 .D 关联交易视角补填）｜PO标记｜物料类别｜供应商；度量=到货额/下单额/预付款比例/预付款/验收付款（各按【全年合计】+1~12月展开，5×13=65 列），共 72 列（6 维度列 + 65 度量列 + 末列备注说明）；预付款比例位于每月「下单额」之后、「预付款」之前，按月手工填报；「付款金额」列已移除，付款总额由预付款+验收付款承载。
+- PO标记为固定值列：BB.3.3.A 恒为「有PO」、BB.3.3.B 恒为「无PO」，由表样固定、不可修改（原「PO标记」枚举（有PO/无PO）已按 PO 拆为两张采购视角表样）。
+- 【两表样差异口径】有PO（BB.3.3.A）：下单主体选管理单元（AA.8）-管理单元与法人一一对应，直接带出归属法人，无需比例拆分；无PO（BB.3.3.B）：无法从下单主体指认法人的，按 BAA.10 进销存按法人兜底拆分比例拆到法人（物料类采购法人拆分的唯一入口仍在财务视角 BB.3.3.C，两张采购视角表样均不生成会计分录；BAA.10 本年度不启用，兜底口径为后续年度预留）。
+- 计算规则：各月「预付款」= 当月下单额 × 当月预付款比例；到货额按100%确认为验收付款；付款节奏以本表各月填报的预付款与验收付款为准（BAA.7 比例表为长期规划，本年度不启用，不参与测算）；「预付款比例」按月填报；全年合计由各月自动汇总。
+- 【两岗分工·代采购】字段名：下单主体（对外下单签约付款方）、受益主体（实际使用方）。采购人员编预算时在采购视角（BB.3.3.A/.B）只填下单主体、不填受益主体；关联交易预算员在 BB.3.3.D 关联交易视角补填受益主体；系统比对两列各自关联的法人公司（取 AA.8 管理单元主数据的「关联法人公司」）——同法人=自购自用、不触发代采购；不同法人=跨法人代采购（带出 BAA.11 加成比例、测算加成款=到货额×加成比例），据此生成物料/资产平价转移、加成款与内部往来。
+- 【关联交易视角 BB.3.3.D】维度（8 列，序号为展示列）=序号｜下单主体（系统带出自 BB.3.3.A/.B 采购视角）｜受益主体（本视角填报，值域 AA.8 管理单元）｜预算项目｜预算部门｜物料类别（AB.9 存货物料类别字典）｜代采购对象（物料名称/备注）｜加成比例%(BAA.11带出)；度量=到货额(万元)/加成款(万元)（各按【全年合计】+1~12月展开，2×13=26 列，共 33 列）。到货额=对外采购到货额（平价，按物料类别对应到 BB.3.X 进销存同类别行：下单方法人该类别转出 − / 受益方法人同类别转入 +，与采购视角同月、同物料类别到货额勾稽）；加成款=到货额×加成比例（同法人不触发时为 0），加成已计入受益方存货（1405）采购成本、不另记 6602 费用；合并层 A 6001.2 与 B 存货中未实现加成按第④类对冲、随领用/对外销售实现；法人之间只认到货额与加成款两个度量——对外采购的付款节奏属下单主体与外部供应商之间，留在采购侧（BB.3.3.A/.B）与财务视角（BB.3.3.C）、随下单主体在 CF-05 归集，不进入本视角；内部结算=月度到货额+月度加成款。本视角是代采购填报源（两岗接力第二岗），据此生成资产/存货/三表后续处理与会计分录——汇总见 BJ.C.a 代采购物料查询表（查询表·只读镜像本视角，表样与本视角完全一致），法人分录由 BB.3.3.C 财务视角生成。
+- 【财务视角 PO标记 维度】财务视角（第三个TAB，BB.3.3.C）维度=法人公司｜预算项目｜预算部门｜PO标记｜物料类别（5 个维度列，PO标记 置于 3 个业务维度之后、物料类别之前），度量=到货额(万元)/预付款(万元)/验收付款(万元)（各按【全年合计】+1~12月展开），共 44 列；PO标记 为下拉维度（枚举：有PO/无PO），是非固定值列（区别于两张采购视角表样的固定值列），用于区分本行金额是按下单主体直接指认法人、还是按 BAA.10 兜底比例拆分到法人。
+- 财务视角（第三个TAB，BB.3.3.C）：按法人公司×预算项目×预算部门×PO标记×物料类别汇总到货额、预付款、验收付款，全年合计+1~12月逐月展开；法人指认=有PO（BB.3.3.A）按下单主体（管理单元）对应法人直接指认（同一法人行）、无PO（BB.3.3.B）按 BAA.10 进销存按法人兜底拆分比例拆分到法人（同一预算项目/预算部门可能落到多个法人行）。物料类采购法人拆分的唯一入口在本表（BB.3.3.C）。两张采购视角表样均不生成会计分录，法人分录由财务视角（BB.3.3.C）按法人公司汇总生成（借贷科目见⑥财务报表项转换规则）；预付款与验收付款为现金流出、进 CF-05。
+- ⚠ 【防重复提示】四类来源归集的物料采购需求须保持互斥：有PO行来自采购订单、无PO行来自 BAP.2、研发长期物料需求来自 BAP.3，同一笔物料需求只在一处列示，避免与 BAP.2/BAP.3 采集的消耗需求重复归集导致到货额与后续进销存入库金额虚增。
+
+## ④ 适用业务情形
+
+**适用于**
+
+- 物料类采购预算（四个Tab：BB.3.3.A 有PO-物料类采购预算、BB.3.3.B 无PO-物料类采购预算两张采购视角表样（列结构相同、仅 PO标记 为固定值列，均不含「受益主体」列）+ BB.3.3.D 关联交易视角（物料类采购）+ BB.3.3.C 财务视角）
+- 【两岗分工】采购人员编预算时在 A/B 采购视角填下单主体（对外下单签约付款方）、不填受益主体；关联交易预算员在 BB.3.3.D 关联交易视角补填受益主体（实际使用方）；系统比对两侧各自关联的法人公司——同法人=自购自用不触发代采购，不同法人=跨法人代采购（带出 BAA.11 加成比例、测算加成款=到货额×加成比例）
+- BB.3.3.D 关联交易视角：维度=下单主体/受益主体（本视角补填）/预算项目/预算部门/物料类别/代采购对象（物料名称/备注）/加成比例%(BAA.11带出)，度量=到货额(万元)/加成款(万元)；到货额=对外采购到货额（平价，按物料类别对应到 BB.3.X 同类别行：下单方法人该类别转出 − / 受益方法人同类别转入 +，与采购视角同月、同物料类别到货额勾稽）；加成款=到货额×加成比例，加成已计入受益方存货（1405）采购成本（不另记 6602，合并层第④类对冲）；本视角是代采购填报源（两岗接力第二岗），据此生成资产/存货/三表后续处理与会计分录（汇总底稿见 BJ.C.a、法人分录由 BB.3.3.C 生成）
+- 按预算项目/部门跟踪到货/下单/预付款比例/预付款/验收付款，PO标记区分有/无PO；到货额按100%确认为验收付款、预付款按下单额×当月比例测算
+- 有PO（BB.3.3.A）按下单主体（AA.8 管理单元）与法人一一对应、直接带出归属法人；无PO（BB.3.3.B）无法从下单主体指认法人的按 BAA.10 进销存按法人兜底拆分比例拆到法人（仅在财务视角 BB.3.3.C 拆分一次，是物料类采购法人拆分的唯一入口；BAA.10 本年度不启用；两张采购视角表样均不生成会计分录）
+- BB.3.3.C 财务视角维度=法人公司×预算项目×预算部门×PO标记×物料类别（5 个维度列，度量=到货额/预付款/验收付款×〔【全年合计】+1~12月〕，共 44 列）：PO标记 为下拉维度（枚举：有PO/无PO）、非固定值列，用于区分本行金额的两类来源通道——有PO（BB.3.3.A）按下单主体直接指认归属法人（同一法人行）、无PO（BB.3.3.B）按 BAA.10 兜底比例拆分到法人（同一预算项目/预算部门可能落到多个法人行）
+- BB.3.3.C 财务视角：按法人公司×预算项目×预算部门×PO标记×物料类别汇总到货额/预付款/验收付款（【全年合计】+1~12月），并按法人公司汇总生成本年度物料采购的会计分录；两张采购视角表样不生成会计分录
+
+**不适用于**
+
+- 设备及无形资产采购（属 BB.3.1）、基建（属 BB.3.2）
+
+## ⑤ 预算编制视角：数据关系总结
+
+**数据来源（上游）**
+
+| 来源表 | 编码 | 取数字段 | 关系说明 |
+| :--- | :--- | :--- | :--- |
+| 存货物料类别字典 | AB.9 | 物料类别 | 按 AB.9 维护物料类别，到货额按类别对应转入 BB.3.X 各物料大类 |
+| 进销存按法人拆分比例表 | BAA.10 | 各法人占比 | BB.3.3.C 财务视角「PO标记=无PO」行法人指认的兜底：无PO（BB.3.3.B 无PO表样）无法从下单主体（AA.8 管理单元）指认到法人的部分，按 BAA.10 各法人比例兜底拆分后落入多个法人行（同一预算项目/预算部门可能落到多个法人行）；「PO标记=有PO」行（BB.3.3.A 有PO表样）按下单主体直接指认归属法人、不经比例拆分（BAA.10 本年度不启用，兜底口径为后续年度预留） |
+
+**输出影响（下游）**
+
+| 目标报表 | 取数路径 |
+| :--- | :--- |
+| BB.3.X 进销存预算 | 到货额直接增加进销存表「本期采购入库」，按 AB.9 类别对应转入各物料大类，并落到 BB.3.X 同一法人行；法人指认=有PO（BB.3.3.A）按下单主体（AA.8 管理单元）直接指认到法人（同一法人行）、无PO（BB.3.3.B）按 BAA.10 兜底拆分到多个法人行（本年度不启用），拆分结果取财务视角 BB.3.3.C 各法人到货额 |
+| BO.BS 资产负债表 | 到货增加存货(1405)；预付款增加预付账款(1123)；验收付款减少应付账款(2202)；以上分录均由 BB.3.3.C 财务视角按「法人公司×预算项目×预算部门×PO标记×物料类别」汇总生成 |
+| BO.CF 现金流量表—CF-05 | 预付款 + 验收付款 → 购买商品、接受劳务支付的现金（经营活动现金流出），按 BB.3.3.C 财务视角的法人公司汇总 |
+
+## ⑥ 财务报表项转换规则
+
+**物料到货** `1~12月到货额（BB.3.3.C 财务视角按「法人公司×预算项目×预算部门×PO标记×物料类别」汇总）`
+
+- 取数说明：取自两张采购视角表样（BB.3.3.A 有PO / BB.3.3.B 无PO）月度到货额手工填报值，按 BB.3.3.C 财务视角的「法人公司×预算项目×预算部门×PO标记×物料类别」汇总生成分录——两类通道的法人归属口径不同：PO标记=有PO 的行，业务发生即按下单主体（AA.8 管理单元）与法人一一对应直接指认归属法人（同一笔采购只落一个法人行）；PO标记=无PO 的行无法从下单主体指认法人，按 BAA.10 进销存按法人兜底拆分比例拆分后落入各法人（同一预算项目/预算部门可能落到多个法人行，本年度不启用）
+- 损益表 PL：—
+- 资产负债表 BS：存货 (+)，1405 采购入库增加
+- 现金流量表 CF：—（到货不等于付款）
+- 科目影响：借：存货—原材料/零部件(1405)；贷：应付账款(2202)
+- 其他备注：进销存联动：入库金额直接增加 BB.3.X 进销存表"本期采购入库"，与 BB.3.X 法人级单表各物料大类入库的同一法人行保持一致（有PO 按下单主体（AA.8 管理单元）直接指认到法人；无PO 按 BAA.10 兜底拆分到法人，BAA.10 本年度不启用），避免存货与采购的法人归属冲突。BB.3.3.C 财务视角共 44 列（维度=法人公司/预算项目/预算部门/PO标记/物料类别 5 列 + 到货额(万元)/预付款(万元)/验收付款(万元) 3 度量×〔【全年合计】+1~12月〕），其 PO标记 维度区分两类来源：有PO 行按下单主体直接指认法人（同一法人行），无PO 行按 BAA.10 兜底比例拆分到法人（同一预算项目/预算部门可能落到多个法人行）；本表不处理增值税，到货额均为不含税口径。
+
+**预付款（物料）** `1~12月预付款`
+
+- 取数说明：月度手工填报，付款节奏以 BB.3.3 各月填报的预付款与验收付款为准（BAA.7 比例表本年度不启用，不参与测算），按 BB.3.3.C 财务视角的「法人公司×预算项目×预算部门×PO标记×物料类别」汇总生成预付款分录——PO标记=有PO 按下单主体直接指认法人，PO标记=无PO 按 BAA.10 兜底拆分到法人后由各法人行分别生成预付款分录（BAA.10 本年度不启用）
+- 损益表 PL：—
+- 资产负债表 BS：预付账款 (+)，1123 预付款增加（先付款后到货）
+- 现金流量表 CF：经营活动现金流出：购买商品、接受劳务支付的现金 CF-05 (+)
+- 科目影响：应付账款(2202) (−)、预付款项(1123) (+)；货币资金(1001) (−)
+- 其他备注：若涉及商业汇票，需配置应付票据中转科目。预付款的法人归属与到货口径一致（有PO 按下单主体（AA.8 管理单元）直接指认到法人；无PO 按 BAA.10 兜底拆分到法人，BAA.10 本年度不启用），按法人公司汇总分别进入各法人单体报表。
+
+**验收付款（物料）** `1~12月验收付款`
+
+- 取数说明：月度手工填报，付款节奏以 BB.3.3 各月填报的预付款与验收付款为准（BAA.7 比例表本年度不启用，不参与测算）；付款后应付账款减少，与到货额勾稽；按 BB.3.3.C 财务视角的「法人公司×预算项目×预算部门×PO标记×物料类别」汇总生成验收付款分录——PO标记=有PO 按下单主体直接指认法人，PO标记=无PO 按 BAA.10 兜底拆分到法人后由各法人行分别生成验收付款分录（BAA.10 本年度不启用）
+- 损益表 PL：—
+- 资产负债表 BS：应付账款 (−)，2202 应付账款减少（到货验收后付款）
+- 现金流量表 CF：经营活动现金流出：购买商品、接受劳务支付的现金 CF-05 (+)
+- 科目影响：借：应付账款(2202)；贷：货币资金(1001)
+- 其他备注：归入 CF-05 经营活动现金流出。验收付款的法人归属与到货口径一致（有PO 按下单主体（AA.8 管理单元）直接指认到法人；无PO 按 BAA.10 兜底拆分到法人，BAA.10 本年度不启用），按法人公司汇总分别进入各法人单体报表。

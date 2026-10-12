@@ -1,0 +1,153 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/></marker>
+    <marker id="arwRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/></marker>
+    <filter id="sh" x="-3%" y="-3%" width="106%" height="110%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/></filter>
+  </defs>
+
+  <text x="800" y="60" text-anchor="middle" font-size="28" font-weight="700" fill="#0f172a">年度预算编制流程 · 下半程</text>
+  <text x="800" y="92" text-anchor="middle" font-size="15" fill="#64748b">财务汇总 → 合并与三表 → 评审与平衡 → 定稿执行</text>
+
+  <!-- 阶段列标题 -->
+  <rect x="80" y="125" width="340" height="34" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="250" y="148" text-anchor="middle" font-size="14.5" font-weight="700" fill="#0c4a6e">④ 财务汇总</text>
+  <rect x="460" y="125" width="340" height="34" rx="8" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="630" y="148" text-anchor="middle" font-size="14.5" font-weight="700" fill="#5b21b6">⑤ 合并与三表</text>
+  <rect x="840" y="125" width="380" height="34" rx="8" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="1030" y="148" text-anchor="middle" font-size="14.5" font-weight="700" fill="#991b1b">⑥ 评审与平衡</text>
+  <rect x="1260" y="125" width="260" height="34" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="1390" y="148" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1e3a8a">⑦ 定稿与执行</text>
+
+  <!-- 入口节点 -->
+  <g filter="url(#sh)">
+    <rect x="15" y="310" width="55" height="100" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="42" y="345" text-anchor="middle" font-size="11.5" font-weight="600" fill="#475569">← 来自</text>
+    <text x="42" y="365" text-anchor="middle" font-size="11.5" font-weight="600" fill="#475569">业务编制</text>
+    <text x="42" y="385" text-anchor="middle" font-size="10.5" fill="#64748b">业务数齐套</text>
+  </g>
+
+  <!-- P4: 业务初审 -->
+  <g filter="url(#sh)">
+    <rect x="110" y="200" width="280" height="68" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="250" y="228" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">业务初审</text>
+    <text x="250" y="250" text-anchor="middle" font-size="12" fill="#475569">目标 / 资源 / 口径</text>
+  </g>
+
+  <!-- P4: 财务视角补充 -->
+  <g filter="url(#sh)">
+    <rect x="110" y="305" width="280" height="90" rx="10" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <text x="250" y="332" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">财务视角补充（系统）</text>
+    <text x="250" y="354" text-anchor="middle" font-size="12" fill="#475569">成本 / 法人 / 分录</text>
+    <text x="250" y="374" text-anchor="middle" font-size="12" fill="#475569">代采按净额法（CAS 14）</text>
+  </g>
+
+  <!-- P4: 资金与税金 -->
+  <g filter="url(#sh)">
+    <rect x="110" y="430" width="280" height="90" rx="10" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <text x="250" y="457" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">资金与税金（系统）</text>
+    <text x="250" y="479" text-anchor="middle" font-size="12" fill="#475569">BF 资金预算 · BF.4 增值税</text>
+    <text x="250" y="499" text-anchor="middle" font-size="12" fill="#475569">销项 − 进项 ± 留抵结转</text>
+  </g>
+
+  <!-- P5: 关联交易识别 -->
+  <g filter="url(#sh)">
+    <rect x="490" y="200" width="280" height="80" rx="10" fill="#e2e8f0" stroke="#dc2626" stroke-width="2"/>
+    <text x="630" y="228" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">关联交易识别（系统）</text>
+    <text x="630" y="250" text-anchor="middle" font-size="12" fill="#475569">BJ.C 内部交易识别</text>
+    <text x="630" y="270" text-anchor="middle" font-size="12" fill="#475569">跨法人购销 / 代采 / 租赁</text>
+  </g>
+
+  <!-- P5: 合并抵销 -->
+  <g filter="url(#sh)">
+    <rect x="490" y="315" width="280" height="80" rx="10" fill="#e2e8f0" stroke="#dc2626" stroke-width="2"/>
+    <text x="630" y="343" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">合并抵销（系统）</text>
+    <text x="630" y="365" text-anchor="middle" font-size="12" fill="#475569">BO.ELIM 抵销分录</text>
+    <text x="630" y="385" text-anchor="middle" font-size="12" fill="#475569">CAS 33 抵销 · CAS 18 递延所得税</text>
+  </g>
+
+  <!-- P5: 三表试算 -->
+  <g filter="url(#sh)">
+    <rect x="490" y="430" width="280" height="80" rx="10" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
+    <text x="630" y="458" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">三表试算（系统）</text>
+    <text x="630" y="480" text-anchor="middle" font-size="12" fill="#475569">BO.PL / BO.BS / BO.CF</text>
+    <text x="630" y="500" text-anchor="middle" font-size="12" fill="#475569">勾稽：资产负债平衡 · 现金一致</text>
+  </g>
+
+  <!-- P6: 财务复审 -->
+  <g filter="url(#sh)">
+    <rect x="870" y="200" width="280" height="68" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="1010" y="228" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">财务复审（人工）</text>
+    <text x="1010" y="250" text-anchor="middle" font-size="12" fill="#475569">口径 / 勾稽 / 风险</text>
+  </g>
+
+  <!-- P6: 预算评审会（菱形） -->
+  <g filter="url(#sh)">
+    <polygon points="1010,310 1090,375 1010,440 930,375" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="1010" y="360" text-anchor="middle" font-size="14" font-weight="700" fill="#7f1d1d">预算评审会</text>
+    <text x="1010" y="380" text-anchor="middle" font-size="11.5" fill="#991b1b">二上二下</text>
+    <text x="1010" y="398" text-anchor="middle" font-size="11.5" fill="#991b1b">通过 / 退回</text>
+  </g>
+
+  <!-- P6: 数据澄清 -->
+  <g filter="url(#sh)">
+    <rect x="870" y="470" width="280" height="75" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="1010" y="498" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">数据澄清 · 配合复审</text>
+    <text x="1010" y="520" text-anchor="middle" font-size="12" fill="#475569">按评审意见修正主数据与职能数</text>
+  </g>
+
+  <!-- P7: 终审定稿 -->
+  <g filter="url(#sh)">
+    <rect x="1290" y="330" width="220" height="80" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="1400" y="360" text-anchor="middle" font-size="15" font-weight="700" fill="#0f172a">终审定稿</text>
+    <text x="1400" y="382" text-anchor="middle" font-size="12" fill="#475569">预算执行令</text>
+    <text x="1400" y="400" text-anchor="middle" font-size="12" fill="#475569">发布 · 月度滚动</text>
+  </g>
+
+  <!-- 退出口 -->
+  <g filter="url(#sh)">
+    <rect x="1280" y="490" width="240" height="60" rx="10" fill="#f1f5f9" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="1400" y="516" text-anchor="middle" font-size="12.5" font-weight="600" fill="#dc2626">退回调整（二下）</text>
+    <text x="1400" y="536" text-anchor="middle" font-size="11" fill="#64748b">（→ 返回业务编制）</text>
+  </g>
+
+  <!-- 主线箭头 -->
+  <path d="M 70 360 L 110 234" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <path d="M 250 268 L 250 305" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <path d="M 250 395 L 250 430" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <path d="M 390 475 L 490 240" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <text x="410" y="350" font-size="11" fill="#64748b">业务数齐套（二上）</text>
+  <path d="M 630 280 L 630 315" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <path d="M 630 395 L 630 430" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <path d="M 770 470 L 870 234" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <path d="M 1010 268 L 1010 310" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <text x="1025" y="295" font-size="11" fill="#64748b">复审通过</text>
+  <path d="M 1090 375 L 1290 370" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)"/>
+  <text x="1170" y="362" font-size="11" fill="#64748b">通过</text>
+
+  <!-- 退回线 -->
+  <path d="M 1090 395 L 1280 510" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="7 4" fill="none" marker-end="url(#arwRed)"/>
+
+  <!-- 底部图例 -->
+  <rect x="80" y="660" width="1440" height="180" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="105" y="695" font-size="15" font-weight="700" fill="#0f172a">图例与说明</text>
+  <line x1="105" y1="725" x2="155" y2="725" stroke="#475569" stroke-width="2.2" marker-end="url(#arw)"/>
+  <text x="170" y="730" font-size="12.5" fill="#334155">业务主线</text>
+  <line x1="270" y1="725" x2="320" y2="725" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="7 4" marker-end="url(#arwRed)"/>
+  <text x="335" y="730" font-size="12.5" fill="#334155">评审退回</text>
+  <rect x="440" y="713" width="22" height="22" rx="4" fill="#e2e8f0" stroke="#64748b"/>
+  <text x="472" y="730" font-size="12.5" fill="#334155">系统计算</text>
+  <rect x="570" y="713" width="22" height="22" rx="4" fill="#e2e8f0" stroke="#dc2626" stroke-width="2"/>
+  <text x="602" y="730" font-size="12.5" fill="#334155">内部交易 / 抵销</text>
+  <rect x="750" y="713" width="22" height="22" rx="4" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="782" y="730" font-size="12.5" fill="#334155">初审 / 复审 / 评审</text>
+  <rect x="940" y="713" width="22" height="22" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="972" y="730" font-size="12.5" fill="#334155">决策 / 定稿</text>
+  <polygon points="1100,713 1116,724 1100,735 1084,724" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="1125" y="730" font-size="12.5" fill="#334155">评审决策（通过/退回）</text>
+  <rect x="1310" y="713" width="22" height="22" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="4 3"/>
+  <text x="1342" y="730" font-size="12.5" fill="#334155">跨页入口/出口</text>
+
+  <text x="105" y="770" font-size="12.5" fill="#475569">编制节奏：二上（12月上）业务数齐套后，财务补财务视角 / 资金税金 / 合并抵销 / 三表试算；二下（12月下）经管会评审，定稿批复。</text>
+  <text x="105" y="792" font-size="12.5" fill="#475569">数据链路：业务编制 BB → 资金税金 BF → 关联交易 BJ.C → 合并抵销 BO.ELIM → 三表 BO.PL/BS/CF（勾稽校验）→ 评审定稿。</text>
+  <text x="105" y="814" font-size="12.5" fill="#475569">口径：金额不含税 · 单位万元 · 精度 0.1；合并抵销 CAS 33 · 递延所得税 CAS 18。</text>
+</svg>

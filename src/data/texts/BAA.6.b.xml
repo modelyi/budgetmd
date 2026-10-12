@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BAA.6.b BAA.6.b · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BAA.6.b" name="BAA.6.b">
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BAA.6.b'） -->
+  <fields>
+    <field code="year" name="年度" source="预算年度参数"><![CDATA[按预算年度登记（本年度=2027）；与「场所×公司」共同构成面积与单价主键]]></field>
+    <field code="location" name="场所选择" source="BAA.6.a 场所基本信息维护"><![CDATA[取自 BAA.6.a 已登记的场所（场所名称）]]></field>
+    <field code="company" name="公司" source="AA.2 法人组织架构"><![CDATA[该场所在本年度承租/使用的法人公司（与 BB.4.2.b 内部职场租赁「承租方(法人)」同口径）；本表仅登记出租方类型=内部持有的场所]]></field>
+    <field code="leaseTerm" name="租赁期间(起止)" source="本表录入"><![CDATA[租赁合同的起止日期区间（自由文本，如 2027/01/01-2029/12/31）；仅人眼识别，不参与判定与测算（与 AB.16 租赁期限字典口径无关）]]></field>
+    <field code="leaseArea" name="租赁面积 (㎡)" source="本表录入"><![CDATA[仅登记出租方类型=内部持有的场所面积与单价（内部租赁按法人分摊）：该公司在本场所的租赁面积（㎡），仅供 BB.4.2.b 内部职场租赁按「年度×场所×公司」带出；外部租入场所不在此维护、面积与单价由 BB.4.2.a 按对外合同直接录入]]></field>
+    <field code="unitPrice" name="单价(元/㎡·月)" source="本表录入"><![CDATA[仅登记出租方类型=内部持有的场所面积与单价（内部租赁按法人分摊）：按「年度×场所×公司」维护内部场所单价（市场单价=内部定价基准），单位 元/㎡·月、精度 2 位小数；仅供 BB.4.2.b 内部职场租赁带出（内部租金 = 单价 × 租赁面积 ÷ 10000 × 当月在租期内）；外部租入场所不在此维护、合同单价由 BB.4.2.a 按对外合同直接录入]]></field>
+    <field code="notes" name="备注说明" source="本表录入"><![CDATA[面积与单价口径说明（是否含物业费、合同约定期间等），仅人眼识别]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BAA.6 办公场所租赁维护">
+      <point><![CDATA[本表由「办公场所租赁面积维护」更名为「办公场所租赁维护」，含四个子Tab（同页切换）：BAA.6.a 场所基本信息维护 / BAA.6.b 年度租赁面积维护 / BAA.6.c 场所法人比例查看 / BAA.6.e 租赁折现率维护（单价并入 BAA.6.b 维护，不再单独维护子表）。]]></point>
+      <point><![CDATA[维度与度量：①. a 维度=场所编码/场所名称/地址/业主方(出租方)/总面积(㎡)/启用状态；②. b 维度=年度/场所/公司/租赁期间(起止)/租赁面积(㎡)/单价(元/㎡·月)/备注说明（「租赁期间(起止)」= 租赁合同的起止日期区间，自由文本；仅人眼识别，不参与判定与测算，与 AB.16 租赁期限字典口径无关；「单价(元/㎡·月)」= 按「年度×场所×公司」维护的单价（精度 2 位小数），内部持有场所=市场单价（内部定价基准）；外部租入场所不在此维护）；③. c 维度=年度/场所×各法人公司，度量=面积占比(%)（合计恒为 100%）；④. e 维度=年度，度量=折现率(%)（精度 2 位小数）。]]></point>
+      <point><![CDATA[关键口径：场所法人比例仅供查看与核对、不由本表反算；单价在 BAA.6.b 按「年度×场所×公司」维护（单位 元/㎡·月），仅供 BB.4.2.b 内部职场租赁取面积与单价（内部租金 = 单价 × 租赁面积 ÷ 10000 × 当月在租期内；内部持有场所=市场单价）；BB.4.2.a 外部职场租赁的租赁面积与合同单价按对外租赁合同在本表直接录入、不引用 BAA.6.b；折现率默认取 BF.3 综合融资成本、可按年度覆盖，供 BB.4.2.b.1 内部职场租赁·财务视角折现计算租赁负债初始与各月利息。]]></point>
+    </rule>
+  </rules>
+
+</form>

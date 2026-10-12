@@ -1,0 +1,862 @@
+[
+  {
+    "code": "AA.1",
+    "dom": {
+      "docHeight": 1095,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 4,
+        "cols": 8,
+        "header": [
+          "预算年度",
+          "年度全称",
+          "编制性质/类型",
+          "当前基准年度",
+          "年度控制状态",
+          "基准结算币种",
+          "编制上报截止日",
+          "年度编制说明与管控目标"
+        ]
+      },
+      {
+        "rows": 13,
+        "cols": 11,
+        "header": [
+          "期间编码",
+          "所属年度",
+          "月份序号",
+          "期间名称",
+          "所属季度",
+          "起始日期",
+          "结束日期",
+          "期间状态",
+          "上报截止日",
+          "数据锁定日",
+          "管控说明与备注"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AA.10",
+    "dom": {
+      "docHeight": 916,
+      "tables": 1,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 13,
+        "cols": 8,
+        "header": [
+          "供应商编码",
+          "供应商名称",
+          "供应商类型",
+          "归属主体",
+          "供货/服务范围",
+          "状态",
+          "备注说明",
+          "引用说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AA.11",
+    "dom": {
+      "docHeight": 916,
+      "tables": 1,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 13,
+        "cols": 4,
+        "header": [
+          "物料编码",
+          "物料名称",
+          "物料类型",
+          "计量单位"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AA.2",
+    "dom": {
+      "docHeight": 1356,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 13,
+        "cols": 3,
+        "header": [
+          "法人编码",
+          "法人名称",
+          "父组织"
+        ]
+      },
+      {
+        "rows": 13,
+        "cols": 5,
+        "header": [
+          "法人编码",
+          "法人名称",
+          "法人类别",
+          "组织层级",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AA.3",
+    "dom": {
+      "docHeight": 6690,
+      "tables": 3,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 141,
+        "cols": 11,
+        "header": [
+          "科目编码",
+          "科目名称",
+          "科目全称",
+          "科目家族",
+          "分类归属",
+          "层级",
+          "上级编码",
+          "借贷/流向",
+          "直接列报行",
+          "关联编制源表",
+          "准则与核算说明"
+        ]
+      },
+      {
+        "rows": 61,
+        "cols": 8,
+        "header": [
+          "费用科目编码",
+          "费用科目名称",
+          "科目全称",
+          "层级",
+          "上级编码",
+          "支出性质",
+          "默认映射财务报表项",
+          "业务核算范围与口径说明"
+        ]
+      },
+      {
+        "rows": 5,
+        "cols": 7,
+        "header": [
+          "家族前缀",
+          "科目家族名称",
+          "编码结构规范",
+          "示例编码",
+          "层级定义与长度",
+          "关联财务主表",
+          "会计准则依据"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AA.4",
+    "dom": {
+      "docHeight": 1032,
+      "tables": 1,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 17,
+        "cols": 2,
+        "header": [
+          "客户",
+          "客户类型"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AA.5",
+    "dom": {
+      "docHeight": 2830,
+      "tables": 1,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 79,
+        "cols": 6,
+        "header": [
+          "部门编码",
+          "部门名称",
+          "全称",
+          "类型",
+          "状态",
+          "备注"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AA.6",
+    "dom": {
+      "docHeight": 2888,
+      "tables": 1,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 81,
+        "cols": 5,
+        "header": [
+          "项目编码",
+          "项目名称",
+          "项目性质",
+          "项目类型",
+          "项目类型编码"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AA.7",
+    "dom": {
+      "docHeight": 974,
+      "tables": 1,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 15,
+        "cols": 6,
+        "header": [
+          "产品编码",
+          "产品名称",
+          "规格型号",
+          "产品类别（财务口径）",
+          "计量单位",
+          "备注"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AA.8",
+    "dom": {
+      "docHeight": 1235,
+      "tables": 1,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 24,
+        "cols": 5,
+        "header": [
+          "管理单元编码",
+          "管理单元",
+          "关联法人公司",
+          "资产账簿",
+          "备注"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AA.9",
+    "dom": {
+      "docHeight": 979,
+      "tables": 1,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 13,
+        "cols": 7,
+        "header": [
+          "资产账簿",
+          "资产类别",
+          "折旧方法",
+          "折旧惯例",
+          "折旧年限(月)",
+          "残值率",
+          "备注"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.10",
+    "dom": {
+      "docHeight": 922,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 5,
+        "cols": 4,
+        "header": [
+          "账簿编码",
+          "账簿名称",
+          "默认标记",
+          "适用范围说明"
+        ]
+      },
+      {
+        "rows": 5,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.11",
+    "dom": {
+      "docHeight": 1017,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 9,
+        "cols": 4,
+        "header": [
+          "岗位编码",
+          "岗位名称",
+          "状态",
+          "岗位说明"
+        ]
+      },
+      {
+        "rows": 5,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.12",
+    "dom": {
+      "docHeight": 988,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 8,
+        "cols": 4,
+        "header": [
+          "职级编码",
+          "职级名称",
+          "状态",
+          "职级说明"
+        ]
+      },
+      {
+        "rows": 5,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.13",
+    "dom": {
+      "docHeight": 1009,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 8,
+        "cols": 4,
+        "header": [
+          "授信类型编码",
+          "授信类型名称",
+          "状态",
+          "适用范围说明"
+        ]
+      },
+      {
+        "rows": 5,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.14",
+    "dom": {
+      "docHeight": 901,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 6,
+        "cols": 3,
+        "header": [
+          "费用属性编码",
+          "费用属性名称",
+          "适用范围与财务科目映射"
+        ]
+      },
+      {
+        "rows": 4,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.15",
+    "dom": {
+      "docHeight": 900,
+      "tables": 1,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 10,
+        "cols": 13,
+        "header": [
+          "税费/参数分类",
+          "参数编码",
+          "参数指标名称",
+          "计量单位",
+          "2026年基准值",
+          "2027年预算假设",
+          "2028年预测假设",
+          "2029年预测假设",
+          "适用组织/主体",
+          "依据来源与文件",
+          "敏感性等级",
+          "审定状态",
+          "应用说明/被引用"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.16",
+    "dom": {
+      "docHeight": 1009,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 3,
+        "cols": 3,
+        "header": [
+          "租赁期限编码",
+          "租赁期限名称",
+          "适用范围与资本化判定说明"
+        ]
+      },
+      {
+        "rows": 4,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.17",
+    "dom": {
+      "docHeight": 2265,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 39,
+        "cols": 7,
+        "header": [
+          "融资类型编码",
+          "业务名称",
+          "层级",
+          "上级编码",
+          "类型归属",
+          "状态",
+          "备注"
+        ]
+      },
+      {
+        "rows": 8,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.2",
+    "dom": {
+      "docHeight": 1597,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 30,
+        "cols": 5,
+        "header": [
+          "编码",
+          "行业门类",
+          "行业大类",
+          "战略新兴产业标识",
+          "说明"
+        ]
+      },
+      {
+        "rows": 4,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.3",
+    "dom": {
+      "docHeight": 930,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 6,
+        "cols": 6,
+        "header": [
+          "编码",
+          "产品类别（财务口径）名",
+          "默认收入确认方式",
+          "成本率%",
+          "备注",
+          "引用说明"
+        ]
+      },
+      {
+        "rows": 5,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.4",
+    "dom": {
+      "docHeight": 900,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 3,
+        "cols": 6,
+        "header": [
+          "编码",
+          "方式名",
+          "准则分类(时点/时段)",
+          "月度分摆逻辑",
+          "备注",
+          "引用说明"
+        ]
+      },
+      {
+        "rows": 5,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.5",
+    "dom": {
+      "docHeight": 900,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 3,
+        "cols": 5,
+        "header": [
+          "编码",
+          "性质名称",
+          "性质类型",
+          "备注",
+          "引用说明"
+        ]
+      },
+      {
+        "rows": 4,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.6",
+    "dom": {
+      "docHeight": 900,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 3,
+        "cols": 6,
+        "header": [
+          "编码",
+          "好坏件",
+          "成本方向",
+          "业务含义说明",
+          "物料成本计算口径",
+          "引用表单"
+        ]
+      },
+      {
+        "rows": 4,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.7",
+    "dom": {
+      "docHeight": 988,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 9,
+        "cols": 4,
+        "header": [
+          "编码",
+          "项目类型",
+          "适用范围说明",
+          "引用表单"
+        ]
+      },
+      {
+        "rows": 4,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.8",
+    "dom": {
+      "docHeight": 900,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 6,
+        "cols": 3,
+        "header": [
+          "编码",
+          "客户类型",
+          "备注"
+        ]
+      },
+      {
+        "rows": 3,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AB.9",
+    "dom": {
+      "docHeight": 988,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 7,
+        "cols": 5,
+        "header": [
+          "编码",
+          "物料类别",
+          "适用范围说明",
+          "默认出库去向与财务科目",
+          "状态"
+        ]
+      },
+      {
+        "rows": 6,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AM.1",
+    "dom": {
+      "docHeight": 901,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 5,
+        "cols": 9,
+        "header": [
+          "产品编码",
+          "产品类别（财务口径）名",
+          "默认收入确认方式",
+          "方式编码",
+          "准则分类",
+          "月度分摆逻辑",
+          "标准成本率(%)",
+          "毛利率(%)",
+          "映射说明"
+        ]
+      },
+      {
+        "rows": 5,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  },
+  {
+    "code": "AM.2",
+    "dom": {
+      "docHeight": 900,
+      "tables": 2,
+      "stylePrinted": false
+    },
+    "fp": [
+      {
+        "rows": 6,
+        "cols": 3,
+        "header": [
+          "部门",
+          "费用属性",
+          "备注说明"
+        ]
+      },
+      {
+        "rows": 3,
+        "cols": 3,
+        "header": [
+          "字段",
+          "来源",
+          "说明"
+        ]
+      }
+    ],
+    "baseSame": false
+  }
+]

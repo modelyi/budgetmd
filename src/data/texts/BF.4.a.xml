@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BF.4.a BF.4.a · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BF.4.a" name="BF.4.a">
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BF.4.a'） -->
+  <fields>
+    <field code="taxCategory" name="税费分类" source="AB.15 税费比率假设表"><![CDATA[税种分类枚举：增值税、其中: 增值税退税、城市维护建设税、教育费附加 (含地方教育费附加)、房产税、土地使用税、印花税、其他税费、企业所得税]]></field>
+    <field code="provision" name="月度计提" source="BF.4.b 增值税计提辅助表（初始值）/ 本表手工调整"><![CDATA[主表各月预算计提列。其中「增值税」行以辅助表 BF.4.b 测算结果作为默认初始值，但允许编制人员直接手工修改调整；附加税费由系统公式联动计算；其他税种按对应规则填报]]></field>
+    <field code="payment" name="月度缴纳" source="本表录入"><![CDATA[主表各月税费实际缴纳预算列。次月申报缴纳（当月计提、次月申报实缴）；城建税与教育费附加以增值税实缴数为基数计征]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BF.4.a 税金及附加预算表">
+      <point><![CDATA[【表定位】税金及附加主表，按税种（增值税、城建税、教育费附加、房产税、土地使用税、印花税、其他税费、企业所得税）逐月维护预算计提与缴纳预算（两行制表头，【全年合计】+1~12月，计提与缴纳双度量列）。]]></point>
+      <point><![CDATA[【增值税初始值与允许修改】主表「增值税」行「预算计提」列以辅助表 BF.4.b 测算得出的「本期应纳增值税（计提）」作为默认初始值自动带入；但系统明确允许编制人员根据纳税筹划与管理实际直接手工修改。]]></point>
+      <point><![CDATA[【附加税费联动】城市维护建设税(7%)、教育费附加(3%)、地方教育附加(2%)按增值税实缴数（非计提数）× AB.15 税率及附加税比率字典自动公式计算；房产税、土地使用税、印花税等按政策规则填报。]]></point>
+      <point><![CDATA[【三表分录生成】计提进入 6403 税金及附加与 2221 应交税费（增值税净额走 222101），实缴进入 1001 货币资金并归入 CF-07 支付的各项税费。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BF.4.a']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[各项税费（增值税、城建税、教育费附加、房产税、土地使用税、印花税、企业所得税等）月度计提与实际缴纳预算编制]]></item>
+      <item><![CDATA[生成税金及附加计提（6403/2221）与实缴付现（CF-07）会计凭证]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[增值税底层各业务销项与进项细项基数测算（属 BF.4.b）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BF.4.a']） -->
+  <relation>
+    <summary><![CDATA[税金及附加主表，按税种逐月维护计提与缴纳，由 BF.4.b 测算结果提供增值税计提初始值（允许手工修改），附加税费联动计算，生成税费计提与实缴分录。]]></summary>
+    <dataSources>
+      <source code="BF.4.b" name="增值税计提预算表" fields="本期应纳增值税（计提）"><![CDATA[作为「增值税」行预算计提列默认初始值（允许手工修改覆盖）]]></source>
+      <source code="AB.15" name="税费比率假设表" fields="城建税率、教育费附加率"><![CDATA[以实缴增值税为基数自动计算城建税与教育费附加]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BO.PL 利润表—6403"><![CDATA[计提数计入税金及附加（城建+教育+房产+土地+印花+其他）]]></output>
+      <output target="BO.BS 资产负债表—2221"><![CDATA[计提增加应交税费，实缴冲减应交税费]]></output>
+      <output target="BO.CF 现金流量表—CF-07"><![CDATA[实缴数计入支付的各项税费]]></output>
+    </outputs>
+    <keyRules>
+      <rule><![CDATA[增值税预算计提以 BF.4.b 为初始值且允许手工修改；附加税以实缴数为基数；不含税口径。]]></rule>
+    </keyRules>
+  </relation>
+
+</form>

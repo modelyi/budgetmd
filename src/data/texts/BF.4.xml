@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BF.4 税金及附加预算表 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BF.4" name="税金及附加预算表">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BF.4']） -->
+  <overview><![CDATA[税金及附加预算表，两个TAB：BF.4.a主表按税种逐月维护计提与缴纳，城建税/教育费附加/地方教育附加按增值税实缴基数×AB.15比例（ASS-TAX-03、ASS-TAX-04+ASS-TAX-05）自动计算；BF.4.b附表按「销项税额−进项税额±留抵结转」测算增值税净应纳，为主表取数。计提走6403/2221、增值税净额走222101，实缴走1001、进CF-07；各业务编制表均按不含税口径填报，增值税不在业务表推导、统一在本表集中测算。按法人分别申报，集团合并时各法人间不互抵。]]></overview>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BF.4 税金及附加预算表">
+      <point><![CDATA[本表分两个 TAB：BF.4.a 税金及附加预算表（主表）+ BF.4.b 增值税计提预算表（附表）。主表按税种（增值税/城建税/教育费附加/房产税/土地使用税/印花税/其他税费/企业所得税）逐月维护预算计提与缴纳预算。]]></point>
+      <point><![CDATA[增值税计提联动与调整机制：附表 BF.4.b 是增值税计提的辅助表，其测算结果作为主表 BF.4.a「增值税」行「预算计提」列的默认初始值，但允许编制人员结合纳税筹划与管理实际直接手工修改；主表「其中:增值税退税」行取自附表的软件产品即征即退税额。]]></point>
+      <point><![CDATA[附表 BF.4.b 有完整独立表样与字段说明：计税基数全部为不含税口径，销项按收入类别（产品与整机装备销售13%、技术服务6%，不单列软件销售），进项按采购类别（物料13%、设备13%、基建9%）自动取数，费用类可抵扣进项税额与不可抵扣转出由编制人员手工填报；增值税按法人分别申报缴纳，集团合并时各法人之间不得相互抵减。]]></point>
+      <point><![CDATA[城市维护建设税、教育费附加、地方教育附加基于流转税基数与比例自动相乘，无需人工填写；比例取AB.15税费比率假设表（城建ASS-TAX-03=7%、教育ASS-TAX-04=3%、地方教育ASS-TAX-05=2%），不在表内写死。]]></point>
+      <point><![CDATA[税金及附加合计（利润表口径）与各项税费合计（现金流口径）100% 公式求和。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BF.4']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[税金及附加（增值税、城建税、教育费附加、房产税、土地使用税、印花税等）与企业所得税的预算测算；附表 BF.4.b 承载增值税销项税额/进项税额与应纳税额的测算]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[各业务编制表本身的增值税推导与含税折算（业务表一律不含税口径，增值税统一在 BF.4 集中测算与列示）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BF.4']） -->
+  <relation>
+    <summary><![CDATA[税金及附加预算表按税种逐月维护预算计提与缴纳；增值税净应纳取自附表 BF.4.b（销项−进项±留抵结转），城建税/教育费附加等附加税费按 AB.15 比例自动计算，各业务表一律不含税口径、增值税统一在本表集中测算。]]></summary>
+    <dataSources>
+      <source code="BF.4.b" name="增值税计提预算表（附表）" fields="本期应纳增值税（计提）、本期实际缴纳增值税、增值税即征即退/专项返还"><![CDATA[辅助表测算结果作为主表「增值税」行「预算计提」列的初始值（允许手工修改）；退税行取自增值税即征即退/专项返还]]></source>
+      <source code="AB.15" name="税费比率假设表" fields="城建税/教育费附加/地方教育附加比例"><![CDATA[城建税=实缴增值税×比例，按预算年值自动计算，不在表内写死]]></source>
+      <source code="BO.PL" name="BO.PL 利润表" fields="利润总额"><![CDATA[企业所得税预缴按利润总额×税率联动校验]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BO.PL 利润表—税金及附加/所得税"><![CDATA[税金及附加 6403 (+)；企业所得税→所得税费用 6801]]></output>
+      <output target="BO.BS 资产负债表—应交税费"><![CDATA[计提→应交税费 (+)；缴纳→应交税费 (−)、货币资金 (−)]]></output>
+      <output target="BO.CF 现金流量表—CF-07/CF-02"><![CDATA[各项税费实缴→CF-07 支付的各项税费；软件即征即退收现→CF-02 收到的税费返还]]></output>
+    </outputs>
+    <keyRules>
+
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BF.4'].items） -->
+  <events>
+    <event event="附加税费计提" field="城建税(比例取AB.15)/教育费附加(比例取AB.15)">
+      <pl><![CDATA[税金及附加 (+)]]></pl>
+      <bs><![CDATA[应交税费 (+)]]></bs>
+      <cf><![CDATA[—（计提不涉及现金）]]></cf>
+      <source><![CDATA[城建税/教育费附加=实缴增值税×AB.15税率及附加税比率字典比例，公式自动计算，无需人工填写；实缴增值税取自附表 BF.4.b 增值税计提预算表「本期实际缴纳增值税」行]]></source>
+      <entry><![CDATA[税金及附加(6403) (+)；应交税费(2221) (+)（城建税=实缴增值税×ASS-TAX-03比例；教育费附加=实缴增值税×(ASS-TAX-04+ASS-TAX-05)比例）]]></entry>
+      <note><![CDATA[城建税与教育费附加比例集中维护在AB.15税费比率假设表（ASS-TAX-03城建7%、ASS-TAX-04教育3%、ASS-TAX-05地方教育2%），BF.4按该表预算年值自动计算，不在表内写死；也可由用户在表内重置。关联事项：企业所得税预缴计提，所得税费用(6801) (+)、应交税费(2221) (+)，按 BO.PL 利润总额×25%（或高新技术企业15%优惠税率）联动校验。]]></note>
+    </event>
+    <event event="税费缴纳" field="1~12月实缴金额">
+      <pl><![CDATA[—]]></pl>
+      <bs><![CDATA[应交税费 (−)、货币资金 (−)]]></bs>
+      <cf><![CDATA[经营活动现金流出：支付的各项税费 CF-07 (+)]]></cf>
+      <source><![CDATA[税金及附加合计（利润表口径）与各项税费合计（现金流口径）100%公式求和]]></source>
+      <entry><![CDATA[应交税费—各税种明细(2221xx) (−)；货币资金(1001) (−)]]></entry>
+      <note><![CDATA[付现总额包括实缴增值税、城建税、教育费附加、房产税、印花税及企业所得税；必须与 CF-07 保持100%勾稽一致。关联事项：软件增值税即征即退收现，货币资金(1001) (+)、其他收益—增值税即征即退(6115) (+)（一般即征即退）或应交税费(2221) (−)（冲减销项场景），归入CF-02收到的税费返还；留抵退税/加计抵减非现金返还，不得计入CF-02，留抵退税直接冲减CF-07实缴。]]></note>
+    </event>
+  </events>
+
+</form>

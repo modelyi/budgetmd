@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BB.1.2 软硬件收入与成本预算 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BB.1.2" name="软硬件收入与成本预算">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BB.1.2']） -->
+  <overview><![CDATA[软硬件收入与成本，分软硬件销售填报（Tab a，存量订单期初导入+本年新增手工新增合并单表）、财务视角(存量+增量)（Tab c）两部分：销售填报按订单/合同维度填销量与单价，财务视角全部字段系统带出只读（自动合并）并计成本，仅预计销售成本按月手工填报。分录仅在 BB.1.2.c 财务视角产生：收入确认——1122对600101、600103；成本结转——640101对1405；收现——1001，进CF-01，销项税仅在CF-01单点乘入；BB.1.2.a 不涉及会计处理。两个 Tab 均含「签约主体（法人公司）」列，分录按签约主体归集、不另做比例拆分；销售订单不登记内部供应商（内部供货关系不进入销售订单）。]]></overview>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BB.1.2 软硬件收入与成本预算">
+      <point><![CDATA[拆分为两个Tab（同页切换）：软硬件销售填报（Tab a，存量订单导入+增量手工新增合并单表）、财务视角（Tab c，存量+增量合并只读）。]]></point>
+      <point><![CDATA[【视角分离口径】① 销售视角（Tab a）：面向前端销售人员，存量订单期初导入+本年新增手工填在同一张表，按客户与销售额填报；② 财务视角（Tab c）：作为全景汇总视图，由财务填报预计销售成本并核算毛利。]]></point>
+      <point><![CDATA[录入方式：Tab a 软硬件销售填报——存量订单行由系统期初导入带出、增量手工新增行由业务人员手工填报，机台文本必输，销量/单价(不含税)/预收/验收回款按月维护；Tab c 财务视角——存量与增量自动合并只读，仅预计销售成本由财务按月填报。]]></point>
+      <point><![CDATA[度量：销量、单价(不含税)、预计销售收入(不含税)（=销量×单价，公式）、预收、验收回款；财务视角多一列预计销售成本。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.1.2']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[软硬件收入与成本预算：销售填报（.a，存量+增量合并单表）、存量+增量财务视角（.c），登记销量/单价/预收/验收回款及预计销售成本]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[本年度新签合同的签约额预算（属 BB.1.1）]]></item>
+      <item><![CDATA[生产制造排产计划（属 BB.2.1，销售与生产不做关联）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BB.1.2']） -->
+  <relation>
+    <summary><![CDATA[软硬件收入与成本预算是"卖硬件和软件"的收入成本账，按订单/合同维度填报销量与单价，系统自动算出销售收入（销量×单价）；财务视角还需填预计销售成本。预收与验收回款两列体现这笔生意实际能收回多少钱。收入与收款一律按「签约主体（法人公司）」确认，销售订单不再区分内部供应商。]]></summary>
+    <dataSources>
+      <source code="MASTER_CONTRACTS" name="合同主数据" fields="订单编号、销售合同"><![CDATA[仅存量订单有要求，新订单可用虚拟订单号或可不填]]></source>
+      <source code="AA.6" name="预算项目主数据" fields="销售项目"><![CDATA[筛选销售类型的普通项目]]></source>
+      <source code="AA.7" name="预算产品主数据" fields="销售产品"><![CDATA[销售的产品，从预算产品主数据选择]]></source>
+      <source code="区域主数据" name="区域主数据" fields="区域"><![CDATA[订单/项目归属区域，与 BB.1.1 同口径]]></source>
+      <source code="AA.5" name="行政部门字典" fields="预算部门"><![CDATA[订单/项目归属的预算部门，默认明细到二级部门（如"生产一部"而非仅"制造工程部"）]]></source>
+      <source code="AA.4.a" name="客户主数据" fields="客户名称"><![CDATA[必填；客户主数据选择]]></source>
+      <source code="BAA.2" name="产品标准成本设置" fields="标准成本"><![CDATA[销售成本 = 销量 × 产品标准成本（财务视角）]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BO.PL 利润表—营业收入"><![CDATA[销售收入 → 营业收入（按产品类别映射硬件销售/软件销售）]]></output>
+      <output target="BB.3.X 进销存预算"><![CDATA[销售成本 → 产成品转出（存货减少），随销售出库进营业成本]]></output>
+      <output target="BO.CF 现金流量表—CF-01"><![CDATA[预收 + 验收回款 → 销售商品、提供劳务收到的现金]]></output>
+    </outputs>
+    <keyRules>
+      <rule><![CDATA[收入 = 销量 × 单价（不含税），系统自动计算，不可编辑。]]></rule>
+      <rule><![CDATA[销售成本 = 销量 × 标准成本，仅财务视角（BB.1.2.c）可见/维护。]]></rule>
+      <rule><![CDATA[现金流严格校验 CF-01 = 预收款 + 验收回款。]]></rule>
+      <rule><![CDATA[订单编号仅针对存量订单有要求，新订单可用虚拟订单号实现或可不填。]]></rule>
+      <rule><![CDATA[口径措辞统一：签约主体 = 对外签约与对外收款主体（对外确认 6001 主营业务收入）。]]></rule>
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.1.2'].items） -->
+  <events>
+    <event event="收入确认" field="预计销售收入(不含税)">
+      <pl><![CDATA[主营业务收入 6001.1 (+)：按产品类别(财务口径)区分硬件销售、软件销售两条业务线]]></pl>
+      <bs><![CDATA[应收账款 (+)]]></bs>
+      <cf><![CDATA[—（权责发生制，不直接产生现金流）]]></cf>
+      <source><![CDATA[月度"预计销售收入(不含税)" = 当月销量 × 单价(不含税)，公式自动计算]]></source>
+      <entry><![CDATA[借：应收账款(1122)；贷：主营业务收入—硬件销售(600101)/软件销售(600103)]]></entry>
+      <note><![CDATA[根据 productCategory 自动路由至主营业务收入—硬件销售(600101) 或软件销售(600103)，均并入 6001.1 主营业务收入；验收一次性与直线法确认仅为业务标记，取数引擎均按月度填报值直取。本表不处理增值税，收入均为不含税口径。法人分录按签约主体（法人公司）归集生成（应收账款与主营业务收入均落到签约主体法人）。]]></note>
+    </event>
+    <event event="销售成本结转" field="预计销售成本">
+      <pl><![CDATA[主营业务成本 6401.1 (+)（硬件直接材料，随产成品销售出库结转）]]></pl>
+      <bs><![CDATA[存货 (−)]]></bs>
+      <cf><![CDATA[—（存货结转不涉及现金）]]></cf>
+      <source><![CDATA[月度"预计销售成本" = 当月销量 × 单台产品标准成本（finance角色可见）]]></source>
+      <entry><![CDATA[借：主营业务成本(6401.1)；贷：存货—库存商品/产成品(1405)]]></entry>
+      <note><![CDATA[产品标准成本优先取自 BAA.2 产品标准成本设置；无销量数据时，按该月收入占全年收入比例分摊全年标准成本兜底。法人落点与产成品出库法人一致（BB.3.X 产成品出库口径），销售成本按签约主体（法人公司）归集。]]></note>
+    </event>
+    <event event="收预收款" field="预收">
+      <pl><![CDATA[—]]></pl>
+      <bs><![CDATA[货币资金 (+)（合同负债 2204 直接手填，不自动取数）]]></bs>
+      <cf><![CDATA[经营活动现金流入：销售商品、提供劳务收到的现金 CF-01 (+)]]></cf>
+      <source><![CDATA[取自月度"预收"填报值，按合同约定排程手工填写]]></source>
+      <entry><![CDATA[借：货币资金(1001)（合同负债 2204 直接手填）]]></entry>
+      <note><![CDATA[严格校验 CF-01 = Σ(预收款) + Σ(验收回款)；溯源列绑定 sourceColumnCode = monthlyPrepayment。法人分录按签约主体（法人公司）归集生成。]]></note>
+    </event>
+    <event event="验收回款" field="验收回款">
+      <pl><![CDATA[—]]></pl>
+      <bs><![CDATA[货币资金 (+)、应收账款 (−)]]></bs>
+      <cf><![CDATA[经营活动现金流入：销售商品、提供劳务收到的现金 CF-01 (+)]]></cf>
+      <source><![CDATA[取自月度"验收回款"填报值，按客户终验及信用账期手工填写]]></source>
+      <entry><![CDATA[借：货币资金(1001)；贷：应收账款(1122)]]></entry>
+      <note><![CDATA[核算维度需精确至客户+销售合同+项目；回款冲减应收账款时，若有坏账准备，按规则同步调整。法人分录按签约主体（法人公司）归集生成。]]></note>
+    </event>
+  </events>
+
+</form>

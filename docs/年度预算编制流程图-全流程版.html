@@ -1,0 +1,390 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>年度预算编制流程图（全流程版）</title>
+<style>
+  :root {
+    --ink:#0f172a; --body:#334155; --muted:#64748b;
+    --bg:#f1f5f9; --card:#ffffff; --line:#cbd5e1;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:20px; background:var(--bg); color:var(--ink);
+    font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif; }
+  .wrap { max-width:1660px; margin:0 auto; background:#fff;
+    border:1px solid #e2e8f0; border-radius:14px;
+    box-shadow:0 14px 36px rgba(15,23,42,.08); padding:16px 18px 22px; }
+  .title-row { display:flex; justify-content:space-between; align-items:flex-end; gap:14px;
+    margin-bottom:10px; flex-wrap:wrap; }
+  h1 { margin:0 0 4px; font-size:26px; letter-spacing:.02em; }
+  .subtitle { margin:0; font-size:13px; color:var(--muted); }
+  .legend { display:flex; flex-wrap:wrap; gap:6px 12px; font-size:12px; color:#475569; max-width:820px; }
+  .legend span { display:inline-flex; align-items:center; gap:5px; }
+  .swatch { width:13px; height:13px; border-radius:3px; border:1px solid rgba(15,23,42,.18); }
+  svg { width:100%; height:auto; display:block; border:1px solid #e2e8f0; border-radius:10px; background:#fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="title-row">
+    <div>
+      <h1>年度预算编制流程图</h1>
+      <p class="subtitle">装备制造集团全面预算 · 主线：启动 → 假设准备 → 业务编制 → 财务汇总 → 合并三表 → 评审平衡 → 定稿执行</p>
+    </div>
+    <div class="legend" aria-label="图例">
+      <span><i class="swatch" style="background:#ffffff;border-color:#94a3b8"></i>手工填报</span>
+      <span><i class="swatch" style="background:#e2e8f0;border-color:#64748b"></i>系统计算</span>
+      <span><i class="swatch" style="background:#fef3c7;border-color:#d97706"></i>启动/假设/评审</span>
+      <span><i class="swatch" style="background:#dcfce7;border-color:#16a34a"></i>业务编制</span>
+      <span><i class="swatch" style="background:#e0f2fe;border-color:#0284c7"></i>财务汇总</span>
+      <span><i class="swatch" style="background:#ede9fe;border-color:#7c3aed"></i>合并与三表</span>
+      <span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="4 3"/></svg>数据供给</span>
+      <span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4 3"/></svg>评审退回</span>
+    </div>
+  </div>
+
+  <svg viewBox="0 0 1580 1300" role="img" aria-label="年度预算编制流程图（全流程版）">
+    <defs>
+      <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+      </marker>
+      <marker id="arwBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+      </marker>
+      <marker id="arwRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+      </marker>
+      <filter id="sh" x="-10%" y="-10%" width="120%" height="130%">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/>
+      </filter>
+    </defs>
+
+    <!-- ============ 阶段头 ============ -->
+    <rect x="90"  y="66" width="204" height="42" rx="10" fill="#dbeafe" stroke="#60a5fa" />
+    <text x="192" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">① 编制启动</text>
+    <rect x="294" y="66" width="204" height="42" rx="10" fill="#fef3c7" stroke="#f59e0b" />
+    <text x="396" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">② 假设与准备</text>
+    <rect x="498" y="66" width="204" height="42" rx="10" fill="#dcfce7" stroke="#16a34a" />
+    <text x="600" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">③ 业务编制</text>
+    <rect x="702" y="66" width="204" height="42" rx="10" fill="#e0f2fe" stroke="#0284c7" />
+    <text x="804" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#0c4a6e">④ 财务汇总</text>
+    <rect x="906" y="66" width="204" height="42" rx="10" fill="#ede9fe" stroke="#7c3aed" />
+    <text x="1008" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#5b21b6">⑤ 合并与三表</text>
+    <rect x="1110" y="66" width="204" height="42" rx="10" fill="#fee2e2" stroke="#dc2626" />
+    <text x="1212" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b">⑥ 评审与平衡</text>
+    <rect x="1314" y="66" width="186" height="42" rx="10" fill="#dbeafe" stroke="#60a5fa" />
+    <text x="1407" y="92" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">⑦ 定稿与执行</text>
+
+    <!-- 阶段分隔虚线 -->
+    <line x1="294" y1="112" x2="294" y2="1278" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5 5" />
+    <line x1="498" y1="112" x2="498" y2="1278" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5 5" />
+    <line x1="702" y1="112" x2="702" y2="1278" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5 5" />
+    <line x1="906" y1="112" x2="906" y2="1278" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5 5" />
+    <line x1="1110" y1="112" x2="1110" y2="1278" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5 5" />
+    <line x1="1314" y1="112" x2="1314" y2="1278" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="5 5" />
+
+    <!-- ============ 泳道背景（10条） ============ -->
+    <rect x="30" y="118" width="1530" height="108" rx="10" fill="#fbfdff" stroke="#e2e8f0" />
+    <rect x="30" y="226" width="1530" height="120" rx="10" fill="#ffffff" stroke="#e2e8f0" />
+    <rect x="30" y="346" width="1530" height="120" rx="10" fill="#ffffff" stroke="#e2e8f0" />
+    <rect x="30" y="466" width="1530" height="120" rx="10" fill="#ffffff" stroke="#e2e8f0" />
+    <rect x="30" y="586" width="1530" height="80" rx="10" fill="#f0f9ff" stroke="#bae6fd" />
+    <rect x="30" y="666" width="1530" height="80" rx="10" fill="#fffbeb" stroke="#fde68a" />
+    <rect x="30" y="746" width="1530" height="256" rx="10" fill="#fbfdff" stroke="#e2e8f0" />
+    <rect x="30" y="1002" width="1530" height="88" rx="10" fill="#fff7ed" stroke="#fed7aa" />
+    <rect x="30" y="1090" width="1530" height="88" rx="10" fill="#f0fdf4" stroke="#bbf7d0" />
+    <rect x="30" y="1178" width="1530" height="100" rx="10" fill="#ffffff" stroke="#e2e8f0" />
+
+    <!-- 泳道标签 -->
+    <text x="82" y="172" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3b73">预算办公室</text>
+    <text x="82" y="286" text-anchor="middle" font-size="14" font-weight="700" fill="#1f3b73">销售部门</text>
+    <text x="82" y="406" text-anchor="middle" font-size="14" font-weight="700" fill="#1f3b73">采购与供应链</text>
+    <text x="82" y="526" text-anchor="middle" font-size="14" font-weight="700" fill="#1f3b73">生产部门</text>
+    <text x="82" y="632" text-anchor="middle" font-size="14" font-weight="700" fill="#0c4a6e">后勤部门</text>
+    <text x="82" y="712" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">成本管理部</text>
+    <text x="82" y="874" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3b73">财经组</text>
+    <text x="82" y="1050" text-anchor="middle" font-size="14" font-weight="700" fill="#9a3412">人事部门</text>
+    <text x="82" y="1138" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">系统维护组</text>
+    <text x="82" y="1232" text-anchor="middle" font-size="14" font-weight="700" fill="#1f3b73">各项目/部门</text>
+
+    <!-- ============ 箭头 ============ -->
+    <!-- 启动 → 经营假设 -->
+    <path d="M 192 204 L 192 283 L 304 283" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 经营假设 → 销售预算 -->
+    <path d="M 488 283 L 502 283" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 销售预算 → 业务初审 -->
+    <path d="M 682 283 L 906 283" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 采购预算 → 业务初审 -->
+    <path d="M 682 403 C 760 403 840 340 906 296" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 生产预算 → 业务初审 -->
+    <path d="M 682 523 C 760 523 840 380 906 310" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 基建预算 → 业务初审 -->
+    <path d="M 682 626 C 760 626 840 400 906 320" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 业务初审 → 财务视角 -->
+    <path d="M 1004 316 C 1004 460 802 680 802 816" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 资本性支出 → 财务视角 -->
+    <path d="M 682 853 L 706 853" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 财务视角 → 资金预算 -->
+    <path d="M 802 890 L 802 902" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 资金预算 → 关联交易 -->
+    <path d="M 898 919 L 910 853" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 关联交易 → 合并抵销 -->
+    <path d="M 1006 890 L 1006 902" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 合并抵销 → 三表试算 -->
+    <path d="M 1102 939 L 1114 853" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 三表试算 → 财务复审 -->
+    <path d="M 1210 890 L 1210 902" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 财务复审 → 评审会 -->
+    <path d="M 1306 939 L 1318 939 L 1318 172 L 1296 172" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+    <!-- 评审会 → 定稿 -->
+    <path d="M 1292 172 L 1326 172" stroke="#475569" stroke-width="2.2" fill="none" marker-end="url(#arw)" />
+
+    <!-- 蓝虚线 -->
+    <path d="M 396 1102 L 396 766" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <path d="M 488 1048 C 520 960 500 840 490 786" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <path d="M 670 1014 L 670 316" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <path d="M 500 786 C 520 680 540 480 560 316" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <path d="M 500 786 C 520 700 540 580 560 403" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <path d="M 500 786 C 520 740 540 660 560 523" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <path d="M 490 786 L 706 853" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <!-- 蓝虚线：折旧与费用归集 → 税金测算 -->
+    <path d="M 682 940 L 706 960" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <path d="M 420 1190 L 420 800" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <!-- 蓝虚线：标准成本 → 生产预算 -->
+    <path d="M 488 706 C 510 660 510 580 502 523" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <!-- 蓝虚线：采购预算 → 资本性支出（设备采购） -->
+    <path d="M 570 436 L 570 816" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <!-- 蓝虚线：基建预算 → 资本性支出 -->
+    <path d="M 592 652 L 592 816" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+    <!-- 蓝虚线：自制设备 → 资本性支出 -->
+    <path d="M 614 1190 L 614 890" stroke="#2563eb" stroke-width="1.6" stroke-dasharray="6 4" fill="none" marker-end="url(#arwBlue)" />
+
+    <!-- 红虚线：评审退回 -->
+    <path d="M 1212 212 L 1212 240 L 900 240 L 900 250" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="7 4" fill="none" marker-end="url(#arwRed)" />
+    <text x="1120" y="233" font-size="11.5" fill="#dc2626">退回调整</text>
+
+    <!-- 线旁标注 -->
+    <text x="820" y="480" font-size="11" fill="#64748b">业务数齐套</text>
+    <text x="1330" y="930" font-size="11" fill="#64748b">复审通过</text>
+    <text x="340" y="960" font-size="11" fill="#2563eb">主数据供给</text>
+    <text x="505" y="920" font-size="11" fill="#2563eb">人工费率</text>
+    <text x="680" y="700" font-size="11" fill="#2563eb">雇员费用</text>
+    <text x="512" y="740" font-size="11" fill="#2563eb">假设参数</text>
+    <text x="690" y="935" font-size="11" fill="#2563eb">折旧/费用</text>
+    <text x="430" y="1020" font-size="11" fill="#2563eb">费用/物料需求</text>
+    <text x="495" y="620" font-size="11" fill="#2563eb">标准成本</text>
+    <text x="625" y="730" font-size="11" fill="#2563eb">资本化汇总</text>
+
+    <!-- ============ 卡片 ============ -->
+
+    <!-- 预算办公室：启动 -->
+    <g filter="url(#sh)">
+      <rect x="104" y="140" width="176" height="64" rx="12" fill="#dbeafe" stroke="#2563eb" />
+      <text x="192" y="170" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f172a">年度预算启动</text>
+      <text x="192" y="190" text-anchor="middle" font-size="11" fill="#334155">下达编制指引与时间表</text>
+    </g>
+
+    <!-- 预算办公室：评审菱形 -->
+    <g filter="url(#sh)">
+      <polygon points="1212,132 1292,172 1212,212 1132,172" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6" />
+      <text x="1212" y="165" text-anchor="middle" font-size="13" font-weight="700" fill="#7f1d1d">预算评审会</text>
+      <text x="1212" y="187" text-anchor="middle" font-size="10.5" fill="#991b1b">通过 / 退回</text>
+    </g>
+
+    <!-- 预算办公室：定稿 -->
+    <g filter="url(#sh)">
+      <rect x="1326" y="140" width="162" height="64" rx="12" fill="#dbeafe" stroke="#2563eb" />
+      <text x="1407" y="164" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f172a">终审定稿</text>
+      <text x="1407" y="184" text-anchor="middle" font-size="11" fill="#334155">预算执行令</text>
+      <text x="1407" y="199" text-anchor="middle" font-size="10.5" fill="#475569">发布 · 月度滚动</text>
+    </g>
+
+    <!-- 销售部门：经营假设 -->
+    <g filter="url(#sh)">
+      <rect x="304" y="250" width="184" height="66" rx="12" fill="#fef3c7" stroke="#d97706" />
+      <text x="396" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">经营假设确认</text>
+      <text x="396" y="296" text-anchor="middle" font-size="11" fill="#334155">客户 / 项目 / 产能 / 在手订单</text>
+    </g>
+
+    <!-- 销售部门：销售预算 -->
+    <g filter="url(#sh)">
+      <rect x="502" y="250" width="180" height="66" rx="12" fill="#dcfce7" stroke="#16a34a" />
+      <text x="592" y="274" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">销售预算 BB.1</text>
+      <text x="592" y="294" text-anchor="middle" font-size="10.5" fill="#1f2937">签约 1.1 · 软硬件 1.2</text>
+      <text x="592" y="310" text-anchor="middle" font-size="10.5" fill="#1f2937">服务 1.3 · 销售费用 1.4</text>
+    </g>
+
+    <!-- 销售部门：业务初审 -->
+    <g filter="url(#sh)">
+      <rect x="906" y="250" width="196" height="66" rx="12" fill="#fee2e2" stroke="#dc2626" />
+      <text x="1004" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">业务初审</text>
+      <text x="1004" y="296" text-anchor="middle" font-size="11" fill="#334155">销量 / 产量 / 采购 / 人头齐套</text>
+    </g>
+
+    <!-- 采购与供应链：采购预算 -->
+    <g filter="url(#sh)">
+      <rect x="502" y="370" width="180" height="66" rx="12" fill="#dcfce7" stroke="#16a34a" />
+      <text x="592" y="394" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">采购预算 BB.3</text>
+      <text x="592" y="414" text-anchor="middle" font-size="10.5" fill="#1f2937">设备采购 3.1 · 物料 3.3</text>
+      <text x="592" y="430" text-anchor="middle" font-size="10.5" fill="#1f2937">进销存 3.X</text>
+    </g>
+
+    <!-- 生产部门：生产预算 -->
+    <g filter="url(#sh)">
+      <rect x="502" y="490" width="180" height="66" rx="12" fill="#dcfce7" stroke="#16a34a" />
+      <text x="592" y="518" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">生产预算</text>
+      <text x="592" y="538" text-anchor="middle" font-size="10.5" fill="#1f2937">生产排产 BB.2.1</text>
+    </g>
+
+    <!-- 后勤部门：基建工程预算 -->
+    <g filter="url(#sh)">
+      <rect x="502" y="600" width="180" height="52" rx="12" fill="#dcfce7" stroke="#16a34a" />
+      <text x="592" y="622" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">基建工程预算</text>
+      <text x="592" y="640" text-anchor="middle" font-size="10.5" fill="#1f2937">BB.3.2 基建工程</text>
+    </g>
+
+    <!-- 成本管理部：标准成本维护 -->
+    <g filter="url(#sh)">
+      <rect x="304" y="685" width="184" height="42" rx="10" fill="#ffffff" stroke="#d97706" />
+      <text x="396" y="707" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f172a">标准成本维护</text>
+      <text x="396" y="721" text-anchor="middle" font-size="9.5" fill="#334155">BAA.2 产品单位成本 · BAA.4 物料单位成本</text>
+    </g>
+
+    <!-- 财经组：假设与前置信息 -->
+    <g filter="url(#sh)">
+      <rect x="304" y="766" width="184" height="42" rx="10" fill="#ffffff" stroke="#d97706" />
+      <text x="396" y="788" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f172a">假设与前置信息</text>
+      <text x="396" y="802" text-anchor="middle" font-size="9.5" fill="#334155">税率/拆分比例</text>
+    </g>
+
+    <!-- 财经组：资本性支出预算 -->
+    <g filter="url(#sh)">
+      <rect x="502" y="816" width="180" height="74" rx="12" fill="#e2e8f0" stroke="#64748b" />
+      <rect x="624" y="818" width="58" height="18" rx="9" fill="#64748b" />
+      <text x="653" y="831" text-anchor="middle" font-size="10" fill="#ffffff">系统计算</text>
+      <text x="592" y="850" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">资本性支出预算</text>
+      <text x="592" y="869" text-anchor="middle" font-size="10.5" fill="#334155">BB.4 CAPEX 汇总</text>
+      <text x="592" y="885" text-anchor="middle" font-size="10" fill="#475569">设备采购·自制设备·基建</text>
+    </g>
+
+    <!-- 财经组：财务视角 -->
+    <g filter="url(#sh)">
+      <rect x="706" y="816" width="192" height="74" rx="12" fill="#e2e8f0" stroke="#64748b" />
+      <rect x="838" y="818" width="58" height="18" rx="9" fill="#64748b" />
+      <text x="867" y="831" text-anchor="middle" font-size="10" fill="#ffffff">系统计算</text>
+      <text x="802" y="850" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">财务视角补充</text>
+      <text x="802" y="869" text-anchor="middle" font-size="10.5" fill="#334155">BB.1.2.c / BB.1.3.c 成本·法人·分录</text>
+      <text x="802" y="884" text-anchor="middle" font-size="10" fill="#475569">代采按净额法（CAS 14）</text>
+    </g>
+
+    <!-- 财经组：折旧与费用归集 -->
+    <g filter="url(#sh)">
+      <rect x="502" y="902" width="180" height="76" rx="12" fill="#e2e8f0" stroke="#64748b" />
+      <rect x="624" y="904" width="58" height="18" rx="9" fill="#0f766e" />
+      <text x="653" y="917" text-anchor="middle" font-size="10" fill="#ffffff">财经经营组</text>
+      <text x="592" y="936" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">折旧与费用归集</text>
+      <text x="592" y="955" text-anchor="middle" font-size="10.5" fill="#334155">BB.4 折旧计提</text>
+      <text x="592" y="971" text-anchor="middle" font-size="10.5" fill="#334155">BB.5.2 费用转换归集</text>
+    </g>
+
+    <!-- 财经组：资金预算 -->
+    <g filter="url(#sh)">
+      <rect x="706" y="902" width="192" height="35" rx="10" fill="#e2e8f0" stroke="#64748b" />
+      <rect x="828" y="904" width="64" height="14" rx="7" fill="#1d4ed8" />
+      <text x="860" y="915" text-anchor="middle" font-size="9" fill="#ffffff">财经资金组</text>
+      <text x="770" y="924" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f172a">资金预算 BF.1/BF.3</text>
+    </g>
+
+    <!-- 财经组：税金测算 -->
+    <g filter="url(#sh)">
+      <rect x="706" y="943" width="192" height="35" rx="10" fill="#e2e8f0" stroke="#64748b" />
+      <rect x="828" y="945" width="64" height="14" rx="7" fill="#dc2626" />
+      <text x="860" y="956" text-anchor="middle" font-size="9" fill="#ffffff">财经税金组</text>
+      <text x="770" y="965" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f172a">税金测算 BF.4 增值税</text>
+    </g>
+
+    <!-- 财经组：关联交易 -->
+    <g filter="url(#sh)">
+      <rect x="910" y="816" width="192" height="74" rx="12" fill="#e2e8f0" stroke="#dc2626" stroke-width="1.5" />
+      <rect x="1030" y="818" width="64" height="16" rx="8" fill="#dc2626" />
+      <text x="1062" y="830" text-anchor="middle" font-size="9.5" fill="#ffffff">财经税金组</text>
+      <text x="1006" y="850" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">关联交易识别</text>
+      <text x="1006" y="869" text-anchor="middle" font-size="10.5" fill="#334155">BJ.C 内部交易识别</text>
+      <text x="1006" y="885" text-anchor="middle" font-size="10" fill="#475569">跨法人购销 / 代采 / 租赁</text>
+    </g>
+
+    <!-- 财经组：合并抵销 -->
+    <g filter="url(#sh)">
+      <rect x="910" y="902" width="192" height="74" rx="12" fill="#e2e8f0" stroke="#dc2626" stroke-width="1.5" />
+      <rect x="1030" y="904" width="64" height="16" rx="8" fill="#dc2626" />
+      <text x="1062" y="916" text-anchor="middle" font-size="9.5" fill="#ffffff">财经税金组</text>
+      <text x="1006" y="936" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">合并抵销</text>
+      <text x="1006" y="955" text-anchor="middle" font-size="10.5" fill="#334155">BO.ELIM 抵销分录</text>
+      <text x="1006" y="971" text-anchor="middle" font-size="10" fill="#475569">CAS 33 抵销 · CAS 18 递延所得税</text>
+    </g>
+
+    <!-- 财经组：三表试算 -->
+    <g filter="url(#sh)">
+      <rect x="1114" y="816" width="192" height="74" rx="12" fill="#e2e8f0" stroke="#64748b" />
+      <rect x="1246" y="818" width="58" height="18" rx="9" fill="#0f766e" />
+      <text x="1275" y="831" text-anchor="middle" font-size="10" fill="#ffffff">财经经营组</text>
+      <text x="1210" y="850" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">三表试算</text>
+      <text x="1210" y="869" text-anchor="middle" font-size="10.5" fill="#334155">BO.PL / BO.BS / BO.CF</text>
+      <text x="1210" y="884" text-anchor="middle" font-size="10" fill="#475569">勾稽：资产负债平衡 · 现金一致</text>
+    </g>
+
+    <!-- 财经组：财务复审 -->
+    <g filter="url(#sh)">
+      <rect x="1114" y="902" width="192" height="74" rx="12" fill="#ffffff" stroke="#dc2626" />
+      <rect x="1246" y="904" width="58" height="18" rx="9" fill="#0f766e" />
+      <text x="1275" y="917" text-anchor="middle" font-size="10" fill="#ffffff">财经经营组</text>
+      <text x="1210" y="936" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">财务复审</text>
+      <text x="1210" y="955" text-anchor="middle" font-size="10.5" fill="#334155">三表勾稽 / 平衡校验 / 风险事项</text>
+    </g>
+
+    <!-- 人事部门：岗位工时费率设置 -->
+    <g filter="url(#sh)">
+      <rect x="304" y="1014" width="184" height="68" rx="12" fill="#fff7ed" stroke="#f97316" />
+      <text x="396" y="1044" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">岗位工时费率设置</text>
+      <text x="396" y="1066" text-anchor="middle" font-size="10.5" fill="#334155">BAA.3</text>
+    </g>
+
+    <!-- 人事部门：雇员费用编制 -->
+    <g filter="url(#sh)">
+      <rect x="560" y="1014" width="220" height="68" rx="12" fill="#fff7ed" stroke="#f97316" />
+      <text x="670" y="1044" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">雇员费用编制/导入</text>
+      <text x="670" y="1066" text-anchor="middle" font-size="10.5" fill="#334155">BB.5.1</text>
+    </g>
+
+    <!-- 系统维护组：基础静态数据设置 -->
+    <g filter="url(#sh)">
+      <rect x="304" y="1102" width="184" height="70" rx="12" fill="#f0fdf4" stroke="#16a34a" />
+      <text x="396" y="1132" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">基础静态数据设置</text>
+      <text x="396" y="1154" text-anchor="middle" font-size="10" fill="#334155">主数据 AA/AB/AM · 系统初始化</text>
+    </g>
+
+    <!-- 各项目/部门：费用与物料需求 -->
+    <g filter="url(#sh)">
+      <rect x="304" y="1190" width="184" height="80" rx="12" fill="#ffffff" stroke="#16a34a" />
+      <rect x="434" y="1192" width="52" height="18" rx="9" fill="#dcfce7" stroke="#16a34a" />
+      <text x="460" y="1205" text-anchor="middle" font-size="10" fill="#166534">手工录入</text>
+      <text x="396" y="1226" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">费用与物料需求</text>
+      <text x="396" y="1246" text-anchor="middle" font-size="10.5" fill="#334155">BA.5 费用预算 · BAP 物料需求</text>
+      <text x="396" y="1262" text-anchor="middle" font-size="10" fill="#475569">各项目/部门填报</text>
+    </g>
+
+    <!-- 各项目/部门：自制设备预算 -->
+    <g filter="url(#sh)">
+      <rect x="502" y="1190" width="180" height="80" rx="12" fill="#ffffff" stroke="#16a34a" />
+      <rect x="624" y="1192" width="52" height="18" rx="9" fill="#dcfce7" stroke="#16a34a" />
+      <text x="650" y="1205" text-anchor="middle" font-size="10" fill="#166534">手工录入</text>
+      <text x="592" y="1226" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">自制设备预算</text>
+      <text x="592" y="1246" text-anchor="middle" font-size="10.5" fill="#334155">BB.4.1 人工·领料·转固</text>
+      <text x="592" y="1262" text-anchor="middle" font-size="10" fill="#475569">各项目/部门编制</text>
+    </g>
+
+  </svg>
+</div>
+</body>
+</html>

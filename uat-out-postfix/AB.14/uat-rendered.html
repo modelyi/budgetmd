@@ -1,0 +1,116 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+table{border-collapse:collapse;font-size:12px;font-family:"Microsoft YaHei",Arial,sans-serif}
+table th{background:#002f6c;color:#fff;font-weight:600;text-align:center;border:1px solid #cbd5e1;padding:6px 10px;white-space:nowrap}
+table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
+.t3a-html-sheet th,.t3a-html-sheet td{white-space:nowrap}
+.t3a-html-sheet th.t3a-th--time{background:#001e4a}
+.t3a-html-sheet td.t3a-num{text-align:right}
+.t3a-html-sheet tbody tr:nth-child(2n){background:#f8fafc}
+.t3a-sheet-scroll{max-width:100%;overflow-x:auto;transform:rotateX(180deg)}
+.t3a-sheet-scroll > table.t3a-html-sheet{transform:rotateX(180deg)}
+.t3a-html-sheet{display:block;width:max-content}
+.t3a-sheet-scroll::-webkit-scrollbar{height:10px}
+.t3a-sheet-scroll::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-sheet-scroll::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+.t3a-html-sheet::-webkit-scrollbar{height:10px}
+.t3a-html-sheet::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-html-sheet::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+</style></head><body style="margin:24px;background:#fff"><h1>AB.14 费用属性字典</h1>
+<style>
+table{border-collapse:collapse;font-size:12px;font-family:"Microsoft YaHei",Arial,sans-serif}
+table th{background:#002f6c;color:#fff;font-weight:600;text-align:center;border:1px solid #cbd5e1;padding:6px 10px;white-space:nowrap}
+table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
+.t3a-html-sheet th,.t3a-html-sheet td{white-space:nowrap}
+.t3a-html-sheet th.t3a-th--time{background:#001e4a}
+.t3a-html-sheet td.t3a-num{text-align:right}
+.t3a-html-sheet tbody tr:nth-child(2n){background:#f8fafc}
+.t3a-sheet-scroll{max-width:100%;overflow-x:auto;transform:rotateX(180deg)}
+.t3a-sheet-scroll > table.t3a-html-sheet{transform:rotateX(180deg)}
+.t3a-html-sheet{display:block;width:max-content}
+.t3a-sheet-scroll::-webkit-scrollbar{height:10px}
+.t3a-sheet-scroll::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-sheet-scroll::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+.t3a-html-sheet::-webkit-scrollbar{height:10px}
+.t3a-html-sheet::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-html-sheet::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+</style>
+
+<h2>① 预算表样</h2>
+<h3>AB.14 费用属性字典</h3>
+<div class="t3a-sheet-scroll">
+<table class="t3a-html-sheet">
+  <tbody>
+    <tr>
+      <th class="t3a-th">费用属性编码</th>
+      <th class="t3a-th">费用属性名称</th>
+      <th class="t3a-th">适用范围与财务科目映射</th>
+    </tr>
+    <tr>
+      <td>FEE-01</td>
+      <td>销售费用</td>
+      <td>销售活动相关费用，计入 6601 销售费用</td>
+    </tr>
+    <tr>
+      <td>FEE-02</td>
+      <td>管理费用</td>
+      <td>行政管理部门费用，计入 6602 管理费用</td>
+    </tr>
+    <tr>
+      <td>FEE-03</td>
+      <td>研发费用</td>
+      <td>研发活动费用，计入 6603 研发费用</td>
+    </tr>
+    <tr>
+      <td>FEE-04</td>
+      <td>直接制造费用</td>
+      <td>直接计入产品制造成本的制造费用（如车间直接耗用的辅料、动力等）</td>
+    </tr>
+    <tr>
+      <td>FEE-05</td>
+      <td>间接制造费用</td>
+      <td>需分摊计入产品制造成本的制造费用（如车间管理人员、折旧、水电等）</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>② 字段与值说明</h2>
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">来源</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">费用属性编码</td>
+<td align="left">本表维护</td>
+<td align="left">固定值域字典；供各编制表「费用属性 / 费用归属」字段下拉引用</td>
+</tr>
+<tr>
+<td align="left">费用属性名称</td>
+<td align="left">本表维护</td>
+<td align="left">可选值：销售费用 / 管理费用 / 研发费用 / 直接制造费用 / 间接制造费用</td>
+</tr>
+<tr>
+<td align="left">适用范围与财务科目映射</td>
+<td align="left">本表维护</td>
+<td align="left">说明该费用属性的业务含义及对应财务科目（销售费用→6601、管理费用→6602、研发费用→6603、直接制造费用/间接制造费用→制造费用）</td>
+</tr>
+</tbody></table>
+<h2>③ 关键规则要点</h2>
+<p><strong>AB.14 费用属性</strong></p>
+<ul>
+<li>费用属性(AB.14)为固定值域字典（销售费用/管理费用/研发费用/直接制造费用/间接制造费用），供各编制表「费用属性/费用归属」字段下拉引用，不可在编制表内新增值。</li>
+</ul>
+<h2>④ 适用业务情形</h2>
+<p><strong>适用于</strong></p>
+<ul>
+<li>费用属性字典维护（销售费用/管理费用/研发费用/直接制造费用/间接制造费用），供各编制表「费用属性 / 费用归属」字段下拉引用，并映射对应财务科目（6601/6602/6603/制造费用）</li>
+</ul>
+<p><strong>不适用于</strong></p>
+<ul>
+<li>具体业务金额填报</li>
+</ul>
+</body></html>

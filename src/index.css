@@ -1,0 +1,182 @@
+@import "tailwindcss";
+@variant dark (&:is(.dark, .dark *));
+
+@layer base {
+  body {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom scrollbar for wide financial grid */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.table-sticky-left-1 {
+  position: sticky;
+  left: 0;
+  z-index: 12;
+}
+
+
+.table-sticky-left-3 {
+  position: sticky;
+  left: 88px;
+  z-index: 12;
+}
+
+.table-sticky-left-4 {
+  position: sticky;
+  left: 264px;
+  z-index: 12;
+}
+
+/* T3A 表样示范（Markdown + 内嵌 HTML 表头）：
+   复杂表样 <table class="t3a-html-sheet">（两行表头/时间组/度量子列，rowspan/colspan）。
+   class 由 sanitize 白名单放行（内联 style 会被剥，故底色走这里）。 */
+.t3a-html-sheet {
+  border-collapse: collapse;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.t3a-html-sheet th,
+.t3a-html-sheet td {
+  border: 1px solid #cbd5e1;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+.t3a-html-sheet th.t3a-th {
+  background-color: #002f6c;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}
+.t3a-html-sheet th.t3a-th--time {
+  background-color: #001e4a;
+}
+.t3a-html-sheet tbody tr:nth-child(2n) {
+  background-color: #f8fafc;
+}
+.t3a-html-sheet td.t3a-num {
+  text-align: right;
+}
+.dark .t3a-html-sheet th,
+.dark .t3a-html-sheet td {
+  border-color: #334155;
+}
+.dark .t3a-html-sheet th.t3a-th {
+  background-color: #1e3a5f;
+  color: #e2e8f0;
+}
+.dark .t3a-html-sheet th.t3a-th--time {
+  background-color: #172554;
+}
+.dark .t3a-html-sheet tbody tr:nth-child(2n) {
+  background-color: rgba(30, 41, 59, 0.4);
+}
+
+/* T3A 表单文档页（docs/formdocs/*.md）正文表格样式：
+   全部规则作用域限定在页面正文容器 .t3a-doc-view 之下，绝不写全局 table/th/td 选择器，
+   以免影响 T3B / T5 等其他页签。文档内嵌的 <style> 块已在数据源层剥除，样式统一由此处提供。 */
+.t3a-doc-view .markdown-body table {
+  border-collapse: collapse;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+/* 表样（.t3a-html-sheet）：整表横向可滚动、宽度随内容 */
+.t3a-doc-view .markdown-body table.t3a-html-sheet {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.t3a-doc-view .markdown-body .t3a-sheet-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+/* 单元格：1px 边框 */
+.t3a-doc-view .markdown-body table th,
+.t3a-doc-view .markdown-body table td {
+  border: 1px solid #cbd5e1;
+  padding: 6px 10px;
+}
+/* 表头：深蓝底白字 */
+.t3a-doc-view .markdown-body table th {
+  background-color: #002f6c;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}
+/* 时间组表头：更深一档，与既有 t3a-html-sheet 视觉一致 */
+.t3a-doc-view .markdown-body table th.t3a-th--time {
+  background-color: #001e4a;
+}
+/* 表样单元格不换行；数值右对齐 */
+.t3a-doc-view .markdown-body table.t3a-html-sheet th,
+.t3a-doc-view .markdown-body table.t3a-html-sheet td {
+  white-space: nowrap;
+}
+.t3a-doc-view .markdown-body table td.t3a-num {
+  text-align: right;
+}
+/* 表样隔行浅底，提升可读性 */
+.t3a-doc-view .markdown-body table.t3a-html-sheet tbody tr:nth-child(2n) {
+  background-color: #f8fafc;
+}
+/* 横向滚动条常显且可见：默认 webkit 滚动条过淡、易被忽略，加高到 10px 并给轨道/滑块上色，
+   读者一眼可见「此处可横向滑动」。作用域限定在 .t3a-doc-view 之下，不写全局选择器。 */
+.t3a-doc-view .t3a-sheet-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+.t3a-doc-view .t3a-sheet-scroll::-webkit-scrollbar-track {
+  background: #eef2f7;
+}
+.t3a-doc-view .t3a-sheet-scroll::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 5px;
+}
+.t3a-doc-view .t3a-html-sheet::-webkit-scrollbar {
+  height: 10px;
+}
+.t3a-doc-view .t3a-html-sheet::-webkit-scrollbar-track {
+  background: #eef2f7;
+}
+.t3a-doc-view .t3a-html-sheet::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 5px;
+}
+
+/* A1 文档内嵌 mermaid 图（A1.3 五张图）：图容器横向可滚动、SVG 不缩窄到正文宽度，
+   保证大图（ER 图 / 明细流向图）可按原尺寸滚动查看。 */
+.t3a-doc-view .a1-mermaid-diagram {
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 12px;
+  margin: 8px 0;
+}
+.t3a-doc-view .a1-mermaid-diagram svg {
+  max-width: none;
+  height: auto;
+  display: block;
+}

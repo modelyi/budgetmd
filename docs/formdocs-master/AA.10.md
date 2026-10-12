@@ -1,0 +1,177 @@
+# AA.10 供应商主数据
+
+<style>
+table{border-collapse:collapse;font-size:12px;font-family:"Microsoft YaHei",Arial,sans-serif}
+table th{background:#002f6c;color:#fff;font-weight:600;text-align:center;border:1px solid #cbd5e1;padding:6px 10px;white-space:nowrap}
+table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
+.t3a-html-sheet th,.t3a-html-sheet td{white-space:nowrap}
+.t3a-html-sheet th.t3a-th--time{background:#001e4a}
+.t3a-html-sheet td.t3a-num{text-align:right}
+.t3a-html-sheet tbody tr:nth-child(2n){background:#f8fafc}
+.t3a-sheet-scroll{max-width:100%;overflow-x:auto;transform:rotateX(180deg)}
+.t3a-sheet-scroll > table.t3a-html-sheet{transform:rotateX(180deg)}
+.t3a-html-sheet{display:block;width:max-content}
+.t3a-sheet-scroll::-webkit-scrollbar{height:10px}
+.t3a-sheet-scroll::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-sheet-scroll::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+.t3a-html-sheet::-webkit-scrollbar{height:10px}
+.t3a-html-sheet::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-html-sheet::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+</style>
+
+## ① 预算表样
+
+### AA.10 供应商主数据
+
+<div class="t3a-sheet-scroll">
+<table class="t3a-html-sheet">
+  <tbody>
+    <tr>
+      <th class="t3a-th">供应商编码</th>
+      <th class="t3a-th">供应商名称</th>
+      <th class="t3a-th">供应商类型</th>
+      <th class="t3a-th">归属主体</th>
+      <th class="t3a-th">供货/服务范围</th>
+      <th class="t3a-th">状态</th>
+      <th class="t3a-th">备注说明</th>
+      <th class="t3a-th">引用说明</th>
+    </tr>
+    <tr>
+      <td>SUP-IN-001</td>
+      <td>整机总装一厂</td>
+      <td>内部</td>
+      <td>甜甜圈集团公司</td>
+      <td>高功率大幅面激光切割成套装备总装与总调</td>
+      <td>启用</td>
+      <td>集团核心装备总装交付基地</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-IN-002</td>
+      <td>整机总装二厂</td>
+      <td>内部</td>
+      <td>草莓慕斯公司</td>
+      <td>管材激光切割机与三维五轴切管机集成</td>
+      <td>启用</td>
+      <td>华东切管专业制造中心</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-IN-003</td>
+      <td>智能切割头装配中心</td>
+      <td>内部</td>
+      <td>蓝莓蛋挞公司</td>
+      <td>万瓦级智能激光切割头与微纳聚焦模组</td>
+      <td>启用</td>
+      <td>核心光学部件自制总成</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-IN-004</td>
+      <td>数控系统研发与测试中心</td>
+      <td>内部</td>
+      <td>甜甜圈集团公司</td>
+      <td>总线数控切割系统软硬件与工艺套料算法</td>
+      <td>启用</td>
+      <td>自研数控控制中枢</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-IN-005</td>
+      <td>高功率激光加工工艺实验厂</td>
+      <td>内部</td>
+      <td>草莓慕斯公司</td>
+      <td>激光厚板切割、坡口切削及焊接打样工艺开发</td>
+      <td>启用</td>
+      <td>工艺包开发与客户试切打样</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-IN-006</td>
+      <td>高精度机加与结构件中心</td>
+      <td>内部</td>
+      <td>甜甜圈集团公司</td>
+      <td>重型机床床身、高强度横梁与高精度运动滑台</td>
+      <td>启用</td>
+      <td>高刚性基础机械件配套</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-EX-001</td>
+      <td>锐科光纤激光技术供应商</td>
+      <td>外部</td>
+      <td>锐科激光股份有限公司</td>
+      <td>6kW-30kW高功率连续多模/单模光纤激光器</td>
+      <td>启用</td>
+      <td>战略外部光源供应商</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-EX-002</td>
+      <td>创鑫光子核心光源供应商</td>
+      <td>外部</td>
+      <td>创鑫激光股份有限公司</td>
+      <td>万瓦高抗反射光纤激光光源及配件</td>
+      <td>启用</td>
+      <td>主要激光光源供货渠道</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-EX-003</td>
+      <td>柏楚数控核心部件供应商</td>
+      <td>外部</td>
+      <td>柏楚电子科技股份有限公司</td>
+      <td>激光切割控制板卡、电容高度传感器与总线驱动器</td>
+      <td>启用</td>
+      <td>工业控制软硬件供应商</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-EX-004</td>
+      <td>普雷茨特光学核心件供应商</td>
+      <td>外部</td>
+      <td>德国普雷茨特 (Precitec)</td>
+      <td>智能全自动调焦切割头总成与保护镜组</td>
+      <td>启用</td>
+      <td>进口高阶激光头供应商</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-EX-005</td>
+      <td>同飞工业制冷设备供应商</td>
+      <td>外部</td>
+      <td>同飞制冷股份有限公司</td>
+      <td>双温双控大制冷量激光专用冷水机组</td>
+      <td>启用</td>
+      <td>激光冷却系统配套</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+    <tr>
+      <td>SUP-EX-006</td>
+      <td>新代伺服驱动系统供应商</td>
+      <td>外部</td>
+      <td>新代科技股份有限公司</td>
+      <td>高精度大扭矩总线伺服电机及驱动放大器</td>
+      <td>启用</td>
+      <td>多轴运动控制执行机构</td>
+      <td>BB.1.1 合同签约额预算（内部供应商）</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+## ③ 关键规则要点
+
+**AA.10 供应商主数据**
+
+- 供应商类型与归属主体供BB.3.1"供应商"下拉引用。
+
+## ④ 适用业务情形
+
+**适用于**
+
+- 供应商主数据维护，供采购表供应商下拉引用
+
+**不适用于**
+
+- 具体业务金额填报

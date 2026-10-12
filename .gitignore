@@ -1,0 +1,32 @@
+node_modules/
+build/
+dist/
+dist-spa/
+coverage/
+/data/
+.DS_Store
+*.log
+.env*
+!.env.example
+.qoder/
+.hermes/
+*.zip
+
+# Generated release artifacts
+spa.html
+release/
+public/download/
+
+# Local tooling / scratch
+.ocr_venv/
+ck.mjs
+.preview/
+
+# Dated single-file build snapshots (root, generated artifacts)
+spa0*.html
+sa0*.html
+
+# Tool output dirs
+test-results/
+dogfood-output/
+ppt-out/

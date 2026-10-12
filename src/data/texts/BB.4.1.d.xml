@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BB.4.1.d BB.4.1.d · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BB.4.1.d" name="BB.4.1.d">
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BB.4.1.d'） -->
+  <fields>
+    <field code="budgetProject" name="预算项目(自制设备)" source="AA.6 预算项目主数据"><![CDATA[自制设备对应的预算项目]]></field>
+    <field code="entity" name="法人公司" source="AA.2 法人组织架构"><![CDATA[转固资产所属法人公司；转固分录（借1601固定资产/贷1604在建工程）按法人公司汇总生成]]></field>
+    <field code="department" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[预算部门原则上明细到二级部门]]></field>
+    <field code="transferMonth" name="转固月份" source="本表录入"><![CDATA[附表-自制设备转固明细表：1~12月]]></field>
+    <field code="assetCategory" name="资产类别" source="AA.9 资产类别与折旧"><![CDATA[附表-自制设备转固明细表]]></field>
+    <field code="originalValue" name="原值" source="本表录入"><![CDATA[附表-自制设备转固明细表；按法人公司+预算部门按月与主表BB.4.1.a转固转出勾稽一致]]></field>
+    <field code="assetDesc" name="资产描述" source="本表录入"><![CDATA[转固资产的描述（设备名称/规格/用途），仅用于人眼识别，不参与任何测算与分录；与 BB.4.3/BB.4.4.b/BB.4.5 的资产描述同口径]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BB.4.1.d 自制设备转固明细表">
+      <point><![CDATA[维度=预算项目(自制设备)/法人公司/预算部门/转固月份/资产类别/资产描述（末列文本，仅人眼识别）；度量=原值（单列，7 列）。]]></point>
+      <point><![CDATA[转固生成转固分录（借 1601 / 贷 1604）；转固资产次月起提折旧进 BB.4.X。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.4.1.d']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[自制设备达到可使用状态的转固原值明细登记，并生成转固分录]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[投入明细填报（属 .b/.c）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BB.4.1.d']） -->
+  <relation>
+    <summary><![CDATA[自制设备转固明细登记，生成转固分录。]]></summary>
+    <dataSources>
+      <source code="AA.9" name="资产类别及折旧参数" fields="资产类别"><![CDATA[转固资产类别对齐 AA.9，次月起按参数提折旧]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BB.4.1.a 自制设备工程预算汇总表"><![CDATA[按月原值合计 → 转固转出]]></output>
+      <output target="BO.BS 资产负债表—固定资产(1601)/在建工程(1604)"><![CDATA[借 1601 固定资产 / 贷 1604 在建工程]]></output>
+    </outputs>
+    <keyRules>
+      <rule><![CDATA[转固分录按法人公司汇总生成；资产描述末列仅人眼识别、不参与测算与分录。]]></rule>
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.4.1.d'].items） -->
+  <events>
+    <event event="自制设备转固" field="转固明细 原值">
+      <pl><![CDATA[—（转固不进损益；折旧经 BB.4.X 计提后进费用）]]></pl>
+      <bs><![CDATA[在建工程 1604 (−)；固定资产 1601 (+)]]></bs>
+      <cf><![CDATA[—（转固为非现金事件）]]></cf>
+      <source><![CDATA[本子表按法人公司/预算部门/转固月份/资产类别填报原值，转固分录按法人公司汇总生成]]></source>
+      <entry><![CDATA[固定资产(1601) (+)；在建工程(1604) (−)]]></entry>
+      <note><![CDATA[资产描述末列仅人眼识别、不参与测算与分录；转固后次月起提折旧进 BB.4.X。]]></note>
+    </event>
+  </events>
+
+</form>

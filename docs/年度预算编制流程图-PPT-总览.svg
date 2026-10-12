@@ -1,0 +1,120 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arwRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+    </marker>
+    <filter id="sh" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="800" y="70" text-anchor="middle" font-size="30" font-weight="700" fill="#0f172a">年度预算编制流程总览</text>
+  <text x="800" y="105" text-anchor="middle" font-size="16" fill="#64748b">装备制造集团全面预算 · 一上二下编制节奏 · 主线：启动 → 假设 → 编制 → 汇总 → 合并三表 → 评审 → 定稿</text>
+
+  <!-- 7 个阶段卡片：等宽 190，间距 30，起始 x=85，y=320，高 130 -->
+  <!-- ① 编制启动 -->
+  <g filter="url(#sh)">
+    <rect x="85" y="320" width="190" height="130" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="180" y="360" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">① 编制启动</text>
+    <line x1="120" y1="375" x2="240" y2="375" stroke="#93c5fd" stroke-width="1"/>
+    <text x="180" y="400" text-anchor="middle" font-size="13" fill="#334155">下达编制指引</text>
+    <text x="180" y="422" text-anchor="middle" font-size="13" fill="#334155">与时间表</text>
+  </g>
+
+  <!-- ② 假设与准备 -->
+  <g filter="url(#sh)">
+    <rect x="305" y="320" width="190" height="130" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="400" y="360" text-anchor="middle" font-size="17" font-weight="700" fill="#92400e">② 假设与准备</text>
+    <line x1="340" y1="375" x2="460" y2="375" stroke="#fcd34d" stroke-width="1"/>
+    <text x="400" y="400" text-anchor="middle" font-size="13" fill="#334155">主数据维护</text>
+    <text x="400" y="422" text-anchor="middle" font-size="13" fill="#334155">假设参数设定</text>
+  </g>
+
+  <!-- ③ 业务编制 -->
+  <g filter="url(#sh)">
+    <rect x="525" y="320" width="190" height="130" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="620" y="360" text-anchor="middle" font-size="17" font-weight="700" fill="#166534">③ 业务编制</text>
+    <line x1="560" y1="375" x2="680" y2="375" stroke="#86efac" stroke-width="1"/>
+    <text x="620" y="400" text-anchor="middle" font-size="13" fill="#334155">销售·生产·采购</text>
+    <text x="620" y="422" text-anchor="middle" font-size="13" fill="#334155">资产·人工费用</text>
+  </g>
+
+  <!-- ④ 财务汇总 -->
+  <g filter="url(#sh)">
+    <rect x="745" y="320" width="190" height="130" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="840" y="360" text-anchor="middle" font-size="17" font-weight="700" fill="#0c4a6e">④ 财务汇总</text>
+    <line x1="780" y1="375" x2="900" y2="375" stroke="#7dd3fc" stroke-width="1"/>
+    <text x="840" y="400" text-anchor="middle" font-size="13" fill="#334155">成本·资金·税金</text>
+    <text x="840" y="422" text-anchor="middle" font-size="13" fill="#334155">财务视角补充</text>
+  </g>
+
+  <!-- ⑤ 合并与三表 -->
+  <g filter="url(#sh)">
+    <rect x="965" y="320" width="190" height="130" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="1060" y="360" text-anchor="middle" font-size="17" font-weight="700" fill="#5b21b6">⑤ 合并与三表</text>
+    <line x1="1000" y1="375" x2="1120" y2="375" stroke="#c4b5fd" stroke-width="1"/>
+    <text x="1060" y="400" text-anchor="middle" font-size="13" fill="#334155">关联交易·抵销</text>
+    <text x="1060" y="422" text-anchor="middle" font-size="13" fill="#334155">PL·BS·CF 勾稽</text>
+  </g>
+
+  <!-- ⑥ 评审与平衡 -->
+  <g filter="url(#sh)">
+    <rect x="1185" y="320" width="190" height="130" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="1280" y="360" text-anchor="middle" font-size="17" font-weight="700" fill="#991b1b">⑥ 评审与平衡</text>
+    <line x1="1220" y1="375" x2="1340" y2="375" stroke="#fca5a5" stroke-width="1"/>
+    <text x="1280" y="400" text-anchor="middle" font-size="13" fill="#334155">财务复审</text>
+    <text x="1280" y="422" text-anchor="middle" font-size="13" fill="#334155">经管会评审</text>
+  </g>
+
+  <!-- ⑦ 定稿与执行 -->
+  <g filter="url(#sh)">
+    <rect x="1405" y="320" width="130" height="130" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="1470" y="360" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a">⑦ 定稿</text>
+    <line x1="1430" y1="375" x2="1510" y2="375" stroke="#93c5fd" stroke-width="1"/>
+    <text x="1470" y="400" text-anchor="middle" font-size="13" fill="#334155">预算执行令</text>
+    <text x="1470" y="422" text-anchor="middle" font-size="13" fill="#334155">月度滚动</text>
+  </g>
+
+  <!-- 主线箭头 -->
+  <path d="M 275 385 L 305 385" stroke="#475569" stroke-width="2.5" fill="none" marker-end="url(#arw)"/>
+  <path d="M 495 385 L 525 385" stroke="#475569" stroke-width="2.5" fill="none" marker-end="url(#arw)"/>
+  <path d="M 715 385 L 745 385" stroke="#475569" stroke-width="2.5" fill="none" marker-end="url(#arw)"/>
+  <path d="M 935 385 L 965 385" stroke="#475569" stroke-width="2.5" fill="none" marker-end="url(#arw)"/>
+  <path d="M 1155 385 L 1185 385" stroke="#475569" stroke-width="2.5" fill="none" marker-end="url(#arw)"/>
+  <path d="M 1375 385 L 1405 385" stroke="#475569" stroke-width="2.5" fill="none" marker-end="url(#arw)"/>
+
+  <!-- 退回线：⑥ → ③ -->
+  <path d="M 1280 450 L 1280 510 L 620 510 L 620 450" stroke="#dc2626" stroke-width="2" stroke-dasharray="8 5" fill="none" marker-end="url(#arwRed)"/>
+  <text x="950" y="500" text-anchor="middle" font-size="14" font-weight="600" fill="#dc2626">退回调整（二下）</text>
+
+  <!-- 底部图例 -->
+  <rect x="85" y="700" width="1430" height="120" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="110" y="735" font-size="15" font-weight="700" fill="#0f172a">图例</text>
+
+  <line x1="110" y1="765" x2="160" y2="765" stroke="#475569" stroke-width="2.5" marker-end="url(#arw)"/>
+  <text x="175" y="770" font-size="13" fill="#334155">业务主线（量的流转）</text>
+
+  <line x1="340" y1="765" x2="390" y2="765" stroke="#dc2626" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#arwRed)"/>
+  <text x="405" y="770" font-size="13" fill="#334155">评审退回（二下调整）</text>
+
+  <rect x="570" y="753" width="24" height="24" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="604" y="770" font-size="13" fill="#334155">决策 / 启动 / 定稿</text>
+
+  <rect x="770" y="753" width="24" height="24" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="804" y="770" font-size="13" fill="#334155">业务编制</text>
+
+  <rect x="920" y="753" width="24" height="24" rx="4" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="954" y="770" font-size="13" fill="#334155">财务汇总</text>
+
+  <rect x="1070" y="753" width="24" height="24" rx="4" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="1104" y="770" font-size="13" fill="#334155">合并与三表</text>
+
+  <rect x="1240" y="753" width="24" height="24" rx="4" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="1274" y="770" font-size="13" fill="#334155">评审环节</text>
+
+  <text x="110" y="805" font-size="12.5" fill="#64748b">编制节奏：一上（10月业务报数）→ 一下（11月财务反馈）→ 二上（12月财务汇总三表）→ 二下（12月评审定稿）→ 次年1月执行</text>
+</svg>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BB.2.1 生产制造产量计划表 · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BB.2.1" name="生产制造产量计划表">
+
+  <!-- 表概述（原 FORM_LEVEL_NOTES['BB.2.1']） -->
+  <overview><![CDATA[生产制造产量计划表，两个 Tab：BB.2.1.A 主表按「法人公司×部门×产品」手工填报产成品月度产量（仅产成品、不含在制品，16列）；BB.2.1.B 财务视角（生产成本）按「法人公司×预算部门×产品」只读带出完工产量、单位标准成本、完工生产成本（42列）。各月完工生产成本=产量×BAA.2单位标准成本，不再单编生产成本表，是 BB.3.X「完工入库」的金额标准与数据源。分录仅 .B 涉及：完工入库 1405 借/贷（含材料/人工/制费三段），按法人公司汇总、各法人单体入账、集团合并时各法人间不互抵，不直接影响 BO.PL；.A 不涉及会计处理。]]></overview>
+
+  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BB.2.1'） -->
+  <fields>
+    <field code="entity" name="法人公司" source="AA.2 法人组织架构"><![CDATA[]]></field>
+    <field code="department" name="部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[预算部门原则上明细到二级部门]]></field>
+    <field code="productCode" name="产品" source="AA.7 预算产品主数据"><![CDATA[]]></field>
+    <field code="monthlyProduction" name="月度产量" source="本表录入"><![CDATA[]]></field>
+  </fields>
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BB.2.1 生产制造产量计划表">
+      <point><![CDATA[本表含两个Tab（同页切换）：BB.2.1.A 生产制造产量计划表（主表，手工填报产量）+ BB.2.1.B 财务视角（生产成本，全部系统带出/公式、只读不可编辑）。]]></point>
+      <point><![CDATA[主表（BB.2.1.A）维度=法人公司（取 AA.2）、部门（取 AA.5，默认二级部门）、产品（取 AA.7）；度量=产量（仅产成品、不含在制品），按【全年合计】+1~12月手工填报，共 3+13=16 列；【全年合计】为公式列 =SUM(1~12月)。]]></point>
+      <point><![CDATA[财务视角（BB.2.1.B）维度=法人公司、预算部门、产品（与主表同一法人/同部门/同产品）；度量=①完工产量(台，带出主表) ②单位标准成本(元/台，BAA.2 带出) ③完工生产成本(万元)，3 个度量各按【全年合计】+1~12月展开，共 3+3×13=42 列；全部为系统带出或公式列，不可手工编辑。]]></point>
+      <point><![CDATA[完工生产成本口径：③完工生产成本(万元) = ①完工产量 × ②单位标准成本 ÷ 10000（即当月产量 × BAA.2 单位标准成本）；【全年合计】的完工产量与完工生产成本 = SUM(1~12月)，单位标准成本为产品单位值（各月同值、不累加）。]]></point>
+      <point><![CDATA[法人公司落点：财务视角与主表同一法人公司（产量计划的法人落点），完工生产成本按法人公司汇总，法人分录由本表按法人公司汇总生成（借贷科目见⑥财务报表项转换规则）。]]></point>
+      <point><![CDATA[⚠数据一致性：财务视角的完工产量必须与主表同法人/同部门/同产品的产量逐月一致（带出、非填报），两表不得出现同一法人同一产品的产量差异。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.2.1']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[生产制造端的月度计划产量与标准成本预算（含两个Tab：BB.2.1.A 主表产量填报 + BB.2.1.B 财务视角（生产成本），财务视角只读带出完工产量、单位标准成本与完工生产成本）]]></item>
+      <item><![CDATA[完工生产成本按法人公司汇总生成完工入库分录]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[销售合同/订单预算（属 BB.1.1/BB.1.2，销售与生产不做关联）]]></item>
+      <item><![CDATA[物料与设备采购]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BB.2.1']） -->
+  <relation>
+    <summary><![CDATA[本表含两个Tab（同页切换）：BB.2.1.A 生产制造产量计划表（主表，按「法人公司×部门×产品」手工填报各产成品的月度产量计划，仅产成品、不含在制品，共 16 列）+ BB.2.1.B 财务视角（生产成本，按「法人公司×预算部门×产品」只读带出完工产量、单位标准成本与完工生产成本，共 42 列）。各月完工生产成本=当月产量×BAA.2单位标准成本直接计算（不再单独编制生产成本表），并按法人公司汇总生成完工入库分录，作为进销存（BB.3.X）在制品「结转」转出与产成品转入的金额标准（按法人公司取数、同一法人公司内部结转）。]]></summary>
+    <dataSources>
+      <source code="AA.2" name="法人组织架构" fields="法人公司"><![CDATA[主表「法人公司」与财务视角「法人公司」维度取值来源；完工生产成本按法人公司归集、法人分录按法人公司汇总生成]]></source>
+      <source code="AA.5" name="行政部门主数据字典" fields="部门 / 预算部门（一级部门-二级部门）"><![CDATA[主表「部门」与财务视角「预算部门」维度取值来源，默认明细到二级部门；财务视角与主表部门保持一致]]></source>
+      <source code="AA.7" name="预算产品主数据" fields="产品"><![CDATA[主表「产品」与财务视角「产品」维度取值来源（仅产成品），产品名称/编码为 BAA.2 标准成本匹配键]]></source>
+      <source code="BAA.2" name="产品标准成本设置" fields="标准成本(元)"><![CDATA[财务视角「单位标准成本(元/台)」按产品带出 BAA.2 标准成本，据以计算完工生产成本（= 完工产量 × 单位标准成本 ÷ 10000）]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BB.3.X 进销存预算"><![CDATA[完工生产成本作为在制品「结转」转出与产成品转入的金额标准（完工入库数据源，按法人公司取数、同一法人公司内部结转）]]></output>
+      <output target="BO.BS 资产负债表—存货(1405)"><![CDATA[完工入库增加存货—库存商品(1405)：完工入库分录按法人公司汇总生成，存货—库存商品(1405) (+) / 存货(1405) (−)，金额=完工产量×BAA.2 标准成本]]></output>
+      <output target="BO.BS 资产负债表—存货(1405)"><![CDATA[完工转出冲减生产成本科目（存货(1405) 减少）；实际归集额与按 BAA.2 标准成本转出额之差留在在制品/产成品余额，属预算近似口径]]></output>
+    </outputs>
+    <keyRules>
+
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.2.1'].items） -->
+  <events>
+    <event event="产量填报与完工成本计算" field="1~12月产量（主表 BB.2.1.A）/ BB.2.1.B 完工生产成本、单位标准成本">
+      <pl><![CDATA[—（产量不直接进损益表；完工生产成本经 BB.3.X 进销存流转后随销售出库进主营业务成本 6401.1）]]></pl>
+      <bs><![CDATA[存货内部形态转换的金额标准（在制品转产成品，14xx 总额不变）；完工入库增加存货—库存商品(1405)]]></bs>
+      <cf><![CDATA[—（不生成预算凭证）]]></cf>
+      <source><![CDATA[取自本表（BB.2.1.A 主表）月度产量手工填报值，财务视角（BB.2.1.B）按「法人公司×预算部门×产品」带出完工产量、单位标准成本（BAA.2）与完工生产成本；各月完工生产成本 = 当月产量 × BAA.2 单位标准成本（产量计划×标准成本直接计算，不再单独编制生产成本表）；完工入库分录按 BB.2.1.B 财务视角的法人公司汇总生成]]></source>
+      <entry><![CDATA[借：存货—库存商品(1405)；贷：生产成本/存货在制品(1405)（金额=产量×标准成本）]]></entry>
+      <note><![CDATA[计算联动：完工金额=monthlyProduction×BAA.2.standardCost，作为 BB.3.X 进销存表"完工入库"的数据源。]]></note>
+    </event>
+  </events>
+
+</form>

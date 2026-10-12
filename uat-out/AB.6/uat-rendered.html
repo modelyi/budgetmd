@@ -1,0 +1,112 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+table{border-collapse:collapse;font-size:12px;font-family:"Microsoft YaHei",Arial,sans-serif}
+table th{background:#002f6c;color:#fff;font-weight:600;text-align:center;border:1px solid #cbd5e1;padding:6px 10px;white-space:nowrap}
+table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
+.t3a-html-sheet th,.t3a-html-sheet td{white-space:nowrap}
+.t3a-html-sheet th.t3a-th--time{background:#001e4a}
+.t3a-html-sheet td.t3a-num{text-align:right}
+.t3a-html-sheet tbody tr:nth-child(2n){background:#f8fafc}
+.t3a-sheet-scroll{max-width:100%;overflow-x:auto;transform:rotateX(180deg)}
+.t3a-sheet-scroll > table.t3a-html-sheet{transform:rotateX(180deg)}
+.t3a-html-sheet{display:block;width:max-content}
+.t3a-sheet-scroll::-webkit-scrollbar{height:10px}
+.t3a-sheet-scroll::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-sheet-scroll::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+.t3a-html-sheet::-webkit-scrollbar{height:10px}
+.t3a-html-sheet::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-html-sheet::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+</style></head><body style="margin:24px;background:#fff"><h1>AB.6 物料好坏件字典</h1>
+<style>
+table{border-collapse:collapse;font-size:12px;font-family:"Microsoft YaHei",Arial,sans-serif}
+table th{background:#002f6c;color:#fff;font-weight:600;text-align:center;border:1px solid #cbd5e1;padding:6px 10px;white-space:nowrap}
+table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
+.t3a-html-sheet th,.t3a-html-sheet td{white-space:nowrap}
+.t3a-html-sheet th.t3a-th--time{background:#001e4a}
+.t3a-html-sheet td.t3a-num{text-align:right}
+.t3a-html-sheet tbody tr:nth-child(2n){background:#f8fafc}
+.t3a-sheet-scroll{max-width:100%;overflow-x:auto;transform:rotateX(180deg)}
+.t3a-sheet-scroll > table.t3a-html-sheet{transform:rotateX(180deg)}
+.t3a-html-sheet{display:block;width:max-content}
+.t3a-sheet-scroll::-webkit-scrollbar{height:10px}
+.t3a-sheet-scroll::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-sheet-scroll::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+.t3a-html-sheet::-webkit-scrollbar{height:10px}
+.t3a-html-sheet::-webkit-scrollbar-track{background:#eef2f7}
+.t3a-html-sheet::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:5px}
+</style>
+
+<h2>① 预算表样</h2>
+<h3>AB.6 物料好坏件字典</h3>
+<div class="t3a-sheet-scroll">
+<table class="t3a-html-sheet">
+  <tbody>
+    <tr>
+      <th class="t3a-th">编码</th>
+      <th class="t3a-th">好坏件</th>
+      <th class="t3a-th">成本方向</th>
+      <th class="t3a-th">业务含义说明</th>
+      <th class="t3a-th">物料成本计算口径</th>
+      <th class="t3a-th">引用表单</th>
+    </tr>
+    <tr>
+      <td>MQ-01</td>
+      <td>好件</td>
+      <td>正向计入（+）</td>
+      <td>正品物料，正常投入服务作业消耗，物料成本正向计入服务成本</td>
+      <td>好件物料成本 = Σ(好件数量 × 物料标准成本)</td>
+      <td>BB.1.3-③ 服务收入与成本预算附表_物料明细填报；BB.1.3-② 服务销售收入与成本预算_财务视角（物料成本列）</td>
+    </tr>
+    <tr>
+      <td>MQ-02</td>
+      <td>坏件</td>
+      <td>反向抵减（-）</td>
+      <td>更换下来的旧件/缺陷件，核销或退库后可抵减当期物料成本，物料成本反向抵减</td>
+      <td>坏件抵减 = Σ(坏件数量 × 物料标准成本)；净物料成本 = 好件成本 - 坏件抵减</td>
+      <td>BB.1.3-③ 服务收入与成本预算附表_物料明细填报；BB.1.3-② 服务销售收入与成本预算_财务视角（物料成本列）</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>表概述</h2>
+<p>【会计处理】本表不涉及会计处理（仅字典参数维护：物料好坏件字典，为各表维度取值提供值域，不生成分录）。【法人口径】④不区分法人：静态数据字典，不按法人编制。</p>
+<h2>② 字段与值说明</h2>
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">来源</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">编码</td>
+<td align="left">本表维护</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">好坏件</td>
+<td align="left">本表维护</td>
+<td align="left">好件/坏件</td>
+</tr>
+<tr>
+<td align="left">成本方向</td>
+<td align="left">本表维护</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h2>③ 关键规则要点</h2>
+<p><strong>AB.6 物料好坏件</strong></p>
+<ul>
+<li>物料好坏件(AB.6)为固定值域字典，供对应编制表下拉引用，不可在编制表内新增值。</li>
+</ul>
+<h2>④ 适用业务情形</h2>
+<p><strong>适用于</strong></p>
+<ul>
+<li>物料好坏件字典维护，供物料领料好坏件分类引用</li>
+</ul>
+<p><strong>不适用于</strong></p>
+<ul>
+<li>具体业务金额填报</li>
+</ul>
+</body></html>

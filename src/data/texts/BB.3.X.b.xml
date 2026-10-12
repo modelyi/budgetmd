@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BB.3.X.b BB.3.X.b · 文字源（由 scripts/migrateTextsToXml.ts 自动生成，请勿手工编辑）
+
+  口径约定：
+    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；
+    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；
+    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
+    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
+
+  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
+    前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
+    脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
+-->
+<form code="BB.3.X.b" name="BB.3.X.b">
+
+  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
+  <rules>
+    <rule form="BB.3.X.b 领料与结转视图">
+      <point><![CDATA[按法人公司×预算项目×预算部门×领料用途汇总 BAP.2。]]></point>
+      <point><![CDATA[生产类→在制品「料」、研发/销售/管理类费用化，生成领料结转分录。]]></point>
+    </rule>
+  </rules>
+
+  <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.3.X.b']） -->
+  <scenarios>
+    <applies>
+      <item><![CDATA[各品类转入/转出逐来源取数逻辑明细查询]]></item>
+    </applies>
+    <notApplies>
+      <item><![CDATA[进销存余额测算与手工录入（属主表）]]></item>
+    </notApplies>
+  </scenarios>
+
+  <!-- ⑤ 预算编制视角：数据关系总结（原 FORM_DATA_RELATION_SUMMARY['BB.3.X.b']） -->
+  <relation>
+    <summary><![CDATA[BAP.2 领料按用途结转（生产/研发/销售/管理）并生成领料结转分录。]]></summary>
+    <dataSources>
+      <source code="BAP.2" name="物料消耗需求汇总表_常规" fields="领料用途"><![CDATA[按法人公司×预算项目×预算部门×领料用途汇总]]></source>
+    </dataSources>
+    <outputs>
+      <output target="BB.3.X-① 进销存预算"><![CDATA[生产类领料→在制品「料」转入；非生产类→一般物料转出]]></output>
+      <output target="BO.PL 利润表"><![CDATA[研发类→6603、销售类→6601、管理类及其他→6602]]></output>
+    </outputs>
+    <keyRules>
+      <rule><![CDATA[生产类结转在制品、研发/销售/管理类费用化。]]></rule>
+    </keyRules>
+  </relation>
+
+  <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.X.b'].items） -->
+  <events>
+    <event event="领料结转" field="1~12月领料金额（领料用途）">
+      <pl><![CDATA[生产类→转在制品「料」腿（不进损益）；研发类→研发费用 6603 (+)；销售类→销售费用 6601 (+)；管理类及其他→管理费用 6602 (+)]]></pl>
+      <bs><![CDATA[存货(1405) 增加（在制品「料」）；存货—一般物料(1405) 减少]]></bs>
+      <cf><![CDATA[—（领料为非现金事件）]]></cf>
+      <source><![CDATA[取自 BAP.2 物料消耗需求汇总表_常规，按法人公司×预算项目×预算部门×领料用途汇总]]></source>
+      <entry><![CDATA[生产类：存货(1405) (+)、存货—一般物料(1405) (−)；研发/销售/管理类：6603/6601/6602 (+)、存货—一般物料(1405) (−)]]></entry>
+      <note><![CDATA[生产类领料转入在制品「料」；研发/销售/管理类按用途费用化。]]></note>
+    </event>
+  </events>
+
+  <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BB.3.X.b']） -->
+  <noVoucher><![CDATA[不涉及财报转换（转入转出逻辑明细表仅展示取数口径，不生成会计分录）。]]></noVoucher>
+
+</form>
