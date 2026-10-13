@@ -339,21 +339,37 @@ export const nodes: DiagramNode[] = [
   ] },
   // T6-9：「设备采购需求」自 ④ 财务预算列（x706）归位 ② 假设与准备列（与本泳道另三张前置需求卡同列），
   //   落在新增的第三行（y1284），卡宽 188 与 cd29 对齐、左缘 x304 与本列其余卡对齐；卡内文字与徽标随卡平移。
+  // T6-13：第二行原为「各项目/部门在费用预算模块填报」，与徽标「费用预算模块」语义重复；
+  //   改为「各项目/部门填报 · 前置需求采集」（说明需求在前置环节归集），第三行区分需求与预算的文字保留。
   { id: 'cd26', kind: 'box', x: 304, y: 1284, w: 188, h: 72, rx: 12, fill: '#ffffff', stroke: '#16a34a', strokeWidth: 1, points: '', badge: { text: '费用预算模块', x: 418, y: 1286, w: 72, h: 18, rx: 9, fill: '#dcfce7', stroke: '#16a34a', color: '#166534', size: 10 }, lines: [
     { text: '设备采购需求', x: 398, y: 1320, size: 12.5, weight: 700, color: '#0f172a' },
-    { text: '各项目/部门在费用预算模块填报', x: 398, y: 1338, size: 10, weight: 400, color: '#334155' },
+    { text: '各项目/部门填报 · 前置需求采集', x: 398, y: 1338, size: 10, weight: 400, color: '#334155' },
     { text: '需求由采购部编制为设备采购预算 BB.3.1', x: 398, y: 1351, size: 9.5, weight: 400, color: '#475569' },
   ] },
 ];
 
-/** 图例（8 项） */
+/**
+ * 图例（13 项）：卡片底色 + 阶段色 + 连线，与 nodes 的实际 fill 双向一致。
+ * 卡片底色逐色核对：白底手工填报（cd10/cd11/cd20）、蓝底启动与定稿（cd1/cd3）、
+ * 黄底假设与参数（cd4）、绿底业务预算（cd5/cd7/cd8/cd9）、灰底系统计算（cd12–cd19）、
+ * 红底评审与初审（cd2/cd6，含评审菱形）、橙底岗位与人工参数（cd21/cd22）、
+ * 浅绿底基础静态数据（cd23）、白底绿边前置模块需求采集（cd24/cd25/cd26/cd28/cd29）。
+ * 其中 ① 启动/② 假设/③ 业务/⑥ 评审 四色与阶段头同色，图例项与阶段色共用一个色项；
+ * ④ 财务预算、⑤ 合并与三表 两色仅用于阶段头色带（本阶段卡片为灰底系统计算），图例保留作阶段色标识。
+ * id 为内容覆盖层 key，沿用原图例项的 id→色值对应关系（新增项用 lg9–lg13）。
+ */
 export const legendItems: DiagramLegend[] = [
   { id: 'lg1', label: '手工填报', kind: 'swatch', color: '#ffffff', borderColor: '#94a3b8' },
   { id: 'lg2', label: '系统计算', kind: 'swatch', color: '#e2e8f0', borderColor: '#64748b' },
-  { id: 'lg3', label: '启动/假设/评审', kind: 'swatch', color: '#fef3c7', borderColor: '#d97706' },
+  { id: 'lg9', label: '启动与定稿', kind: 'swatch', color: '#dbeafe', borderColor: '#2563eb' },
+  { id: 'lg3', label: '假设与参数', kind: 'swatch', color: '#fef3c7', borderColor: '#d97706' },
   { id: 'lg4', label: '业务预算', kind: 'swatch', color: '#dcfce7', borderColor: '#16a34a' },
   { id: 'lg5', label: '财务预算', kind: 'swatch', color: '#e0f2fe', borderColor: '#0284c7' },
   { id: 'lg6', label: '合并与三表', kind: 'swatch', color: '#ede9fe', borderColor: '#7c3aed' },
+  { id: 'lg10', label: '评审与初审', kind: 'swatch', color: '#fee2e2', borderColor: '#dc2626' },
+  { id: 'lg11', label: '岗位与人工参数', kind: 'swatch', color: '#fff7ed', borderColor: '#f97316' },
+  { id: 'lg12', label: '基础静态数据', kind: 'swatch', color: '#f0fdf4', borderColor: '#16a34a' },
+  { id: 'lg13', label: '前置模块（需求采集）', kind: 'swatch', color: '#ffffff', borderColor: '#16a34a' },
   { id: 'lg7', label: '数据供给', kind: 'dash', color: '#2563eb' },
   { id: 'lg8', label: '评审退回', kind: 'dash', color: '#dc2626' },
 ];
