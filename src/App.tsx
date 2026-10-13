@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { SpecialSolutionsView } from './components/SpecialSolutionsView';
+import { IntercompanySolutionView } from './components/IntercompanySolutionView';
 import { FormDocsView } from './components/FormDocsView';
 import { formDocsA1 } from './data/pages/formDocsMarkdownA1';
 import { formDocsMulti } from './data/pages/formDocsMarkdownMulti';
@@ -15,6 +16,7 @@ const TABS = [
   { key: 'budget-multi', label: 'T3B 多主体编制套表', groups: ['BA', 'BB', 'BF', 'BO'], mode: 'multi' as const },
   { key: 'master', label: 'T4 基础静态数据', groups: ['AA', 'AB', 'AM'] },
   { key: 'solution', label: 'T5 专项方案说明', groups: [] },
+  { key: 'intercompany', label: 'T5BB 关联交易专项方案说明', groups: [] },
   { key: 'flow', label: 'T6 整体编制流程图', groups: [] },
   { key: 'logic', label: 'T7 逻辑关系说明', groups: [] },
   { key: 'ppt', label: 'T9 TO 方案总结PPT', groups: [] },
@@ -94,6 +96,8 @@ export default function App() {
       <div className="flex flex-1 min-h-0 min-w-0 overflow-hidden">
         {activeTab === 'flow' ? (<FlowView />) : activeTab === 'logic' ? (<LogicView />) : activeTab === 'ppt' ? (<PptView />) : activeTab === 'solution' ? (
           <SpecialSolutionsView />
+        ) : activeTab === 'intercompany' ? (
+          <IntercompanySolutionView />
         ) : activeTab === 'overview' ? (
           // T1 总览：Markdown 文档阅览（docs/formdocs-a1/*.md 4 篇），独立实例 key=docs-a1
           <FormDocsView
