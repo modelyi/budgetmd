@@ -95,7 +95,6 @@ export interface XmlA14Rule {
   name: string;
   rule: string;
   src: string;
-  ref: string;
   isTotal: boolean;
 }
 
@@ -106,7 +105,6 @@ export interface XmlAccountItem {
   name: string;
   fullName: string;
   description: string;
-  standardRef: string;
 }
 
 /** 科目说明：科目编码规则一条 */
@@ -117,7 +115,6 @@ export interface XmlAccountCodingRule {
   codePattern: string;
   exampleCode: string;
   description: string;
-  governingStandards: string;
   associatedStatements: string;
 }
 
@@ -272,7 +269,6 @@ export function parseFormTextXml(xml: string, fallbackCode = ''): FormText {
       name: attr(it, 'name'),
       rule: text(it.rule),
       src: text(it.src),
-      ref: attr(it, 'ref'),
       isTotal: attr(it, 'isTotal') === '1',
     })),
     accounts: asArray(root.accounts?.account).map((a) => ({
@@ -281,7 +277,6 @@ export function parseFormTextXml(xml: string, fallbackCode = ''): FormText {
       name: attr(a, 'name'),
       fullName: attr(a, 'fullName'),
       description: text(a.description),
-      standardRef: text(a.standardRef),
     })),
     accountCodingRules: asArray(root.codingRules?.rule).map((r) => ({
       family: attr(r, 'family'),
@@ -290,7 +285,6 @@ export function parseFormTextXml(xml: string, fallbackCode = ''): FormText {
       codePattern: text(r.codePattern),
       exampleCode: attr(r, 'exampleCode'),
       description: text(r.description),
-      governingStandards: text(r.governingStandards),
       associatedStatements: text(r.associatedStatements),
     })),
     expenseSubjects: asArray(root.expenseSubjects?.item).map((it) => ({

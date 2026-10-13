@@ -2305,7 +2305,7 @@
             "colSpan": 1
           },
           {
-            "text": "资本化判定取 AB.16「租赁期限」（一年以上→资本化，形成使用权资产 1621 与租赁负债 2602；「租赁类型」由系统带出、不可手工改）；CAS 21 资本化处理：租赁负债初始 = 租赁付款额按折现率折现（月折现率 = 年折现率 ÷ 12，按剩余租赁月数折现）；使用权资产原值 = 租赁负债初始；折现率取 BAA.6.e（默认取 BF.3 综合融资成本、可按年度覆盖）",
+            "text": "资本化判定取 AB.16「租赁期限」（一年以上→资本化，形成使用权资产 1621 与租赁负债 2602；「租赁类型」由系统带出、不可手工改）；资本化处理：租赁负债初始 = 租赁付款额按折现率折现（月折现率 = 年折现率 ÷ 12，按剩余租赁月数折现）；使用权资产原值 = 租赁负债初始；折现率取 BAA.6.e（默认取 BF.3 综合融资成本、可按年度覆盖）",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2755,7 +2755,7 @@
             "colSpan": 1
           },
           {
-            "text": "资本化判定取 AB.16「租赁期限」（一年以上→资本化，形成使用权资产 1621 与租赁负债 2602；「租赁类型」由系统带出、不可手工改）；CAS 21 资本化处理：租赁负债初始 = 租赁付款额按折现率折现（月折现率 = 年折现率 ÷ 12，按剩余租赁月数折现）；使用权资产原值 = 租赁负债初始；折现率取 BAA.6.e（默认取 BF.3 综合融资成本、可按年度覆盖）；与 BB.4.2.b.1 差异只在出租方为集团外第三方、不产生内部结算、不参与集团合并抵销",
+            "text": "资本化判定取 AB.16「租赁期限」（一年以上→资本化，形成使用权资产 1621 与租赁负债 2602；「租赁类型」由系统带出、不可手工改）；资本化处理：租赁负债初始 = 租赁付款额按折现率折现（月折现率 = 年折现率 ÷ 12，按剩余租赁月数折现）；使用权资产原值 = 租赁负债初始；折现率取 BAA.6.e（默认取 BF.3 综合融资成本、可按年度覆盖）；与 BB.4.2.b.1 差异只在出租方为集团外第三方、不产生内部结算、不参与集团合并抵销",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4653,13 +4653,6 @@
             "rowSpan": 1,
             "colSpan": 1,
             "bg": "#002f6c"
-          },
-          {
-            "text": "准则依据与业务说明",
-            "isHeader": true,
-            "rowSpan": 1,
-            "colSpan": 1,
-            "bg": "#002f6c"
           }
         ],
         [
@@ -4689,12 +4682,6 @@
           },
           {
             "text": "—",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "集团合并报表口径",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4736,12 +4723,6 @@
                 "formName": "各业务表法人公司列"
               }
             ]
-          },
-          {
-            "text": "法人单体报表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4780,12 +4761,6 @@
                 "formName": "BJ.C"
               }
             ]
-          },
-          {
-            "text": "CAS 33 合并财务报表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4824,12 +4799,6 @@
                 "formName": "AA.2.持股比例"
               }
             ]
-          },
-          {
-            "text": "合并报表权益结构",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4862,12 +4831,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "直接加总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4897,12 +4860,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "CAS 14 收入准则",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4960,12 +4917,6 @@
                 "field": "确认收入"
               }
             ]
-          },
-          {
-            "text": "CAS 14 收入准则",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5052,12 +5003,6 @@
                 "field": "内部往来收息"
               }
             ]
-          },
-          {
-            "text": "CAS 14 收入准则",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5087,12 +5032,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "CAS 1 存货准则",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5165,12 +5104,6 @@
                 "field": "内部供应商提供行（签约主体承接人工成本，平价）"
               }
             ]
-          },
-          {
-            "text": "CAS 1 存货准则 / CAS 9 职工薪酬",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5220,12 +5153,6 @@
                 "field": "内部供应商出料·出库成本（提供方结转其他业务成本）"
               }
             ]
-          },
-          {
-            "text": "CAS 1 存货准则",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5271,12 +5198,6 @@
                 "field": "税费及附加合计(利润表口径)"
               }
             ]
-          },
-          {
-            "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5353,12 +5274,6 @@
                 "field": "用途=销售，各月求和）（外部职场租赁费用，不抵销"
               }
             ]
-          },
-          {
-            "text": "期间销售费用",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5453,12 +5368,6 @@
                 "field": "用途=管理，各月求和）（外部职场租赁费用，不抵销"
               }
             ]
-          },
-          {
-            "text": "期间管理费用",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5535,12 +5444,6 @@
                 "field": "用途=研发，各月求和）（外部职场租赁费用，不抵销"
               }
             ]
-          },
-          {
-            "text": "CAS 6 研发费用化",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5570,12 +5473,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "CAS 17 借款费用",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5651,12 +5548,6 @@
                 "field": "内部借款利息费用"
               }
             ]
-          },
-          {
-            "text": "CAS 17 借款费用",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5695,12 +5586,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 17 借款费用",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5739,12 +5624,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 16 政府补助",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5804,12 +5683,6 @@
                 "field": "投资收益"
               }
             ]
-          },
-          {
-            "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5848,12 +5721,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 22 金融工具确认与计量",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5892,12 +5759,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 22 金融工具确认与计量",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5936,12 +5797,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 8 资产减值",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5996,12 +5851,6 @@
                 "field": "内部转卖加成收益，集团合并层抵销"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报（资产处置收益单列）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6031,12 +5880,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "利润表核心指标",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6078,12 +5921,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6122,12 +5959,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 16 政府补助",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6166,12 +5997,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6195,12 +6020,6 @@
           },
           {
             "text": "= 营业利润 + 营业外收入 − 营业外支出",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式计算",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6255,12 +6074,6 @@
                 "field": "企业所得税"
               }
             ]
-          },
-          {
-            "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6290,12 +6103,6 @@
           },
           {
             "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "净利润最终成果",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6337,12 +6144,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 33 合并财务报表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6381,12 +6182,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6419,12 +6214,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6454,12 +6243,6 @@
           },
           {
             "text": "—",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "CAS 34 每股收益",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6501,12 +6284,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 34 每股收益",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6545,12 +6322,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 34 每股收益",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6596,12 +6367,6 @@
                 "field": "CF-24 现金及现金等价物净增加额"
               }
             ]
-          },
-          {
-            "text": "现金流期末平衡",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6652,12 +6417,6 @@
                 "field": "新增投资额、减少投资额"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6696,12 +6455,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6740,12 +6493,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6800,12 +6547,6 @@
                 "field": "确认收入、验收回款"
               }
             ]
-          },
-          {
-            "text": "债权滚动",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6844,12 +6585,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6904,12 +6639,6 @@
                 "field": "付款额"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6991,12 +6720,6 @@
                 "field": "增加/冲减项）"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7124,12 +6847,6 @@
                 "field": "下单主体法人+受益主体法人+月度到货额(各月求和)（物料平价转移：下单主体法人侧转出、受益主体法人侧转入，按 BB.3.3.D.物料类别 对应到 BB.3.X 同类别行）"
               }
             ]
-          },
-          {
-            "text": "CAS 1 进销存平衡",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7168,12 +6885,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7212,12 +6923,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7256,12 +6961,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7300,12 +6999,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7329,12 +7022,6 @@
           },
           {
             "text": "= 货币资金 + 交易性金融资产 + 衍生金融资产 + 应收票据 + 应收账款 + 应收款项融资 + 预付款项 + 其他应收款 + 存货 + 合同资产 + 持有待售资产 + 一年内到期的非流动资产 + 其他流动资产",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式汇总",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -7382,12 +7069,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7426,12 +7107,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7470,12 +7145,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7521,12 +7190,6 @@
                 "field": "投资金额"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7565,12 +7228,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7609,12 +7266,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7653,12 +7304,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7763,12 +7408,6 @@
                 "field": "仅资产类别=固定资产部分（下单主体法人侧冲减、受益主体法人侧增加，按各自法人取数；转移额与提供方 A 在 BB.3.1（经 BB.3.1.C）的同月、同资产类别到货原值勾稽、到货月全额转移下两者相等）"
               }
             ]
-          },
-          {
-            "text": "CAS 4 固定资产",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7852,12 +7491,6 @@
                 "field": "原值(万元)"
               }
             ]
-          },
-          {
-            "text": "资本化工程投入",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7896,12 +7529,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7940,12 +7567,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8000,12 +7621,6 @@
                 "field": "使用权资产原值（外部租赁，不参与合并抵销）；使用权资产折旧由 BB.4.5 计提、经 BB.4.X.A 归集"
               }
             ]
-          },
-          {
-            "text": "CAS 21 租赁",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8065,12 +7680,6 @@
                 "field": "到货额(万元)（下单主体法人侧冲减、受益主体法人侧增加、仅资产类别=无形资产部分；转移额与提供方 A 在 BB.3.1（经 BB.3.1.C）的同月、同资产类别到货原值勾稽、到货月全额转移下两者相等）"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8109,12 +7718,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8153,12 +7756,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8197,12 +7794,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8241,12 +7832,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8285,12 +7870,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8323,12 +7902,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8352,12 +7925,6 @@
           },
           {
             "text": "= 流动资产合计 + 非流动资产合计",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式汇总",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -8416,12 +7983,6 @@
                 "formName": "手工填报"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8460,12 +8021,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8504,12 +8059,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8548,12 +8097,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8608,12 +8151,6 @@
                 "field": "原值(万元)"
               }
             ]
-          },
-          {
-            "text": "应付款项滚动",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8652,12 +8189,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8696,12 +8227,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 14 预收款",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8751,12 +8276,6 @@
                 "formName": "实际发放"
               }
             ]
-          },
-          {
-            "text": "CAS 9 薪酬负债",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8807,12 +8326,6 @@
                 "field": "计提"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8894,12 +8407,6 @@
                 "field": "增加/冲减项）"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8938,12 +8445,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8993,12 +8494,6 @@
                 "formName": "手工填报"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9037,12 +8532,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9066,12 +8555,6 @@
           },
           {
             "text": "= 短期借款 + 交易性金融负债 + 衍生金融负债 + 应付票据 + 应付账款 + 预收款项 + 合同负债 + 应付职工薪酬 + 应交税费 + 其他应付款 + 持有待售负债 + 一年内到期的非流动负债 + 其他流动负债",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式汇总",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9130,12 +8613,6 @@
                 "formName": "手工填报"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9174,12 +8651,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9234,12 +8705,6 @@
                 "field": "租赁负债初始、本金偿付（外部租赁，不参与合并抵销）"
               }
             ]
-          },
-          {
-            "text": "CAS 21 租赁",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9278,12 +8743,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9322,12 +8781,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9366,12 +8819,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9410,12 +8857,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9454,12 +8895,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9492,12 +8927,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9521,12 +8950,6 @@
           },
           {
             "text": "= 29998 流动负债合计 + 29997 非流动负债合计",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式汇总",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9574,12 +8997,6 @@
                 "formName": "期初数据"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9618,12 +9035,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9662,12 +9073,6 @@
                 "formName": "期初数据"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9706,12 +9111,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9750,12 +9149,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9801,12 +9194,6 @@
                 "field": "净利润"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9852,12 +9239,6 @@
                 "field": "净利润"
               }
             ]
-          },
-          {
-            "text": "损益滚入权益",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9881,12 +9262,6 @@
           },
           {
             "text": "= 实收资本（或股本） + 其他权益工具 + 资本公积 − 库存股 + 其他综合收益 + 盈余公积 + 未分配利润",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式汇总",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9934,12 +9309,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "CAS 30 财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9972,12 +9341,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10001,12 +9364,6 @@
           },
           {
             "text": "= 29999 负债合计 + 49998 所有者权益合计（须与资产总计 19999 平衡）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式汇总",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -10079,12 +9436,6 @@
                 "field": "ASS-TAX-07、ASS-TAX-09"
               }
             ]
-          },
-          {
-            "text": "经营现金流入",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10134,12 +9485,6 @@
                 "formName": "增值税即征即退/专项返还"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10203,12 +9548,6 @@
                 "field": "月度加成款(各月求和)（加成部分）"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号 现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10238,12 +9577,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式计算",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -10292,12 +9625,6 @@
                 "field": "预付款(万元)、验收付款(万元)"
               }
             ]
-          },
-          {
-            "text": "经营现金流出",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10343,12 +9670,6 @@
                 "field": "实际发放"
               }
             ]
-          },
-          {
-            "text": "经营现金流出",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10394,12 +9715,6 @@
                 "field": "各项税费合计(现金流口径)"
               }
             ]
-          },
-          {
-            "text": "经营现金流出",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10485,12 +9800,6 @@
                 "field": "月度加成款(各月求和)（加成部分）"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号 现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10523,12 +9832,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10552,12 +9855,6 @@
           },
           {
             "text": "= CF-04 − CF-09",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式计算",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -10617,12 +9914,6 @@
                 "field": "减少投资额"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10682,12 +9973,6 @@
                 "field": "本年计划分红/利息流入"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10733,12 +10018,6 @@
                 "field": "对外出售/报废变卖"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10777,12 +10056,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10828,12 +10101,6 @@
                 "field": "月度到货额(各月求和)（平价部分）"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10863,12 +10130,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -10935,12 +10196,6 @@
                 "field": "预付款(万元)、付款(万元)"
               }
             ]
-          },
-          {
-            "text": "投资现金流出",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11000,12 +10255,6 @@
                 "field": "新增投资额"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11044,12 +10293,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11095,12 +10338,6 @@
                 "field": "月度到货额(各月求和)（平价部分）"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11133,12 +10370,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11162,12 +10393,6 @@
           },
           {
             "text": "= CF-13 − CF-16",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式计算",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -11215,12 +10440,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11279,12 +10498,6 @@
                 "formName": "手工填报"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11330,12 +10543,6 @@
                 "field": "实收利息）（内部借款，合并层互抵"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11368,12 +10575,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11403,12 +10604,6 @@
           },
           {
             "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -11484,12 +10679,6 @@
                 "field": "内部借款，合并层互抵"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11553,12 +10742,6 @@
                 "field": "放款流出，合并层互抵"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11591,12 +10774,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11620,12 +10797,6 @@
           },
           {
             "text": "= CF-19 − CF-22",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "公式计算",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -11673,12 +10844,6 @@
                 "formName": "三表手工调整"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11708,12 +10873,6 @@
           },
           {
             "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "现金流量表总计",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -11762,12 +10921,6 @@
                 "field": "货币资金(1001)期末余额"
               }
             ]
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -11800,17 +10953,11 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ]
       ],
       "rowCount": 142,
-      "colCount": 6
+      "colCount": 5
     }
   ]
 }

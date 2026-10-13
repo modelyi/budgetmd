@@ -73,13 +73,6 @@
             "rowSpan": 1,
             "colSpan": 1,
             "bg": "#002f6c"
-          },
-          {
-            "text": "准则与核算说明",
-            "isHeader": true,
-            "rowSpan": 1,
-            "colSpan": 1,
-            "bg": "#002f6c"
           }
         ],
         [
@@ -139,12 +132,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第14号-收入",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -210,12 +197,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第1号-存货",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -275,12 +256,6 @@
           },
           {
             "text": "BF.4.税费及附加合计(利润表口径)",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -346,12 +321,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -411,12 +380,6 @@
           },
           {
             "text": "BB.5.2.法人公司金额 / BA.5.月度金额 / BAA.8.法人公司占比 / BB.4.X.A.管理费用折旧小计 / BB.4.2.b 内部职场租赁.费用化合同内部租金+月度加成款（承租方内部租赁费用） / BB.4.2.a 外部职场租赁.费用化合同月租金（用途=管理） / BB.5.1.财务视角管理费用（人工） / BAP.2.月度消耗金额（领料用途=管理类及其他） / BB.4.5.本年新增折旧计提（经 BB.4.X.A 归集）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -482,12 +445,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -547,12 +504,6 @@
           },
           {
             "text": "BB.5.2.法人公司金额 / BA.5.月度金额 / BAA.8.法人公司占比 / BB.4.X.A.研发费用折旧小计 / BB.5.1.财务视角研发费用（人工） / BAP.2.月度消耗金额（领料用途=研发类） / BB.4.2.a 外部职场租赁.费用化合同月租金（用途=研发，各月求和） / BB.4.5.本年新增折旧计提（经 BB.4.X.A 归集）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第6号-无形资产",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -618,12 +569,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第17号-借款费用",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -683,12 +628,6 @@
           },
           {
             "text": "BB.1.2.预计销售收入(不含税) / BB.1.3.确认收入",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第14号-收入",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -754,12 +693,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第14号-收入",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -819,12 +752,6 @@
           },
           {
             "text": "BB.3.3.D/BB.3.1.D 代采购·加成款（提供方加成收入，合并层抵销） / BB.1.3.f 物料明细_财务查询·内部供应商出料（销售线物料，提供方完整内部销售价＝出库成本+加成款，合并层与签约主体 6401.1 抵销） / BB.1.3.i 人工明细_财务查询·完整服务价（销售线人工，提供方内部往来收入=人工成本+加成款，合并层与签约主体 6401.1 抵销）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第14号-收入",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -890,12 +817,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第1号-存货",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -955,12 +876,6 @@
           },
           {
             "text": "手工 / BB.1.3.f 物料明细_财务查询·内部供应商出料·出库成本（提供方（内部供应商归属法人）结转其他业务成本，各月求和；集团合并层抵销后合并层只保留该真实出库成本）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第1号-存货",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -1026,12 +941,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第17号-借款费用",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -1091,12 +1000,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第17号-借款费用",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -1162,12 +1065,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第22号-金融工具确认和计量",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -1227,12 +1124,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第8号-资产减值",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -1298,12 +1189,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第22号-金融工具确认和计量",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -1363,12 +1248,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第16号-政府补助",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -1434,12 +1313,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -1499,12 +1372,6 @@
           },
           {
             "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -1570,12 +1437,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第34号-每股收益",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -1635,12 +1496,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第34号-每股收益",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -1706,12 +1561,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第34号-每股收益",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -1771,12 +1620,6 @@
           },
           {
             "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -1842,12 +1685,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报（资产处置收益单列）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -1907,12 +1744,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第16号-政府补助",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -1978,12 +1809,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第2号-长期股权投资",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2043,12 +1868,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2114,12 +1933,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2179,12 +1992,6 @@
           },
           {
             "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2250,12 +2057,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第18号-所得税",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2315,12 +2116,6 @@
           },
           {
             "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2386,12 +2181,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2451,12 +2240,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2522,12 +2305,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2587,12 +2364,6 @@
           },
           {
             "text": "BF.3.a 金融工具投融资-银行.新增投资额、减少投资额 / BF.3.b 金融工具投资预算-非银.新增投资额、减少投资额",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第22号-金融工具确认和计量",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2658,12 +2429,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第22号-金融工具确认和计量",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2723,12 +2488,6 @@
           },
           {
             "text": "BB.1.2.预计销售收入(不含税) / BB.1.2.验收回款 / BB.1.3.确认收入 / BB.1.3.验收回款",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第22号-金融工具确认和计量",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2794,12 +2553,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2859,12 +2612,6 @@
           },
           {
             "text": "BB.3.3.到货额 / BB.2.1.完工生产成本 / BB.3.3.D.到货额（代采购物料平价转移：下单主体法人侧转出 − / 受益主体法人侧转入 +，按 BB.3.3.D.物料类别 对应到 BB.3.X 同类别行；转移额与提供方 A 在 BB.3.3 的同月、同物料类别到货额勾稽、到货月全额转移下两者相等） / BB.1.3.f 物料明细_财务查询·内部供应商出料（销售线物料真实购销：提供方（内部供应商归属法人）侧按出库成本转出 − 并结转 6401.2，签约主体侧按采购价＝出库成本+加成款入库 +，加成进存货后随服务消耗结转 6401.1；增值税为价外税不进存货） / BB.1.2.预计销售成本 / BB.1.3.直接物料成本 / BB.3.X.调整转入、调整转出 / BB.4.1.c.领料金额合计 / BB.4.X.A.制造费用折旧小计 / BB.5.1.财务视角制造费用（在制品人工与制费） / BB.5.2.部门费用性质=制造费用",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第1号-存货",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2930,12 +2677,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第14号-收入",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2995,12 +2736,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3066,12 +2801,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3131,12 +2860,6 @@
           },
           {
             "text": "BB.3.3.D/BB.3.1.D 代采购·提供方应收（含税＝不含税（平价转移款+月度加成款）×(1+适用税率)，货物 13%、代购服务 6%，取 AB.15，内部往来；集团合并层与接受方互抵）− 结算冲减（接受方向提供方的含税内部结算付款额，按月归集；含税＝不含税额 ×(1+适用税率)） / 三表手工调整 / BJ.C.f 内部借款预算表·借出方当月新增 − 当月还本（内部往来·增加/冲减项；保持不含税本金口径，贷款服务利息借入方进项不得抵扣；本方案默认内部借款按应税处理，集团如有统借统还等免税安排，另行调整；集团合并层与借入方 2241.1 按本方法人+对手方法人配对互抵） / 销售线物料明细内部供应商出料（BB.1.3.f 出库成本+加成款：提供方按含税内部销售价＝不含税（出库成本+加成款）×(1+13%) 确认应收，按合同账期真实现金收款、期末保留真实未收余额） / BB.1.3.i 人工明细_财务查询·内部供应商提供行（提供方应收＝含税完整服务价（人工成本+加成款）×(1+6%)，内部往来·增加项，按合同账期真实现金收款、期末保留真实未收余额）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3202,12 +2925,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3267,12 +2984,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3338,12 +3049,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3403,12 +3108,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3474,12 +3173,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3539,12 +3232,6 @@
           },
           {
             "text": "BB.4.4.原值汇总 / BB.4.4.累计折旧汇总 / BB.3.1.到货额 / BB.3.2.b.验收转固 / BB.4.1.d.转固转出 / BB.4.3.月度资产原值 / BB.3.1.D.到货额（下单主体法人侧冲减 −、受益主体法人侧增加 +，按各自法人取数；转移额与提供方 A 在 BB.3.1（经 BB.3.1.C）的同月、同资产类别到货原值勾稽、到货月全额转移下两者相等） / BB.4.X.A.折旧合计 / BB.4.6.资产净值 / BB.3.1.A·BB.3.1.B 采购视角明细行（按资产类别前缀归类后经 BB.3.1.C 按法人汇总） / BB.4.5.本年新增折旧计提（经 BB.4.X.A 归集） / AA.9 折旧参数（方法/年限/残值率）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第4号-固定资产",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3610,12 +3297,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第4号-固定资产",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3675,12 +3356,6 @@
           },
           {
             "text": "BF.1.月度投资金额",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第2号-长期股权投资",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3746,12 +3421,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第6号-无形资产",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3811,12 +3480,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3882,12 +3545,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3947,12 +3604,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4018,12 +3669,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4083,12 +3728,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4154,12 +3793,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4219,12 +3852,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4290,12 +3917,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4355,12 +3976,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4426,12 +4041,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4491,12 +4100,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4562,12 +4165,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4627,12 +4224,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4698,12 +4289,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4763,12 +4348,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4834,12 +4413,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4899,12 +4472,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第14号-收入",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4970,12 +4537,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第9号-职工薪酬",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5035,12 +4596,6 @@
           },
           {
             "text": "BF.4.增值税（含内部交易增值税：各法人独立申报、内部交易销项与进项不对抵；集团合并层各法人加总后内部部分自然净 0）/ BF.4.企业所得税 / BF.4.城市维护建设税 / BF.4.教育费附加(含地方教育费附加) / BF.4.房产税 / BF.4.土地使用税 / BF.4.印花税 / BF.4.其他税费",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5106,12 +4661,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5171,12 +4720,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5242,12 +4785,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5307,12 +4844,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5378,12 +4909,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5443,12 +4968,6 @@
           },
           {
             "text": "BB.3.3.D/BB.3.1.D 代采购·接受方应付（含税＝不含税（平价转移款+月度加成款）×(1+适用税率)，货物 13%、代购服务 6%，取 AB.15，内部往来；集团合并层与提供方互抵） / 三表手工调整 / BJ.C.f 内部借款预算表·借入方当月新增 − 当月还本（内部往来·增加/冲减项；保持不含税本金口径，贷款服务利息借入方进项不得抵扣；本方案默认内部借款按应税处理，集团如有统借统还等免税安排，另行调整；集团合并层与借出方 1221.1 按本方法人+对手方法人配对互抵） / 销售线物料明细内部供应商出料（BB.1.3.f 出库成本+加成款：签约主体按含税采购价＝不含税（出库成本+加成款）×(1+13%) 确认应付，按合同账期真实现金付款、期末保留真实未付余额） / BB.1.3.i 人工明细_财务查询·内部供应商提供行（接受方应付＝含税完整服务价（人工成本+加成款）×(1+6%)，内部往来·增加项，按合同账期真实现金付款、期末保留真实未付余额）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5514,12 +5033,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5579,12 +5092,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5650,12 +5157,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5715,12 +5216,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5786,12 +5281,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5851,12 +5340,6 @@
           },
           {
             "text": "BF.3.d 融资预算汇总表·当期新增融资总额 / 当期减少融资总额 / 当期流动性重分类金额 / BF.3.c 融资预算明细表·期限、到期时间、已有期初净额",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5922,12 +5405,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5987,12 +5464,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6058,12 +5529,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6123,12 +5588,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6194,12 +5653,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6259,12 +5712,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6330,12 +5777,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6395,12 +5836,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6466,12 +5901,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "公司法及企业会计准则",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6531,12 +5960,6 @@
           },
           {
             "text": "上年末余额 / 手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6602,12 +6025,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6667,12 +6084,6 @@
           },
           {
             "text": "BO.PL.净利润",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6738,12 +6149,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6803,12 +6208,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -6874,12 +6273,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -6939,12 +6332,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -7010,12 +6397,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7075,12 +6456,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -7146,12 +6521,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7211,12 +6580,6 @@
           },
           {
             "text": "BB.1.2.预收 / BB.1.2.验收回款 / BB.1.3.预收款 / BB.1.3.验收回款 / AB.15(ASS-TAX-07、ASS-TAX-09)",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -7282,12 +6645,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7347,12 +6704,6 @@
           },
           {
             "text": "三表手工调整 / BB.4.2.b 内部职场租赁.出租方月度结算收款（含税内部结算收款＝内部租金×(1+9%)＋加成款×(1+6%)，取 AB.15；合并层互抵） / BB.3.3.D 关联交易视角（物料类采购）.月度到货额×(1+13%)+月度加成款×(1+6%)（各月求和，含税结算收款，内部结算、合并层互抵） / BB.3.1.D 关联交易视角（设备及无形资产采购）.月度加成款×(1+6%)（各月求和，加成部分/代购服务费，含税结算收款/付款，内部结算、合并层互抵）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -7418,12 +6769,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7483,12 +6828,6 @@
           },
           {
             "text": "BB.3.3.预付款 / BB.3.3.验收付款 / BB.3.3.预付款比例 / AB.15 税率及附加税比率字典.ASS-TAX-07（增值税法定标准税率，仅本行单点乘入一次；BAA.7 比例表本年度不启用）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -7554,12 +6893,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7619,12 +6952,6 @@
           },
           {
             "text": "BF.4.各项税费合计(现金流口径)",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -7690,12 +7017,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7755,12 +7076,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -7826,12 +7141,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -7891,12 +7200,6 @@
           },
           {
             "text": "BF.3.a.减少投资额 / BF.3.b.减少投资额",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -7962,12 +7265,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8027,12 +7324,6 @@
           },
           {
             "text": "BB.4.6.处置收款-含税(万元)（对外出售/报废变卖/内部转卖，处置方式区分）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -8098,12 +7389,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8163,12 +7448,6 @@
           },
           {
             "text": "BB.3.1.D 关联交易视角（设备及无形资产采购）·月度到货额（平价部分，下单主体法人侧、各月求和）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -8234,12 +7513,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8299,12 +7572,6 @@
           },
           {
             "text": "BB.3.1.付款额 / BB.3.2.付款额 / BB.4.3.月度预付款额 / BB.4.3.月度付款额 / BB.4.3.月度付款额（含内部转卖买方受让付款，原值=转卖价） / AB.15 税率及附加税比率字典.ASS-TAX-07、ASS-TAX-10（设备/物料 13%、基建工程 9%，仅本行单点乘入一次）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -8370,12 +7637,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8435,12 +7696,6 @@
           },
           {
             "text": "BF.1.月度投资金额 / BF.3.a.新增投资额 / BF.3.b.新增投资额（标注为新增投资支出的部分）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -8506,12 +7761,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8571,12 +7820,6 @@
           },
           {
             "text": "公式汇总",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -8642,12 +7885,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8707,12 +7944,6 @@
           },
           {
             "text": "BF.3.新增投资额 / BJ.C.f 内部借款预算表·借入方当月新增（内部借款，单体口径计入、集团合并层与借出方 CF-22.1 配对互抵）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -8778,12 +8009,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8843,12 +8068,6 @@
           },
           {
             "text": "BJ.C.f 内部借款预算表·借出方当月还本 + 当月实付利息（借出方口径＝当月实收利息）（单体口径计入；集团合并层与借入方 CF-20/CF-21 按本方法人+对手方法人配对互抵）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -8914,12 +8133,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8979,12 +8192,6 @@
           },
           {
             "text": "BF.3.减少投资额 / BJ.C.f 内部借款预算表·借入方当月还本（内部借款，单体口径计入、集团合并层与借出方 CF-19.2 配对互抵）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9050,12 +8257,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9115,12 +8316,6 @@
           },
           {
             "text": "BJ.C.f 内部借款预算表·借出方当月新增（放款流出，单体口径计入；集团合并层与借入方 CF-18 配对互抵） / BB.4.2.b.1 内部职场租赁·财务视角.本金偿付(各月求和)（内部租赁） / BB.4.2.a.1 外部职场租赁·财务视角.月度本金偿付(各月求和)（外部租赁、不抵销）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9186,12 +8381,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9251,12 +8440,6 @@
           },
           {
             "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9322,12 +8505,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9387,12 +8564,6 @@
           },
           {
             "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9458,12 +8629,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9523,12 +8688,6 @@
           },
           {
             "text": "公式计算",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9594,12 +8753,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第21号-租赁 (CAS 21)",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9662,17 +8815,11 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第21号-租赁 (CAS 21)",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ]
       ],
       "rowCount": 142,
-      "colCount": 11
+      "colCount": 10
     },
     {
       "name": "AA.3.b 费用明细科目(FY)",
@@ -10284,13 +9431,6 @@
             "rowSpan": 1,
             "colSpan": 1,
             "bg": "#002f6c"
-          },
-          {
-            "text": "会计准则依据",
-            "isHeader": true,
-            "rowSpan": 1,
-            "colSpan": 1,
-            "bg": "#002f6c"
           }
         ],
         [
@@ -10326,12 +9466,6 @@
           },
           {
             "text": "利润表 (Income Statement) / 综合经营透视表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -10373,12 +9507,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第30号-财务报表列报",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10414,12 +9542,6 @@
           },
           {
             "text": "现金流量表 (Cash Flow) / 资金出入池预算表 / 月度资金头寸表",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第31号-现金流量表 (直接法编制)",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -10461,17 +9583,11 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "企业会计准则第9号-职工薪酬 / 第4号-固定资产 / 财税研发加计扣除政策",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ]
       ],
       "rowCount": 5,
-      "colCount": 7
+      "colCount": 6
     }
   ]
 }

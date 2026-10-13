@@ -982,7 +982,7 @@ export function buildManagementUnitMasterSheets(units: ManagementUnit[]): any[] 
 
 // ---------------------------------------------------------------------------
 // 科目说明文字源优先：src/data/texts/_chart-of-accounts.xml
-// 统一科目主数据（名称/全称/核算说明/准则依据）、科目编码规则（家族名/编码结构/示例/层级定义/依据）
+// 统一科目主数据（名称/全称/核算说明）、科目编码规则（家族名/编码结构/示例/层级定义）
 // 与费用明细科目（FY，名称/全称/核算范围说明）的文字统一从 XML 取；
 // 未登记 XML、或条目数与 TS 主数据不一致时整体回退 TS（行为与迁移前一致）。
 // 迁移：scripts/migrateTextsToXml.ts；逐字校验：scripts/validateTextsXml.ts。
@@ -997,7 +997,6 @@ function accountTextXmlFirst(accounts: UnifiedBudgetAccountItem[]): UnifiedBudge
     name: x[i].name || a.name,
     fullName: x[i].fullName || a.fullName,
     description: x[i].description || a.description,
-    accountingStandardRef: x[i].standardRef || a.accountingStandardRef,
   }));
 }
 
@@ -1010,7 +1009,6 @@ function codingRuleTextXmlFirst(rules: BudgetAccountCodingRule[]): BudgetAccount
     codePattern: x[i].codePattern || r.codePattern,
     exampleCode: x[i].exampleCode || r.exampleCode,
     description: x[i].description || r.description,
-    governingStandards: x[i].governingStandards || r.governingStandards,
     associatedStatements: x[i].associatedStatements ? x[i].associatedStatements.split(' / ') : r.associatedStatements,
   }));
 }
@@ -1039,7 +1037,7 @@ export function buildUnifiedBudgetSubjectMasterSheets(
   // Sheet 1: 统一科目总表 (PL/BS/CF)
   const accHeaders = [
     '科目编码', '科目名称', '科目全称', '科目家族', '分类归属',
-    '层级', '上级编码', '借贷/流向', '是否直接列报', '关联编制源表', '准则与核算说明'
+    '层级', '上级编码', '借贷/流向', '是否直接列报', '关联编制源表'
   ];
   const accCelldata: any[] = [];
   accHeaders.forEach((h, c) => {
@@ -1064,8 +1062,7 @@ export function buildUnifiedBudgetSubjectMasterSheets(
       { v: acc.parentCode || '-', align: 1 },
       { v: acc.balanceDirection, align: 1 },
       { v: acc.isReportLineItem ? '是' : '否', align: 1 },
-      { v: acc.budgetSourceWorkbench || '基础设置', align: 0 },
-      { v: acc.accountingStandardRef || 'CAS / 集团统一预算科目口径', align: 0 }
+      { v: acc.budgetSourceWorkbench || '基础设置', align: 0 }
     ];
 
     rowVals.forEach((cell, c) => {
@@ -1100,7 +1097,7 @@ export function buildUnifiedBudgetSubjectMasterSheets(
     config: {
       rowlen: { 0: 28 },
       columnlen: {
-        0: 100, 1: 160, 2: 220, 3: 100, 4: 160, 5: 70, 6: 90, 7: 90, 8: 90, 9: 160, 10: 300
+        0: 100, 1: 160, 2: 220, 3: 100, 4: 160, 5: 70, 6: 90, 7: 90, 8: 90, 9: 240
       },
       frozen: { type: 'rangeRow', range: { row_focus: 0, column_focus: 0 } }
     }
@@ -1170,7 +1167,7 @@ export function buildUnifiedBudgetSubjectMasterSheets(
   };
 
   // Sheet 3: 科目编码规则表
-  const ruleHeaders = ['家族前缀', '科目家族名称', '编码结构规范', '示例编码', '层级定义与长度', '关联财务主表', '会计准则依据'];
+  const ruleHeaders = ['家族前缀', '科目家族名称', '编码结构规范', '示例编码', '层级定义与长度', '关联财务主表'];
   const ruleCelldata: any[] = [];
   ruleHeaders.forEach((h, c) => {
     ruleCelldata.push({
@@ -1187,8 +1184,7 @@ export function buildUnifiedBudgetSubjectMasterSheets(
       { v: rule.codePattern, align: 1 },
       { v: rule.exampleCode, align: 1, bold: 1, fc: '#059669' },
       { v: rule.description, align: 0 },
-      { v: rule.associatedStatements.join(' / '), align: 0 },
-      { v: rule.governingStandards, align: 0 }
+      { v: rule.associatedStatements.join(' / '), align: 0 }
     ];
     rowVals.forEach((cell, c) => {
       ruleCelldata.push({
@@ -1222,7 +1218,7 @@ export function buildUnifiedBudgetSubjectMasterSheets(
     config: {
       rowlen: { 0: 28 },
       columnlen: {
-        0: 90, 1: 160, 2: 140, 3: 110, 4: 260, 5: 180, 6: 220
+        0: 90, 1: 160, 2: 140, 3: 110, 4: 260, 5: 280
       },
       frozen: { type: 'rangeRow', range: { row_focus: 0, column_focus: 0 } }
     }
@@ -1382,7 +1378,7 @@ export function buildProjectCatalogSheets(
   };
 
   // Sheet 2: 存量产品成本率基准
-  const costHeaders = ['产品大类 / 业务线', '默认预算成本率(%)', '对应预算毛利率(%)', '成本核算口径', '准则依据与测算原则'];
+  const costHeaders = ['产品大类 / 业务线', '默认预算成本率(%)', '对应预算毛利率(%)', '成本核算口径', '测算原则说明'];
   const costCelldata: any[] = [];
   costHeaders.forEach((h, c) => {
     costCelldata.push({

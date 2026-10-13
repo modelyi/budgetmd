@@ -2410,13 +2410,6 @@
             "rowSpan": 1,
             "colSpan": 1,
             "bg": "#002f6c"
-          },
-          {
-            "text": "准则依据",
-            "isHeader": true,
-            "rowSpan": 1,
-            "colSpan": 1,
-            "bg": "#002f6c"
           }
         ],
         [
@@ -2428,12 +2421,6 @@
           },
           {
             "text": "【资产类】",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2488,12 +2475,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2538,12 +2519,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2576,12 +2551,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2611,12 +2580,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2668,12 +2631,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -2703,12 +2660,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2757,12 +2708,6 @@
           },
           {
             "text": "年初=上年末余额；发生=SUM(BB.3.1.预付款) + SUM(BB.3.2.付款额) − 本期转为到货/验收部分；期末=年初+发生+调整。付款节奏以 BB.3.1/BB.3.2 各月填报数为准（BAA.7 比例表本年度不启用，不参与测算）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2838,12 +2783,6 @@
           },
           {
             "text": "= SUM(BB.3.3.D.月度到货额(各月求和) + BB.3.3.D.月度加成款(各月求和) + BB.3.1.D.月度到货额(各月求和) + BB.3.1.D.月度加成款(各月求和))（增加项：提供方应收＝含税（不含税平价转出价+加成款），含税＝不含税价 ×(1+适用税率)（货物 13%、代购服务 6%，取 AB.15），内部往来；集团合并层与接受方其他应付款-内部往来互抵）− SUM(BB.3.3.D.月度到货额(各月求和) + BB.3.3.D.月度加成款(各月求和) + BB.3.1.D.月度到货额(各月求和) + BB.3.1.D.月度加成款(各月求和))（结算冲减：接受方向提供方的含税内部结算付款额＝不含税（月度到货额+月度加成款），含税＝不含税额 ×(1+适用税率)（货物 13%、代购服务 6%，取 AB.15），按月归集；结算款=月度到货额+月度加成款，加成随结算。按月足额结算时年内净发生额为 0、期末余额为 0；跨月未结部分构成期末余额） + SUM(BJ.C.f 内部借款预算表·借出方当月新增 − 当月还本)（按月归集：增加项＝借出方当月新增（放款）、冲减项＝借出方当月还本（收本）；内部往来 1221.1，集团合并层与借入方其他应付款-内部往来 2241.1 按本方法人+对手方法人配对互抵）；销售线内部供应商往来（BB.1.3.f 物料明细_财务查询 / BB.1.3.i 人工明细_财务查询 中「内部供应商」非空且≠签约主体的行；「内部供应商」列由交易路径管理岗维护）：物料行为真实购销、真实现金结算——提供方（内部供应商归属法人）按含税内部销售价（＝不含税（出库成本+加成款）×(1+13%)，货物税率 13%）确认其他应收款-内部往来 1221.1 (+)（增加项），签约主体按合同账期真金白银付款、付款月份冲减该应收（冲减项），年内净发生额与期末余额按实际付款节奏保留真实往来余额；人工行（BB.1.3.i）同物料模型——提供方按含税完整服务价（＝不含税（人工成本+加成款）×(1+6%)，服务 6%）确认应收、按合同账期收款、期末保留真实未收余额；集团合并层 1221.1↔2241.1 互抵；内部借款 BJ.C.f 往来保持现有不含税本金口径（贷款服务利息的增值税：借入方取得的贷款服务进项税额不得抵扣；本方案默认内部借款按应税处理，集团如有统借统还等免税安排，另行调整；其利息往来亦不含税，见 BJ.C.f 说明）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2968,12 +2907,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3003,12 +2936,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3044,12 +2971,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3079,12 +3000,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3120,12 +3035,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3149,12 +3058,6 @@
           },
           {
             "text": "= 货币资金 + 交易性金融资产 + 衍生金融资产 + 应收票据 + 应收账款 + 应收款项融资 + 预付款项 + 其他应收款 + 存货 + 合同资产 + 持有待售资产 + 一年内到期的非流动资产 + 其他流动资产",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3190,12 +3093,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3228,12 +3125,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3263,12 +3154,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3311,12 +3196,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3346,12 +3225,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3387,12 +3260,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3422,12 +3289,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3529,12 +3390,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3612,12 +3467,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3650,12 +3499,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3685,12 +3528,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3739,12 +3576,6 @@
           },
           {
             "text": "年初=内部 BB.4.2.b.1 / 外部 BB.4.2.a.1 上年确认的使用权资产原值 − 累计折旧（使用权资产按净值列示：净值=原值−累计折旧）；发生=本年新增（BB.4.2.b.1 内部 + BB.4.2.a.1 外部新增资本化租赁合同的使用权资产原值）− 本年折旧（使用权资产折旧由 BB.4.5 增量资产折旧计算表计提、经 BB.4.X.A 归集）− 到期终止（口径：到期终止＝租赁期结束月，剩余租赁负债与使用权资产净值一次性结转（按租赁期终止月自动判定）；提前终止/退租等边界本期未展开，如发生直接在三表手工调整列录入）；资本化判定取 AB.16「租赁期限」：一年以上→资本化（进本行）、一年以下（含 12 个月）→费用化（不进本行，其租金按用途直接进费用），租赁类型由系统带出；期末=年初+发生+调整；内部租赁在集团合并层与出租方全额抵销，外部租赁（BB.4.2.a.1）是对外交易、不参与合并抵销、单体与合并同额保留",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3801,12 +3632,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3836,12 +3661,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3877,12 +3696,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3912,12 +3725,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -3953,12 +3760,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -3991,12 +3792,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4020,12 +3815,6 @@
           },
           {
             "text": "= 债权投资 + 其他债权投资 + 长期应收款 + 长期股权投资 + 其他权益工具投资 + 其他非流动金融资产 + 投资性房地产 + 固定资产 + 在建工程 + 生产性生物资产 + 油气资产 + 使用权资产 + 无形资产 + 开发支出 + 商誉 + 长期待摊费用 + 递延所得税资产 + 其他非流动资产",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4055,12 +3844,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4072,12 +3855,6 @@
           },
           {
             "text": "【负债类】",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4132,12 +3909,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4167,12 +3938,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4208,12 +3973,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4243,12 +4002,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4300,12 +4053,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4338,12 +4085,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4373,12 +4114,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4425,12 +4160,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4472,12 +4201,6 @@
           },
           {
             "text": "年初=上年末余额；增加=BF.4 各税种计提列合计（增值税净应纳 + 企业所得税 + 城建税 + 教育费附加 + 房产税 + 土地使用税 + 印花税 + 其他）；减少=BF.4 各税种实缴列合计；期末=年初+计提−实缴+调整。增值税行填净应纳（销项−进项，取 BF.4.b），不得整行重复计入；即征即退到账冲减本科目，留抵退税在实缴列冲减、不进 CF-02；含内部交易增值税：各法人独立申报、内部交易销项与进项不对抵；集团合并层各法人加总后内部部分自然净 0（内部交易同为应税交易，卖方/提供方计销项、买方/接受方计进项，同额同率，税率取 AB.15）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4556,12 +4279,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4591,12 +4308,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4639,12 +4350,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4677,12 +4382,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4706,12 +4405,6 @@
           },
           {
             "text": "= 短期借款 + 交易性金融负债 + 衍生金融负债 + 应付票据 + 应付账款 + 预收款项 + 合同负债 + 应付职工薪酬 + 应交税费 + 其他应付款 + 持有待售负债 + 一年内到期的非流动负债 + 其他流动负债",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4754,12 +4447,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4789,12 +4476,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4846,12 +4527,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4881,12 +4556,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4922,12 +4591,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -4957,12 +4620,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -4998,12 +4655,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5036,12 +4687,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5065,12 +4710,6 @@
           },
           {
             "text": "= 长期借款 + 应付债券 + 租赁负债 + 长期应付款 + 预计负债 + 递延收益 + 递延所得税负债 + 其他非流动负债",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5100,12 +4739,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5117,12 +4750,6 @@
           },
           {
             "text": "【所有者权益】",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5174,12 +4801,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5209,12 +4830,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5254,12 +4869,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5292,12 +4901,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5327,12 +4930,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5375,12 +4972,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5420,12 +5011,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5449,12 +5034,6 @@
           },
           {
             "text": "= 实收资本（或股本） + 其他权益工具 + 资本公积 − 库存股 + 其他综合收益 + 盈余公积 + 未分配利润",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5490,12 +5069,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -5519,12 +5092,6 @@
           },
           {
             "text": "= 归属于母公司所有者权益合计 + 少数股东权益",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -5554,24 +5121,17 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ]
       ],
       "rowCount": 73,
-      "colCount": 5,
+      "colCount": 4,
       "wrap": true,
       "colWidths": [
         "8%",
         "16%",
         "28%",
-        "40%",
-        "8%"
+        "48%"
       ]
     }
   ]

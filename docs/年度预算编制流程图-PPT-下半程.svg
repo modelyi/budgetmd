@@ -38,7 +38,7 @@
     <rect x="110" y="305" width="280" height="90" rx="10" fill="#e2e8f0" stroke="#64748b" stroke-width="1.5"/>
     <text x="250" y="332" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">财务视角补充（系统）</text>
     <text x="250" y="354" text-anchor="middle" font-size="12" fill="#475569">成本 / 法人 / 分录</text>
-    <text x="250" y="374" text-anchor="middle" font-size="12" fill="#475569">代采按净额法（CAS 14）</text>
+    <text x="250" y="374" text-anchor="middle" font-size="12" fill="#475569">代采按净额法</text>
   </g>
 
   <!-- P4: 资金与税金 -->
@@ -62,7 +62,7 @@
     <rect x="490" y="315" width="280" height="80" rx="10" fill="#e2e8f0" stroke="#dc2626" stroke-width="2"/>
     <text x="630" y="343" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">合并抵销（系统）</text>
     <text x="630" y="365" text-anchor="middle" font-size="12" fill="#475569">BO.ELIM 抵销分录</text>
-    <text x="630" y="385" text-anchor="middle" font-size="12" fill="#475569">CAS 33 抵销 · CAS 18 递延所得税</text>
+    <text x="630" y="385" text-anchor="middle" font-size="12" fill="#475569">合并抵销 · 递延所得税</text>
   </g>
 
   <!-- P5: 三表试算 -->
@@ -149,5 +149,5 @@
 
   <text x="105" y="770" font-size="12.5" fill="#475569">编制节奏：二上（12月上）业务数齐套后，财务补财务视角 / 资金税金 / 合并抵销 / 三表试算；二下（12月下）经管会评审，定稿批复。</text>
   <text x="105" y="792" font-size="12.5" fill="#475569">数据链路：业务编制 BB → 资金税金 BF → 关联交易 BJ.C → 合并抵销 BO.ELIM → 三表 BO.PL/BS/CF（勾稽校验）→ 评审定稿。</text>
-  <text x="105" y="814" font-size="12.5" fill="#475569">口径：金额不含税 · 单位万元 · 精度 0.1；合并抵销 CAS 33 · 递延所得税 CAS 18。</text>
+  <text x="105" y="814" font-size="12.5" fill="#475569">口径：金额不含税 · 单位万元 · 精度 0.1；合并抵销 · 递延所得税。</text>
 </svg>

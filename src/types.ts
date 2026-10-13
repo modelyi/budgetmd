@@ -33,7 +33,7 @@ export interface BudgetPremiseItem {
   responsibleDept: string;    // 主责部门 (如 财务部, 战略企划部, 预算管理委员会)
   controlPrinciple: '刚性红线' | '指导性原则' | '弹性控制' | '前置审批';
   detailedGuidelines: string; // 细化指引与执行要求
-  accountingReference: string;// 会计准则/法规依据 (如 CAS 14, CAS 21, 国资委考核办法)
+  accountingReference: string;// 会计与法规依据说明
   status: '生效执行' | '待审议' | '归档';
 }
 
@@ -624,7 +624,7 @@ export interface FixedAssetProcurementItem {
   annualPaymentTotal?: number;      // 2027预算年度付款总金额 (万元 = m1 + ... + m12)
   futureYearPayment?: number;       // 递延至2028及以后年度付款金额 (万元)
 
-  // 5. 转固入账与折旧联动 (企业会计准则 CAS 4)
+  // 5. 转固入账与折旧联动
   residualRatePct?: number;         // 预计净残值率 (%, 默认 5%)
   monthlyDepreciation?: number;     // 转固次月起每月计提折旧额 (万元)
   budgetYearDepreciation?: number;  // 2027年预算内累计折旧额 (万元)
@@ -1010,7 +1010,7 @@ export interface IntercompanyLeasingBudgetItem {
   providerDepreciationCost: number;// 本期折旧成本 (元 / 万元)
   providerReceivableEndingBalance: number; // 期末应收租金余额 (元 / 万元)
   
-  // 承租方(子公司/承租主体)口径 (符合 CAS 21 新租赁准则)
+  // 承租方(子公司/承租主体)口径（按新租赁准则）
   receiverRightOfUseAssetOriginal: number; // 使用权资产原值 (元 / 万元)
   receiverRightOfUseAssetAccumDepr: number; // 使用权资产累计折旧 (元 / 万元)
   receiverLeaseLiabilityBalance: number; // 租赁负债余额 (元 / 万元)

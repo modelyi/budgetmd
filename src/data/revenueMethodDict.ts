@@ -4,7 +4,7 @@
 export interface RevenueMethodDictItem {
   code: string;                   // 编码
   name: string;                   // 方式名
-  recognitionType: '时点法' | '时段法'; // 准则分类（CAS 14）
+  recognitionType: '时点法' | '时段法'; // 收入确认时点分类
   monthlyDistribution: string;    // 月度分摆逻辑
   notes: string;                  // 报表驱动说明
 }

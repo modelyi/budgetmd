@@ -22,13 +22,12 @@
     <field code="name" name="报表项目名称" source="会计规则引擎"><![CDATA[]]></field>
     <field code="rule" name="取数规则与加总公式" source="会计规则引擎"><![CDATA[]]></field>
     <field code="src" name="来源编制表与字段" source="会计规则引擎"><![CDATA[]]></field>
-    <field code="ref" name="准则依据与业务说明" source="会计准则"><![CDATA[]]></field>
   </fields>
 
   <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
   <rules>
     <rule form="A1.4 表项与财务报表转换规则总览">
-      <point><![CDATA[基于会计规则引擎总结的权威规则库，含两个Tab：A1.4.a业务事件与财务三表转换规则库（全量21张编制表凭证与三表流向）+ A1.4.b财务三表取数与科目汇总规则库（三表行项加总公式与准则依据）。全面、精确、易读。]]></point>
+      <point><![CDATA[基于会计规则引擎总结的权威规则库，含两个Tab：A1.4.a业务事件与财务三表转换规则库（全量21张编制表凭证与三表流向）+ A1.4.b财务三表取数与科目汇总规则库（三表行项加总公式）。全面、精确、易读。]]></point>
     </rule>
   </rules>
 

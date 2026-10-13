@@ -82,7 +82,7 @@ const FILE_HEADER = (code: string, name: string, source: string) =>
   `\n` +
   `  口径约定：\n` +
   `    · 长文本一律 CDATA 包裹（<![CDATA[ 原文 ]]>），CDATA 与标签紧邻、不留空白；\n` +
-  `    · 短标识（code / name / source / fields / target / event / field / form / cat / ref / family）用 XML 属性；\n` +
+  `    · 短标识（code / name / source / fields / target / event / field / form / cat / family）用 XML 属性；\n` +
   `    · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；\n` +
   `    · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。\n` +
   `\n` +
@@ -233,10 +233,10 @@ function buildStatementRulesXml(): string {
   }
 
   const a14 = STATEMENT_RULES.map((item) => {
-    const anyItem = item as { cat: string; code: string; name: string; rule: string; src?: string; source?: string; ref: string; isTotal?: boolean };
+    const anyItem = item as { cat: string; code: string; name: string; rule: string; src?: string; source?: string; isTotal?: boolean };
     const src = anyItem.src !== undefined ? anyItem.src : anyItem.source ?? '';
     return (
-      `    <item ${attr('cat', anyItem.cat)} ${attr('code', anyItem.code)} ${attr('name', anyItem.name)} ${attr('ref', anyItem.ref)}` +
+      `    <item ${attr('cat', anyItem.cat)} ${attr('code', anyItem.code)} ${attr('name', anyItem.name)}` +
       `${anyItem.isTotal ? ' isTotal="1"' : ''}>\n` +
       `      <rule>${cdata(anyItem.rule)}</rule>\n` +
       `      <src>${cdata(src)}</src>\n` +
@@ -264,7 +264,6 @@ function buildChartOfAccountsXml(): string {
     (a) =>
       `    <account ${attr('code', a.code)} ${attr('family', a.family)} ${attr('name', a.name)} ${attr('fullName', a.fullName)}>\n` +
       `      <description>${cdata(a.description)}</description>\n` +
-      `      <standardRef>${cdata(a.accountingStandardRef)}</standardRef>\n` +
       `    </account>`,
   ).join('\n');
 
@@ -273,7 +272,6 @@ function buildChartOfAccountsXml(): string {
       `    <rule ${attr('family', r.family)} ${attr('prefix', r.prefix)} ${attr('familyName', r.familyName)} ${attr('exampleCode', r.exampleCode)}>\n` +
       `      <codePattern>${cdata(r.codePattern)}</codePattern>\n` +
       `      <description>${cdata(r.description)}</description>\n` +
-      `      <governingStandards>${cdata(r.governingStandards)}</governingStandards>\n` +
       `      <associatedStatements>${cdata(r.associatedStatements.join(' / '))}</associatedStatements>\n` +
       `    </rule>`,
   ).join('\n');
@@ -287,9 +285,9 @@ function buildChartOfAccountsXml(): string {
 
   const body =
     `  <!-- 统一科目主数据（原 src/data/unifiedBudgetChartOfAccounts.ts UNIFIED_BUDGET_ACCOUNTS），\n` +
-    `       文字=科目名称/科目全称/核算范围说明/会计准则依据；结构化列（家族/层级/借贷方向/是否列报行等）留在 TS。 -->\n` +
+    `       文字=科目名称/科目全称/核算范围说明；结构化列（家族/层级/借贷方向/是否列报行等）留在 TS。 -->\n` +
     `  <accounts>\n${accounts}\n  </accounts>\n\n` +
-    `  <!-- 科目编码规则（原 BUDGET_ACCOUNT_CODING_RULES），文字=家族名/编码结构/示例/说明/层级定义/准则依据。 -->\n` +
+    `  <!-- 科目编码规则（原 BUDGET_ACCOUNT_CODING_RULES），文字=家族名/编码结构/示例/说明/层级定义。 -->\n` +
     `  <codingRules>\n${codingRules}\n  </codingRules>\n\n` +
     `  <!-- 费用明细科目 FY（原 src/data/expenseBudgetSubjectsData.ts FIXED_EXPENSE_BUDGET_SUBJECTS），\n` +
     `       文字=科目名称/科目全称/业务核算范围与口径说明（AA.3.b 渲染列）。 -->\n` +

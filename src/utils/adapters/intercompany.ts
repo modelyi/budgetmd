@@ -735,11 +735,9 @@ export function buildIntercompanyAssetTransferSheet(_items: any[] = []): any {
 
 export function buildTaxRateAssumptionSheet(items: BudgetAssumptionItem[] = TAX_RATE_ASSUMPTIONS): any {
   const celldata: any[] = [];
-  const headers = [
-    '序号', '税费/参数分类', '参数编码', '参数指标名称', '计量单位',
-    '2026年基准值', '2027年预算假设', '2028年预测假设', '2029年预测假设',
-    '适用组织/主体', '依据来源与文件', '敏感性等级', '审定状态', '应用说明/被引用'
-  ];
+  // 最简三列字典：只保留「参数编码 | 参数指标名称 | 比率」（比率取预算年值 budgetYearValue）；
+  // 年度多列（2026~2029）与税费分类/计量单位/适用主体/依据来源/敏感性等级/审定状态/应用说明等元数据一律去掉。
+  const headers = ['参数编码', '参数指标名称', '比率'];
   headers.forEach((h, c) => {
     celldata.push({ r: 0, c, v: { v: h, m: h, ct: { fa: 'General', t: 'g' }, ...SPREADSHEET_STYLES.deepBlueHeader } });
   });
@@ -757,20 +755,9 @@ export function buildTaxRateAssumptionSheet(items: BudgetAssumptionItem[] = TAX_
         }
       });
     };
-    setCell(0, idx + 1);
-    setCell(1, it.category);
-    setCell(2, it.paramCode, false);
-    setCell(3, it.paramName);
-    setCell(4, it.paramUnit);
-    setCell(5, it.baseValueCurrentYear, true, '0.00%');
-    setCell(6, it.budgetYearValue, true, '0.00%');
-    setCell(7, it.forecastYearPlus1, true, '0.00%');
-    setCell(8, it.forecastYearPlus2, true, '0.00%');
-    setCell(9, it.applicableEntity);
-    setCell(10, it.sourceBasis);
-    setCell(11, it.sensitivityLevel);
-    setCell(12, it.status);
-    setCell(13, it.remarks || '');
+    setCell(0, it.paramCode, false);
+    setCell(1, it.paramName);
+    setCell(2, it.budgetYearValue, true, '0.00%');
   });
   return {
     name: 'AB.15 税率及附加税比率字典',
@@ -781,6 +768,6 @@ export function buildTaxRateAssumptionSheet(items: BudgetAssumptionItem[] = TAX_
     column: headers.length,
     defaultRowHeight: 28,
     celldata,
-    config: { columnlen: { 0: 50, 1: 130, 2: 110, 3: 230, 4: 70, 5: 90, 6: 100, 7: 100, 8: 100, 9: 210, 10: 240, 11: 80, 12: 80, 13: 280 } }
+    config: { columnlen: { 0: 110, 1: 300, 2: 90 } }
   };
 }

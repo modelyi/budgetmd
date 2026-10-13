@@ -8,8 +8,8 @@
  * 校验两层：
  *   ① 结构化逐字比对：表概述 / 每个字段的 登记名+渲染名+数据来源+其他说明 / 每条规则要点 /
  *      每条适用情形 / 数据关系（summary+dataSources+outputs+keyRules）/ 每个转换事件 8 列 /
- *      无分录说明 / 三表报表行（name+seq+rule+source）/ A1.4.b 规则库（cat+code+name+rule+src+ref）/
- *      科目说明（名称+全称+说明+准则依据）/ 编码规则 / FY 明细科目；
+ *      无分录说明 / 三表报表行（name+seq+rule+source）/ A1.4.b 规则库（cat+code+name+rule+src）/
+ *      科目说明（名称+全称+核算说明）/ 编码规则 / FY 明细科目；
  *   ② 字节级 CDATA 比对：文件中每个 CDATA 原文必须在该编码的 TS 文字里逐字出现（多重集相等），
  *      用于捕获「解析端 trim 掩盖的前后空白」等结构比较看不到的差异。
  */
@@ -213,13 +213,12 @@ if (!sr) {
   STATEMENT_RULES.forEach((item, i) => {
     const x = sr.a14Rules[i];
     if (!x) return;
-    const anyItem = item as { cat: string; code: string; name: string; rule: string; src?: string; source?: string; ref: string };
+    const anyItem = item as { cat: string; code: string; name: string; rule: string; src?: string; source?: string };
     cmp(`A1.4.b[${i}].cat`, anyItem.cat, x.cat);
     cmp(`A1.4.b[${i}].code`, anyItem.code, x.code);
     cmp(`A1.4.b[${i}].name`, anyItem.name, x.name);
     cmp(`A1.4.b[${i}].rule`, anyItem.rule, x.rule);
     cmp(`A1.4.b[${i}].src`, anyItem.src !== undefined ? anyItem.src : anyItem.source ?? '', x.src);
-    cmp(`A1.4.b[${i}].ref`, anyItem.ref, x.ref);
   });
 }
 
@@ -238,7 +237,6 @@ if (!ca) {
     cmp(`account[${i}:${a.code}].name`, a.name, x.name);
     cmp(`account[${i}:${a.code}].fullName`, a.fullName, x.fullName);
     cmp(`account[${i}:${a.code}].description`, a.description, x.description);
-    cmp(`account[${i}:${a.code}].standardRef`, a.accountingStandardRef, x.standardRef);
   });
   cmp('codingRules 条数', BUDGET_ACCOUNT_CODING_RULES.length, ca.accountCodingRules.length);
   BUDGET_ACCOUNT_CODING_RULES.forEach((r, i) => {
@@ -250,7 +248,6 @@ if (!ca) {
     cmp(`codingRule[${i}:${r.family}].codePattern`, r.codePattern, x.codePattern);
     cmp(`codingRule[${i}:${r.family}].exampleCode`, r.exampleCode, x.exampleCode);
     cmp(`codingRule[${i}:${r.family}].description`, r.description, x.description);
-    cmp(`codingRule[${i}:${r.family}].governingStandards`, r.governingStandards, x.governingStandards);
     cmp(`codingRule[${i}:${r.family}].associatedStatements`, r.associatedStatements.join(' / '), x.associatedStatements);
   });
   cmp('expenseSubjects 条数', FIXED_EXPENSE_BUDGET_SUBJECTS.length, ca.expenseSubjects.length);
@@ -306,8 +303,8 @@ pushTs('_statement-rules', [
   }),
 ]);
 pushTs('_chart-of-accounts', [
-  ...UNIFIED_BUDGET_ACCOUNTS.flatMap((a) => [a.description, a.accountingStandardRef]),
-  ...BUDGET_ACCOUNT_CODING_RULES.flatMap((r) => [r.codePattern, r.description, r.governingStandards, r.associatedStatements.join(' / ')]),
+  ...UNIFIED_BUDGET_ACCOUNTS.flatMap((a) => [a.description]),
+  ...BUDGET_ACCOUNT_CODING_RULES.flatMap((r) => [r.codePattern, r.description, r.associatedStatements.join(' / ')]),
   ...FIXED_EXPENSE_BUDGET_SUBJECTS.map((it) => it.description ?? ''),
 ]);
 

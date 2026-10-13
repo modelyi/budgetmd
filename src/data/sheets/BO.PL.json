@@ -8763,13 +8763,6 @@
             "rowSpan": 1,
             "colSpan": 1,
             "bg": "#002f6c"
-          },
-          {
-            "text": "准则依据",
-            "isHeader": true,
-            "rowSpan": 1,
-            "colSpan": 1,
-            "bg": "#002f6c"
           }
         ],
         [
@@ -8793,12 +8786,6 @@
           },
           {
             "text": "= 6001.1 主营业务收入 + 6001.2 其他业务收入；签约主体对客户确认",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -8856,12 +8843,6 @@
           },
           {
             "text": "= SUM(BB.1.2.预计销售收入(不含税)) + SUM(BB.1.3.确认收入)；BB.1.2 按产品类别(财务口径)区分硬件销售、软件销售两条业务线，BB.1.3 为技术服务，三条业务线并入本行、不单列报表行；不含税、贷方发生额累计；BJ.C.g 内部销售预算·交易类型=产品销售（A 卖自产产成品给 B，B 作半成品/原材料再加工）：A 按内部销售价（产成品成本+加成款）确认本行主营业务收入-内部，集团合并层与 B 6401.1（B 已对外销售部分）及 B 存货 1405（期末未售部分中的加成）对冲",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -8945,12 +8926,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -8974,12 +8949,6 @@
           },
           {
             "text": "= 6401.1 主营业务成本 + 6401.2 其他业务成本",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9046,12 +9015,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9095,12 +9058,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9137,12 +9094,6 @@
           },
           {
             "text": "直接取 BF.4.税费及附加合计(利润表口径)（=城建税+教育费附加+房产税+土地使用税+印花税+其他税费，BF.4 表内公式求和）；增值税为价外税不计入本行，即征即退退税收益计入其他收益(6117)不入本行",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9213,12 +9164,6 @@
           },
           {
             "text": "= SUM(BB.5.1 财务视角.销售费用（人工，已剔除服务人工与资本化人工）) + SUM(BB.5.2.部门费用性质=\"销售费用\"的各法人公司金额（非人工经营费用）) + BB.4.X.A.销售费用折旧与摊销小计（含存量、本年新增（含使用权资产）与代采购转入资产折旧（来源=代采购转入，经 BB.4.5→BB.4.X.A）；折旧只在本处取一次；代采购资产折旧的承担方为接受方 B（资产卡片只在接受方 B 的 BB.4.5「代采购转入」来源生成，A 侧不建折旧卡、不计提折旧）） + SUM(BAP.2.月度消耗金额（领料用途=销售类）) + SUM(BB.4.2.a.外部职场租赁.费用化合同月租金（用途=销售，各月求和）)（外部职场租赁费用化合同，按用途归销售费用；对外交易、非内部结算、不进内部往来、集团合并层不抵销）资本化人工已在 BB.5.1 财务视角剥离至「自制在建工程」列并计入 1604，本行不再扣减",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9310,12 +9255,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9386,12 +9325,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9415,12 +9348,6 @@
           },
           {
             "text": "= 6604.1 利息费用 − 6604.2 利息收入（利息收入为财务费用减项）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9490,12 +9417,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9528,12 +9449,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9563,12 +9478,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9625,12 +9534,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9660,12 +9563,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9701,12 +9598,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9736,12 +9627,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9793,12 +9678,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9822,12 +9701,6 @@
           },
           {
             "text": "= 营业收入 − 营业成本 − 税金及附加 − 销售费用 − 管理费用 − 研发费用 − 财务费用 + 投资收益 + 公允价值变动收益 − 资产减值损失 − 信用减值损失 + 资产处置收益 + 其他收益",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9863,12 +9736,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9898,12 +9765,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -9939,12 +9800,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -9968,12 +9823,6 @@
           },
           {
             "text": "= 营业利润 + 营业外收入 − 营业外支出",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -10016,12 +9865,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10045,12 +9888,6 @@
           },
           {
             "text": "= 利润总额 − 所得税费用；归属于母公司所有者的净利润 = 净利润 − 少数股东损益（表样不单列）",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -10086,12 +9923,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10124,12 +9955,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10153,12 +9978,6 @@
           },
           {
             "text": "= 净利润 + 其他综合收益的税后净额",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -10194,12 +10013,6 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ],
         [
@@ -10229,12 +10042,6 @@
           },
           {
             "text": "手工",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -10270,24 +10077,17 @@
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
-          },
-          {
-            "text": "",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
           }
         ]
       ],
       "rowCount": 33,
-      "colCount": 5,
+      "colCount": 4,
       "wrap": true,
       "colWidths": [
         "8%",
         "16%",
         "28%",
-        "40%",
-        "8%"
+        "48%"
       ]
     }
   ]

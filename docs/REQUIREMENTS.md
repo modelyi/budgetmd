@@ -131,20 +131,13 @@
 
 **(b) 关键字段说明**
 
+表样简化为「参数编码 | 参数指标名称 | 比率」三列：不再分 2026~2029 年度列，也不再展示税费分类/计量单位/适用组织主体/依据来源与文件/敏感性等级/审定状态/应用说明等元数据（这些属性仍保留在参数模型里，供测算扩展，只是不上表样）。
+
 | 字段名 | 字段类型 | 数据来源（选择/手填） | 是否必输 | 备注 |
 |--------|------|------|------|------|
-| category | 枚举 | 选择（下拉） | 是 | 财税与优惠政策 |
-| paramCode | string | 手填 | 是 | ASS-TAX-01~10 |
-| paramName | string | 手填 | 是 | 税率/附加税比率/优惠参数名称 |
-| paramUnit | string | 手填 | 是 | % |
-| baseValueCurrentYear | number | 手填 | 是 | 本年度基准值 |
-| budgetYearValue | number | 手填 | 是 | 预算年度取数值，BF.4 按此值计算 |
-| forecastYearPlus1 / forecastYearPlus2 | number | 手填 | 是 | 后续年度预测值 |
-| applicableEntity | string | 手填 | 是 | 适用法人组织/纳税主体 |
-| sourceBasis | string | 手填 | 是 | 法规、政策或审定依据 |
-| sensitivityLevel | 枚举 | 选择（下拉） | 是 | 高 / 中 / 低 |
-| status | 枚举 | 选择（下拉） | 是 | 审定状态 |
-| remarks | string | 手填 | 否 | 应用说明/被引用关系 |
+| paramCode | string | 手填 | 是 | 参数编码 ASS-TAX-01~10，BF.4 按编码取数 |
+| paramName | string | 手填 | 是 | 参数指标名称（税率/附加税比率/优惠参数名称） |
+| budgetYearValue | number | 手填 | 是 | 比率（%），BF.4 按此值计算 |
 
 **(c) BF.4 联动规则**：ASS-TAX-03（城建税7%）按 BF.4.b「本期实际缴纳增值税」计提城建税；ASS-TAX-04（教育费附加3%）与 ASS-TAX-05（地方教育附加2%）合计5%，按同一基数计提附加税；ASS-TAX-07（产品与整机装备销售/物料及设备采购13%）、ASS-TAX-09（技术服务及费用类可抵扣6%）、ASS-TAX-10（基建工程采购9%）供 BF.4.b 适用税率取数；ASS-TAX-01/02/08分别服务企业所得税优惠、研发加计扣除及软件产品即征即退口径。
 **(d) 数据关系**：AB.15 是 BF.4 的直接基础字典；BF.4.a 读取附加税比率，BF.4.b 读取增值税税率及退税参数，不在 BF.4 内写死上述比例。
@@ -243,7 +236,7 @@ BB.1.3 物料明细从 AA.11 选择物料，并以 **物料编码 + 部件类别
 | responsibleDept | string | 手填 | 是 | 主责部门 |
 | controlPrinciple | 枚举 | 选择（下拉） | 是 | 刚性红线 / 指导性原则 / 弹性控制 / 前置审批 |
 | detailedGuidelines | string | 手填 | 是 | 细化指引与执行要求 |
-| accountingReference | string | 手填 | 是 | 会计准则/法规依据（CAS 14、CAS 21、国资委考核办法） |
+| accountingReference | string | 手填 | 是 | 会计准则/法规依据（收入、租赁、国资委考核办法） |
 
 ### 3.6 BAA.6 费用预算汇总表（视图）
 
@@ -484,7 +477,7 @@ BB.1.3 物料明细从 AA.11 选择物料，并以 **物料编码 + 部件类别
 
 ### 3.15 BB.3.1 固定资产采购与资本化预算（`FixedAssetProcurementItem`、`CapexBudgetItem`）
 
-**(a) 业务目标**：按设备类/物料类/基建类三大类编制固定资产采购的"下单、验收、付款"三指标 12 个月明细，联动生成月度出款现金流与转固折旧（CAS 4）；另有全口径 CapEx 综合投资表覆盖无形资产/在建工程。页面含 5 个视图页签：①资产类采购预算编制表（12 个月下单/验收/付款）②1~12 月采购资金付款出款计划 ③固定资产转固入账与折旧测算（CAS 4）④全口径 CapEx 综合投资表 ⑤在线编制表。
+**(a) 业务目标**：按设备类/物料类/基建类三大类编制固定资产采购的"下单、验收、付款"三指标 12 个月明细，联动生成月度出款现金流与转固折旧；另有全口径 CapEx 综合投资表覆盖无形资产/在建工程。页面含 5 个视图页签：①资产类采购预算编制表（12 个月下单/验收/付款）②1~12 月采购资金付款出款计划 ③固定资产转固入账与折旧测算 ④全口径 CapEx 综合投资表 ⑤在线编制表。
 
 **(b) 关键字段说明 — 采购主表 `FixedAssetProcurementItem`**（单位：万元）
 
@@ -596,7 +589,7 @@ BB.1.3 物料明细从 AA.11 选择物料，并以 **物料编码 + 部件类别
 
 **③ 内部销售预算表 `IntercompanySalesBudgetItem`**：projectName（软硬件销售、技术服务分包、委托研发服务、仓储物流等）；budgetSubjectCode/Name 自动带出（PL0101 主营业务收入 / PL0201 营业成本 / PL05 研发费用）；providerEntity/receiverEntity 12 法人下拉；金额/税率/含税/加成四列同上（含税与加成为公式，加成率自动取数）；providerPLStatement（提供方进利润表"主营业务收入"）、providerCFStatement（进"销售商品、提供劳务收到的现金"）、receiverPLStatement（接受方进"研发费用/管理费用/营业成本"）、receiverCFStatement（进"购买商品、接受劳务支付的现金"）、eliminationEntry（合并抵销分录：借营业收入，贷营业成本/研发费用，贷存货/资产未实现内部销售利润）。
 
-**④ 内部职场租赁预算表 `IntercompanyLeasingBudgetItem`**：businessScenario（租赁第三方房产/自有房产租赁）下拉；leasePeriodType（费用化<1年 / 资本化使用权资产租赁>1年）、leaseAccountingType（使用权资产租赁/经营租赁费用化）下拉，符合 CAS 21 新租赁准则；年租金含税/不含税、税率；出租方口径：providerRentalRevenue（本期租赁收入不含税）、providerDepreciationCost（本期折旧成本）、providerReceivableEndingBalance（期末应收租金）；承租方口径：使用权资产原值/累计折旧、租赁负债余额、本期折旧费用、本期利息费用、本期租赁费（费用化）、期末应付租金；交易结算与加成明细同②；eliminationExplanation（出租方进利润表其他业务收入/主营业务收入，承租方进折旧/利息/管理费用，集团层面抵销）。
+**④ 内部职场租赁预算表 `IntercompanyLeasingBudgetItem`**：businessScenario（租赁第三方房产/自有房产租赁）下拉；leasePeriodType（费用化<1年 / 资本化使用权资产租赁>1年）、leaseAccountingType（使用权资产租赁/经营租赁费用化）下拉，符合新租赁准则；年租金含税/不含税、税率；出租方口径：providerRentalRevenue（本期租赁收入不含税）、providerDepreciationCost（本期折旧成本）、providerReceivableEndingBalance（期末应收租金）；承租方口径：使用权资产原值/累计折旧、租赁负债余额、本期折旧费用、本期利息费用、本期租赁费（费用化）、期末应付租金；交易结算与加成明细同②；eliminationExplanation（出租方进利润表其他业务收入/主营业务收入，承租方进折旧/利息/管理费用，集团层面抵销）。
 
 **⑤ 资产转卖预算表 `IntercompanyAssetTransferBudgetItem`**：assetDesc/assetOriginalValue；assetCategory（生产设备/研发仪器/运输工具/电子设备/不动产及厂房）下拉；depreciationMethod（直线折旧无残值/直线法5%残值/双倍余额递减法/年数总和法）下拉；usefulLifeYears、capitalizationDate；sellerEntity/buyerEntity 下拉；transferAmountTaxExcluded/Included 手工；taxRatePct、transferDate、remainingDeprMonths；assetNetValue = 原值 − 累计折旧（公式）；assetDisposalGainLoss = 转卖金额(不含税) − 资产净值（公式）；monthlyDepreciation（1~12月折旧摊销）与 annualDepreciationTotal。报表流向字段：买方固定资产原值增加（BS）、买方"购建固定资产…支付的现金"（CF）、卖方"处置固定资产…收回的现金净额"（CF）、卖方减固定资产（BS）、卖方"资产处置收益"（PL），上述在集团层面自动抵销；eliminationRule：进利润表"折旧与摊销"，同时核销资产负债表"固定资产-折旧差"（买方按转卖金额计算的折旧差，集团层面自动抵销）。
 
@@ -660,7 +653,7 @@ BB.1.3 物料明细从 AA.11 选择物料，并以 **物料编码 + 部件类别
 | taxRatePct | number | 手填 | 是 | 适用税率%（含免税 0%） |
 | months / annualTotal | MonthlyBudget/number | 手填 或 系统计算（公式） | 是（系统自动生成，无需手工） | 月度发生额与全年合计 |
 | plImpact / cfImpact | string | 系统生成 | 是 | 利润表流向（四科目之一）、现金流量表流向（收到其他与经营活动有关的现金 等） |
-| accountingBasis | string | 手填 | 是 | 会计准则依据（如 CAS 16 政府补助） |
+| accountingBasis | string | 手填 | 是 | 会计准则依据（如政府补助） |
 
 ### 3.22a BB.4.4 存量资产折旧计算表（`ExistingAssetDepreciationItem`）
 
