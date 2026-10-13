@@ -4089,9 +4089,28 @@ export function buildTaxBudgetSheet(
   let plTaxSummaryRow = 10;
   let eitRow = 11;
   let cfTaxSummaryRow = 12;
+  let bsTaxSummaryRow = 13;
+
+  // 年初「应交税费」余额：现表内无取数来源，按 0 起算（说明列公式表述不变）
+  const openingBalance = 0;
+
+  // 资负口径余额行说明（计算规则；与 src/data/texts/BF.4.xml ③规则要点一致，逐字不改）
+  const BS_BALANCE_NOTE =
+    '年初余额 + 本期计提合计 − 本期实缴合计 = 期末应交税费（逐月滚动累计）；与资产负债表「应交税费」一致。增值税填净应纳（销项−进项，取附表 BF.4.b）；留抵退税在实缴列冲减，不重复计入；各法人独立申报，内部交易销项与进项不对抵，集团合并层各法人加总后内部部分自然净 0。';
+
+  // 行配置类型：汇总行按报表口径标记（利润表 isPLSummary / 现金流 isCFSummary / 资产负债表 isBSSummary）
+  type TaxBudgetRowConfig = {
+    cat: string;
+    seq?: number | string;
+    prior?: number | string;
+    note?: string;
+    isPLSummary?: boolean;
+    isCFSummary?: boolean;
+    isBSSummary?: boolean;
+  };
 
   // Define the standard category structure according to user's image
-  const standardCategories = [
+  const standardCategories: TaxBudgetRowConfig[] = [
     { cat: '增值税', seq: 1, prior: 10000, note: '增值税计提初始值取自附表 BF.4.b 辅助测算结果，允许用户直接手工修改；次月申报缴纳' },
     { cat: '其中: 增值税退税', seq: '其中', prior: '', note: '软件退税及先进制造业增值税加计抵减/即征即退' },
     { cat: '城市维护建设税', seq: 2, prior: '比率取AB.15假设设置', note: '城建税率取AB.15税费比率假设表ASS-TAX-03(市区7%)，以实缴增值税为计税依据' },
@@ -4102,13 +4121,15 @@ export function buildTaxBudgetSheet(
     { cat: '其他税费', seq: 7, prior: 10000, note: '车船税、环境保护税等' },
     { cat: '税费及附加合计(利润表口径)', isPLSummary: true },
     { cat: '企业所得税', seq: 8, prior: '', note: '利润总额调整后依适用税率(15%/25%)按季预缴' },
-    { cat: '各项税费合计(现金流口径)', isCFSummary: true }
+    { cat: '各项税费合计(现金流口径)', isCFSummary: true },
+    { cat: '应交税费（资负口径）', isBSSummary: true }
   ];
 
   standardCategories.forEach(itemConfig => {
     const r = currRow;
     const isPLSummary = itemConfig.isPLSummary;
     const isCFSummary = itemConfig.isCFSummary;
+    const isBSSummary = itemConfig.isBSSummary;
     const excelRow = r + 1;
 
     if (itemConfig.cat === '增值税') vatRow = excelRow;
@@ -4122,14 +4143,15 @@ export function buildTaxBudgetSheet(
     if (isPLSummary) plTaxSummaryRow = excelRow;
     if (itemConfig.cat === '企业所得税') eitRow = excelRow;
     if (isCFSummary) cfTaxSummaryRow = excelRow;
+    if (isBSSummary) bsTaxSummaryRow = excelRow;
 
     // Find matching mock item if any
     const matched = fallbackItems.find(it => it.category === itemConfig.cat);
 
-    const isSummaryRow = isPLSummary || isCFSummary;
-    const rowBg = isPLSummary ? '#eff6ff' : isCFSummary ? '#f0fdf4' : (r % 2 === 0 ? '#fafafa' : '#ffffff');
+    const isSummaryRow = isPLSummary || isCFSummary || isBSSummary;
+    const rowBg = isPLSummary ? '#eff6ff' : isCFSummary ? '#f0fdf4' : isBSSummary ? '#fffbeb' : (r % 2 === 0 ? '#fafafa' : '#ffffff');
     const textB = isSummaryRow ? 1 : 0;
-    const textFc = isPLSummary ? '#1e40af' : isCFSummary ? '#166534' : '#1e293b';
+    const textFc = isPLSummary ? '#1e40af' : isCFSummary ? '#166534' : isBSSummary ? '#92400e' : '#1e293b';
     const borderToUse = isSummaryRow ? borderSummary : borderCell;
 
     // Col 0: 序号
@@ -4237,6 +4259,16 @@ export function buildTaxBudgetSheet(
         b: 1,
         ht: 2,
         f: priorFormula,
+        fmt: '¥#,##0.00',
+        bd: borderToUse
+      });
+    } else if (isBSSummary) {
+      // 资负口径余额行：第 2 列列示年初「应交税费」余额（现表内不可得，按 0 起算）
+      setCell(r, 2, openingBalance, {
+        bg: '#fef3c7',
+        fc: '#92400e',
+        b: 1,
+        ht: 2,
         fmt: '¥#,##0.00',
         bd: borderToUse
       });
@@ -4424,6 +4456,54 @@ export function buildTaxBudgetSheet(
 
       // Col 29: 备注
       setCell(r, 29, '进入现金流量表「支付的各项税费」科目 = 增值税+城建+教育+房产+土地+印花+其他+所得税 (系统公式自动汇总)', { bg: rowBg, fc: '#166534', b: 1, ht: 0, bd: borderToUse });
+
+    } else if (isBSSummary) {
+      // 资负口径（余额行）: 期末应交税费 = 年初余额 + 本期计提合计 − 本期实缴合计，逐月滚动累计
+      // 计提/实缴合计取自本表各税种行的「预算计提」/「缴纳预算」列（不新造列）；
+      // 增值税退税为「增值税」的「其中」行，不重复计入；余额落在各月「缴纳预算」列（月末余额）。
+      const bsCategories = ['增值税', '城市维护建设税', '教育费附加 (含地方教育费附加)', '房产税', '土地使用税', '印花税', '其他税费', '企业所得税'];
+      const flowTerms = (L: string) => `${L}${vatRow}+${L}${umctRow}+${L}${eduRow}+${L}${propertyRow}+${L}${landRow}+${L}${stampRow}+${L}${otherTaxRow}+${L}${eitRow}`;
+
+      let balance = openingBalance;
+      let prevBalanceRef = `C${excelRow}`; // 1月以第 2 列年初余额为起点
+
+      for (let m = 1; m <= 12; m++) {
+        const provCol = 3 + m * 2;
+        const payCol = 4 + m * 2;
+        const provColLetter = getExcelCol(provCol);
+        const payColLetter = getExcelCol(payCol);
+
+        let mProvSum = 0;
+        let mPaySum = 0;
+        bsCategories.forEach(cName => {
+          if (cName === '城市维护建设税') {
+            const vatItem = fallbackItems.find(it => it.category === '增值税');
+            mProvSum += (vatItem?.months?.[m]?.provision || 0) * UMCT_RATE;
+            mPaySum += (vatItem?.months?.[m]?.payment || 0) * UMCT_RATE;
+          } else if (cName === '教育费附加 (含地方教育费附加)') {
+            const vatItem = fallbackItems.find(it => it.category === '增值税');
+            mProvSum += (vatItem?.months?.[m]?.provision || 0) * EDU_RATE;
+            mPaySum += (vatItem?.months?.[m]?.payment || 0) * EDU_RATE;
+          } else {
+            const it = fallbackItems.find(x => x.category === cName);
+            mProvSum += it?.months?.[m]?.provision || 0;
+            mPaySum += it?.months?.[m]?.payment || 0;
+          }
+        });
+
+        balance = Number((balance + mProvSum - mPaySum).toFixed(2));
+
+        const balFormula = `=${prevBalanceRef}+${flowTerms(provColLetter)}-(${flowTerms(payColLetter)})`;
+        setCell(r, payCol, balance, { bg: '#fffbeb', fc: textFc, b: 1, ht: 2, f: balFormula, bd: borderToUse });
+
+        prevBalanceRef = `${payColLetter}${excelRow}`;
+      }
+
+      // Col 4: 全年「缴纳预算」列列示年末应交税费余额（12月滚动结果）
+      setCell(r, 4, balance, { bg: '#fef3c7', fc: textFc, b: 1, ht: 2, f: `=AC${excelRow}`, bd: borderToUse });
+
+      // Col 29: 备注（计算规则原文）
+      setCell(r, 29, BS_BALANCE_NOTE, { bg: rowBg, fc: '#92400e', b: 1, ht: 0, bd: borderToUse });
 
     } else {
       // Standard Data Rows
