@@ -19,8 +19,10 @@
   <fields>
     <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据"><![CDATA[物料消耗归属的预算项目；领料用途可由预算项目属性自动映射带出（产品化项目→生产类、研发项目→研发类、销售项目→销售类、职能/公共平台项目→管理类及其他）]]></field>
     <field code="department" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[预算部门原则上明细到二级部门]]></field>
+    <field code="demandType" name="需求类型" source="本表录入"><![CDATA[下拉枚举：常规 / 研发长期；默认「常规」。用于表内区分两类物料消耗需求——常规物料消耗，与原独立的研发长期物料消耗需求汇总表（整表已并入本表）承载的研发长期物料消耗；研发长期行的物料类别固定「研发物料」、领料用途为研发类]]></field>
+    <field code="materialCode" name="物料编码" source="AA.11 物料主数据"><![CDATA[消耗物料编码，从物料主数据选择（研发长期行必填、由物料名称按物料主数据带出）；常规物料消耗无编码时留空]]></field>
     <field code="materialName" name="物料名称" source="AA.11 物料主数据"><![CDATA[消耗物料名称，从物料主数据选择]]></field>
-    <field code="materialCategory" name="物料类别" source="AB.9 存货物料类别字典"><![CDATA[可选值：生产物料/研发物料/服务物料/专项储备/其他物料；与 BB.3.3 物料采购、BB.3.X 进销存品类同一口径，按物料类别归集消耗去向]]></field>
+    <field code="materialCategory" name="物料类别" source="AB.9 存货物料类别字典"><![CDATA[可选值：生产物料/研发物料/服务物料/专项储备/其他物料；与 BB.3.3 物料采购、BB.3.X 进销存品类同一口径，按物料类别归集消耗去向；需求类型=研发长期 的行固定「研发物料」（关联 AB.9）、不可修改]]></field>
     <field code="usage" name="领料用途" source="本表录入"><![CDATA[可选值：研发类/销售类/管理类及其他（生产物料消耗无前置收集表，在 BB.3.X 在制品料行直接手工填报）；决定物料消耗去向（研发类→研发费用、销售类→销售费用、管理类及其他→管理费用），可由预算项目属性自动映射带出]]></field>
     <field code="monthlyAmount" name="月度消耗金额" source="本表录入"><![CDATA[按月手工填报；全年合计=SUM(1~12月)；金额不含税、单位万元、精度 0.1]]></field>
     <field code="annualTotal" name="全年合计" source="本表公式"><![CDATA[=SUM(1~12月消耗金额)]]></field>
@@ -30,11 +32,8 @@
   <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BAP.2']） -->
   <scenarios>
     <applies>
-      <item><![CDATA[各部门月度物料消耗金额汇总（领料用途：生产/研发/销售/管理及其他），是 BB.3.X 进销存出库与在制品领料的唯一取数来源（领料结转分录由 BB.3.X.b 领料与结转视图生成）]]></item>
+      <item><![CDATA[各部门月度物料消耗金额汇总（需求类型：常规 / 研发长期 两类；领料用途：生产/研发/销售/管理及其他），是 BB.3.X 进销存出库与在制品领料的唯一取数来源（领料结转分录由 BB.3.X.b 领料与结转视图生成）；研发长期物料消耗需求（需求类型=研发长期、物料类别固定「研发物料」）为原独立的研发长期物料消耗需求汇总表整表并入本表后的行]]></item>
     </applies>
-    <notApplies>
-      <item><![CDATA[研发长期物料消耗（属 BAP.3）]]></item>
-    </notApplies>
   </scenarios>
 
 </form>

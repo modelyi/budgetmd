@@ -19,6 +19,20 @@
             "bg": "#002f6c"
           },
           {
+            "text": "需求类型",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "物料编码",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
             "text": "物料名称",
             "isHeader": true,
             "rowSpan": 2,
@@ -153,6 +167,18 @@
             "colSpan": 1
           },
           {
+            "text": "常规",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "研发打样材料",
             "isHeader": false,
             "rowSpan": 1,
@@ -264,6 +290,18 @@
           },
           {
             "text": "激光器研发部",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "常规",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -385,6 +423,18 @@
             "colSpan": 1
           },
           {
+            "text": "常规",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "办公消耗用品",
             "isHeader": false,
             "rowSpan": 1,
@@ -501,6 +551,18 @@
             "colSpan": 1
           },
           {
+            "text": "常规",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "行政后勤耗材",
             "isHeader": false,
             "rowSpan": 1,
@@ -605,31 +667,171 @@
         ],
         [
           {
-            "text": "P1 高功率平板光纤激光切割机",
+            "text": "P3 超快激光与复合加工预研",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
           },
           {
-            "text": "销售一部",
+            "text": "研发中心",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
           },
           {
-            "text": "销售演示耗材",
+            "text": "研发长期",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
           },
           {
-            "text": "其他物料",
+            "text": "MAT-OPT-001",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
           },
           {
-            "text": "销售类",
+            "text": "聚焦镜组",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发物料",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发类",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.3",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.3",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.3",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "P3 超快激光与复合加工预研",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发中心",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发长期",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "MAT-DRV-005",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "伺服驱动组件",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发物料",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发类",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -647,7 +849,13 @@
             "colSpan": 1
           },
           {
-            "text": "1.0",
+            "text": "0.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.5",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -659,13 +867,7 @@
             "colSpan": 1
           },
           {
-            "text": "1.0",
-            "isHeader": false,
-            "rowSpan": 1,
-            "colSpan": 1
-          },
-          {
-            "text": "2.0",
+            "text": "0.5",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -677,7 +879,7 @@
             "colSpan": 1
           },
           {
-            "text": "1.0",
+            "text": "0.5",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -689,7 +891,13 @@
             "colSpan": 1
           },
           {
-            "text": "2.0",
+            "text": "0.5",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.5",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -701,13 +909,135 @@
             "colSpan": 1
           },
           {
-            "text": "1.0",
+            "text": "0.5",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
           },
           {
-            "text": "1.0",
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "P3 超快激光与复合加工预研",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "制造工程部",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发长期",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "MAT-COL-006",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "循环机组组件",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发物料",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "研发类",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.8",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.8",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.4",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.8",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "0.6",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -720,8 +1050,8 @@
           }
         ]
       ],
-      "rowCount": 7,
-      "colCount": 19
+      "rowCount": 9,
+      "colCount": 21
     }
   ]
 }

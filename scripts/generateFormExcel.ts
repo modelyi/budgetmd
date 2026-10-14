@@ -27,7 +27,7 @@ import { MATERIAL_MASTER_DATA } from '../src/data/materialMasterData';
 import {
   hourlyStandardCostSamples, materialStandardCostSamples, expenseBudgetSummaryResearchSamples,
   officeLeaseSiteMasterSamples, officeLeaseAnnualAreaSamples, officeLeaseDiscountRateSamples,
-  expenseConversionRatioSamples, rndMaterialConsumptionSummarySamples,
+  expenseConversionRatioSamples,
 } from '../src/data/assumptionSamples';
 import { BUDGET_YEAR_MASTER_SAMPLE, BUDGET_PERIOD_CALENDAR_SAMPLE } from '../src/data/mappingSamples';
 import { SALES_CONTRACT_SAMPLE, STOCK_ORDER_SAMPLE, SERVICE_REVENUE_SAMPLE, SERVICE_MATERIAL_SAMPLE, SERVICE_LABOR_SAMPLE, SALES_EXPENSE_SAMPLE } from '../src/data/salesSamples';
@@ -47,7 +47,7 @@ import {
   buildSelfBuiltCipSheet, buildSelfBuiltLaborDetailSheet, buildSelfBuiltCipTransferSheet, buildSelfBuiltMaterialDetailSheet,
   buildProductStandardCostSheet, buildHourlyStandardCostSheet, buildMaterialStandardCostSheet,
   buildEquipmentProcurementPaymentRatioSheet, buildMaterialProcurementPaymentRatioSheet,
-  buildExpenseBudgetSummaryResearchSheet, buildMaterialConsumptionSummarySheet, buildRndMaterialConsumptionSummarySheet,
+  buildExpenseBudgetSummaryResearchSheet, buildMaterialConsumptionSummarySheet,
   buildExpenseConversionRatioSheet, buildAssetConversionRatioSheet, buildDepreciationSplitRatioSheet, buildInventoryEntityRatioSheet,
   buildDepreciationExpenseSummarySheet, buildIncrementalDepreciationDetailSheet, buildExpenseConversionResultSheet,
   buildExternalOfficeLeaseSheet, buildExternalLeaseCapitalizationSheet,
@@ -222,10 +222,14 @@ const FORM_SHEET_BUILDERS: Record<string, () => SpreadsheetSheetFixture[]> = {
       months: { m1: 1, m2: 1, m3: 1, m4: 1, m5: 1, m6: 1, m7: 1, m8: 1, m9: 1, m10: 1, m11: 1, m12: 1 } },
     { budgetProject: '职能部门', department: '综合管理部', materialName: '行政后勤耗材', materialCategory: '其他物料', usage: '管理类及其他',
       months: { m1: 1, m2: 1, m3: 1, m4: 1, m5: 1, m6: 1, m7: 1, m8: 1, m9: 1, m10: 1, m11: 1, m12: 1 } },
-    { budgetProject: 'P1 高功率平板光纤激光切割机', department: '销售一部', materialName: '销售演示耗材', materialCategory: '其他物料', usage: '销售类',
-      months: { m1: 1, m2: 1, m3: 1, m4: 1, m5: 2, m6: 1, m7: 1, m8: 1, m9: 2, m10: 1, m11: 1, m12: 1 } },
+    // 研发长期物料需求（需求类型=研发长期；物料类别固定「研发物料」）——原独立研发长期表的行，已并入本表
+    { budgetProject: 'P3 超快激光与复合加工预研', department: '研发中心', demandType: '研发长期', materialCode: 'MAT-OPT-001', materialName: '聚焦镜组', materialCategory: '研发物料', usage: '研发类',
+      months: { m1: 0.6, m2: 0.4, m3: 0.5, m4: 0.3, m5: 0.4, m6: 0.5, m7: 0.3, m8: 0.6, m9: 0.4, m10: 0.3, m11: 0.5, m12: 0.4 } },
+    { budgetProject: 'P3 超快激光与复合加工预研', department: '研发中心', demandType: '研发长期', materialCode: 'MAT-DRV-005', materialName: '伺服驱动组件', materialCategory: '研发物料', usage: '研发类',
+      months: { m1: 1.0, m2: 0.5, m3: 0.5, m4: 1.0, m5: 0.5, m6: 1.0, m7: 0.5, m8: 1.0, m9: 0.5, m10: 0.5, m11: 1.0, m12: 0.5 } },
+    { budgetProject: 'P3 超快激光与复合加工预研', department: '制造工程部', demandType: '研发长期', materialCode: 'MAT-COL-006', materialName: '循环机组组件', materialCategory: '研发物料', usage: '研发类',
+      months: { m1: 0.8, m2: 0.4, m3: 0.6, m4: 0.4, m5: 0.6, m6: 0.8, m7: 0.4, m8: 0.6, m9: 0.4, m10: 0.6, m11: 0.8, m12: 0.6 } },
   ])] as unknown as SpreadsheetSheetFixture[],
-  'BAP.3': () => [buildRndMaterialConsumptionSummarySheet(rndMaterialConsumptionSummarySamples)] as unknown as SpreadsheetSheetFixture[],
   'BAA.6': () => [
     buildOfficeLeaseSiteMasterSheet(officeLeaseSiteMasterSamples),
     // BAA.6.b 年度租赁面积维护（含「单价(元/㎡·月)」列，仅供 BB.4.2.b 内部职场租赁取面积与单价）
@@ -423,7 +427,7 @@ const FORM_SHEET_BUILDERS: Record<string, () => SpreadsheetSheetFixture[]> = {
           m12: { orderAmount: 0, acceptanceAmount: 8, advancePaymentRatio: 0, advancePayment: 0, acceptancePayment: 8 },
         },
         totalOrderAmount: 0, totalAcceptanceAmount: 95, totalAdvancePayment: 0, totalAcceptancePayment: 95 },
-      // ② 从 BAP.3 获取（研发长期物料消耗需求）—— 研发专用物料，归属研发物料
+      // ② 从 BAP.2（需求类型=研发长期）获取（研发长期物料消耗需求）—— 研发专用物料，归属研发物料
       { budgetProject: '产品化项目', department: '研发中心', orderingEntity: '', benefitEntity: '', poFlag: '无PO', assetCategory: '研发物料', supplier: '新代伺服驱动系统供应商',
         months: {
           m1: { orderAmount: 15, acceptanceAmount: 12, advancePaymentRatio: 0.3, advancePayment: 4.5, acceptancePayment: 12 },

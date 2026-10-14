@@ -128,7 +128,7 @@ registerRawTexts(
 // ── T3A 范围：表单级编码清单（与页面 T3A Tab 目录一致的表单条目） ──
 // BA 组（BAA.11 为 prototype 隐藏，剔除）：
 const T3A_FORM_CODES = [
-  'BA.5', 'BAP.2', 'BAP.3',
+  'BA.5', 'BAP.2',
   'BAA.2', 'BAA.3', 'BAA.4', 'BAA.6', 'BAA.7', 'BAA.8', 'BAA.9', 'BAA.10',
   // BB 组（BB.4.2.b / BB.4.2.b.1 为 prototype 隐藏，剔除）：
   'BB.1.1', 'BB.1.2', 'BB.1.3', 'BB.1.4', 'BB.1.X',
@@ -160,7 +160,7 @@ T3A_FORM_CODES.forEach((code) => {
 // multi 多主体视角恢复）；子表级恢复项 BB.1.2.d / BB.3.1.D / BB.3.3.D 不单列条目，
 // 由「关闭隐藏过滤」自动恢复其表样段与字段分节。
 const MULTI_FORM_CODES = [
-  'BA.5', 'BAP.2', 'BAP.3',
+  'BA.5', 'BAP.2',
   'BAA.2', 'BAA.3', 'BAA.4', 'BAA.6', 'BAA.7', 'BAA.8', 'BAA.9', 'BAA.10', 'BAA.11',
   'BB.1.1', 'BB.1.2', 'BB.1.3', 'BB.1.4', 'BB.1.X',
   'BB.2.1',

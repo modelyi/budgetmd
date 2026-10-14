@@ -174,16 +174,20 @@ export function buildExpenseBudgetSummaryResearchSheet(items: any[] = []): any {
 }
 
 
+/**
+ * BAP.2 物料消耗需求汇总表_常规
+ * 母表承载常规与研发长期两类物料消耗需求，由「需求类型」列区分（常规 / 研发长期）；研发长期行物料类别固定「研发物料」。
+ */
 export function buildMaterialConsumptionSummarySheet(items: any[] = []): any {
   const celldata: any[] = [];
   const merge: Record<string, { r: number; c: number; rs: number; cs: number }> = {};
 
-  const baseHeaders = ['预算项目', '预算部门', '物料名称', '物料类别', '领料用途'];
-  const N_BASE = baseHeaders.length; // 5 (c0~c4)
-  const COL_SUM = N_BASE;             // 5
-  const moStart = (m: number) => COL_SUM + 1 + (m - 1); // 1月=c6 ... 12月=c17
-  const COL_NOTES = moStart(12) + 1;  // 18
-  const TOTAL_COLS = COL_NOTES + 1;   // 19
+  const baseHeaders = ['预算项目', '预算部门', '需求类型', '物料编码', '物料名称', '物料类别', '领料用途'];
+  const N_BASE = baseHeaders.length; // 7 (c0~c6)
+  const COL_SUM = N_BASE;             // 7
+  const moStart = (m: number) => COL_SUM + 1 + (m - 1); // 1月=c8 ... 12月=c19
+  const COL_NOTES = moStart(12) + 1;  // 20
+  const TOTAL_COLS = COL_NOTES + 1;   // 21
 
   // Row 0/1: 维度列表头 (两行制, r0 跨行合并)
   baseHeaders.forEach((h, c) => {
@@ -222,9 +226,11 @@ export function buildMaterialConsumptionSummarySheet(items: any[] = []): any {
     };
     setCell(0, it.budgetProject ?? '');
     setCell(1, it.department ?? '');
-    setCell(2, it.materialName ?? '');
-    setCell(3, it.materialCategory ?? '');
-    setCell(4, it.usage ?? '');
+    setCell(2, it.demandType ?? '常规');
+    setCell(3, it.materialCode ?? '');
+    setCell(4, it.materialName ?? '');
+    setCell(5, it.materialCategory ?? '');
+    setCell(6, it.usage ?? '');
     const colLetter = (c: number): string => {
       let s = '', n = c + 1;
       while (n > 0) { s = String.fromCharCode(65 + ((n - 1) % 26)) + s; n = Math.floor((n - 1) / 26); }
@@ -238,7 +244,7 @@ export function buildMaterialConsumptionSummarySheet(items: any[] = []): any {
     setCell(COL_NOTES, it.notes ?? '');
   });
 
-  const columnlen: Record<number, number> = { 0: 150, 1: 130, 2: 150, 3: 120, 4: 110 };
+  const columnlen: Record<number, number> = { 0: 150, 1: 130, 2: 110, 3: 120, 4: 150, 5: 120, 6: 110 };
   columnlen[COL_SUM] = 90;
   for (let m = 1; m <= 12; m++) columnlen[moStart(m)] = 75;
   columnlen[COL_NOTES] = 220;
@@ -327,82 +333,6 @@ export function buildMaterialConsumptionFinanceViewSheet(items: any[] = []): any
     index: 'bb3x_material_consumption_finance_view',
     status: 1,
     order: 1,
-    row: Math.max(items.length + 5, 10),
-    column: TOTAL_COLS,
-    celldata,
-    config: { merge, rowlen: { 0: 32, 1: 24 }, columnlen }
-  };
-}
-
-
-export function buildRndMaterialConsumptionSummarySheet(items: any[] = []): any {
-  const celldata: any[] = [];
-  const merge: Record<string, { r: number; c: number; rs: number; cs: number }> = {};
-
-  const baseHeaders = ['预算部门', '物料编码', '物料名称', '物料类别'];
-  const N_BASE = baseHeaders.length; // 4 (c0~c3)
-  const COL_SUM = N_BASE;             // 4
-  const moStart = (m: number) => COL_SUM + 1 + (m - 1); // 1月=c5 ... 12月=c16
-  const COL_NOTES = moStart(12) + 1;  // 17
-  const TOTAL_COLS = COL_NOTES + 1;   // 18
-
-  baseHeaders.forEach((h, c) => {
-    celldata.push({ r: 0, c, v: { v: h, m: h, ct: { fa: 'General', t: 'g' }, ...SPREADSHEET_STYLES.deepBlueHeader } });
-    celldata.push({ r: 1, c, v: { v: h, m: h, ct: { fa: 'General', t: 'g' }, ...SPREADSHEET_STYLES.deepBlueHeader } });
-    merge[`0_${c}`] = { r: 0, c, rs: 2, cs: 1 };
-  });
-
-  celldata.push({ r: 0, c: COL_SUM, v: { v: '【全年合计】', m: '【全年合计】', ct: { fa: 'General', t: 'g' }, ...SPREADSHEET_STYLES.deepBlueSumHeader } });
-  celldata.push({ r: 1, c: COL_SUM, v: { v: '【全年合计】', m: '【全年合计】', ct: { fa: 'General', t: 'g' }, ...SPREADSHEET_STYLES.deepBlueSumHeader } });
-  merge[`0_${COL_SUM}`] = { r: 0, c: COL_SUM, rs: 2, cs: 1 };
-
-  for (let m = 1; m <= 12; m++) {
-    const c = moStart(m);
-    const label = `${m}月`;
-    celldata.push({ r: 0, c, v: { v: label, m: label, ct: { fa: 'General', t: 'g' }, ...SPREADSHEET_STYLES.deepBlueHeader } });
-    celldata.push({ r: 1, c, v: { v: label, m: label, ct: { fa: 'General', t: 'g' }, ...SPREADSHEET_STYLES.deepBlueHeader } });
-    merge[`0_${c}`] = { r: 0, c, rs: 2, cs: 1 };
-  }
-
-  celldata.push({ r: 0, c: COL_NOTES, v: { v: '备注说明', m: '备注说明', ct: { fa: 'General', t: 'g' }, ...SPREADSHEET_STYLES.deepBlueHeader } });
-  celldata.push({ r: 1, c: COL_NOTES, v: { v: '备注说明', m: '备注说明', ct: { fa: 'General', t: 'g' }, ...SPREADSHEET_STYLES.deepBlueHeader } });
-  merge[`0_${COL_NOTES}`] = { r: 0, c: COL_NOTES, rs: 2, cs: 1 };
-
-  items.forEach((it, idx) => {
-    const r = idx + 2;
-    const rowBg = idx % 2 === 1 ? '#f8fafc' : '#ffffff';
-    const setCell = (c: number, val: any, isNum = false, f?: string) => {
-      const cell: any = { v: val, m: isNum && typeof val === 'number' ? val.toLocaleString('zh-CN', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : String(val ?? ''), ct: { fa: isNum ? '#,##0.00' : 'General', t: isNum ? 'n' : 'g' }, bg: rowBg, ht: isNum ? 2 : 1, vt: 1 };
-      if (f) cell.f = f;
-      celldata.push({ r, c, v: cell });
-    };
-    setCell(0, it.department ?? '');
-    setCell(1, it.materialCode ?? '');
-    setCell(2, it.materialName ?? '');
-    setCell(3, '研发物料');
-    const colLetter = (c: number): string => {
-      let s = '', n = c + 1;
-      while (n > 0) { s = String.fromCharCode(65 + ((n - 1) % 26)) + s; n = Math.floor((n - 1) / 26); }
-      return s;
-    };
-    const sumRefs = `${colLetter(moStart(1))}${r}:${colLetter(moStart(12))}${r}`;
-    setCell(COL_SUM, it.annualTotal ?? 0, true, `=SUM(${sumRefs})`);
-    for (let m = 1; m <= 12; m++) {
-      setCell(moStart(m), it.months?.[`m${m}`] ?? 0, true);
-    }
-    setCell(COL_NOTES, it.notes ?? '');
-  });
-
-  const columnlen: Record<number, number> = { 0: 130, 1: 120, 2: 160, 3: 110 };
-  columnlen[COL_SUM] = 90;
-  for (let m = 1; m <= 12; m++) columnlen[moStart(m)] = 75;
-  columnlen[COL_NOTES] = 220;
-
-  return {
-    name: 'BAP.3 物料消耗需求汇总表_研发长期',
-    index: 'bap3_rnd_material_consumption_summary_research',
-    status: 1,
-    order: 0,
     row: Math.max(items.length + 5, 10),
     column: TOTAL_COLS,
     celldata,

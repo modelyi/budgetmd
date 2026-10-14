@@ -183,8 +183,7 @@ export const BUDGET_FIELD_REGISTRY: BudgetFieldDef[] = [
  ['BAA.10','entityRatioDB','香橙舒芙蕾公司占比','number','手工', true, '本表录入', '各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 DB，按「预算项目×预算部门」逐行维护'],
  ['BAA.10','entityRatioDC','青提马卡龙公司占比','number','手工', true, '本表录入', '各法人公司占比，每行加和须=100%（比例保留 2 位小数）；法人编码 DC，按「预算项目×预算部门」逐行维护'],
  ['BAA.10','totalRatio','合计','number','公式', true, '本表公式', '各法人公司占比自动加总，强等于100%（系统计算列、不可手工修改；每行加和须=100%）'],
-  ['BAP.2','budgetProject','预算项目','select','选择', true, 'AA.6 预算项目主数据', '物料消耗归属的预算项目；领料用途可由预算项目属性自动映射带出（产品化项目→生产类、研发项目→研发类、销售项目→销售类、职能/公共平台项目→管理类及其他）'], ['BAP.2','department','预算部门','select','选择', true, 'AA.5 行政部门主数据字典（一级部门-二级部门）', '预算部门原则上明细到二级部门'], ['BAP.2','materialName','物料名称','string','手工', true, 'AA.11 物料主数据', '消耗物料名称，从物料主数据选择'], ['BAP.2','materialCategory','物料类别','select','选择', true, 'AB.9 存货物料类别字典', '可选值：生产物料/研发物料/服务物料/专项储备/其他物料；与 BB.3.3 物料采购、BB.3.X 进销存品类同一口径，按物料类别归集消耗去向'], ['BAP.2','usage','领料用途','select','选择', true, '本表录入', '可选值：研发类/销售类/管理类及其他（生产物料消耗无前置收集表，在 BB.3.X 在制品料行直接手工填报）；决定物料消耗去向（研发类→研发费用、销售类→销售费用、管理类及其他→管理费用），可由预算项目属性自动映射带出'], ['BAP.2','monthlyAmount','月度消耗金额','number','手工', true, '本表录入', '按月手工填报；全年合计=SUM(1~12月)；金额不含税、单位万元、精度 0.1'], ['BAP.2','annualTotal','全年合计','number','公式', false, '本表公式', '=SUM(1~12月消耗金额)'], ['BAP.2','notes','备注说明','string','手工', false, '本表录入', '补充物料消耗的业务假设或特殊事项'],
-  ['BAP.3','department','预算部门','select','选择', true, 'AA.5 行政部门主数据字典（一级部门-二级部门）', '研发长期物料消耗需求归属的预算部门，默认明细到二级部门'], ['BAP.3','materialCode','物料编码','string','手工', true, 'AA.11 物料主数据', '研发长期消耗物料编码，从物料主数据选择'], ['BAP.3','materialName','物料名称','string','系统带出', true, 'AA.11 物料主数据', '按物料编码自动带出'], ['BAP.3','materialCategory','物料类别','string','系统带出', true, 'AB.9 存货物料类别字典', '固定值「研发物料」：本表仅承载研发长期物料消耗需求，物料类别恒为研发物料，不可修改'], ['BAP.3','monthlyAmount','月度消耗金额','number','手工', true, '本表录入', '按月手工填报；全年合计=SUM(1~12月)；金额不含税、单位万元、精度 0.1'], ['BAP.3','annualTotal','全年合计','number','公式', false, '本表公式', '=SUM(1~12月消耗金额)'], ['BAP.3','notes','备注说明','string','手工', false, '本表录入', '补充研发长期物料消耗的业务假设或特殊事项'],
+  ['BAP.2','budgetProject','预算项目','select','选择', true, 'AA.6 预算项目主数据', '物料消耗归属的预算项目；领料用途可由预算项目属性自动映射带出（产品化项目→生产类、研发项目→研发类、销售项目→销售类、职能/公共平台项目→管理类及其他）'], ['BAP.2','department','预算部门','select','选择', true, 'AA.5 行政部门主数据字典（一级部门-二级部门）', '预算部门原则上明细到二级部门'], ['BAP.2','demandType','需求类型','select','选择', true, '本表录入', '下拉枚举：常规 / 研发长期；默认「常规」。用于表内区分两类物料消耗需求——常规物料消耗，与原独立的研发长期物料消耗需求汇总表（整表已并入本表）承载的研发长期物料消耗；研发长期行的物料类别固定「研发物料」、领料用途为研发类'], ['BAP.2','materialCode','物料编码','string','手工', false, 'AA.11 物料主数据', '消耗物料编码，从物料主数据选择（研发长期行必填、由物料名称按物料主数据带出）；常规物料消耗无编码时留空'], ['BAP.2','materialName','物料名称','string','手工', true, 'AA.11 物料主数据', '消耗物料名称，从物料主数据选择'], ['BAP.2','materialCategory','物料类别','select','选择', true, 'AB.9 存货物料类别字典', '可选值：生产物料/研发物料/服务物料/专项储备/其他物料；与 BB.3.3 物料采购、BB.3.X 进销存品类同一口径，按物料类别归集消耗去向；需求类型=研发长期 的行固定「研发物料」（关联 AB.9）、不可修改'], ['BAP.2','usage','领料用途','select','选择', true, '本表录入', '可选值：研发类/销售类/管理类及其他（生产物料消耗无前置收集表，在 BB.3.X 在制品料行直接手工填报）；决定物料消耗去向（研发类→研发费用、销售类→销售费用、管理类及其他→管理费用），可由预算项目属性自动映射带出'], ['BAP.2','monthlyAmount','月度消耗金额','number','手工', true, '本表录入', '按月手工填报；全年合计=SUM(1~12月)；金额不含税、单位万元、精度 0.1'], ['BAP.2','annualTotal','全年合计','number','公式', false, '本表公式', '=SUM(1~12月消耗金额)'], ['BAP.2','notes','备注说明','string','手工', false, '本表录入', '补充物料消耗的业务假设或特殊事项'],
   ['BB.2.1','entity','法人公司','select','选择', true, 'AA.2 法人组织架构'], ['BB.2.1','department','部门','select','选择', true, 'AA.5 行政部门主数据字典（一级部门-二级部门）', '预算部门原则上明细到二级部门'], ['BB.2.1','productCode','产品','select','选择', true, 'AA.7 预算产品主数据'], ['BB.2.1','monthlyProduction','月度产量','number','手工', true, '本表录入'],
   // BB.2.1.B 财务视角（生产成本）：维度=法人公司/预算部门/产品，度量=完工产量/单位标准成本/完工生产成本（全部系统带出或公式，不可手工编辑）
   ['BB.2.1.B','legalEntity','法人公司','select','系统带出', true, 'AA.2 法人组织架构 / BB.2.1.A 主表', '维度列；与主表 BB.2.1.A 同一法人公司（产量计划的法人落点），完工生产成本按法人公司归集并由本表按法人公司汇总生成完工入库分录'],
@@ -774,11 +773,11 @@ export const BUDGET_FIELD_FILL_REQUIREMENTS: BudgetFieldFillRequirement[] = [
   { formCode: 'BAA.11', fieldCode: 'internalTransactionType', requirement: '交易类型包括代采物料、代采设备、资产转卖、职场租赁和内部销售' },
   { formCode: 'BAA.11', fieldCode: 'markupRatePct', requirement: '加成比例仅对集团内跨法人交易生效；同一法人内部自购自用或调拨时系统自动置为 0；一经年度预算下达锁定，年内不得随意篡改' },
   { formCode: 'BAP.2', fieldCode: 'department', requirement: '一般明细到二级部门' },
+  { formCode: 'BAP.2', fieldCode: 'demandType', requirement: '下拉：常规 / 研发长期（默认常规）；表内区分常规与研发长期两类物料消耗需求' },
+  { formCode: 'BAP.2', fieldCode: 'materialCode', requirement: '研发长期行必填（从 AA.11 物料主数据选择）；常规物料消耗无编码时留空' },
   { formCode: 'BAP.2', fieldCode: 'materialCategory', requirement: '关联 AB.9 存货物料类别字典（生产物料/研发物料/服务物料/专项储备/其他物料）' },
   { formCode: 'BAP.2', fieldCode: 'usage', requirement: '4 类：生产类/研发类/销售类/管理类及其他，决定物料消耗去向；可由预算项目的项目属性自动映射带出，无需人工逐行判断' },
   { formCode: 'BAP.2', fieldCode: 'annualTotal', requirement: '全年合计 = SUM(1~12月)' },
-  { formCode: 'BAP.3', fieldCode: 'materialCategory', requirement: '固定「研发物料」，关联 AB.9；本表仅承载研发长期物料消耗需求' },
-  { formCode: 'BAP.3', fieldCode: 'annualTotal', requirement: '全年合计 = SUM(1~12月)' },
   { formCode: 'BJ.C.a', fieldCode: 'benefitEntity', requirement: '由关联交易预算员补填；镜像 BB.3.3.D' },
   { formCode: 'BJ.C.d', fieldCode: 'remainingDeprMonths', requirement: '剩余折旧期限(月)' },
   { formCode: 'BJ.C.d', fieldCode: 'markupRevenue', requirement: '＝账面净值 × 加成比例' },
@@ -977,7 +976,7 @@ export const BUDGET_TABLE_BEHAVIOR_NOTES: BudgetTableBehaviorNote[] = [
       '本表与 BB.3.3.B 无PO 两张采购视角表样列结构完全相同，按表样列序填写各维度列；PO标记为固定值列（本表恒为「有PO」），由表样固定、不可修改。',
       '按月填报到货额、下单额、预付款比例、预付款、验收付款；全年合计由各月自动汇总、不可直接编辑。',
       '付款测算：到货额按 100% 确认为验收付款；预付款、验收付款均为手工填报字段，由预算编制人按实际付款安排按月填写，不强制公式联动（BAA.7 比例表本年度不启用、不参与测算）。',
-      '防重复提示：四类来源归集的物料采购需求须保持互斥（有PO行来自采购订单、无PO行来自 BAP.2、研发长期物料需求来自 BAP.3），同一笔物料需求只在一处列示，避免到货额与后续进销存入库金额虚增。',
+      '防重复提示：四类来源归集的物料采购需求须保持互斥（有PO行来自采购订单；无PO行来自 BAP.2 物料消耗需求汇总表 需求类型=常规 的行；研发长期物料需求来自 BAP.2 同一表 需求类型=研发长期 的行；其余为其他手工增加），同一笔物料需求只在一处列示，避免到货额与后续进销存入库金额虚增。',
     ],
   },
   {
@@ -1008,7 +1007,7 @@ export const BUDGET_TABLE_BEHAVIOR_NOTES: BudgetTableBehaviorNote[] = [
     notes: [
       '本表为法人级单表：维度 = 法人公司×存货类别，平表结构（无分组行、无自动合计行）。',
       '手工调库·进与出：除自动取数外的手工出入库调整（盘盈入库、盘亏/报废出库、跨期补记等）直接在本表「转入数」/「转出数」列手工录入，与自动取数互斥、不重复计。',
-      '防重复提示：BAP.2 只承载常规物料；服务物料消耗由 BB.1.3、自制设备领料由 BB.4.1.c 各自承载，按 AB.9 存货物料类别做标识隔离，确保同一笔领用只在一处出库、不重复计入。',
+      '防重复提示：BAP.2 承载常规与研发长期两类物料消耗需求（表内 需求类型 维度区分：常规 / 研发长期）；服务物料消耗由 BB.1.3、自制设备领料由 BB.4.1.c 各自承载，按 AB.9 存货物料类别做标识隔离，确保同一笔领用只在一处出库、不重复计入。',
     ],
   },
   {
@@ -1264,14 +1263,9 @@ export const BUDGET_TABLE_BEHAVIOR_NOTES: BudgetTableBehaviorNote[] = [
   {
     gridName: 'BAP.2 物料消耗需求汇总表_常规',
     notes: [
+      '需求类型 2 类（表内行级维度、默认常规）：常规承载常规物料消耗，研发长期承载原独立的研发长期物料消耗需求汇总表（整表已并入本表）——合并后不再单设研发长期表，同一表内按 需求类型 区分。',
       '领料用途 4 类：生产类进在制品「料」腿、研发类进研发费用、销售类进销售费用、管理类及其他进管理费用。',
-      '边界：本表不包括三类领料——服务领料归 BB.1.3（.d/.f）、自制设备领料归 BB.4.1.c、研发长期物料归 BAP.3。',
-    ],
-  },
-  {
-    gridName: 'BAP.3 物料消耗需求汇总表_研发长期',
-    notes: [
-      '本表当前暂无实际数据来源：配套的前置「研发长期物料消耗需求采集」模块尚未开发，暂不参与 BB.3.X 进销存表与 BB.3.3 物料采购预算取数。',
+      '边界：本表不包括两类领料——服务领料归 BB.1.3（.d/.f）、自制设备领料归 BB.4.1.c；研发长期物料消耗需求已并入本表（需求类型=研发长期，物料类别固定「研发物料」）。',
     ],
   },
   {
@@ -1477,7 +1471,6 @@ export const BUDGET_FORM_REGISTRY: BudgetFormDef[] = [
   { code: 'BAA.4', name: '服务物料定额标准', tab: 'standardCostMaterial', group: 'BA' },
   { code: 'BA.5', name: '费用预算汇总表', tab: 'expenseBudgetSummary', group: 'BA' },
   { code: 'BAP.2', name: '物料消耗需求汇总表_常规', tab: 'masterData', subTab: 'materialConsumptionSummary', group: 'BA' },
-  { code: 'BAP.3', name: '物料消耗需求汇总表_研发长期', tab: 'masterData', subTab: 'rndMaterialConsumptionSummary', group: 'BA' },
   { code: 'BAA.6', name: '办公场所租赁维护', tab: 'officeLeaseArea', group: 'BA' },
   { code: 'BAA.7', name: '采购付款额测算比例附表', tab: 'procurementPaymentRatio', group: 'BA' },
   { code: 'BAA.8', name: '经营费用转换比例表', tab: 'expenseConversionRatio', group: 'BA' },

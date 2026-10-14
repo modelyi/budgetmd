@@ -80,9 +80,9 @@ T3B 照此结构落地，三处对应改动：
 
 ---
 
-## 附录：T3B 表单清单（43 篇）
+## 附录：T3B 表单清单（42 篇）
 
-- **BA（12）**：BA.5、BAP.2、BAP.3、BAA.2、BAA.3、BAA.4、BAA.6、BAA.7、BAA.8、BAA.9、BAA.10、**BAA.11★**
+- **BA（11）**：BA.5、BAP.2、BAA.2、BAA.3、BAA.4、BAA.6、BAA.7、BAA.8、BAA.9、BAA.10、**BAA.11★**
 - **BB（22）**：BB.1.1、BB.1.2、BB.1.3、BB.1.4、BB.1.X、BB.2.1、BB.3.1、BB.3.2、BB.3.3、BB.3.X、BB.4.1、BB.4.2.a、BB.4.2.a.1、**BB.4.2.b★**、**BB.4.2.b.1★**、BB.4.3、BB.4.4、BB.4.5、BB.4.6、BB.4.X、BB.5.1、BB.5.2
 - **BF（5）**：BF.1、BF.3、BF.4、**BJ.C★**、**BJ.C.R★**
 - **BO（4）**：BO.PL、BO.BS、BO.CF、**BO.ELIM★**
