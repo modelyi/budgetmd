@@ -50,10 +50,6 @@
     <outputs>
       <output target="BB.1.X 销售预算多维汇总分析—销售直接费用"><![CDATA[按产品/客户/区域/项目/预算部门/费用科目汇总 → 销售直接费用列]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[按月手工填报，全年合计 = SUM(1~12月)。]]></rule>
-      <rule><![CDATA[费用科目覆盖差旅/招待/广告/佣金等销售费用类别。]]></rule>
-    </keyRules>
   </relation>
 
 </form>

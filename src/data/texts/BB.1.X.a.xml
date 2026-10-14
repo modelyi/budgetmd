@@ -35,9 +35,6 @@
     <outputs>
       <output target="BB.1.X.b 透视表"><![CDATA[基表明细按客户/项目/产品/部门切换维度汇总展示]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[收入/成本/毛利/贡献利润为经营分析汇总口径（万元，不含税）；不区分法人、不参与三表。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BB.1.X.a']） -->

@@ -39,9 +39,6 @@
       <output target="BB.3.X 进销存预算表"><![CDATA[驱动下单方对应存货类别转出、受益方同类别存货转入]]></output>
       <output target="BO.PL / BO.BS / BO.CF 单体与合并报表"><![CDATA[驱动单体内部收入/成本/往来核算，并在合并层由 BO.ELIM 逐笔对冲]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[到货额=对外采购到货额（平价）；受益方存货入账原值=内部结算=到货额+加成款；加成款按月结算；法人之间只认到货额与加成款两个度量，内部结算=月度到货额+月度加成款。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则 -->

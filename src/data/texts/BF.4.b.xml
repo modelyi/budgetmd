@@ -58,9 +58,6 @@
     <outputs>
       <output target="BF.4.a 税金及附加预算表"><![CDATA[「本期应纳增值税（计提）」作为主表增值税行预算计提列初始值；「本期实际缴纳增值税」作为主表缴纳列与附加税基数；「增值税即征即退/专项返还」作为退税行]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[不含税计税基数×适用税率；各月计提次月申报缴纳；辅助测算结果带入主表允许修改，本表不直接生成凭证。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BF.4.b']） -->

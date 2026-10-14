@@ -56,9 +56,6 @@
       <output target="BB.4.1 自制设备工程预算"><![CDATA[「自制在建工程」列 → BB.4.1.a 人工投入]]></output>
       <output target="BO.CF 现金流量表—CF-06"><![CDATA[实际发放 → 支付给职工以及为职工支付的现金]]></output>
     </outputs>
-    <keyRules>
-
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.5.1'].items） -->

@@ -36,9 +36,6 @@
       <output target="BO.CF 现金流量表—CF-14"><![CDATA[付款额→购建固定资产支付的现金]]></output>
       <output target="BB.4.X 资本性支出汇总表"><![CDATA[转固金额归集入 BB.4.X（次月起提折旧）]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[验收额→1604、付款额→CF-14、转固→1601，三口径分离。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.2-①'].items） -->

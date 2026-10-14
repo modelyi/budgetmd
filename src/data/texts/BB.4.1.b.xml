@@ -45,9 +45,6 @@
     <outputs>
       <output target="BB.4.1.a 自制设备工程预算汇总表"><![CDATA[按「法人公司+预算部门」按月合计 → 人工投入]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[禁止在本子表手工篡改；资本化人工分录唯一由 BB.5.1 生成。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BB.4.1.b']） -->

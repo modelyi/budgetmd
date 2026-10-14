@@ -38,9 +38,6 @@
       <output target="BO.BS 资产负债表—在建工程(1604)"><![CDATA[资本化人工借 1604 / 贷 2211]]></output>
       <output target="BO.PL 利润表—主营业务成本 6401.1"><![CDATA[服务人工成本单列进 6401.1（费用重分类）]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[四项费用计提=人事视角计提数−资本化人工−服务人工，避免重复归集；「自制在建工程」列是资本化人工分录点。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.5.1-②'].items） -->

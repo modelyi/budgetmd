@@ -53,9 +53,6 @@
       <output target="BO.CF 现金流量表—CF-07"><![CDATA[支付其他与经营活动有关的现金 (+)；现金流支出等于计提数]]></output>
       <output target="BO.BS 资产负债表—其他应付款"><![CDATA[费用计提→应付账款(2202) (+)；付现→货币资金 (−)]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[外部职场租赁的租金/物业来源不在本表按面积公摊：费用化合同由 BB.4.2.a 外部职场租赁带出（按用途归 6601/6602/6603）、资本化合同由 BB.4.2.a.1 外部职场租赁·财务视角带出；内部场地租赁由 BB.4.2.b 内部职场租赁带出。本表只承载其余经营费用，不与两类租赁重复取数。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.5.2'].items） -->

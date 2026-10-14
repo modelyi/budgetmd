@@ -55,7 +55,6 @@ export interface XmlRelation {
   summary: string;
   dataSources: XmlDataSource[];
   outputs: XmlOutput[];
-  keyRules: string[];
 }
 
 /** ⑥ 财务报表项转换规则（一条业务事件一行） */
@@ -229,7 +228,6 @@ export function parseFormTextXml(xml: string, fallbackCode = ''): FormText {
             target: attr(o, 'target'),
             path: text(o),
           })),
-          keyRules: asArray(relationNode.keyRules?.rule).map(text).filter(Boolean),
         }
       : undefined,
     common: text(root.events?.common),

@@ -61,9 +61,6 @@
       <output target="BO.BS 资产负债表—长期股权投资"><![CDATA[月度投资金额 → 长期股权投资 (+)；分红/利息收现 → 货币资金 (+)]]></output>
       <output target="BO.CF 现金流量表—投资活动"><![CDATA[投资金额 → CF-15 投资支付的现金 (+)；分红/利息收现 → CF-12 取得投资收益收到的现金 (+)]]></output>
     </outputs>
-    <keyRules>
-
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BF.1'].items） -->

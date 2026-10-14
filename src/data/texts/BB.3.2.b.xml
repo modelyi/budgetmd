@@ -46,9 +46,6 @@
       <output target="BB.3.2-① 主表转固金额"><![CDATA[按月合计汇总至主表转固金额（公式字段）]]></output>
       <output target="BO.BS 资产负债表—固定资产(1601)"><![CDATA[驱动 1604→1601 转固分录（借固定资产 贷在建工程）]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[转固月份=资产启用月份，次月起提折旧进 BB.4.X。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.2.b'].items） -->

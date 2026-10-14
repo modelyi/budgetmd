@@ -43,10 +43,6 @@
       <output target="BO.ELIM 集团合并抵销工作底稿"><![CDATA[生成内部销售收入与采购成本 1:1 对冲分录及存货未实现毛利抵销分录]]></output>
       <output target="BO.PL / BO.BS / BO.CF 合并三表"><![CDATA[全额抵销内部虚增，直出集团对外纯净三表]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[同笔内部销售两端金额必须绝对相等，卖方确认收入≡买方入账成本。]]></rule>
-      <rule><![CDATA[内部交易对集团对外合并净利润的净影响严格为 0。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则 -->

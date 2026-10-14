@@ -26,9 +26,6 @@
       <output target="BO.BS 资产负债表"><![CDATA[其他业务收支/营业外收支按各自 BS 去向计入；报表调整/其他关联项按关联报表行（每个报表项逐行对应）作为前置调整项叠加至该行「上游自动取数」]]></output>
       <output target="BO.CF 现金流量表"><![CDATA[其他业务收支/营业外收支按各自 CF 去向计入；报表调整/其他关联项按关联报表行（每个报表项逐行对应）作为前置调整项叠加至该行「1~12月自动取数」]]></output>
     </outputs>
-    <keyRules>
-
-    </keyRules>
   </relation>
 
 </form>

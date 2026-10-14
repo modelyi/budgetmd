@@ -35,9 +35,6 @@
       <output target="BB.3.X-① 进销存预算"><![CDATA[生产类领料→在制品「料」转入；非生产类→一般物料转出]]></output>
       <output target="BO.PL 利润表"><![CDATA[研发类→6603、销售类→6601、管理类及其他→6602]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[生产类结转在制品、研发/销售/管理类费用化。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.X.b'].items） -->

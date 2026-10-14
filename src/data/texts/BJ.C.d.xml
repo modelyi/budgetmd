@@ -37,9 +37,6 @@
       <output target="BO.BS 资产负债表"><![CDATA[买方资产原值包含加成部分，合并层调减买方资产增值，还原至账面净值]]></output>
       <output target="BO.CF 现金流量表"><![CDATA[卖方 CF-13.1 处置收现与买方 CF-14 投资付现全额对冲]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[转卖价 = 账面净值 + 加成收入；交易在发生月份填列，全年合计自动汇总。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则 -->

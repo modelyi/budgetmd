@@ -34,12 +34,6 @@
       <output target="BO.BS 合并资产负债表"><![CDATA[内部往来轧差清零，存货与资产中的未实现加成恢复原始成本]]></output>
       <output target="BO.CF 合并现金流量表"><![CDATA[内部结算资金对冲，只留对外真实收支]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[抵销按月计算，各类交易严格按内部交易抵销规则分录抵销。]]></rule>
-      <rule><![CDATA[同笔交易双方金额必须相等，不等则阻断合并。]]></rule>
-      <rule><![CDATA[递延所得税等税层面影响由财务人工测算，系统不自动处理。]]></rule>
-      <rule><![CDATA[单体对外向税务局缴纳的税金现金流在合并层不予抵销。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则 -->

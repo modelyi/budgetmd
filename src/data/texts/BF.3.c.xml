@@ -50,9 +50,6 @@
       <output target="BO.CF 现金流量表—筹资活动"><![CDATA[新增融资 → CF-18；偿还本金 → CF-20；实付利息 → CF-21；融资租赁本金偿付 → CF-22.1；表外额度档（担保/保函/信用证等）与外汇即期不产生现金流]]></output>
       <output target="内部借款 XYZ-16（关联交易）"><![CDATA[走 1221.1/2241.1 内部往来、集团合并层互抵（口径见 BJ.C）]]></output>
     </outputs>
-    <keyRules>
-
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BF.3.c'].items） -->

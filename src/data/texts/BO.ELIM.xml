@@ -45,10 +45,6 @@
       <output target="BO.BS 合并资产负债表"><![CDATA[提供资产负债表“内部抵销”调整列数值]]></output>
       <output target="BO.CF 合并现金流量表"><![CDATA[提供现金流量表“内部抵销”调整列数值]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[底稿各行与合并三表调整列一一对应。]]></rule>
-      <rule><![CDATA[抵销分录均可追溯至前端业务表单行。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则 -->

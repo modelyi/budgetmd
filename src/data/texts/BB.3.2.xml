@@ -53,9 +53,6 @@
       <output target="BO.BS 资产负债表—在建工程(1604)/固定资产(1601)"><![CDATA[期初金额与 BB.4.1.a 期初金额共同构成 1604 年初余额；验收额按工程验收确认 1604 发生额增加（借 1604 / 贷 2202）；转固按 BB.3.2.b 转固月份使 1604 转出、1601 原值增加（两侧同额）]]></output>
       <output target="BO.CF 现金流量表—CF-14"><![CDATA[基建付款额 → 购建固定资产支付的现金（投资活动现金流出）；付款额不构成在建工程原值]]></output>
     </outputs>
-    <keyRules>
-
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.2'].items） -->

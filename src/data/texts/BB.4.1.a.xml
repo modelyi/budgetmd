@@ -51,9 +51,6 @@
       <output target="BB.4.5 增量资产折旧计算表"><![CDATA[转固转出（按法人公司、转固月份）→ 单卡本年新增原值（来源=自制转固）]]></output>
       <output target="BO.BS 资产负债表—在建工程(1604)"><![CDATA[期初金额构成 1604 年初余额；投入/转固在 1604 的增减由 .c/.d 与 BB.5.1 生成]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[纯汇总表，不生成分录；月末在建工程余额=上月末+投入合计−转固转出。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BB.4.1.a']） -->

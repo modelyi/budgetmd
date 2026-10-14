@@ -41,9 +41,6 @@
       <output target="BO.PL 利润表—营业成本"><![CDATA[产成品出库驱动主营业务成本（硬件直接材料）]]></output>
       <output target="BO.CF 现金流量表—补充资料"><![CDATA[引用「存货的减少（减：增加）」]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[在制品→产成品同一法人内结转；各来源逐来源按法人取数、不乘比例。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BB.3.X-①']） -->

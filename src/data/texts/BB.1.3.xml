@@ -43,12 +43,6 @@
       <output target="BO.PL 利润表—营业成本"><![CDATA[服务物料成本 → 主营业务成本（服务直接物料构成）；服务人工成本 → 主营业务成本（服务直接人工构成），均并入 6401.1]]></output>
       <output target="BO.CF 现金流量表—CF-01"><![CDATA[预收 + 验收回款 → 销售商品、提供劳务收到的现金]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[服务人工从 BB.5.1 雇员费用冲减并单列，不重复计提应付职工薪酬。]]></rule>
-      <rule><![CDATA[好件/坏件分开核算，成本强制取自 BAA.4 服务物料定额标准。]]></rule>
-      <rule><![CDATA[预收/验收回款口径与 BB.1.2 一致，统一进 CF-01。]]></rule>
-      <rule><![CDATA[口径措辞统一：签约主体 = 对外签约与对外收款主体（对外确认 6001 主营业务收入）。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.1.3'].items） -->

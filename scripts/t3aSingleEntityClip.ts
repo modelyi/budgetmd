@@ -504,13 +504,12 @@ export const T3A_TEXT_OPS: TextOp[] = [
   del('均不参与集团合并抵销'),
 ];
 
-/** 整条剔除（字段行 / 规则点 / 适用情形 / 数据来源行 / 输出行 / 关键编制规则 / 事件行） */
+/** 整条剔除（字段行 / 规则点 / 适用情形 / 数据来源行 / 输出行 / 事件行） */
 export const T3A_DROP_ITEM_RES: RegExp[] = [
   /^内部供应商$/, // BB.1.3 物料/人工明细「内部供应商」列字段行
   /^代采购\/加成（净额法）$/, // BB.3.1/BB.3.3 ⑥ 代采购加成事件行（t3a 单主体无代采购、无加成款）
   /^其中:内部加成/, // BB.3.X 内部加成列字段行
   /^物料明细与人工明细均设「内部供应商」列/, // BB.1.3 规则点（整条多主体）
-  /^「内部供应商」为备查字段/, // BB.1.1 关键编制规则（整条多主体）
   /^【两岗分工/, // BB.3.1/BB.3.3 规则点与适用情形（两岗接力代采购）
   /^【关联交易视角 BB\.3\.[13]\.D】/, // BB.3.1/BB.3.3 关联交易视角规则点
   /^BB\.3\.[13]\.D 关联交易视角/, // BB.3.1/BB.3.3 关联交易视角适用情形
@@ -554,7 +553,6 @@ export function clipFormText(t: any): any {
       outputs: t.relation.outputs
         .filter((o: any) => !isDroppedT3aItem(o.target) && !T3A_MULTI_ENTITY_PATTERN.test(o.target ?? ''))
         .map((o: any) => ({ ...o, path: clipT3aText(o.path ?? '') })),
-      keyRules: t.relation.keyRules.filter((k: string) => !isDroppedT3aItem(k)).map(clipT3aText).filter(Boolean),
     };
   }
   out.events = (t.events ?? [])

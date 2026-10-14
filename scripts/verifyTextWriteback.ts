@@ -46,7 +46,6 @@ function openKeys(code: string, ft: ReturnType<typeof parseFormTextXml>): string
   ft.notApplies.forEach((_, i) => keys.push(`${code}::notApplies::${i}`));
   if (ft.relation) {
     keys.push(`${code}::relation::summary`);
-    ft.relation.keyRules.forEach((_, i) => keys.push(`${code}::relation::keyRule::${i}`));
     ft.relation.dataSources.forEach((_, i) => {
       for (const slot of ['name', 'code', 'fields', 'relation'] as const) keys.push(`${code}::relation::source::${i}::${slot}`);
     });

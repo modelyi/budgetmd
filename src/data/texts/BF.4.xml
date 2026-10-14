@@ -38,9 +38,6 @@
       <output target="BO.BS 资产负债表—应交税费"><![CDATA[计提→应交税费 (+)；缴纳→应交税费 (−)、货币资金 (−)]]></output>
       <output target="BO.CF 现金流量表—CF-07/CF-02"><![CDATA[各项税费实缴→CF-07 支付的各项税费；软件即征即退收现→CF-02 收到的税费返还]]></output>
     </outputs>
-    <keyRules>
-
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BF.4'].items） -->

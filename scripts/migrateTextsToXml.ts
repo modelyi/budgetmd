@@ -139,10 +139,9 @@ function buildFormXml(code: string, name: string): { xml: string; stat: string }
         }\n    </dataSources>\n` +
         `    <outputs>\n${
           relation.outputs.map((o) => `      <output ${attr('target', o.target)}>${cdata(o.path)}</output>`).join('\n')
-        }\n    </outputs>\n` +
-        `    <keyRules>\n${relation.keyRules.map((r) => `      <rule>${cdata(r)}</rule>`).join('\n')}\n    </keyRules>\n  </relation>\n`,
+        }\n    </outputs>\n  </relation>\n`,
     );
-    count.relation = relation.dataSources.length + relation.outputs.length + relation.keyRules.length;
+    count.relation = relation.dataSources.length + relation.outputs.length;
   }
 
   // ⑥ 财务报表项转换规则

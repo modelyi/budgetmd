@@ -42,10 +42,6 @@
       <output target="BO.BS 合并资产负债表"><![CDATA[1221.1 与 2241.1 借贷本金对冲清零]]></output>
       <output target="BO.CF 合并现金流量表"><![CDATA[内部资金调拨收支同额对冲，只留对外真实筹资投资现金流]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[同一笔借款在借入方与借出方填列的本金、利率与利息必须绝对一致。]]></rule>
-      <rule><![CDATA[合并层面利息收入与利息支出 1:1 全额抵销，对外合并净利润无净影响。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则 -->

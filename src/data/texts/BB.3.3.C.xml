@@ -49,9 +49,6 @@
       <output target="BB.3.X 进销存预算"><![CDATA[到货额→本期采购入库，按 AB.9 类别转入各物料大类]]></output>
       <output target="BO.CF 现金流量表—CF-05"><![CDATA[预付款+验收付款→购买商品、接受劳务支付的现金]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[有PO按下单主体、无PO按 BAA.10 兜底，按法人汇总生成分录。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.3.C'].items） -->

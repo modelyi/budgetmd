@@ -24,9 +24,6 @@
     <outputs>
       <output target="BB.3.X-① 进销存预算"><![CDATA[转入/转出取数口径的说明性明细]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[仅展示取数口径，不生成会计分录。]]></rule>
-    </keyRules>
   </relation>
 
 </form>

@@ -47,7 +47,6 @@ function collectFormFields(code: string, ft: FormText): MdField[] {
       push(textKey.relationOutput(code, i, 'target'), 'label', o.target, '⑤ 数据关系 · 下游输出');
       if (o.path) push(textKey.relationOutput(code, i, 'path'), 'text', o.path);
     });
-    r.keyRules.forEach((t, i) => push(textKey.relationKeyRule(code, i), 'line', t, '⑤ 数据关系 · 关键规则'));
   }
 
   // ⑥ 报表项转换规则

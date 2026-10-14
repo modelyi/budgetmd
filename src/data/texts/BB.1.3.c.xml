@@ -60,9 +60,6 @@
       <output target="BO.PL 利润表—营业成本"><![CDATA[物料+人工成本→主营业务成本 6401.1]]></output>
       <output target="BO.CF 现金流量表—CF-01"><![CDATA[预收+验收回款→CF-01]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[服务人工从 BB.5.1 冲减并单列，不重复计提应付职工薪酬。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.1.3.c'].items） -->

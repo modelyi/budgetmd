@@ -48,9 +48,6 @@
       <output target="BO.CF 现金流量表—CF-14"><![CDATA[预付款+验收付款→购建固定资产支付的现金]]></output>
       <output target="BB.4.X 资本性支出汇总表"><![CDATA[到货额→原值（到货即转固）]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[有PO按下单主体、无PO按 BAA.9.a 拆分，按法人汇总生成分录。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.1.C'].items） -->

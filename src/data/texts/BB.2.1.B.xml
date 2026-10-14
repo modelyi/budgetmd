@@ -46,9 +46,6 @@
       <output target="BB.3.X 进销存预算"><![CDATA[完工生产成本作为在制品「结转」转出与产成品转入的金额标准]]></output>
       <output target="BO.BS 资产负债表—存货(1405)"><![CDATA[完工入库增加存货—库存商品(1405)，按法人汇总生成]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[完工生产成本=产量×BAA.2 标准成本；财务视角与主表同法人/同部门/同产品逐月一致。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.2.1.B'].items） -->

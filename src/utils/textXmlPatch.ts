@@ -68,7 +68,6 @@ export function resolveSlotOriginal(ft: FormText, key: string): SlotSource | nul
       const rel = ft.relation;
       if (!rel) return null;
       if (parts[2] === 'summary') return t(rel.summary);
-      if (parts[2] === 'keyRule') return t(rel.keyRules[Number(parts[3]) || 0]);
       if (parts[2] === 'source') {
         const s = rel.dataSources[Number(parts[3]) || 0];
         if (!s) return null;
@@ -239,11 +238,6 @@ export function resolveNodeScope(xml: string, key: string): NodeScope | null {
       if (!rel) return null;
       const sub = parts[2];
       if (sub === 'summary') return scopeOf(nthElement(xml, 'summary', 0, rel.bodyStart, rel.bodyEnd));
-      if (sub === 'keyRule') {
-        const kr = nthElement(xml, 'keyRules', 0, rel.bodyStart, rel.bodyEnd);
-        if (!kr) return null;
-        return scopeOf(nthElement(xml, 'rule', num(parts[3]), kr.bodyStart, kr.bodyEnd));
-      }
       if (sub === 'source') {
         const ds = nthElement(xml, 'dataSources', 0, rel.bodyStart, rel.bodyEnd);
         if (!ds) return null;

@@ -56,10 +56,6 @@
       <output target="BO.CF 现金流量表—CF-13.1 处置固定资产、无形资产和其他长期资产收回的现金净额"><![CDATA[取本表处置收款-含税（含税现金口径），按处置月份列归集]]></output>
       <output target="BO.BS 资产负债表—应交税费(2221)"><![CDATA[处置收款含税与不含税的差额即增值税销项税额（在收付时点内含，不在 CF-07 重复计提）]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[一行一笔处置；金额填在处置月份列，全年合计 = 各月求和；资产净值与处置损益为行内公式，不允许手工改数。]]></rule>
-      <rule><![CDATA[本表不计提折旧（属 BB.4.4/BB.4.5）、不单独计提增值税（含税−不含税即增值税）；法人归属按处置主体（资产卡片所在法人）。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.4.6'].items） -->

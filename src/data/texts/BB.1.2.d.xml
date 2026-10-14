@@ -42,10 +42,6 @@
       <output target="BO.ELIM 集团合并抵销工作底稿"><![CDATA[生成内部产品购销 1:1 对冲分录及存货未实现加成抵销分录]]></output>
       <output target="BO.PL / BO.BS / BO.CF 合并三表"><![CDATA[消除内部销售虚增，保持合并毛利与存货真实自洽]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[调拨数量不得超过调出方法人的实际排产完工量（BB.2.1）。]]></rule>
-      <rule><![CDATA[内部购销在合并层 1:1 等额全额对冲，对外净利润影响为 0。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则 -->

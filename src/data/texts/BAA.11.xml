@@ -33,10 +33,6 @@
       <output target="BB.4.2.b 内部职场租赁"><![CDATA[带出职场租赁加成比例，计算内部租金加成款]]></output>
       <output target="BJ.C.g / BB.1.2.d 内部产品销售"><![CDATA[带出内部产品购销加成比例，确定内部销售定价]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[加成比例仅对跨法人交易生效；同一法人内部自购自用或调拨时系统自动置为 0。]]></rule>
-      <rule><![CDATA[加成比例一经年度预算下达锁定，年内不得随意篡改，确保全集团两端核算同源一致。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则 -->

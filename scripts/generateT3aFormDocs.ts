@@ -33,7 +33,7 @@
  * 每篇文档结构（固定，章节顺序与调研页 ResearchSummaryView 完全一致，表样置首）：
  *   H1 表单编码+名称 → ① 预算表样（内嵌 HTML，多子表多段）
  *   → ② 字段与值说明 → ④ 适用业务情形（适用于/不适用于两组）
- *   → ⑤ 预算编制视角：数据关系总结（数据来源（上游）/输出影响（下游）/关键编制规则）
+ *   → ⑤ 预算编制视角：数据关系总结（数据来源（上游）/输出影响（下游））
  *   → ⑥ 财务报表项转换规则（两段式：可选「本表共用口径」+ 报表取数表 + 科目（报表项）入账表；
  *     仅登记的表单输出，无则整节省略。全部单元格只用报表项名——科目码与现金流量表行代号
  *     在渲染层剥除；已去原「取数说明 / 其他备注」两项）
@@ -685,7 +685,7 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
     }
   }
 
-  // ⑤ 预算编制视角：数据关系总结（三个子块：数据来源（上游）/输出影响（下游）/关键编制规则；
+  // ⑤ 预算编制视角：数据关系总结（两个子块：数据来源（上游）/输出影响（下游）；
   //     表格列与页面逐列一致：数据来源=来源表/编码/取数字段/关系说明，输出影响=目标报表/取数路径）
   const rel = text.relation;
   if (rel) {
@@ -714,12 +714,6 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
         // ⑤「输出影响」行去代号（只留报表项名，与 ⑥ 同一去代号口径）
         out.push(`| ${mdCell(normReportText(o.target, { gloss: true }))} | ${mdCell(normReportText(o.path, { gloss: true }))} |`);
       });
-      out.push('');
-    }
-    if (rel.keyRules.length > 0) {
-      out.push('**关键编制规则**');
-      out.push('');
-      rel.keyRules.forEach((k) => out.push(`- ${k}`));
       out.push('');
     }
   }
@@ -1216,12 +1210,6 @@ function generateA1SpecialDoc(code: string, text: FormText, allTexts: Record<str
       });
       out.push('');
     }
-    if (rel.keyRules.length > 0) {
-      out.push('**关键编制规则**');
-      out.push('');
-      rel.keyRules.forEach((k) => out.push(`- ${k}`));
-      out.push('');
-    }
   }
 
   return out.join('\n');
@@ -1267,7 +1255,6 @@ function verifyDocVerbatim(code: string, doc: string, textMap?: Record<string, F
     });
     // ⑤「输出影响」行同样去代号（渲染层与文档一致；校验用同一归一）
     text.relation.outputs.forEach((o, i) => expect(`relation.outputs[${i}].target`, normReportText(o.target, { gloss: true })));
-    text.relation.keyRules.forEach((k, i) => expect(`relation.keyRules[${i}]`, k));
   }
   // ⑥ 财务报表项转换规则（XML <events> 逐字；渲染为两段式并去代号——校验用同一归一/拆分口径）
   const commonRendered = text.common ? normReportText(text.common) : '';

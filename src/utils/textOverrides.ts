@@ -20,7 +20,6 @@
  *   · BB.1.1::relation::summary           —— ⑤数据关系·总结
  *   · BB.1.1::relation::source::0::name|code|fields|relation —— ⑤上游来源行各列
  *   · BB.1.1::relation::output::0::target|path               —— ⑤下游输出行各列
- *   · BB.1.1::relation::keyRule::0        —— ⑤关键编制规则
  *   · BB.1.1::event::0::event|field|pl|bs|cf|source|entry|note —— ⑥转换规则各行
  *   · BB.1.1::noVoucher                   —— ⑥「不生成分录」说明文案
  *
@@ -57,7 +56,6 @@ export const textKey = {
     `${code}::relation::source::${idx}::${slot}`,
   relationOutput: (code: string, idx: number, slot: 'target' | 'path') =>
     `${code}::relation::output::${idx}::${slot}`,
-  relationKeyRule: (code: string, idx: number) => `${code}::relation::keyRule::${idx}`,
   event: (
     code: string,
     idx: number,

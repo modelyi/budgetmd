@@ -35,9 +35,6 @@
     <outputs>
 
     </outputs>
-    <keyRules>
-      <rule><![CDATA[毛利润=收入−成本，贡献利润=毛利润−销售直接费用；纯展示、不生成凭证。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BB.1.X.b']） -->

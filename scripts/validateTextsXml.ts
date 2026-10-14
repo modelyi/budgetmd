@@ -7,7 +7,7 @@
  *
  * 校验两层：
  *   ① 结构化逐字比对：每个字段的 登记名+渲染名+数据来源+其他说明 /
- *      每条适用情形 / 数据关系（summary+dataSources+outputs+keyRules）/ 每个转换事件 8 列 /
+ *      每条适用情形 / 数据关系（summary+dataSources+outputs）/ 每个转换事件 8 列 /
  *      无分录说明 / 三表报表行（name+seq+rule+source）/ A1.4.b 规则库（cat+code+name+rule+src）/
  *      科目说明（名称+全称+核算说明）/ 编码规则 / FY 明细科目；
  *   ② 字节级 CDATA 比对：文件中每个 CDATA 原文必须在该编码的 TS 文字里逐字出现（多重集相等），
@@ -144,8 +144,7 @@ for (const code of [...candidates].sort()) {
       cmpList(`${code}.relation.dataSources.relation`, tsRelation.dataSources.map((d) => d.relation), r.dataSources.map((d) => d.relation));
       cmpList(`${code}.relation.outputs.target`, tsRelation.outputs.map((o) => o.target), r.outputs.map((o) => o.target));
       cmpList(`${code}.relation.outputs.path`, tsRelation.outputs.map((o) => o.path), r.outputs.map((o) => o.path));
-      cmpList(`${code}.relation.keyRules`, tsRelation.keyRules, r.keyRules);
-      sectionCount.relation += tsRelation.dataSources.length + tsRelation.outputs.length + tsRelation.keyRules.length;
+      sectionCount.relation += tsRelation.dataSources.length + tsRelation.outputs.length;
     }
   } else if (ft.relation) {
     mismatches.push(`${code}.relation：XML 有数据关系，TS 无（会改变渲染语义）`);
@@ -262,7 +261,7 @@ for (const code of [...candidates].sort()) {
     ...tsFields.map((f) => f.remark),
     ...(tsScenario?.applies ?? []),
     ...(tsScenario?.notApplies ?? []),
-    ...(tsRelation ? [tsRelation.summary, ...tsRelation.dataSources.map((d) => d.relation), ...tsRelation.outputs.map((o) => o.path), ...tsRelation.keyRules] : []),
+    ...(tsRelation ? [tsRelation.summary, ...tsRelation.dataSources.map((d) => d.relation), ...tsRelation.outputs.map((o) => o.path)] : []),
     ...tsEvents.flatMap((e) => [e.pl, e.bs, e.cf, e.source, e.entry, e.note]),
     // undefined 与空串在 XML 中同为 <![CDATA[]]>，比较前统一为 ''
   ] as (string | undefined)[]).map((v) => v ?? ''));

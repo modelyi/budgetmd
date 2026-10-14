@@ -48,9 +48,6 @@
       <output target="BO.BS 资产负债表—在建工程(1604)/存货(1405)"><![CDATA[借 1604 在建工程 / 贷 1405 存货（领料出库）]]></output>
       <output target="BB.3.X 进销存预算"><![CDATA[领料出库金额同步影响一般物料转出]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[领料分录按法人公司汇总生成；按月领料合计与 BB.4.1.a 同月领料投入强勾稽。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.4.1.c'].items） -->

@@ -45,9 +45,6 @@
       <output target="BO.BS 资产负债表—2221"><![CDATA[计提增加应交税费，实缴冲减应交税费]]></output>
       <output target="BO.CF 现金流量表—CF-07"><![CDATA[实缴数计入支付的各项税费]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[增值税预算计提以 BF.4.b 为初始值且允许手工修改；附加税以实缴数为基数；不含税口径。]]></rule>
-    </keyRules>
   </relation>
 
 </form>

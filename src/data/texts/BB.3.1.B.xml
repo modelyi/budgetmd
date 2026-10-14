@@ -56,9 +56,6 @@
     <outputs>
       <output target="BB.3.1.C 财务视角"><![CDATA[无PO行按 BAA.9.a 拆分后汇入财务视角]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[PO标记固定=无PO；不生成会计分录（分录由 .C 生成）。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BB.3.1.B']） -->

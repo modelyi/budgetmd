@@ -55,9 +55,6 @@
     <outputs>
       <output target="BB.1.2.c 财务视角"><![CDATA[销量/单价/预收/回款自动合并进财务视角，生成收入确认与 CF-01]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[收入=销量×单价（公式，不可编辑）；存量与增量同表、由订单编号区分。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BB.1.2.a']） -->

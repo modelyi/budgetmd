@@ -36,9 +36,6 @@
     <outputs>
       <output target="BB.2.1.B 财务视角"><![CDATA[完工产量带出，据以计算完工生产成本]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[产量【全年合计】=SUM(1~12月)。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 无转换规则说明（原 NO_VOUCHER_FORM_NOTE['BB.2.1.A']） -->

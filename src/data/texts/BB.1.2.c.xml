@@ -57,9 +57,6 @@
       <output target="BB.3.X 进销存预算"><![CDATA[销售成本→产成品转出（存货减少）]]></output>
       <output target="BO.CF 现金流量表—CF-01"><![CDATA[预收+验收回款→销售商品、提供劳务收到的现金]]></output>
     </outputs>
-    <keyRules>
-      <rule><![CDATA[收入=销量×单价、销售成本=销量×BAA.2；CF-01=Σ预收+Σ验收回款。]]></rule>
-    </keyRules>
   </relation>
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.1.2.c'].items） -->
