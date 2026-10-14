@@ -160,6 +160,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+供应商类型与归属主体供 BB.3.1「供应商」下拉引用。
+
 ## ④ 适用业务情形
 
 **适用于**

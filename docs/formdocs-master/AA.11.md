@@ -108,6 +108,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+物料编码为唯一身份来源，不区分法人；供 BAA.4 服务物料定额标准引用。
+
 ## ④ 适用业务情形
 
 **适用于**

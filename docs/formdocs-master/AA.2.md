@@ -95,6 +95,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+法人编码全局唯一，是各编制表「归属法人/主体」下拉的唯一取值来源。
+
 ### AA.2.b 法人组织架构图
 
 <div class="t3a-sheet-scroll">

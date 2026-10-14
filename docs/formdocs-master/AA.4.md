@@ -98,6 +98,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+客户类型引用 AB.8 客户类型业务字典。
+
 ## ④ 适用业务情形
 
 **适用于**

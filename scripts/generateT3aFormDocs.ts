@@ -59,12 +59,18 @@ import type { MarkdownTableGrid, MarkdownTableCell } from '../src/utils/markdown
 // 文档表样与页面展示保持同一来源口径，复用同一投影函数，避免两处口径漂移。
 import { projectFinanceResearchGrids } from '../src/utils/financeResearchProjection';
 // A1 组（T1 总览）专属数据源：A1.3 ER 图取表单/字段登记（纯数据，无 React 依赖）。
-import { BUDGET_FORM_REGISTRY, BUDGET_FIELD_REGISTRY } from '../src/data/budgetFormRegistry';
+import {
+  BUDGET_FORM_REGISTRY,
+  BUDGET_FIELD_REGISTRY,
+  BUDGET_FIELD_FILL_REQUIREMENTS,
+  BUDGET_TABLE_BEHAVIOR_NOTES,
+} from '../src/data/budgetFormRegistry';
 // T3A 单主体裁剪（原型口径）：T3A scope 应用裁剪规则、multi scope 保持原样，
 // 保证 T3B（docs/formdocs-multi/）逐字不变。详见 scripts/t3aSingleEntityClip.ts。
 import {
   clipFormText,
   clipT3aGrid,
+  clipT3aClauses,
   collectMultiEntityResidue,
   type ClipGrid,
 } from './t3aSingleEntityClip';
@@ -385,6 +391,71 @@ function mdCell(s: string): string {
   return s.replace(/\|/g, '\\|').replace(/\r?\n/g, '<br>');
 }
 
+// ── ②「填报要求」列 / ① 表下注：登记表（budgetFormRegistry）→ 渲染 ─────────────
+// 字段级约束：key = `${子表编码}::${字段编码}`。「必输 / 录入方式」由 BUDGET_FIELD_REGISTRY
+// 的 required / inputMode 派生（原有登记，不改），补充分句取 BUDGET_FIELD_FILL_REQUIREMENTS。
+// 表级约束：按表样名取 BUDGET_TABLE_BEHAVIOR_NOTES，渲染在该表下方一段。
+const FIELD_META_BY_KEY = new Map(BUDGET_FIELD_REGISTRY.map((f) => [`${f.formCode}::${f.fieldCode}`, f]));
+const FILL_REQ_BY_KEY = new Map(
+  BUDGET_FIELD_FILL_REQUIREMENTS.map((r) => [`${r.formCode}::${r.fieldCode}`, r]),
+);
+/** 有「填报要求」登记的子表编码集合（仅这些子表的 ② 加第四列；未登记者保持原三列，避免全库错列） */
+const FILL_REQ_FORM_CODES = new Set(BUDGET_FIELD_FILL_REQUIREMENTS.map((r) => r.formCode));
+const TABLE_NOTES_BY_GRID = new Map(BUDGET_TABLE_BEHAVIOR_NOTES.map((n) => [n.gridName, n.notes]));
+
+/** 录入方式短语（派生自登记表 inputMode/required；用户录入类带必输性，派生类不带、避免与说明冲突） */
+function inputModePhrase(mode: string, required: boolean): string {
+  switch (mode) {
+    case '手工':
+      return `${required ? '必输' : '选填'}；手工填报`;
+    case '选择':
+      return `${required ? '必输' : '选填'}；下拉选择`;
+    case '系统带出':
+      return '系统带出';
+    case '公式':
+      return '公式自动计算';
+    case '自动':
+      return '系统自动';
+    default:
+      return '';
+  }
+}
+
+/**
+ * 无派生值又无登记约束时的兜底（该子表开启了「填报要求」列，不得留空格）：
+ * 由 XML「来源」列文本派生一句，与来源同义、不新增口径。
+ */
+function fallbackFromSource(src: string): string {
+  const s = (src || '').trim();
+  if (/公式/.test(s)) return '公式自动计算';
+  if (/本表维护/.test(s)) return '手工维护';
+  if (/本表录入|手工/.test(s)) return '手工填报';
+  if (/字典|主数据|带出|视角|导入|接口/.test(s)) return '系统带出';
+  return '按表样填报';
+}
+
+/** 字段级「填报要求」= 派生（必输/录入方式）+ 补充分句（登记表捡回的约束）；overrideBase 时只用补充值 */
+function fillRequirementFor(formCode: string, fieldCode: string, sourceText = ''): string {
+  const specificEntry = FILL_REQ_BY_KEY.get(`${formCode}::${fieldCode}`);
+  const specific = specificEntry ? (SCOPE === 't3a' ? clipT3aClauses(specificEntry.requirement) : specificEntry.requirement) : '';
+  if (specificEntry?.overrideBase) return specific || fallbackFromSource(sourceText);
+  const parts: string[] = [];
+  const meta = FIELD_META_BY_KEY.get(`${formCode}::${fieldCode}`);
+  if (meta) {
+    const phrase = inputModePhrase(meta.inputMode, meta.required);
+    if (phrase) parts.push(phrase);
+  }
+  if (specific) parts.push(specific);
+  const joined = parts.join('；');
+  return joined || fallbackFromSource(sourceText);
+}
+
+/** 表级下注：T3A 逐句裁剪（剔除多主体残留句），其余范围原样 */
+function tableBehaviorNotes(gridName: string): string[] {
+  const notes = TABLE_NOTES_BY_GRID.get(gridName) ?? [];
+  return notes.map((n) => (SCOPE === 't3a' ? clipT3aClauses(n) : n)).filter(Boolean);
+}
+
 // ── ⑥/⑤「输出影响」去代号（只留报表项名） ────────────────────────────────────
 // 口径铁律：科目颗粒度止于报表项目行——渲染 ⑥ 与 ⑤「输出影响」时把会计科目码与现金流量表
 // 行代号从文本里去掉、只保留报表项名；「预付账款」与「预付款项」统一为「预付款项」
@@ -629,6 +700,12 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
         out.push('');
         out.push(gridToHtmlTable(grid));
         out.push('');
+        // ① 表下注：表级系统行为（自动汇总/不可直接编辑/确认提示/汇总口径等）——
+        // 文字源为登记表 BUDGET_TABLE_BEHAVIOR_NOTES（按表样名取），T3A 逐句裁剪。
+        tableBehaviorNotes(grid.name).forEach((n) => {
+          out.push(n);
+          out.push('');
+        });
       });
     }
   }
@@ -659,11 +736,25 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
       out.push(`**${sec.title}**`);
       out.push('');
     }
-    out.push('| 字段 | 来源 | 说明 |');
-    out.push('| :--- | :--- | :--- |');
-    sec.fields.forEach((f) => {
-      out.push(`| ${mdCell(f.display || f.name)} | ${mdCell(f.source)} | ${mdCell(f.remark)} |`);
-    });
+    // ② 第四列「填报要求」：仅对登记表已登记的字段级约束子表开启（未登记者保持原三列），
+    // 由登记表（required/inputMode 派生 + BUDGET_FIELD_FILL_REQUIREMENTS）渲染，T3A 逐句裁剪。
+    const withReq = FILL_REQ_FORM_CODES.has(sec.tabCode);
+    if (withReq) {
+      out.push('| 字段 | 来源 | 说明 | 填报要求 |');
+      out.push('| :--- | :--- | :--- | :--- |');
+      sec.fields.forEach((f) => {
+        out.push(
+          `| ${mdCell(f.display || f.name)} | ${mdCell(f.source)} | ${mdCell(f.remark)} | ` +
+            `${mdCell(fillRequirementFor(sec.tabCode, f.code, f.source))} |`,
+        );
+      });
+    } else {
+      out.push('| 字段 | 来源 | 说明 |');
+      out.push('| :--- | :--- | :--- |');
+      sec.fields.forEach((f) => {
+        out.push(`| ${mdCell(f.display || f.name)} | ${mdCell(f.source)} | ${mdCell(f.remark)} |`);
+      });
+    }
     out.push('');
   });
 

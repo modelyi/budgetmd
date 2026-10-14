@@ -198,6 +198,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+管理单元与关联法人公司一一对应，是 BB.3.1「下单主体」带出所属法人的依据；BB.4.4 的资产账簿由 AA.8 管理单元主数据的「资产账簿」列直接带出（不手工另行确定）。
+
 ## ④ 适用业务情形
 
 **适用于**

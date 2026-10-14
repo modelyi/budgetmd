@@ -70,6 +70,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+预算年度与月度期间为全系统统一时间轴；期间锁定后不可再编辑已锁定月份的数据。
+
 ### AA.1.b 预算期间日历
 
 <div class="t3a-sheet-scroll">
@@ -247,6 +249,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
   </tbody>
 </table>
 </div>
+
+预算年度与月度期间为全系统统一时间轴；期间锁定后不可再编辑已锁定月份的数据。
 
 ## ④ 适用业务情形
 

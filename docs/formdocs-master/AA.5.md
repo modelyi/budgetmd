@@ -662,6 +662,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+部门编码/名称为一级、二级部门下拉的统一来源；类型区分管理/普通部门。
+
 ## ④ 适用业务情形
 
 **适用于**

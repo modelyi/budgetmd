@@ -108,6 +108,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+整表数据来自费用预算模块的编制结果，本表为汇总展示；按预算项目、预算部门（默认明细到二级部门）、费用科目维度录入全年及 1~12 月费用金额。
+
 ## ④ 适用业务情形
 
 **适用于**

@@ -597,6 +597,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+项目类型引用 AB.7 预算项目类型字典；同一项目编码可被多张编制表引用（如 BB.3.1、BAA.8）。
+
 ## ④ 适用业务情形
 
 **适用于**

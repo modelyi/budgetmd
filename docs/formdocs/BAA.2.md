@@ -60,6 +60,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+标准成本供完工生产成本计算（BB.2.1 产量 × BAA.2 标准成本）与 BB.1.2 销售成本等按产品引用。
+
 ## ④ 适用业务情形
 
 **适用于**

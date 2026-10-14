@@ -54,6 +54,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+工时费率供 BB.1.3 服务人工成本测算取数。
+
 ## ④ 适用业务情形
 
 **适用于**

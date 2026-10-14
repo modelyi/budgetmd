@@ -80,6 +80,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+为固定值域字典，表样仅三列（参数编码 / 参数指标名称 / 比率），供 BF.4 税金及附加预算表等「税率/附加税比率」字段下拉引用，不可在编制表内新增值。
+
 ## ④ 适用业务情形
 
 **适用于**

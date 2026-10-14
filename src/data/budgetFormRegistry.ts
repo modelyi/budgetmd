@@ -541,6 +541,897 @@ export function getBudgetFields(formCode: string): BudgetFieldDef[] {
   return BUDGET_FIELD_REGISTRY.filter(f => f.formCode === formCode);
 }
 
+// ==========================================================================
+// ② 字段与值说明「填报要求」列：字段级填报约束（自历史「③ 关键规则要点」/「表概述」归位）
+// --------------------------------------------------------------------------
+// 背景：早前按用户要求删除了表单文档里的「表概述」「③ 关键规则要点」「⑤ 关键编制规则」
+// 三个平铺块；但其中混有实用的字段级填报约束（必输 / 取值域 / 不允许负数或留空 /
+// 未发生填 0 / 自动带出不可直接编辑 / 备查字段等），不能丢。此处按「字段」逐条归位：
+//   · 「必输 / 录入方式」由 BUDGET_FIELD_REGISTRY 的 required / inputMode 在渲染层派生，
+//     不在此重复登记；
+//   · 只有 XML 字段登记名之外的补充约束（取值域、数值规则、只读、备查等）登记在本表。
+// 口径铁律：只从历史捡回，不新增规则、不改口径、不引入科目码。
+// key = `${formCode}::${fieldCode}`，formCode 与 BUDGET_FIELD_REGISTRY / 子表 XML 一致。
+// ==========================================================================
+export interface BudgetFieldFillRequirement {
+  /** 表单或子表编码（如 BB.1.1 / BB.3.1.A，与 BUDGET_FIELD_REGISTRY.formCode 一致） */
+  formCode: string;
+  /** 字段编码（与 BUDGET_FIELD_REGISTRY.fieldCode / XML <field code> 一致） */
+  fieldCode: string;
+  /** 该字段的字段级填报约束；渲染在 ②「填报要求」列、追加在「必输 / 录入方式」之后 */
+  requirement: string;
+  /** 置 true 时本约束整体取代「必输 / 录入方式」派生值（用于固定值/只读列，避免与派生值自相矛盾） */
+  overrideBase?: boolean;
+}
+
+export const BUDGET_FIELD_FILL_REQUIREMENTS: BudgetFieldFillRequirement[] = [
+  // ── BB.1.1 合同签约额预算表 ──
+  { formCode: 'BB.1.1', fieldCode: 'contractNature', requirement: '取值仅「存量框架合同 / 新增商业机会」两值' },
+  { formCode: 'BB.1.1', fieldCode: 'machineCode', requirement: '文本录入' },
+  { formCode: 'BB.1.1', fieldCode: 'legalEntity', requirement: '签约额按本列直接归属法人，不另做比例拆分' },
+  { formCode: 'BB.1.1', fieldCode: 'annualContractAmount', requirement: '由 1~12 月签约额自动汇总，不可直接编辑' },
+  { formCode: 'BB.1.1', fieldCode: 'monthlyContractAmount', requirement: '金额不含税，不允许负数或留空，未发生填 0' },
+  { formCode: 'BB.1.1', fieldCode: 'nextYearContractAmount', requirement: '金额不含税，不允许负数或留空，未发生填 0' },
+  { formCode: 'BB.1.1', fieldCode: 'yearAfterNextContractAmount', requirement: '金额不含税，不允许负数或留空，未发生填 0' },
+
+  // ── BB.3.1.A 有PO-设备及无形资产采购预算（采购视角） ──
+  { formCode: 'BB.3.1.A', fieldCode: 'poFlag', requirement: '固定值列：本表恒为「有PO」，由表样固定、不可修改', overrideBase: true },
+  { formCode: 'BB.3.1.A', fieldCode: 'advancePayment', requirement: '不强制公式联动' },
+  { formCode: 'BB.3.1.A', fieldCode: 'acceptancePayment', requirement: '不强制公式联动' },
+  { formCode: 'BB.3.1.A', fieldCode: 'annualArrival', requirement: '由各月到货额自动汇总，不可直接编辑' },
+  { formCode: 'BB.3.1.A', fieldCode: 'annualOrder', requirement: '由各月下单额自动汇总，不可直接编辑' },
+
+  // ── BB.3.1.B 无PO-设备及无形资产采购预算（采购视角） ──
+  { formCode: 'BB.3.1.B', fieldCode: 'poFlag', requirement: '固定值列：本表恒为「无PO」，由表样固定、不可修改', overrideBase: true },
+  { formCode: 'BB.3.1.B', fieldCode: 'advancePayment', requirement: '不强制公式联动' },
+  { formCode: 'BB.3.1.B', fieldCode: 'acceptancePayment', requirement: '不强制公式联动' },
+  { formCode: 'BB.3.1.B', fieldCode: 'annualArrival', requirement: '由各月到货额自动汇总，不可直接编辑' },
+  { formCode: 'BB.3.1.B', fieldCode: 'annualOrder', requirement: '由各月下单额自动汇总，不可直接编辑' },
+
+  // ── BB.3.1.D 关联交易视角（设备及无形资产采购） ──
+  { formCode: 'BB.3.1.D', fieldCode: 'orderingEntity', requirement: '系统带出自 BB.3.1.A/.B 采购视角，本视角只读' },
+  { formCode: 'BB.3.1.D', fieldCode: 'benefitEntity', requirement: '由关联交易预算员补填；同法人=自购自用不触发代采购，不同法人=跨法人代采购' },
+  { formCode: 'BB.3.1.D', fieldCode: 'monthlyDeliveryAmount', requirement: '跨法人代采购行专用；同法人自购自用行填 0' },
+  { formCode: 'BB.3.1.D', fieldCode: 'markupRatePct', requirement: '仅跨法人代采购带出，同法人留「—」' },
+
+  // ── BB.3.1.C 财务视角（按法人汇总） ──
+  { formCode: 'BB.3.1.C', fieldCode: 'poFlag', requirement: '下拉维度（枚举：有PO / 无PO；非固定值列）：区分本行金额按下单主体直接指认法人、还是按 BAA.9.a 比例拆分到法人', overrideBase: true },
+  { formCode: 'BB.3.1.C', fieldCode: 'legalEntity', requirement: '有PO按下单主体（管理单元）对应法人直接指认；无PO按 BAA.9.a 资产转换比例拆分到法人' },
+  { formCode: 'BB.3.1.C', fieldCode: 'origValue', requirement: '由采购视角按法人汇总，不可直接编辑' },
+  { formCode: 'BB.3.1.C', fieldCode: 'advancePayment', requirement: '由采购视角按法人汇总，不可直接编辑' },
+  { formCode: 'BB.3.1.C', fieldCode: 'acceptancePayment', requirement: '由采购视角按法人汇总，不可直接编辑' },
+
+  // ── BB.5.1 雇员费用编制/导入 ──
+  { formCode: 'BB.5.1', fieldCode: 'serviceLaborCost', requirement: '工时×BAA.3 工时标准成本，按法人公司×预算部门×月份汇总，并等额冲减原费用计提；人事视角不显示本列' },
+  { formCode: 'BB.5.1', fieldCode: 'actualPayment', requirement: '付现口径，按实际发放月份归集' },
+
+  // ── 本轮全库捡回：② 字段级填报约束（自历史「③ 关键规则要点」/「表概述」按字段归位） ──
+  { formCode: 'BB.1.2.a', fieldCode: 'machineCode', requirement: '文本录入，用户必输' },
+  { formCode: 'BB.1.2.a', fieldCode: 'monthlyRevenue', requirement: '公式自动计算（＝销量 × 单价（不含税）），不可直接编辑' },
+  { formCode: 'BB.1.2.a', fieldCode: 'monthlyQty', requirement: '按月维护' },
+  { formCode: 'BB.1.2.a', fieldCode: 'monthlyPrice', requirement: '按月维护（不含税）' },
+  { formCode: 'BB.1.2.a', fieldCode: 'monthlyPrepayment', requirement: '按月维护；进 CF-01' },
+  { formCode: 'BB.1.2.a', fieldCode: 'monthlyAcceptCollection', requirement: '按月维护；进 CF-01' },
+  { formCode: 'BB.1.2.c', fieldCode: 'monthlyQty', requirement: '存量与增量自动合并只读，不可手工编辑' },
+  { formCode: 'BB.1.2.c', fieldCode: 'monthlyPrice', requirement: '存量与增量自动合并只读，不可手工编辑' },
+  { formCode: 'BB.1.2.c', fieldCode: 'monthlyRevenue', requirement: '存量与增量自动合并只读，不可手工编辑' },
+  { formCode: 'BB.1.2.c', fieldCode: 'monthlyCost', requirement: '仅财务视角可见/维护，由财务按月填报（＝销量 × 标准成本）' },
+  { formCode: 'BB.1.2.c', fieldCode: 'monthlyPrepayment', requirement: '存量与增量自动合并只读，不可手工编辑' },
+  { formCode: 'BB.1.2.c', fieldCode: 'monthlyAcceptCollection', requirement: '存量与增量自动合并只读，不可手工编辑' },
+  { formCode: 'BB.1.3.a', fieldCode: 'machineCode', requirement: '文本录入，用户必输' },
+  { formCode: 'BB.1.3.d', fieldCode: 'serviceMaterials.partCategory', requirement: '好件/坏件分开核算；坏件不得取好件成本' },
+  { formCode: 'BB.1.3.f', fieldCode: 'serviceMaterials.partCategory', requirement: '好件/坏件分开核算；坏件不得取好件成本' },
+  { formCode: 'BB.1.3.f', fieldCode: 'serviceMaterials.monthlyCosts', requirement: '好件消耗 − 坏件残值（好坏件净额法）；成本强制取自 BAA.4 服务物料定额标准' },
+  { formCode: 'BB.1.4', fieldCode: 'department', requirement: '默认明细到二级部门' },
+  { formCode: 'BB.1.4', fieldCode: 'expenseSubject', requirement: '覆盖差旅/招待/广告/佣金等销售费用类别' },
+  { formCode: 'BB.2.1', fieldCode: 'department', requirement: '默认明细到二级部门' },
+  { formCode: 'BB.2.1', fieldCode: 'monthlyProduction', requirement: '仅产成品、不含在制品；按月手工填报' },
+  { formCode: 'BB.2.1.B', fieldCode: 'completedQuantity', requirement: '系统带出自 BB.2.1.A 主表（同法人/同部门/同产品），非填报' },
+  { formCode: 'BB.2.1.B', fieldCode: 'unitStandardCost', requirement: '取自 BAA.2；产品单位值，各月同值、不累加' },
+  { formCode: 'BB.2.1.B', fieldCode: 'completionProductionCost', requirement: '＝完工产量 × 单位标准成本 ÷ 10000' },
+  { formCode: 'BB.3.2', fieldCode: 'monthlyTransferAmount', requirement: '公式字段：按月汇总 BB.3.2.b 基建转固明细表同月转固原值，不可直接编辑' },
+  { formCode: 'BB.3.2', fieldCode: 'openingAmount', requirement: '年初在建工程余额（期初金额），与 BB.4.1.a 期初金额共同构成本期在建工程年初余额' },
+  { formCode: 'BB.3.2.b', fieldCode: 'originalValue', requirement: '用户直接填报各笔转固原值' },
+  { formCode: 'BB.3.2.b', fieldCode: 'assetDesc', requirement: '文本，仅用于人眼识别，不参与任何测算与分录' },
+  { formCode: 'BB.3.3.A', fieldCode: 'poFlag', requirement: '固定值列：本表恒为「有PO」，由表样固定、不可修改', overrideBase: true },
+  { formCode: 'BB.3.3.A', fieldCode: 'advancePaymentRatio', requirement: '按月手工填报，位于每月「下单额」之后、「预付款」之前' },
+  { formCode: 'BB.3.3.A', fieldCode: 'advancePayment', requirement: '不强制公式联动' },
+  { formCode: 'BB.3.3.A', fieldCode: 'acceptancePayment', requirement: '不强制公式联动' },
+  { formCode: 'BB.3.3.A', fieldCode: 'annualArrival', requirement: '由各月到货额自动汇总，不可直接编辑' },
+  { formCode: 'BB.3.3.A', fieldCode: 'annualOrder', requirement: '由各月下单额自动汇总，不可直接编辑' },
+  { formCode: 'BB.3.3.B', fieldCode: 'poFlag', requirement: '固定值列：本表恒为「无PO」，由表样固定、不可修改', overrideBase: true },
+  { formCode: 'BB.3.3.B', fieldCode: 'advancePaymentRatio', requirement: '按月手工填报，位于每月「下单额」之后、「预付款」之前' },
+  { formCode: 'BB.3.3.B', fieldCode: 'advancePayment', requirement: '不强制公式联动' },
+  { formCode: 'BB.3.3.B', fieldCode: 'acceptancePayment', requirement: '不强制公式联动' },
+  { formCode: 'BB.3.3.B', fieldCode: 'annualArrival', requirement: '由各月到货额自动汇总，不可直接编辑' },
+  { formCode: 'BB.3.3.B', fieldCode: 'annualOrder', requirement: '由各月下单额自动汇总，不可直接编辑' },
+  { formCode: 'BB.3.3.C', fieldCode: 'poFlag', requirement: '下拉维度（枚举：有PO / 无PO；非固定值列）：区分本行金额按下单主体直接指认法人、还是按兜底比例拆分到法人', overrideBase: true },
+  { formCode: 'BB.3.3.C', fieldCode: 'legalEntity', requirement: '有PO按下单主体（管理单元）对应法人直接指认；无PO按兜底拆分比例拆分到法人' },
+  { formCode: 'BB.3.3.C', fieldCode: 'arrivalAmount', requirement: '由采购视角按法人汇总，不可直接编辑' },
+  { formCode: 'BB.3.3.C', fieldCode: 'advancePayment', requirement: '由采购视角按法人汇总，不可直接编辑' },
+  { formCode: 'BB.3.3.C', fieldCode: 'acceptancePayment', requirement: '由采购视角按法人汇总，不可直接编辑' },
+  { formCode: 'BB.3.3.D', fieldCode: 'orderingEntity', requirement: '系统带出自 BB.3.3.A/.B 采购视角，本视角只读' },
+  { formCode: 'BB.3.3.D', fieldCode: 'monthlyDeliveryAmount', requirement: '代采购行专用；同法人自购自用行填 0' },
+  { formCode: 'BB.3.X', fieldCode: 'inventoryCategory', requirement: '存货类别 = 大类 + 小类' },
+  { formCode: 'BB.3.X', fieldCode: 'openingBalance', requirement: '按「法人公司×存货类别」手工一次性填报' },
+  { formCode: 'BB.3.X', fieldCode: 'monthlyOpening', requirement: '公式：1月 = 年初余额，2~12月 = 同一法人同一品类上月期末数滚动' },
+  { formCode: 'BB.3.X', fieldCode: 'monthlyTransferIn', requirement: '系统带出；另含手工调库（盘盈入库、跨期补记等）直接录入，与自动取数互斥、不重复计' },
+  { formCode: 'BB.3.X', fieldCode: 'monthlyTransferOut', requirement: '系统带出；另含手工调库（盘亏/报废出库等）直接录入，与自动取数互斥、不重复计' },
+  { formCode: 'BB.3.X', fieldCode: 'monthlyClosing', requirement: '公式 = 期初数 + 转入数 − 转出数' },
+  { formCode: 'BB.3.X', fieldCode: 'yearEndBalance', requirement: '公式 = 12月期末数' },
+  { formCode: 'BB.4.1.a', fieldCode: 'remark', requirement: '项目级备注，仅人眼阅读识别' },
+  { formCode: 'BB.4.1.a', fieldCode: 'openingAmount', requirement: '期初金额（年初自制在建工程余额），允许手工录入；年度单列、不按月展开' },
+  { formCode: 'BB.4.1.a', fieldCode: 'laborInput', requirement: '由 BB.4.1.b 附表按月汇总带出，纯计算展示、不可编辑' },
+  { formCode: 'BB.4.1.a', fieldCode: 'materialInput', requirement: '由 BB.4.1.c 附表按月汇总带出，纯计算展示、不可编辑' },
+  { formCode: 'BB.4.1.a', fieldCode: 'capitalizeOut', requirement: '由 BB.4.1.d 附表按月汇总带出，纯计算展示、不可编辑' },
+  { formCode: 'BB.4.1.b', fieldCode: 'position', requirement: '岗位/工种' },
+  { formCode: 'BB.4.1.c', fieldCode: 'materialCategory', requirement: '固定值「自制设备用料」' },
+  { formCode: 'BB.4.1.d', fieldCode: 'originalValue', requirement: '单列、不按月展开；手工填报' },
+  { formCode: 'BB.4.1.d', fieldCode: 'assetDesc', requirement: '文本，与 BB.4.3/BB.4.4.b/BB.4.5 同口径；仅人眼识别、不参与测算与分录' },
+  { formCode: 'BB.4.2.a', fieldCode: 'seq', requirement: '展示列，调研页渲染时统一不显示' },
+  { formCode: 'BB.4.2.a', fieldCode: 'lessorName', requirement: '外部第三方名称手工填写（不取法人主数据）' },
+  { formCode: 'BB.4.2.a', fieldCode: 'budgetDepartment', requirement: '默认明细到二级部门' },
+  { formCode: 'BB.4.2.a', fieldCode: 'leaseTermMonths', requirement: '系统带出（＝租赁期终止月 − 租赁期起始月 + 1），派生列、不可手工录入' },
+  { formCode: 'BB.4.2.a', fieldCode: 'leaseTerm', requirement: '系统带出，按「租赁期限(月)」落 AB.16（≤12个月→一年以内、>12个月→一年以上），不可手工选' },
+  { formCode: 'BB.4.2.a', fieldCode: 'leaseArea', requirement: '按对外租赁合同本表手工录入，不做场所面积按法人分摊' },
+  { formCode: 'BB.4.2.a', fieldCode: 'unitPrice', requirement: '按对外租赁合同本表手工录入的合同单价（精度 2 位）；不引用 BAA.6.b' },
+  { formCode: 'BB.4.2.a', fieldCode: 'leaseType', requirement: '由「租赁期限」派生、系统带出、不可手工改（一年以内→费用化(一年以内)、一年以上→资本化(大于一年)）' },
+  { formCode: 'BB.4.2.a', fieldCode: 'discountRatePct', requirement: '默认取 BAA.6.e 租赁折现率维护、默认取 BF.3 综合融资成本' },
+  { formCode: 'BB.4.2.a', fieldCode: 'monthlyRent', requirement: '公式 = 单价 × 租赁面积 ÷ 10000 × 当月在租期内' },
+  { formCode: 'BB.4.2.a.1', fieldCode: 'remainingMonths', requirement: '系统带出' },
+  { formCode: 'BB.4.2.a.1', fieldCode: 'discountRatePct', requirement: '默认取 BAA.6.e、默认取 BF.3 综合融资成本' },
+  { formCode: 'BB.4.2.a.1', fieldCode: 'annualLeasePayment', requirement: '＝ BB.4.2.a 该合同月租金【全年合计】' },
+  { formCode: 'BB.4.2.a.1', fieldCode: 'liabilityInit', requirement: '＝租赁付款额按折现率折现（月折现率 = 年折现率 ÷ 12，按剩余租赁月数折现）' },
+  { formCode: 'BB.4.2.a.1', fieldCode: 'rouOriginal', requirement: '＝租赁负债初始（使用权资产与租赁负债同额初始确认）' },
+  { formCode: 'BB.4.2.a.1', fieldCode: 'monthlyPayment', requirement: '系统测算' },
+  { formCode: 'BB.4.2.a.1', fieldCode: 'monthlyInterest', requirement: '系统测算（＝期初租赁负债 × 年折现率 ÷ 12）' },
+  { formCode: 'BB.4.2.a.1', fieldCode: 'monthlyPrincipal', requirement: '系统测算（＝当月租赁付款额 − 当月利息费用）' },
+  { formCode: 'BB.4.2.b', fieldCode: 'leaseTermMonths', requirement: '系统带出（＝租赁期终止月 − 租赁期起始月 + 1），派生列、不可手工录入' },
+  { formCode: 'BB.4.2.b', fieldCode: 'leaseTerm', requirement: '系统带出，按「租赁期限(月)」落 AB.16，与 BB.4.2.a 共用同一字典、不可手工选' },
+  { formCode: 'BB.4.2.b', fieldCode: 'leaseType', requirement: '由「租赁期限」派生、系统带出、不可手工改（一年以内→费用化(一年以内)、一年以上→资本化(大于一年)）' },
+  { formCode: 'BB.4.2.b', fieldCode: 'monthlyReceivableBalance', requirement: '【全年合计】取 12 月末余额（余额口径不按月求和）' },
+  { formCode: 'BB.4.2.b.1', fieldCode: 'annualLeasePayment', requirement: '＝ BB.4.2.b 该合同内部租金的【全年合计】' },
+  { formCode: 'BB.4.2.b.1', fieldCode: 'discountRatePct', requirement: '默认取 BAA.6.e、默认取 BF.3 综合融资成本' },
+  { formCode: 'BB.4.2.b.1', fieldCode: 'leaseLiabilityInitial', requirement: '＝租赁付款额按折现率折现（月折现率 = 年折现率 ÷ 12，按剩余租赁月数折现）' },
+  { formCode: 'BB.4.2.b.1', fieldCode: 'rouAssetOriginal', requirement: '＝租赁负债初始（同额初始确认）' },
+  { formCode: 'BB.4.2.b.1', fieldCode: 'monthlyPayment', requirement: '系统测算' },
+  { formCode: 'BB.4.2.b.1', fieldCode: 'monthlyInterestExpense', requirement: '系统测算（＝期初租赁负债 × 年折现率 ÷ 12）' },
+  { formCode: 'BB.4.2.b.1', fieldCode: 'monthlyPrincipalRepayment', requirement: '系统测算（＝当月租赁付款额 − 当月利息费用）' },
+  { formCode: 'BB.4.3', fieldCode: 'assetDesc', requirement: '文本，仅人眼识别' },
+  { formCode: 'BB.4.3', fieldCode: 'monthlyOriginalValue', requirement: '资产原值按取得时点确认，手工填报' },
+  { formCode: 'BB.4.3', fieldCode: 'monthlyPrepayment', requirement: '先付部分；与「付款」是两个独立付款度量，只驱动现金流、不参与原值确认' },
+  { formCode: 'BB.4.3', fieldCode: 'monthlyPayment', requirement: '验收或尾款等实际付款；预付款 + 付款合计即为货币资金减少额（CF-14 基数）' },
+  { formCode: 'BB.4.3', fieldCode: 'annualOriginalValue', requirement: '全年合计 = SUM(1~12月对应子列)' },
+  { formCode: 'BB.4.3', fieldCode: 'annualPayment', requirement: '全年合计 = SUM(1~12月对应子列)' },
+  { formCode: 'BB.4.3', fieldCode: 'annualPrepayment', requirement: '全年合计 = SUM(1~12月对应子列)' },
+  { formCode: 'BB.4.4.b', fieldCode: 'assetCategory', requirement: '单列，取值域 AA.9 的层级写法「大类-小类」（全库只有一个字段「资产类别」、不设大类/小类）' },
+  { formCode: 'BB.4.4.b', fieldCode: 'assetDesc', requirement: '文本，仅供人眼识别资产，不参与折旧计算' },
+  { formCode: 'BB.4.4.b', fieldCode: 'managementUnit', requirement: '管理单元置于资产账簿之前' },
+  { formCode: 'BB.4.4.b', fieldCode: 'assetBook', requirement: '系统带出：由 AA.8 管理单元主数据按管理单元直接关联带出' },
+  { formCode: 'BB.4.4.b', fieldCode: 'activationDate', requirement: '启用日期（当月新增下月起提，据此确定新年度折旧起始月）' },
+  { formCode: 'BB.4.4.b', fieldCode: 'expenseAttribution', requirement: '系统带出：由资产领用部门属性经 AM.2 自动带出，不允许手工修改' },
+  { formCode: 'BB.4.4.b', fieldCode: 'annualDepreciation', requirement: '全年折旧 = SUM(1~12月对应费用子列)' },
+  { formCode: 'BB.4.5', fieldCode: 'category', requirement: '取值域 AA.9 的层级写法「大类-小类」' },
+  { formCode: 'BB.4.5', fieldCode: 'assetDesc', requirement: '文本，仅人眼识别' },
+  { formCode: 'BB.4.5', fieldCode: 'startMonth', requirement: '启用月份 = 资产达到可使用状态并启用的月份' },
+  { formCode: 'BB.4.5', fieldCode: 'depConvention', requirement: '折旧惯例 = 「下月折」（当月新增下月起提）' },
+  { formCode: 'BB.4.5', fieldCode: 'depMonths', requirement: '本年折旧月数 = 12 − 启用月份（1月启用折 11 个月……12月启用折 0 个月）' },
+  { formCode: 'BB.4.5', fieldCode: 'monthlyDep', requirement: '每月折旧额 = 本年新增原值 × (1 − 预计净残值率) ÷ 剩余年限(月数)（年限平均法）' },
+  { formCode: 'BB.4.5', fieldCode: 'residualRate', requirement: '无形资产残值率统一 0%' },
+  { formCode: 'BB.4.6', fieldCode: 'disposalType', requirement: '枚举（两类）：对外出售、报废变卖' },
+  { formCode: 'BB.4.6', fieldCode: 'netBookValue', requirement: '行内公式 = 资产原值 − 累计折旧，不允许手工改数' },
+  { formCode: 'BB.4.6', fieldCode: 'disposalGainLoss', requirement: '行内公式 = 处置收款(不含税) − 资产净值（正数收益、负数损失），不允许手工改数' },
+  { formCode: 'BB.4.6', fieldCode: 'originalValue', requirement: '金额一律填在处置月份列，全年合计自动求和' },
+  { formCode: 'BB.4.6', fieldCode: 'accumulatedDep', requirement: '金额一律填在处置月份列，全年合计自动求和' },
+  { formCode: 'BB.4.6', fieldCode: 'disposalRevenueExTax', requirement: '金额一律填在处置月份列，全年合计自动求和' },
+  { formCode: 'BB.4.6', fieldCode: 'disposalRevenueIncTax', requirement: '金额一律填在处置月份列，全年合计自动求和' },
+  { formCode: 'BB.4.X', fieldCode: 'assetCategory', requirement: '取值域 AA.9 的层级写法「大类-小类」；表样含「固定资产-使用权资产」行' },
+  { formCode: 'BB.5.2', fieldCode: 'department', requirement: '编到二级部门' },
+  { formCode: 'BB.5.2', fieldCode: 'deptExpenseNature', requirement: '默认来自二级部门与费用性质的映射字典（AM.2）；二级/三级部门维护费用属性映射，一级部门不维护' },
+  { formCode: 'BB.5.2', fieldCode: 'project', requirement: '跨部门/集团级项目「部门」与「部门费用性质」不必填（非必填，允许留空）' },
+  { formCode: 'BF.1', fieldCode: 'totalProjectInvestment', requirement: '按项目整体计划填报，不强制等于己方出资额 + 合伙人投入资本' },
+  { formCode: 'BF.1', fieldCode: 'ourShareholdingRatio', requirement: '按协议填报，不强制等于资本金比例' },
+  { formCode: 'BF.1', fieldCode: 'annualReturn', requirement: '预计归属于我司的年度收益，非被投企业全额利润，不强行等于当年现金分红' },
+  { formCode: 'BF.1', fieldCode: 'paybackPeriod', requirement: '保留原名、单位年；仅在稳定可收现收益假设下按 己方出资额 ÷ 预计每年收益 作简化静态参考（1 位小数）；收益 ≤ 0 或假设不适用时留空/不适用，不得为 0 年或除零' },
+  { formCode: 'BF.1', fieldCode: 'yearEndCumulatedInvestment', requirement: '＝ 至上年末累计投入 + 本年投资金额' },
+  { formCode: 'BF.1', fieldCode: 'yearEndCumulatedDividend', requirement: '「本年累计分红/利息」，不含以前年度' },
+  { formCode: 'BF.1', fieldCode: 'investmentMonths', requirement: '按收付计划填报；全年汇总由系统自动计算' },
+  { formCode: 'BF.1', fieldCode: 'dividendMonths', requirement: '按收付计划填报；全年汇总由系统自动计算' },
+  { formCode: 'BF.3.a', fieldCode: 'newInvestment', requirement: '保留原投资本金字段' },
+  { formCode: 'BF.3.b', fieldCode: 'dividendCash', requirement: '计划分红/利息，与投资收益分别按确认与收现口径填报' },
+  { formCode: 'BF.3.c', fieldCode: 'financingFee', requirement: '融资费用与利息不得重复归集' },
+  { formCode: 'BF.3.c', fieldCode: 'annualInterestPayable', requirement: '「计提利息合计」：指本月计提发生额而非应付未付余额' },
+  { formCode: 'BF.3.c', fieldCode: 'annualInterestPaid', requirement: '「实付利息合计」：仍按付息计划填报；计提与实付可不同' },
+  { formCode: 'BF.3.c', fieldCode: 'newFinancing', requirement: '全年新增融资金额（由月度汇总，不重复录入）' },
+  { formCode: 'BF.3.c', fieldCode: 'decrease', requirement: '全年偿还本金（由月度汇总，不重复录入）' },
+  { formCode: 'BF.3.c', fieldCode: 'monthlyNewFinancing', requirement: '月度新增融资金额' },
+  { formCode: 'BF.3.c', fieldCode: 'monthlyRepayment', requirement: '月度偿还本金' },
+  { formCode: 'BF.3.c', fieldCode: 'interestPayable', requirement: '月度计提利息（本月计提发生额）' },
+  { formCode: 'BF.3.c', fieldCode: 'interestPaid', requirement: '月度实付利息（按付息计划填报）' },
+  { formCode: 'BF.3.d', fieldCode: 'monthlyNewFinancing', requirement: '由系统从 BF.3.c 汇总、不双填' },
+  { formCode: 'BF.3.d', fieldCode: 'monthlyRepayment', requirement: '由系统从 BF.3.c 汇总、不双填' },
+  { formCode: 'BF.3.d', fieldCode: 'liquidityReclassification', requirement: '系统按到期日自动识别、带出、不可手工填、不产生现金流' },
+  { formCode: 'BF.3.e', fieldCode: 'openingCredit', requirement: '上年末剩余授信额度' },
+  { formCode: 'BF.3.e', fieldCode: 'newCredit', requirement: '本年新增授信额度；合计 = 上年末剩余 + 本年新增' },
+  { formCode: 'BF.4.a', fieldCode: 'provision', requirement: '月度计提' },
+  { formCode: 'BF.4.a', fieldCode: 'payment', requirement: '月度缴纳' },
+  { formCode: 'BF.4.b', fieldCode: 'payableVat', requirement: '本期应纳增值税（计提）；作为主表「增值税」行「预算计提」列的默认初始值，允许手工修改' },
+  { formCode: 'BF.4.b', fieldCode: 'monthlyAmount', requirement: '1~12月各月金额' },
+  { formCode: 'BF.4.b', fieldCode: 'actualPayment', requirement: '本期实际缴纳增值税' },
+  { formCode: 'BF.4.b', fieldCode: 'vatRebate', requirement: '增值税即征即退/专项返还' },
+  { formCode: 'BAA.6.b', fieldCode: 'leaseTerm', requirement: '＝租赁合同的起止日期区间（自由文本）；仅人眼识别、不参与判定与测算，与 AB.16 租赁期限字典口径无关' },
+  { formCode: 'BAA.6.b', fieldCode: 'unitPrice', requirement: '按「年度×场所×公司」维护的单价（精度 2 位小数）' },
+  { formCode: 'BAA.6.e', fieldCode: 'discountRatePct', requirement: '折现率(%)（精度 2 位小数），默认取 BF.3 综合融资成本、可按年度覆盖' },
+  { formCode: 'BAA.7', fieldCode: 'department', requirement: '预算部门原则上明细到二级部门' },
+  { formCode: 'BAA.8', fieldCode: 'expenseNature', requirement: '默认由 AM.2 按部门带出；部门为空的项目（如产能、产品化项目）需人工选择' },
+  { formCode: 'BAA.8', fieldCode: 'entityRatio', requirement: '各法人公司占比拆分后加和须等于 100%' },
+  { formCode: 'BAA.9.a', fieldCode: 'budgetDepartment', requirement: '预算部门默认二级部门' },
+  { formCode: 'BAA.9.a', fieldCode: 'entityRatio', requirement: '每行加和须 = 100%（仅文字说明提示，不强制校验/高亮）' },
+  { formCode: 'BAA.9.b', fieldCode: 'assetCategory', requirement: '层级 = 大类-小类，与 AA.9 对齐（已删除法人字段）' },
+  { formCode: 'BAA.9.b', fieldCode: 'totalRatio', requirement: '强校验：每行四大费用属性比例加和必须强等于 100%（Sum = 100%）' },
+  { formCode: 'BAA.10', fieldCode: 'budgetDepartment', requirement: '预算部门默认二级部门' },
+  { formCode: 'BAA.10', fieldCode: 'totalRatio', requirement: '每行加和须 = 100%（仅文字提示）' },
+  { formCode: 'BAA.11', fieldCode: 'internalTransactionType', requirement: '交易类型包括代采物料、代采设备、资产转卖、职场租赁和内部销售' },
+  { formCode: 'BAA.11', fieldCode: 'markupRatePct', requirement: '加成比例仅对集团内跨法人交易生效；同一法人内部自购自用或调拨时系统自动置为 0；一经年度预算下达锁定，年内不得随意篡改' },
+  { formCode: 'BAP.2', fieldCode: 'department', requirement: '一般明细到二级部门' },
+  { formCode: 'BAP.2', fieldCode: 'materialCategory', requirement: '关联 AB.9 存货物料类别字典（生产物料/研发物料/服务物料/专项储备/其他物料）' },
+  { formCode: 'BAP.2', fieldCode: 'usage', requirement: '4 类：生产类/研发类/销售类/管理类及其他，决定物料消耗去向；可由预算项目的项目属性自动映射带出，无需人工逐行判断' },
+  { formCode: 'BAP.2', fieldCode: 'annualTotal', requirement: '全年合计 = SUM(1~12月)' },
+  { formCode: 'BAP.3', fieldCode: 'materialCategory', requirement: '固定「研发物料」，关联 AB.9；本表仅承载研发长期物料消耗需求' },
+  { formCode: 'BAP.3', fieldCode: 'annualTotal', requirement: '全年合计 = SUM(1~12月)' },
+  { formCode: 'BJ.C.a', fieldCode: 'benefitEntity', requirement: '由关联交易预算员补填；镜像 BB.3.3.D' },
+  { formCode: 'BJ.C.d', fieldCode: 'remainingDeprMonths', requirement: '剩余折旧期限(月)' },
+  { formCode: 'BJ.C.d', fieldCode: 'markupRevenue', requirement: '＝账面净值 × 加成比例' },
+  { formCode: 'BJ.C.e', fieldCode: 'benefitEntity', requirement: '由关联交易预算员补填；镜像 BB.3.1.D' },
+  { formCode: 'BJ.C.f', fieldCode: 'openingNet', requirement: '期初净额' },
+  { formCode: 'BJ.C.g', fieldCode: 'unitCost', requirement: '卖出方单位成本' },
+  { formCode: 'BO.PL', fieldCode: 'monthlyBusiness', requirement: '1~12月预算数：由底层编制表按科目映射自动归集，只读不可编辑' },
+  { formCode: 'BO.PL', fieldCode: 'monthlyManualAdjust', requirement: '调整项：供财务人员直接手工调节报表结果，允许编辑' },
+  { formCode: 'BO.PL', fieldCode: 'annualTotal', requirement: '全年合计 = SUM(1~12月预算数) + 调整项，公式自动计算' },
+  { formCode: 'BO.BS', fieldCode: 'closingBalance', requirement: '期末余额 = 年初余额 + 本年发生额 + 调整额，需做勾稽校验' },
+  { formCode: 'BO.BS', fieldCode: 'annualOccurrence', requirement: '本年发生额（按权责发生制）' },
+  { formCode: 'BO.CF', fieldCode: 'annualManualAdjust', requirement: '全年编制手工调整，财务人员可录入' },
+  { formCode: 'BO.CF', fieldCode: 'monthlyAuto', requirement: '1~12月自动取数，由各业务表资金收付款项汇总' },
+  { formCode: 'BO.CF', fieldCode: 'annualTotal', requirement: '全年编制合计' },
+  { formCode: 'BO.CF', fieldCode: 'varianceNote', requirement: '差异说明' },
+  { formCode: 'BO.ELIM', fieldCode: 'elimCode', requirement: '抵销事项编号（ELIM-01~05）' },
+  { formCode: 'BO.ELIM', fieldCode: 'source', requirement: '取数来源；支持穿透查询、可跳转查看原始业务单据行' },
+
+  // ── T4 基础静态数据（AA/AB/AM）字典级字段约束 ──
+  { formCode: 'AB.2', fieldCode: 'industryCode', requirement: '为固定值域字典（国资委行业分类），供对应编制表「行业」字段下拉引用，不可在编制表内新增值' },
+  { formCode: 'AB.3', fieldCode: 'categoryCode', requirement: '为固定值域字典，供对应编制表下拉引用，不可在编制表内新增值' },
+  { formCode: 'AB.4', fieldCode: 'methodCode', requirement: '为固定值域字典，供对应编制表下拉引用，不可在编制表内新增值' },
+  { formCode: 'AB.5', fieldCode: 'natureCode', requirement: '为固定值域字典，供对应编制表下拉引用，不可在编制表内新增值' },
+  { formCode: 'AB.6', fieldCode: 'codeVal', requirement: '为固定值域字典，供对应编制表下拉引用，不可在编制表内新增值' },
+  { formCode: 'AB.7', fieldCode: 'codeVal', requirement: '为固定值域字典，供对应编制表下拉引用，不可在编制表内新增值' },
+  { formCode: 'AB.8', fieldCode: 'codeVal', requirement: '为固定值域字典，供对应编制表下拉引用，不可在编制表内新增值' },
+  { formCode: 'AB.9', fieldCode: 'codeVal', requirement: '为固定值域字典，供对应编制表下拉引用，不可在编制表内新增值' },
+  { formCode: 'AB.11', fieldCode: 'positionCode', requirement: '业务字典，供 BAA.3 费率设置及 BB.1.3 技术服务人工明细统一引用；为示例值，系统不做表与表之间的值域严格校验' },
+  { formCode: 'AB.12', fieldCode: 'rankCode', requirement: '业务字典，供 BAA.3 费率设置及 BB.1.3 技术服务人工明细统一引用；为示例值，系统不做表与表之间的值域严格校验' },
+  { formCode: 'AB.13', fieldCode: 'creditTypeCode', requirement: '固定值域字典（流动资金贷款/并购贷款/固定资产贷款/债券/供应链融资/贸易融资/其他授信），供 BF.3.e 授信预算表「授信类型」字段下拉引用，不可在编制表内新增值' },
+  { formCode: 'AB.14', fieldCode: 'expenseAttrCode', requirement: '固定值域字典（销售费用/管理费用/研发费用/直接制造费用/间接制造费用），供各编制表「费用属性/费用归属」字段下拉引用，不可在编制表内新增值' },
+  { formCode: 'AB.16', fieldCode: 'leaseTermCode', requirement: '固定值域字典（一年以内 / 一年以上），供 BB.4.2.a 与 BB.4.2.b 的「租赁期限」列共同引用；按「租赁期终止月 − 租赁期起始月 + 1」的月数自动落档、不可手工选，并作为资本化判定依据；不可在编制表内新增值' },
+  { formCode: 'AB.17', fieldCode: 'financingTypeCode', requirement: '固定值域字典（两级编码：一级 20 条、二级 18 条），供 BF.3.c 融资预算明细表「融资类型」字段下拉引用，不可在编制表内新增值' },
+  { formCode: 'AM.1', fieldCode: 'revenueMethod', requirement: '由产品自动带出收入确认方式，供 BB.1.1/BB.1.2 等销售表默认取值' },
+  { formCode: 'AM.1', fieldCode: 'costRate', requirement: '标准成本率，供 BB.1.1/BB.1.2 等销售表默认取值' },
+  { formCode: 'AM.2', fieldCode: 'department', requirement: '二级/三级部门维护费用属性映射，一级部门不维护' },
+  { formCode: 'AM.2', fieldCode: 'expenseNature', requirement: '可由人工修改；供 BAA.8 按部门自动带出费用性质' },
+  { formCode: 'BAA.4', fieldCode: 'partCategory', requirement: '好件/坏件分开维护' },
+  { formCode: 'BAA.4', fieldCode: 'standardCost', requirement: '标准成本供 BB.1.3 直接物料成本测算取数' },
+  { formCode: 'BAA.6.a', fieldCode: 'status', requirement: '启用/停用' },
+  { formCode: 'BB.1.3.c', fieldCode: 'monthlyLaborCost', requirement: '自 BB.5.1 雇员费用冲减并单列，不重复计提应付职工薪酬' },
+  { formCode: 'BB.1.3.c', fieldCode: 'monthlyMaterialCost', requirement: '由物料明细按好坏件净额汇总' },
+  { formCode: 'BB.1.3.g', fieldCode: 'laborHours', requirement: '工时(小时)，手工填报' },
+  { formCode: 'BB.1.3.i', fieldCode: 'laborCost', requirement: '＝工时 × BAA.3 工时费率；汇入 BB.5.1 财务视角「服务人工成本」并等额冲减原费用计提' },
+  { formCode: 'AB.10', fieldCode: 'isDefault', requirement: '全表仅一条为默认（是/否），默认账簿对应的折旧参数用于新增资产折旧计算' },
+];
+
+// ==========================================================================
+// ① 预算表样下注：表级系统行为（自动汇总 / 不可直接编辑 / 确认提示 / 汇总口径等）
+// --------------------------------------------------------------------------
+// 与字段级约束互补：凡不落到单一字段、而属「整表系统行为」的历史约束（含 ③ 中被删的
+// 表级条目），以「表样名 → 若干句」登记；生成器渲染在该表下方一段。gridName 必须与
+// src/data/sheets/<code>.json 的 grid.name 完全一致（含子表 TAB 名前缀）。
+// 每格为独立一句（分句数组）：T3A 单主体裁剪时仅剔除含多主体残留的句子，其余保留。
+// ==========================================================================
+export interface BudgetTableBehaviorNote {
+  /** 表样名（与 src/data/sheets/<code>.json 的 grid.name 完全一致） */
+  gridName: string;
+  /** 该表下方的表级系统行为说明（逐句登记） */
+  notes: string[];
+}
+
+export const BUDGET_TABLE_BEHAVIOR_NOTES: BudgetTableBehaviorNote[] = [
+  {
+    gridName: 'BB.1.1.a 销售合同签约额预算',
+    notes: [
+      '本年签约额合计由 1~12 月签约额自动汇总，不可直接编辑；三年签约额均为 0 时给出确认提示。',
+      '本表不设「内部供应商」列，内部供应商为备查字段（取值 AA.10 供应商主数据、供应商类型=内部；非必填，留空=无内部供货主体），只作登记、不参与金额测算与分录。',
+    ],
+  },
+  {
+    gridName: 'BB.3.1.A 有PO-设备及无形资产采购预算',
+    notes: [
+      '本表与 BB.3.1.B 无PO 两张采购视角表样列结构完全相同，按表样列序填写各维度列；PO标记为固定值列（本表恒为「有PO」），由表样固定、不可修改。',
+      '按月填报到货额、下单额、预付款比例、预付款、验收付款；全年合计由各月自动汇总、不可直接编辑。',
+      '付款测算：到货额按 100% 确认为验收付款，预付款=下单额×当月预付款比例；预付款、验收付款均为手工填报字段，由预算编制人按实际付款安排按月填写，不强制公式联动（BAA.7 比例表本年度不启用、不参与测算）。',
+      '本表自动带出/自动计算的数据（下单主体带出、全年合计汇总、按比例测算的付款参考值等）仅为编制辅助用途，自动填列的数据允许预算编制人修改；如与实际业务安排不符，可直接调整。',
+    ],
+  },
+  {
+    gridName: 'BB.3.1.B 无PO-设备及无形资产采购预算',
+    notes: [
+      '本表与 BB.3.1.A 有PO 两张采购视角表样列结构完全相同，按表样列序填写各维度列；PO标记为固定值列（本表恒为「无PO」），由表样固定、不可修改。',
+      '无PO行无法从下单主体指认法人的，按 BAA.9.a 资产转换比例拆分到法人（资本性支出法人拆分的唯一入口在 BB.3.1.C 财务视角）。',
+      '按月填报到货额、下单额、预付款比例、预付款、验收付款；全年合计由各月自动汇总、不可直接编辑。',
+      '本表自动带出/自动计算的数据仅为编制辅助用途，自动填列的数据允许预算编制人修改；如与实际业务安排不符，可直接调整。',
+    ],
+  },
+  {
+    gridName: 'BB.3.1.D 关联交易视角（设备及无形资产采购）',
+    notes: [
+      '本视角为两岗接力代采购模型的第二岗填报源：采购人员在采购视角（BB.3.1.A/.B）只填下单主体、不填受益主体，关联交易预算员在本视角补填受益主体。',
+      '系统比对下单主体与受益主体各自关联的法人公司（取 AA.8 管理单元主数据的「关联法人公司」）：同法人=自购自用、不触发代采购；不同法人=跨法人代采购（带出 BAA.11 加成比例、测算加成款=到货额×加成比例）。',
+      '按月填报到货额、加成款；全年合计由各月自动汇总、不可直接编辑。',
+    ],
+  },
+  {
+    gridName: 'BB.3.1.C 财务视角',
+    notes: [
+      '本视角按法人公司×预算项目×预算部门×PO标记汇总原值（到货额）、预付款、验收付款，全年合计+1~12 月逐月展开、由各月自动汇总，不可直接编辑。',
+      '有PO按下单主体（管理单元）对应法人直接指认（同一法人行）、无PO按 BAA.9.a 资产转换比例拆分到法人（同一预算项目/预算部门可能落到多个法人行）；本视角是本年度资本性支出法人拆分的唯一入口。',
+    ],
+  },
+  {
+    gridName: 'BB.5.1 雇员费用编制/导入',
+    notes: [
+      '人事视角只呈现全口径人工费用，不显示「服务人工成本」「自制在建工程」两列。',
+      '人事部门编制的雇员费用为全口径人工费用，包括后续参与自制设备工程（资本化）与技术服务交付（服务人工）的人员，不在人事视角拆分。',
+    ],
+  },
+  {
+    gridName: 'BB.5.1 财务视角',
+    notes: [
+      '财务视角销售/研发/管理/制造四项费用计提数，均以人事视角全口径计提数为基础，扣除 BB.4.1 资本化人工和 BB.1.3 技术服务人工；扣除后的四项费用与两类人工分别列示，避免重复归集。',
+      '服务人工成本按工时×BAA.3 工时标准成本、按法人公司×预算部门×月份汇总，并等额冲减原费用计提；自制在建工程按人工投入明细汇总。',
+    ],
+  },
+
+  // ── 本轮全库捡回：① 表样下注·表级系统行为（自历史「③ 关键规则要点」/「表概述」按表样归位） ──
+  {
+    gridName: 'BB.1.2.a 软硬件销售填报',
+    notes: [
+      '销售视角（本表）按订单/合同维度填报销量与单价：存量订单行由系统期初导入带出、增量手工新增行由业务人员手工填报，机台为文本必输，销量/单价(不含税)/预收/验收回款按月维护。',
+      '订单编号仅针对存量订单有要求，新订单可用虚拟订单号实现或可不填。',
+      '现金流严格校验：CF-01 = 预收款 + 验收回款。',
+    ],
+  },
+  {
+    gridName: 'BB.1.2.c 财务视角(存量+增量)',
+    notes: [
+      '财务视角全部字段由存量与增量自动合并、系统带出只读（不可手工编辑），仅「预计销售成本」由财务按月填报。',
+      '销售成本 = 销量 × 标准成本，仅本视角可见/维护。',
+    ],
+  },
+  {
+    gridName: 'BB.1.3.a 服务销售填报',
+    notes: [
+      '服务主表在产品之后设「机台」字段，为文本、由用户输入（用户必输）。',
+    ],
+  },
+  {
+    gridName: 'BB.1.3.c 财务视角(存量+增量)',
+    notes: [
+      '财务视角为全景汇总视图：除人工成本、物料成本、其他费用外，其余字段由存量与增量自动合并只读。',
+    ],
+  },
+  {
+    gridName: 'BB.1.3.d 物料明细',
+    notes: [
+      '好件/坏件分开核算，成本强制取自 BAA.4 服务物料定额标准；坏件不得取好件成本。',
+    ],
+  },
+  {
+    gridName: 'BB.1.3.f 物料明细_财务查询',
+    notes: [
+      '物料成本 = Σ(好件数量 × 好件成本) − Σ(坏件数量 × 坏件成本)；成本数据强制勾稽取自 BAA.4 服务物料定额标准。',
+    ],
+  },
+  {
+    gridName: 'BB.1.4 销售费用预算明细表 (经营)',
+    notes: [
+      '按月手工填报，全年合计 = SUM(1~12月)，自动汇总、不可直接编辑。',
+      '独立于预算三表体系（不与凭证/科目余额/三表挂钩），仅供销售预算汇总分析引用。',
+    ],
+  },
+  {
+    gridName: 'BB.2.1.A 生产制造产量计划表',
+    notes: [
+      '【全年合计】为公式列 = SUM(1~12月)，自动汇总、不可直接编辑；度量仅产成品、不含在制品。',
+    ],
+  },
+  {
+    gridName: 'BB.2.1.B 财务视角（生产成本）',
+    notes: [
+      '本视角全部为系统带出或公式列，不可手工编辑。',
+      '数据一致性：完工产量必须与主表同法人/同部门/同产品的产量逐月一致（带出、非填报），两表不得出现同一法人同一产品的产量差异。',
+    ],
+  },
+  {
+    gridName: 'BB.3.2 基建工程采购预算',
+    notes: [
+      '月度验收额、月度付款额手工填报；月度转固金额为公式字段（按月汇总 BB.3.2.b 基建转固明细表同月转固原值），不可直接编辑。',
+      '三口径分离（验收额→在建工程、付款额→购建固定资产支付的现金、转固金额→固定资产原值），三者不得互相引用为金额来源。',
+    ],
+  },
+  {
+    gridName: 'BB.3.2.b 基建转固明细表',
+    notes: [
+      '用户直接填报各笔转固原值，按月合计自动汇总至主表转固金额；转固资产按 AA.9 资产类别参数下月起提折旧。',
+      '末列「资产描述」仅用于人眼识别，不参与任何测算与分录。',
+    ],
+  },
+  {
+    gridName: 'BB.3.3.A 有PO-物料类采购预算',
+    notes: [
+      '本表与 BB.3.3.B 无PO 两张采购视角表样列结构完全相同，按表样列序填写各维度列；PO标记为固定值列（本表恒为「有PO」），由表样固定、不可修改。',
+      '按月填报到货额、下单额、预付款比例、预付款、验收付款；全年合计由各月自动汇总、不可直接编辑。',
+      '付款测算：到货额按 100% 确认为验收付款；预付款、验收付款均为手工填报字段，由预算编制人按实际付款安排按月填写，不强制公式联动（BAA.7 比例表本年度不启用、不参与测算）。',
+      '防重复提示：四类来源归集的物料采购需求须保持互斥（有PO行来自采购订单、无PO行来自 BAP.2、研发长期物料需求来自 BAP.3），同一笔物料需求只在一处列示，避免到货额与后续进销存入库金额虚增。',
+    ],
+  },
+  {
+    gridName: 'BB.3.3.B 无PO-物料类采购预算',
+    notes: [
+      '本表与 BB.3.3.A 有PO 两张采购视角表样列结构完全相同，按表样列序填写各维度列；PO标记为固定值列（本表恒为「无PO」），由表样固定、不可修改。',
+      '无PO行无法从下单主体指认法人的，按兜底拆分比例拆分到法人（物料类采购法人拆分的唯一入口在 BB.3.3.C 财务视角；兜底比例表本年度不启用、为后续年度预留）。',
+      '按月填报到货额、下单额、预付款比例、预付款、验收付款；全年合计由各月自动汇总、不可直接编辑。',
+    ],
+  },
+  {
+    gridName: 'BB.3.3.C 财务视角',
+    notes: [
+      '本视角按法人公司×预算项目×预算部门×PO标记×物料类别汇总到货额、预付款、验收付款，全年合计+1~12月逐月展开、由各月自动汇总，不可直接编辑。',
+      '有PO按下单主体（管理单元）对应法人直接指认、无PO按兜底拆分比例拆分到法人（同一预算项目/预算部门可能落到多个法人行）；本视角是物料类采购法人拆分的唯一入口。',
+    ],
+  },
+  {
+    gridName: 'BB.3.3.D 关联交易视角（物料类采购）',
+    notes: [
+      '本视角为代采购模型的第二岗填报源：采购人员在采购视角（BB.3.3.A/.B）只填下单主体、不填受益主体，关联交易预算员在本视角补填受益主体。',
+      '系统比对下单主体与受益主体各自关联的法人公司：同法人 = 自购自用、不触发代采购；不同法人 = 集团内跨法人代采购（带出加成比例、测算加成款 = 到货额 × 加成比例）。',
+      '按月填报到货额、加成款；全年合计由各月自动汇总、不可直接编辑。',
+    ],
+  },
+  {
+    gridName: 'BB.3.X 进销存预算',
+    notes: [
+      '本表为法人级单表：维度 = 法人公司×存货类别，平表结构（无分组行、无自动合计行）。',
+      '手工调库·进与出：除自动取数外的手工出入库调整（盘盈入库、盘亏/报废出库、跨期补记等）直接在本表「转入数」/「转出数」列手工录入，与自动取数互斥、不重复计。',
+      '防重复提示：BAP.2 只承载常规物料；服务物料消耗由 BB.1.3、自制设备领料由 BB.4.1.c 各自承载，按 AB.9 存货物料类别做标识隔离，确保同一笔领用只在一处出库、不重复计入。',
+    ],
+  },
+  {
+    gridName: 'BB.3.X.b 转入转出逻辑明细表',
+    notes: [
+      '各品类转入/转出逐来源取数逻辑明细展示；仅展示口径、不生成会计分录。',
+    ],
+  },
+  {
+    gridName: 'BB.4.1.a 自制设备工程预算汇总表',
+    notes: [
+      '本表为纯汇总表：人工投入/领料投入/转固转出三个度量的各月数据由三张附表按月汇总带出，纯计算展示、不可编辑；期初金额（年初自制在建工程余额）允许手工录入。',
+      '人工投入必须从 BB.5.1 财务视角「自制在建工程」列直通带入，禁止在本表手工篡改；本表不重复生成资本化人工分录（避免双计）。',
+      '三条勾稽均按「法人公司+预算部门」按月匹配：人工投入 = BB.4.1.b、领料投入 = BB.4.1.c、转固转出 = BB.4.1.d。',
+      '备注分为「备注」（第4列，项目级、仅人眼阅读识别）与末列「备注说明」（行级补充说明），两者位置不同、含义不同，不合并。',
+    ],
+  },
+  {
+    gridName: 'BB.4.1.b 人工投入明细表',
+    notes: [
+      '按法人公司/预算部门/岗位或工种逐行填报月度人工金额；各月合计 = BB.4.1.a 同一法人公司+预算部门同月人工投入（勾稽）。',
+      '数据强制从 BB.5.1 雇员费用表直通带入，禁止在自制设备表手工篡改。',
+    ],
+  },
+  {
+    gridName: 'BB.4.1.c 领料投入明细',
+    notes: [
+      '按法人公司/预算部门/物料名称逐行填报，物料类别固定为「自制设备用料」；各物料按月合计必须与 BB.4.1.a 同一法人公司+预算部门同月领料投入强勾稽。',
+    ],
+  },
+  {
+    gridName: 'BB.4.1.d 自制设备转固明细表',
+    notes: [
+      '按法人公司/预算部门/转固月份/资产类别填报原值；按法人公司+预算部门按月转固原值合计必须与 BB.4.1.a 主表转固转出勾稽一致。',
+      '末列「资产描述」与 BB.4.3/BB.4.4.b/BB.4.5 同口径；仅人眼识别、不参与测算与分录。',
+    ],
+  },
+  {
+    gridName: 'BB.4.2.a 外部职场租赁',
+    notes: [
+      '资本化判定只看整体租期（落 AB.16 租赁期限）：>12 个月 → 资本化（转 BB.4.2.a.1）；≤12 个月 → 费用化（月租金按用途进损益）；判定在登记层发生一次、下游不再重复判定。',
+      '月租金 = 单价 × 租赁面积 ÷ 10000 × 当月在租期内；租赁面积与合同单价按对外租赁合同本表手工录入，不做场所面积按法人分摊。',
+      '外部租赁属对外交易：不产生内部结算、不确认内部往来、不参与集团合并抵销，单体与合并口径同额保留。',
+    ],
+  },
+  {
+    gridName: 'BB.4.2.a.1 外部职场租赁·财务视角',
+    notes: [
+      '只放整体租期 > 12 个月（资本化）的外部租赁合同，一行一笔与 BB.4.2.a 资本化行一一对应；费用化合同不进本表。',
+      '本表只做租赁负债与现金流测算（付款额/负债初始/利息/本金），使用权资产折旧在 BB.4.5 计提、本表不重复列示每月折旧额/累计折旧。',
+      '使用权资产原值（= 租赁负债初始）与剩余租赁月数汇入 BB.4.5 作为增量折旧输入；本表不计提折旧。',
+    ],
+  },
+  {
+    gridName: 'BB.4.2.b 内部职场租赁',
+    notes: [
+      '资本化判定在本表登记层完成一次（「租赁期限」落 AB.16、与 BB.4.2.a 共用同一字典），只有租赁类型=资本化(大于一年) 的行进 BB.4.2.b.1；费用化与资本化两条出口不重叠、不重复取数。',
+      '出租方侧只有「出租方折旧成本、应收租金余额」两个数，不单独立表、挂本表末两列；应收租金余额【全年合计】取 12 月末余额（余额口径不按月求和），其余度量【全年合计】= SUM(1~12月)。',
+    ],
+  },
+  {
+    gridName: 'BB.4.2.b.1 内部职场租赁·财务视角',
+    notes: [
+      '只放整体租期 > 12 个月的资本化内部租赁合同，一行一笔、与 BB.4.2.b 主表资本化行一一对应；费用化合同不进本表。',
+      '本表只做租赁负债与现金流测算，使用权资产折旧在 BB.4.5 计提、本表不重复列示每月折旧额/累计折旧；使用权资产原值与剩余租赁月数汇入 BB.4.5 作为增量折旧输入。',
+    ],
+  },
+  {
+    gridName: 'BB.4.3 其他固定资产新增表',
+    notes: [
+      '本表不计提折旧（折旧统一由 BB.4.5 按 AA.9 参数计提）；三个度量相互独立、不得混同：资产原值按取得时点确认，预付款=先付部分、付款=验收或尾款等实际付款，二者只驱动现金流、不参与原值确认。',
+      '预付款 + 付款合计即为货币资金减少额，构成 CF-14 购建固定资产、无形资产和其他长期资产支付的现金的基数（不取资产原值列）。',
+    ],
+  },
+  {
+    gridName: 'BB.4.4.b 存量资产折旧计算表',
+    notes: [
+      '登记上一年度未报废的存量资产卡片（含资产类别=使用权资产的存量部分，一律来自 ERP 导入）；当月新增下月起提，折旧起始月由启用日期确定。',
+      '「费用归属」由资产领用部门属性经 AM.2 自动带出，不允许手工修改；折旧为非付现成本、不产生现金流。',
+    ],
+  },
+  {
+    gridName: 'BB.4.5 增量资产折旧计算表',
+    notes: [
+      '每一张本年新增资产卡片一行，系统计算带入、不可编辑，形成可追溯到单卡的明细数据。',
+      '折旧惯例 = 「下月折」（当月新增下月起提）；本年折旧月数 = 12 − 启用月份；每月折旧额 = 本年新增原值 × (1 − 预计净残值率) ÷ 剩余年限(月数)；参数全部取自 AA.9。',
+      '本表不自行拆分法人——采购类设备与无形资产的法人直接取采购环节已拆分的结果，本表不再拆分。',
+    ],
+  },
+  {
+    gridName: 'BB.4.6 资产处置预算表',
+    notes: [
+      '一行一笔处置；金额一律填在处置月份列，全年合计 = 各月求和；资产净值与处置损益为行内公式，不允许手工改数。',
+      '本表不计提折旧、不单独计提增值税；法人归属按处置主体（资产卡片所在法人）。',
+    ],
+  },
+  {
+    gridName: 'BB.4.X.A 折旧计算汇总表',
+    notes: [
+      '纯计算展示、不可编辑；不设原值、预付款、验收付款列；仅汇总固定资产与无形资产、不包括在建工程。',
+      '「制造费用折旧」小计归集进 BB.3.X「在制品-费」转入数，与 BB.5.2「制造费用」并列、两处不得重叠取数。',
+    ],
+  },
+  {
+    gridName: 'BB.5.2 经营费用转换结果表',
+    notes: [
+      '纯计算展示、不可手工编辑；由 BAP.1(BA.5) 月度金额 × BAA.8 法人公司拆分比例自动计算，现金流支出等于计提数、按月全额付现。',
+      '跨部门/集团级项目「部门」与「部门费用性质」非必填、允许留空；部门费用性质默认自动取自 AM.2 部门属性映射表（按部门带出）。',
+    ],
+  },
+  {
+    gridName: 'BA.5 费用预算汇总表',
+    notes: [
+      '整表数据来自费用预算模块的编制结果，本表为汇总展示；按预算项目、预算部门（默认明细到二级部门）、费用科目维度录入全年及 1~12 月费用金额。',
+    ],
+  },
+  {
+    gridName: 'BF.1 股权投资预算',
+    notes: [
+      '月度投资金额及分红/利息收现按收付计划填报，全年各自汇总；不增加管理台账列。',
+    ],
+  },
+  {
+    gridName: 'BF.3.a 金融工具投融资-银行',
+    notes: [
+      'a 未单设收益收现列、不扩列，仅在确认与收现同期同额的明确预算假设下共用；差额经既有报表调整入口处理，避免重复计入。',
+    ],
+  },
+  {
+    gridName: 'BF.3.b 金融工具投资预算-非银',
+    notes: [
+      '投资收益与计划分红/利息分别按确认与收现口径填报。',
+    ],
+  },
+  {
+    gridName: 'BF.3.c 融资预算明细表',
+    notes: [
+      '「计提利息」为本月计提发生额（非应付未付余额）、「实付利息」按付息计划填报；计提与实付可不同，费用按计提发生额归集、不按未付余额逐月求和。',
+      '每月新增「新增融资金额」「偿还本金」两个入口，原年度新增/减少改为「全年新增融资金额」「全年偿还本金」，均由月度汇总、不重复录入。',
+      '严格区分本金偿还与利息支付，禁止混入同一现金流行；融资费用与利息不得重复归集。',
+    ],
+  },
+  {
+    gridName: 'BF.3.d 融资预算汇总表',
+    notes: [
+      '按同一法人及融资类型/产品对应关系取 BF.3.c 的月度新增、还本和分类型计提利息汇总，不双填、不重复生成分录。',
+      '「当期流动性重分类金额」由系统按到期日自动识别、带出、不可手工填、不产生现金流。',
+    ],
+  },
+  {
+    gridName: 'BF.3.e 授信预算表',
+    notes: [
+      '保留现有授信预算列（上年末剩余 + 本年新增 = 合计）；不同授信不可无条件互用，不作为全集团借款统一硬上限，不扩展授信台账。',
+      '交叉校验：集团授信总额 = 各法人小计之和 = 各授信类型小计之和。',
+    ],
+  },
+  {
+    gridName: 'BF.4.a 税金及附加预算表',
+    notes: [
+      '城市维护建设税、教育费附加、地方教育附加基于流转税基数与比例自动相乘、无需人工填写（比例取 AB.15，不在表内写死），也可由用户在表内重置。',
+      '「应交税费（资负口径）」为余额行：年初余额 + 本期计提合计 − 本期实缴合计 = 期末应交税费（逐月滚动累计），各月数字为该月月末余额；增值税填净应纳，留抵退税在实缴列冲减、不重复计入。',
+      '税金及附加合计（利润表口径）与各项税费合计（现金流口径）100% 公式求和。',
+    ],
+  },
+  {
+    gridName: 'BF.4.b 增值税计提预算表',
+    notes: [
+      '附表测算结果作为主表「增值税」行「预算计提」列的默认初始值，但允许编制人员结合纳税筹划与管理实际直接手工修改。',
+      '计税基数全部为不含税口径；费用类可抵扣进项税额与不可抵扣转出由编制人员手工填报。',
+    ],
+  },
+  {
+    gridName: 'BAA.2 产品标准成本设置',
+    notes: [
+      '标准成本供完工生产成本计算（BB.2.1 产量 × BAA.2 标准成本）与 BB.1.2 销售成本等按产品引用。',
+    ],
+  },
+  {
+    gridName: 'BAA.3 服务人工标准成本',
+    notes: [
+      '工时费率供 BB.1.3 服务人工成本测算取数。',
+    ],
+  },
+  {
+    gridName: 'BAA.4 服务物料定额标准',
+    notes: [
+      '好件/坏件标准成本供 BB.1.3 直接物料成本测算取数。',
+    ],
+  },
+  {
+    gridName: 'BAA.6.b 年度租赁面积维护',
+    notes: [
+      '单价在 BAA.6.b 按「年度×场所×公司」维护（单位 元/㎡·月），精度 2 位小数；外部租入场所的面积与合同单价不在此维护。',
+    ],
+  },
+  {
+    gridName: 'BAA.6.c 场所法人比例查看',
+    notes: [
+      '面积占比(%) 合计恒为 100%；仅供查看与核对、不由本表反算。',
+    ],
+  },
+  {
+    gridName: 'BAA.6.e 租赁折现率维护',
+    notes: [
+      '折现率默认取 BF.3 综合融资成本、可按年度覆盖。',
+    ],
+  },
+  {
+    gridName: 'BAA.7 设备类采购付款比例表',
+    notes: [
+      '本预算年度该比例表不需要实现和使用：BB.3.1 设备及无形资产采购预算、BB.3.3 物料类采购预算的预付款比例与验收付款由各表按月自行填报，不强制从本表取数、不做公式联动；后续年度启用该规则时，再由本表统一提供比例口径。',
+    ],
+  },
+  {
+    gridName: 'BAA.7 物料类采购付款比例表',
+    notes: [
+      '本预算年度该比例表不需要实现和使用：BB.3.1 设备及无形资产采购预算、BB.3.3 物料类采购预算的预付款比例与验收付款由各表按月自行填报，不强制从本表取数、不做公式联动；后续年度启用该规则时，再由本表统一提供比例口径。',
+    ],
+  },
+  {
+    gridName: 'BAA.8 经营费用转换比例表',
+    notes: [
+      '费用性质默认由 AM.2 按部门带出，部门为空的项目（如产能、产品化项目）需人工选择；二级/三级部门维护费用属性映射，一级部门不维护。',
+      '各法人公司占比拆分后加和须等于 100%。',
+    ],
+  },
+  {
+    gridName: 'BAA.9.a 资产转换比例',
+    notes: [
+      '比例按「预算项目×预算部门」维度逐行维护法人拆分，每行加和须 = 100%（仅文字说明提示，不强制校验/高亮）。',
+    ],
+  },
+  {
+    gridName: 'BAA.9.b 折旧费用拆分比例',
+    notes: [
+      '强校验规则：每行四大费用属性比例加和必须强等于 100%（Sum = 100%）。',
+    ],
+  },
+  {
+    gridName: 'BAA.10 进销存按法人拆分比例',
+    notes: [
+      '本预算年度该比例表不需要实现和使用：BB.3.X 进销存预算已改为法人级单表（法人公司×存货类别，一表到底），各品类的转入/转出逐来源按法人取数、不乘比例，本表不再参与 BB.3.X 的任何拆分；本表仅作为「无来源品类」的兜底比例予以保留。',
+      '表样与字段登记保留不变：仍按「预算项目×预算部门」逐行维护法人公司占比 + 合计列（每行加和须 = 100%，仅文字提示）。',
+    ],
+  },
+  {
+    gridName: 'BAA.11 关联交易加成比例',
+    notes: [
+      '本表为基础参数，不直接产生分录；前端业务发生集团内跨法人交易时，系统自动带出对应比例、计算加成款与转移价。',
+      '内部加成款 = 转移价 × 加成比例% ÷ (1 + 加成比例%) = 基础采购/成本价 × 加成比例%。',
+    ],
+  },
+  {
+    gridName: 'BAP.2 物料消耗需求汇总表_常规',
+    notes: [
+      '领料用途 4 类：生产类进在制品「料」腿、研发类进研发费用、销售类进销售费用、管理类及其他进管理费用。',
+      '边界：本表不包括三类领料——服务领料归 BB.1.3（.d/.f）、自制设备领料归 BB.4.1.c、研发长期物料归 BAP.3。',
+    ],
+  },
+  {
+    gridName: 'BAP.3 物料消耗需求汇总表_研发长期',
+    notes: [
+      '本表当前暂无实际数据来源：配套的前置「研发长期物料消耗需求采集」模块尚未开发，暂不参与 BB.3.X 进销存表与 BB.3.3 物料采购预算取数。',
+    ],
+  },
+  {
+    gridName: 'BJ.C.a 代采购物料查询表',
+    notes: [
+      '查询表·只读镜像 BB.3.3.D，表样与 BB.3.3.D 完全一致，不生成分录。',
+    ],
+  },
+  {
+    gridName: 'BJ.C.e 代采购资产查询表',
+    notes: [
+      '查询表·只读镜像 BB.3.1.D，表样与 BB.3.1.D 完全一致，不生成分录。',
+    ],
+  },
+  {
+    gridName: 'BJ.C.d 资产转卖预算表',
+    notes: [
+      '双方在本表登记定价，并由系统在集团合并层全额抵销加成与现金流。',
+    ],
+  },
+  {
+    gridName: 'BJ.C.f 内部借款预算表',
+    notes: [
+      '按笔录入交易双方、本金、计提利息与实付利息。',
+    ],
+  },
+  {
+    gridName: 'BJ.C.g 内部销售预算',
+    notes: [
+      '卖方按成本加成确认主营业务收入、买方按采购价入库。',
+    ],
+  },
+  {
+    gridName: 'BO.PL 利润表',
+    notes: [
+      '1~12月预算数由底层编制表按科目映射自动归集，只读不可编辑；「编制手工调整」列供财务人员手工编辑。',
+      '全年合计 = SUM(1~12月预算数) + 调整项，公式自动计算。',
+    ],
+  },
+  {
+    gridName: 'BO.BS 资产负债表',
+    notes: [
+      '本表按年处理、不展开到月：列结构为「年初余额 → 本年发生额 → 调整额 → 期末余额」，期末余额 = 年初余额 + 本年发生额 + 调整额，需做勾稽校验。',
+      '往来科目（应收账款/预付账款/应付账款/合同负债）按权责发生制滚动列报余额并做期末余额勾稽。',
+    ],
+  },
+  {
+    gridName: 'BO.CF 现金流量表',
+    notes: [
+      '本表按年处理、不展开到月：仅保留「本年累计」一列（全年现金流合计，流量口径、非年末时点数）。',
+      '1~12月各月数据自动汇总；财务人员可录入全年手工调整。',
+    ],
+  },
+  {
+    gridName: 'BO.ELIM 集团合并抵销工作底稿',
+    notes: [
+      '系统按抵销事项编号（ELIM-01~05）自动列出抵销类型、交易双方、来源表单、影响的报表项目和各月抵销金额，不需手工填写。',
+      '底稿各行与合并三表调整列一一对应，抵销分录均可追溯至前端业务表单行；同笔业务两端金额必须相等。',
+    ],
+  },
+
+  // ── T4 基础静态数据（AA/AB/AM）表级系统行为 ──
+  {
+    gridName: 'AA.1.a 预算年度主数据',
+    notes: [
+      '预算年度与月度期间为全系统统一时间轴；期间锁定后不可再编辑已锁定月份的数据。',
+    ],
+  },
+  {
+    gridName: 'AA.1.b 预算期间日历',
+    notes: [
+      '预算年度与月度期间为全系统统一时间轴；期间锁定后不可再编辑已锁定月份的数据。',
+    ],
+  },
+  {
+    gridName: 'AA.2 法人组织架构主数据',
+    notes: [
+      '法人编码全局唯一，是各编制表「归属法人/主体」下拉的唯一取值来源。',
+    ],
+  },
+  {
+    gridName: 'AA.3.a 统一科目总表(PL/BS/CF)',
+    notes: [
+      '三表科目按 PL/BS/CF 分家族编码并逐行对应报表行，「其中：」类子行用点号子编码（如 6001.1 主营业务收入）；费用科目单列于 AA.3.b。',
+    ],
+  },
+  {
+    gridName: 'AA.4.a 客户主数据',
+    notes: [
+      '客户类型引用 AB.8 客户类型业务字典。',
+    ],
+  },
+  {
+    gridName: 'AA.5 行政部门主数据字典',
+    notes: [
+      '部门编码/名称为一级、二级部门下拉的统一来源；类型区分管理/普通部门。',
+    ],
+  },
+  {
+    gridName: 'AA.6 预算项目主数据',
+    notes: [
+      '项目类型引用 AB.7 预算项目类型字典；同一项目编码可被多张编制表引用（如 BB.3.1、BAA.8）。',
+    ],
+  },
+  {
+    gridName: 'AA.7 预算产品主数据',
+    notes: [
+      '产品类别（财务口径）引用 AB.3 字典，决定默认收入确认方式与成本率。',
+    ],
+  },
+  {
+    gridName: 'AA.8 管理单元主数据',
+    notes: [
+      '管理单元与关联法人公司一一对应，是 BB.3.1「下单主体」带出所属法人的依据；BB.4.4 的资产账簿由 AA.8 管理单元主数据的「资产账簿」列直接带出（不手工另行确定）。',
+    ],
+  },
+  {
+    gridName: 'AA.9 资产类别及折旧参数',
+    notes: [
+      '按资产类别（大类-小类）维护折旧方法、折旧惯例、折旧年限(月)、残值率；固定资产-使用权资产的折旧参数取本行默认账簿（方法=年限平均法、年限=租赁期、残值率取账簿）。',
+    ],
+  },
+  {
+    gridName: 'AA.10 供应商主数据',
+    notes: [
+      '供应商类型与归属主体供 BB.3.1「供应商」下拉引用。',
+    ],
+  },
+  {
+    gridName: 'AA.11 物料主数据',
+    notes: [
+      '物料编码为唯一身份来源，不区分法人；供 BAA.4 服务物料定额标准引用。',
+    ],
+  },
+  {
+    gridName: 'AB.10 资产账簿字典',
+    notes: [
+      '资产账簿按法人公司设立（不考虑税账簿）；该默认资产账簿对应的折旧参数用于全系统新增资产折旧计算，存量资产直接按每条记录匹配的资产账簿折旧参数计算。',
+    ],
+  },
+  {
+    gridName: 'AB.15 税率及附加税比率字典',
+    notes: [
+      '为固定值域字典，表样仅三列（参数编码 / 参数指标名称 / 比率），供 BF.4 税金及附加预算表等「税率/附加税比率」字段下拉引用，不可在编制表内新增值。',
+    ],
+  },
+  {
+    gridName: 'AM.1 产品类别（财务口径）与收入映射',
+    notes: [
+      '按产品自动带出收入确认方式与标准成本率，供 BB.1.1/BB.1.2 等销售表默认取值。',
+    ],
+  },
+  {
+    gridName: 'AM.2 部门属性映射表',
+    notes: [
+      '按二级/三级部门维护费用属性（基于 AB.14 费用属性字典），供 BAA.8 按部门自动带出费用性质，可人工修改；二级/三级部门维护费用属性映射，一级部门不维护。',
+    ],
+  },
+];
+
 export const BUDGET_FORM_REGISTRY: BudgetFormDef[] = [
   { code: 'A1.1', name: '表单整体登记簿', tab: 'masterData', subTab: 'formOverview', group: 'A' },
   { code: 'A1.2', name: '编制表类列登记', tab: 'masterData', subTab: 'columnRegistry', group: 'A' },

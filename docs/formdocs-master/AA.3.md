@@ -1734,6 +1734,8 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
+三表科目按 PL/BS/CF 分家族编码并逐行对应报表行，「其中：」类子行用点号子编码（如 6001.1 主营业务收入）；费用科目单列于 AA.3.b。
+
 ### AA.3.b 费用明细科目(FY)
 
 <div class="t3a-sheet-scroll">

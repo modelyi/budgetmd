@@ -611,6 +611,22 @@ export function hasMultiEntityResidue(s: string): boolean {
   return T3A_MULTI_ENTITY_PATTERN.test(s ?? '');
 }
 
+/**
+ * 登记表新增文字（② 填报要求 / ① 表下注）的 T3A 裁剪：先走逐段裁剪，再逐句剔除仍含
+ * 多主体残留的句子（这两处内容不走 XML 文字源管道，clipFormText 覆盖不到）。
+ * 用于「只加 ② 一列与表下注」时，保证 T3A 单主体文档不被带进多法人内容。
+ */
+export function clipT3aClauses(input: string): string {
+  if (!input) return input;
+  const clipped = clipT3aText(input);
+  return clipped
+    .split(/(?<=[；。])/)
+    .filter((p) => !hasMultiEntityResidue(p))
+    .join('')
+    .replace(/^[；。]+/, '')
+    .trim();
+}
+
 // ── 表样分片裁剪（整列 / 整行） ───────────────────────────────────────────────
 
 export interface ClipGridCell {
