@@ -496,6 +496,12 @@ export const T3A_TEXT_OPS: TextOp[] = [
   reDel(/由上项「± 代采购资产转移」取数、不改变集团合并层固定资产净额[；]?/g),
   rep('不在本行重复外部租赁（BB.4.2.a.1）是对外交易、单体与合并同额保留', '不在本行重复'),
   rep('期末=年初+发生+调整外部租赁（BB.4.2.a.1）是对外交易、单体与合并同额保留', '期末=年初+发生+调整'),
+
+  // ══ U. ⑥ 节首共用口径（common）里的多主体口径句子 ══
+  del('，租金、使用权资产与租赁负债均不参与集团合并抵销'),
+  del('外部租赁为对外交易、不参与集团合并抵销。'),
+  del('外部租赁为对外交易、不参与集团合并抵销'),
+  del('均不参与集团合并抵销'),
 ];
 
 /** 整条剔除（字段行 / 规则点 / 适用情形 / 数据来源行 / 输出行 / 关键编制规则 / 事件行） */
@@ -559,6 +565,8 @@ export function clipFormText(t: any): any {
     entry: clipT3aText(e.entry ?? ''),
     note: clipT3aText(e.note ?? ''),
   }));
+  // ⑥ 节首共用口径：与其余文字同走裁剪（多主体口径的句子在此被逐段删除）
+  out.common = typeof t.common === 'string' ? clipT3aText(t.common) : '';
   return out;
 }
 

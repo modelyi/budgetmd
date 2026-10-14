@@ -53,7 +53,7 @@
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.2.b'].items） -->
   <events>
-    <event event="基建验收转固" field="1~12月转固金额（公式）">
+    <event event="基建验收转固" field="BB.3.2.b·转固原值">
       <pl><![CDATA[—（转固不进损益；折旧经 BB.4.X 计提后进费用）]]></pl>
       <bs><![CDATA[在建工程 1604 (−)；固定资产 1601 (+)]]></bs>
       <cf><![CDATA[—（转固为非现金事件）]]></cf>

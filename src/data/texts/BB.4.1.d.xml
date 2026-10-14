@@ -53,7 +53,7 @@
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.4.1.d'].items） -->
   <events>
-    <event event="自制设备转固" field="转固明细 原值">
+    <event event="自制设备转固" field="BB.4.1.d·原值">
       <pl><![CDATA[—（转固不进损益；折旧经 BB.4.X 计提后进费用）]]></pl>
       <bs><![CDATA[在建工程 1604 (−)；固定资产 1601 (+)]]></bs>
       <cf><![CDATA[—（转固为非现金事件）]]></cf>

@@ -68,7 +68,8 @@
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BF.1'].items） -->
   <events>
-    <event event="股权投资出资" field="1~12月投资金额">
+        <common><![CDATA[以归属于我司的预计年度收益为预算依据，不以当年现金分红直接替代；仅在明确确认与收现同期同额的预算假设下共用，期间及收现差额经既有 BJ.A 调整入口处理、不与本表自动取数重复计入。]]></common>
+    <event event="股权投资出资" field="BF.1·投资金额">
       <pl><![CDATA[—（资产化）]]></pl>
       <bs><![CDATA[长期股权投资 (+)]]></bs>
       <cf><![CDATA[投资活动现金流出：投资支付的现金 CF-15 (+)]]></cf>
@@ -76,7 +77,7 @@
       <entry><![CDATA[长期股权投资(1501) (+)；货币资金(1001) (−)]]></entry>
       <note><![CDATA[—]]></note>
     </event>
-    <event event="投资分红/利息收现" field="1~12月分红/利息收现">
+    <event event="投资分红/利息收现" field="BF.1·分红 / 利息收现">
       <pl><![CDATA[不由收现金额直接确定投资收益]]></pl>
       <bs><![CDATA[货币资金 (+)，按对应收益确认及往来结算口径处理]]></bs>
       <cf><![CDATA[投资活动现金流入：取得投资收益收到的现金 CF-12 (+)]]></cf>

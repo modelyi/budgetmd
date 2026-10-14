@@ -128,6 +128,12 @@ export interface FormText {
   applies: string[];
   notApplies: string[];
   relation?: XmlRelation;
+  /**
+   * ⑥ 本表多个度量共用的口径（表单级，可选）。取自 <events><common>；
+   * 仅当原 note 中确有跨全部度量的共用口径时写出，渲染为 ⑥ 节首一句；
+   * 缺省为空串时不渲染这句。
+   */
+  common: string;
   events: XmlConversionEvent[];
   /** ⑥ 无转换规则时的说明文案（原 NO_VOUCHER_FORM_NOTE） */
   noVoucher: string;
@@ -226,6 +232,7 @@ export function parseFormTextXml(xml: string, fallbackCode = ''): FormText {
           keyRules: asArray(relationNode.keyRules?.rule).map(text).filter(Boolean),
         }
       : undefined,
+    common: text(root.events?.common),
     events: asArray(root.events?.event).map((e) => ({
       event: attr(e, 'event'),
       field: attr(e, 'field'),

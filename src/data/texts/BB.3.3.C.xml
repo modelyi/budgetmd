@@ -56,7 +56,7 @@
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.3.C'].items） -->
   <events>
-    <event event="物料到货" field="1~12月到货额（按法人×预算项目×预算部门×PO标记×物料类别汇总）">
+    <event event="物料到货" field="BB.3.3.C·到货额(万元)">
       <pl><![CDATA[—]]></pl>
       <bs><![CDATA[存货 (+) 1405 采购入库增加]]></bs>
       <cf><![CDATA[—（到货不等于付款）]]></cf>
@@ -64,7 +64,7 @@
       <entry><![CDATA[借：存货—原材料/零部件(1405)；贷：应付账款(2202)]]></entry>
       <note><![CDATA[到货额直接增加 BB.3.X「本期采购入库」；不含税口径。]]></note>
     </event>
-    <event event="预付款（物料）" field="1~12月预付款">
+    <event event="预付款（物料）" field="BB.3.3.C·预付款(万元)">
       <pl><![CDATA[—]]></pl>
       <bs><![CDATA[预付账款 1123 (+)；货币资金(1001) (−)]]></bs>
       <cf><![CDATA[经营活动现金流出 CF-05 (+)]]></cf>
@@ -72,7 +72,7 @@
       <entry><![CDATA[预付款项(1123) (+)；货币资金(1001) (−)]]></entry>
       <note><![CDATA[归入 CF-05；法人归属与到货口径一致。]]></note>
     </event>
-    <event event="验收付款（物料）" field="1~12月验收付款">
+    <event event="验收付款（物料）" field="BB.3.3.C·验收付款(万元)">
       <pl><![CDATA[—]]></pl>
       <bs><![CDATA[应付账款 2202 (−)；货币资金(1001) (−)]]></bs>
       <cf><![CDATA[经营活动现金流出 CF-05 (+)]]></cf>

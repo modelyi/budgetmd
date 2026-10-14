@@ -34,7 +34,9 @@
  *   H1 表单编码+名称 → ① 预算表样（内嵌 HTML，多子表多段）
  *   → ② 字段与值说明 → ④ 适用业务情形（适用于/不适用于两组）
  *   → ⑤ 预算编制视角：数据关系总结（数据来源（上游）/输出影响（下游）/关键编制规则）
- *   → ⑥ 财务报表项转换规则（仅登记的表单输出，无则整节省略）
+ *   → ⑥ 财务报表项转换规则（两段式：可选「本表共用口径」+ 报表取数表 + 科目（报表项）入账表；
+ *     仅登记的表单输出，无则整节省略。全部单元格只用报表项名——科目码与现金流量表行代号
+ *     在渲染层剥除；已去原「取数说明 / 其他备注」两项）
  *
  * 用法：
  *   npx tsx scripts/generateT3aFormDocs.ts                # 缺省 t3a → docs/formdocs/（37 篇）
@@ -46,6 +48,7 @@
  * 逐字一致；列覆盖断言全程开启，任一失败立即报错退出。
  *   npx tsx scripts/generateT3aFormDocs.ts [--scope multi] --verify
  *   npx tsx scripts/generateT3aFormDocs.ts [--scope multi] --verify-code <表单编码>
+ *   VERIFY_ALL=1 npx tsx scripts/generateT3aFormDocs.ts [--scope multi] --verify  # 全量逐字比对（缺省随机抽 3 篇）
  */
 import { writeFileSync, readFileSync, readdirSync, existsSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
@@ -382,6 +385,217 @@ function mdCell(s: string): string {
   return s.replace(/\|/g, '\\|').replace(/\r?\n/g, '<br>');
 }
 
+// ── ⑥/⑤「输出影响」去代号（只留报表项名） ────────────────────────────────────
+// 口径铁律：科目颗粒度止于报表项目行——渲染 ⑥ 与 ⑤「输出影响」时把会计科目码与现金流量表
+// 行代号从文本里去掉、只保留报表项名；「预付账款」与「预付款项」统一为「预付款项」
+// （与 BO.BS 报表行一致）。去代号只发生在文档渲染层，XML 文字源仍保留原始编码。
+// 同一段文字若含 (1601)/(660301) 这类科目码时，这里统一按「括号内纯编码」「行内裸编码」
+// 两档剥除；现金流量表行代号（如 CF-14）替换为该行的报表项名（取自 _statement-rules.xml
+// 的 CF 家族报表行，单一来源），若该行名已在同段出现则直接删除代号、避免重复。
+const CF_NAME_BY_CODE = (() => {
+  const m = new Map<string, string>();
+  const rows = getAllFormTexts()['_statement-rules']?.statementRows ?? [];
+  rows.forEach((r) => {
+    if (r.family === 'CF' && r.code) m.set(r.code, r.name);
+  });
+  return m;
+})();
+/** 报表行代号（PL/BS/CF 全家族）→ 报表项名：裸码（如「正数进 6115」）回填成报表项名，不再留码 */
+const ROW_NAME_BY_CODE = (() => {
+  const m = new Map<string, string>();
+  const rows = getAllFormTexts()['_statement-rules']?.statementRows ?? [];
+  rows.forEach((r) => {
+    if (r.code && r.name && !m.has(r.code)) m.set(r.code, r.name);
+  });
+  return m;
+})();
+/** 括号内纯编码：(1601) （660301） (160401/1604) (14xx) (600101) */
+const PAREN_CODE_RE = /[（(]\s*\d[\dA-Za-z./-]*\s*[)）]/g;
+/** 行内裸编码：「应付账款 2202 (−)」「销售→6601/6602/6603」里的 6601 等；不误伤带「-」的单据号（如 PO-2027-0118）
+ *  尾部禁用「.数字」——让 6401.1 这类带小数位的报表行码整段匹配（否则会截成 6401 留下游离的「.1」） */
+const BARE_CODE_RE = /(?<![\d(（\-])\d{4,6}(?:\.\d+)?(?!\d|\.\d)/g;
+/** 现金流量表行代号：CF-14 / CF-13.1 */
+const CF_CODE_RE = /CF-\d+(?:\.\d+)*/g;
+/** 分录括注（如「存货 (−) 领料出库（借1604贷1405）」）：信息已在科目入账列，删除以避免残留裸码 */
+const ENTRY_GLOSS_RE = /[（(][^（）()]{0,60}?[借贷][^（）()]{0,60}?[)）]/g;
+
+/** 归一空白（折叠多空格、去中文标点前空格） */
+function tidyText(s: string): string {
+  return s
+    .replace(/[ \t\u3000]{2,}/g, ' ')
+    .replace(/\s+([，。；：、）】」%])/g, '$1')
+    .replace(/\s+([)）])/g, '$1')
+    .replace(/([（【「])\s+/g, '$1')
+    .replace(/：\s*[（(]\s*[)）]/g, '：')
+    .replace(/([，。；：、])\s+/g, '$1') // 删码后遗留「， 预付款增加」这类悬空空格
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+/** 科目名与其报表行名「尾—首」相接（如「财务费用-租赁利息」的尾「利息」＝行名「其中：利息费用」的首「利息」）
+ *  ——命中即说明裸码只是前面那个科目名的报表行标注，不是取数来源 */
+function endsWithHeadOf(token: string, rowName: string): boolean {
+  const head = rowName.replace(/^其中：/, '').match(/^[\u4e00-\u9fa5]{2}/)?.[0] ?? '';
+  const tail = token.match(/[\u4e00-\u9fa5]{2}$/)?.[0] ?? '';
+  return head.length === 2 && tail === head;
+}
+
+/** ⑥/⑤ 渲染用去代号归一（gloss=true 时同时删分录括注） */
+function normReportText(s: string, opts: { gloss?: boolean } = {}): string {
+  if (!s) return '';
+  // 「预付账款」→「预付款项」必须在**去代号之前**统一：否则先按裸码回填报表项名「预付款项」、
+  // 后改名把原文的「预付账款」也改成「预付款项」，同一格会出现「预付款项 预付款项」双写。
+  let t = s.replace(/预付账款/g, '预付款项');
+  if (opts.gloss) t = t.replace(ENTRY_GLOSS_RE, '');
+  // 单元格里已出现任一行长名（如「…支付其他与经营活动有关的现金 CF-07」）时，行代号属冗余标注：
+  // 直接删除代号、不再回填名称，免得同一格出现两个相互打架的现金流量表行名
+  const hasAnyCfRowName = Array.from(CF_NAME_BY_CODE.values()).some((n) => t.includes(n));
+  t = t.replace(CF_CODE_RE, (code, offset: number) => {
+    const name = CF_NAME_BY_CODE.get(code);
+    if (!name) return '';
+    if (hasAnyCfRowName) return '';
+    // 紧邻「/」的行代号（如「收回投资/取得投资收益收到的现金 CF-11/CF-12」）说明该报表行名
+    // 已以前文「a/b」合写形式给出，直接删除代号、不再回填名称（避免正文里重复一段名称）
+    const before = t[offset - 1] ?? '';
+    const after = t[offset + code.length] ?? '';
+    if (before === '/' || after === '/') return '';
+    return t.includes(name) ? '' : name;
+  });
+  t = t.replace(/[/、]\s*(?=[（(])/g, ''); // 行代号删除后遗留的悬空「/」「、」
+  t = t.replace(/[：:]\s*(?=[（(])/g, ' '); // 「…现金流出：CF-14 (+)」删代号后成「…现金流出 (+)」
+  t = t.replace(PAREN_CODE_RE, '');
+  t = t.replace(BARE_CODE_RE, (code, offset: number) => {
+    // 裸码若本身承载报表行信息（如「正数进 6115」）→ 回填该行报表项名。
+    // 该行名已在本格出现（前文，或紧随其后的同一个小句里，如「进 6401.1 主营业务成本」「1601（固定资产 (+)…）」）
+    // 时，这个码只是那处名称的标注 → 直接删除，不再回填（避免「主营业务成本 主营业务成本」这类重词）。
+    const name = ROW_NAME_BY_CODE.get(code);
+    if (!name) return '';
+    const short = name.replace(/^其中：/, '');
+    const before = t.slice(0, offset);
+    const after = t.slice(offset + code.length, offset + code.length + 14);
+    if (before.includes(short) || after.includes(short)) return '';
+    // 裸码紧跟在一个科目名之后（如「财务费用-租赁利息 6604.1」「管理费用-折旧费 6602」）时，该码只是
+    // 这个科目名的报表行标注、不是取数来源：直接删除、不回填报表项名——回填会与前面的科目名拼出
+    // 「…租赁利息 利息费用」这类重词。判据＝紧邻的汉字词与报表项名「尾—首」相接。
+    const prevTok = (before.replace(/\s+$/, '').match(/([^\s，、；：／/（）()→＋+])+$/) || [])[0] ?? '';
+    if (prevTok && endsWithHeadOf(prevTok, short)) return '';
+    return short;
+  });
+  // 去码后清理悬空连接符（「销售→6601、管理→6602」→「销售、管理」；「…费用→6601/6602/6603 (+)」→「…费用 (+)」）
+  t = t.replace(/(?:[→、/]\s*)+(?=[（(]|$)/g, '');
+  t = t.replace(/→\s*(?=[、，。；)）])/g, '');
+  t = t.replace(/[—–]\s+(?=[\u4e00-\u9fa5])/g, (m0) => m0.trimEnd());
+  t = t.replace(/[，、；]\s*$/g, '');
+  t = t.replace(/预付账款/g, '预付款项');
+  return tidyText(t);
+}
+
+/** 科目性质：借方性质(资产/成本费用) 或 贷方性质(负债/权益/收入)；备抵类归贷方(增加在贷)；判不出返回 null */
+function accountNature(rawTok: string): 'd' | 'c' | null {
+  const codeM = rawTok.match(/[（(]\s*(\d[\d.]*)/);
+  const code = codeM ? codeM[1] : '';
+  const name = rawTok.replace(/[（(][^)）]*[)）]/g, '');
+  // 备抵/净值类（累计折旧、坏账准备、*净值）：增加记贷——先于编码判定，避免落入资产类的借方
+  if (/累计折旧|坏账准备|跌价准备|净值/.test(name)) return 'c';
+  if (code) {
+    if (/^1/.test(code)) return 'd'; // 资产类
+    if (/^2/.test(code)) return 'c'; // 负债类
+    if (/^4/.test(code)) return 'c'; // 所有者权益类
+    if (/^3/.test(code)) return 'd'; // 成本类（生产成本等）
+    if (/^6/.test(code)) return /^6[01]/.test(code) ? 'c' : 'd'; // 60/61=收入收益(贷)，其余成本费用(借)
+  }
+  if (/负债|应付|借款|贷款|应交|债券|收入|收益|薪酬|预收/.test(name)) return 'c';
+  if (/资产|资金|应收|存货|材料|备件|产成品|在制品|费用|成本|支出|在建|固定|无形|长期股权|使用权|现金/.test(name)) return 'd';
+  return null;
+}
+
+/** 科目颗粒度止于报表项目行：折叠「科目—明细」后缀为报表项名（保留「—内部往来」，内部交易仅允许该后缀） */
+function collapseToReportItem(s: string): string {
+  return s
+    .replace(/([^\s，、；：/（）()])[—–‑-]([^—–‑\-，、；：/\s（）()]+)/g, (m, head, tail) => (/内部/.test(tail) ? m : head))
+    .replace(/\/(?![\s）)])/g, ' / ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+/** 从增减清单里取「科目名」：去标签前缀（如「提款：」「费用重分类（…）：」）与「计入」引导词 */
+function cleanAccountToken(n: string): string {
+  return n
+    .replace(/^[^：，、]{0,40}：/, '')
+    .replace(/^.*计入/, '')
+    .replace(/^[^\s（）()]{1,10}\s+(?=[^\s]*[（(\d])/, '') // 去「结算付款时 」这类标签前缀（仅当其后确实是科目名）
+    .trim();
+}
+
+/**
+ * ⑥「科目（报表项）入账」的 借/贷 拆分（逐文字源 entry 解析，不新增业务内容、不改方向）：
+ *   ① entry 已显式写「借：…；贷：…」→ 按标记归属；
+ *   ② entry 为「科目 (±)；科目 (±)」增减清单（文字源里与本表同口径的存量写法）→ 按科目性质
+ *      与增减方向判借/贷（资产/成本费用 增记借、负债/权益/收入 增记贷，减记反向）；
+ *   ③ 既无借/贷标记、也无可判方向的科目（纯说明性文字，如「本表不生成会计分录」）→ 两列均记「—」。
+ */
+function splitEntryToDebitCredit(entryRaw: string): [string, string] {
+  const raw = (entryRaw ?? '').trim();
+  if (!raw) return ['—', '—'];
+  const segments = raw.split(/\r?\n|[；;。，]/).map((x) => x.trim()).filter(Boolean);
+  const debits: string[] = [];
+  const credits: string[] = [];
+  let explicit = false;
+  segments.forEach((seg) => {
+    const marker = seg.match(/^(借|贷)\s*[:：]?\s*(.*)$/);
+    if (marker) {
+      explicit = true;
+      const side = marker[1] === '借' ? debits : credits;
+      const rest = normReportText(marker[2], { gloss: true }).trim();
+      if (rest) side.push(rest);
+      return;
+    }
+    // 无借/贷标记：「科目 (±)」按标号的增减与科目性质判方向。科目名只按「、」拆分，不按「/」拆，
+    // 避免把「在建工程—基建工程(160401/1604)」这类把科目码写在括号内、含斜杠的写法拆断。
+    const pieces = seg.split(/[（(]\s*([+＋−-])[^)）]*[)）]/);
+    for (let i = 0; i + 1 < pieces.length; i += 2) {
+      const sign = /[+＋]/.test(pieces[i + 1]) ? 'plus' : 'minus';
+      pieces[i]
+        .split(/[、,]/)
+        .map(cleanAccountToken)
+        .filter(Boolean)
+        .forEach((nameTok) => {
+          const nature = accountNature(nameTok);
+          if (nature === null) return; // 无可判方向：不作借/贷断言
+          const increase = sign === 'plus';
+          const isDebit = nature === 'd' ? increase : !increase;
+          const text = normReportText(nameTok).trim();
+          if (text) (isDebit ? debits : credits).push(text);
+        });
+    }
+  });
+  const d = collapseToReportItem(Array.from(new Set(debits)).join('、')) || '—';
+  const c = collapseToReportItem(Array.from(new Set(credits)).join('、')) || '—';
+  return [d, c];
+}
+
+/** ⑥ 比较用归一：去空白与标点（判断「括号说明是否已在共用口径里说过」） */
+function normForCompare(s: string): string {
+  return s.replace(/[\s，。；：、（）()【】「」/·\-—+%＝=]/g, '');
+}
+
+/** ⑥ 三表列单元格：删掉与「本表共用口径」重复的括号说明（任一分句已在共用口径里出现过即整段删除；
+ *  单句说明性的、共用口径未覆盖的括注（如「（先付款后到货）」「（按法人公司汇总）」）保留） */
+function stripCommonGloss(cell: string, commonRendered: string): string {
+  if (!cell || !commonRendered) return cell;
+  const nc = normForCompare(commonRendered);
+  return cell.replace(/（([^（）]*)）/g, (whole, inner: string) => {
+    const clauses = inner.split(/[；;，,]/).map((s) => s.trim()).filter((s) => s.length >= 4);
+    if (clauses.length === 0) return whole;
+    return clauses.some((c) => nc.includes(normForCompare(c))) ? '' : whole;
+  });
+}
+
+/** 斜杠两侧留空（与「科目（报表项）入账」表 collapseToReportItem 的写法一致，两表读起来同一套写法） */
+function spaceSlashes(s: string): string {
+  return s.replace(/\/(?![\s）)])/g, ' / ');
+}
+
 function generateFormDoc(code: string, text: FormText, allTexts: Record<string, FormText>): string {
   const out: string[] = [];
 
@@ -497,7 +711,8 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
       out.push('| 目标报表 | 取数路径 |');
       out.push('| :--- | :--- |');
       rel.outputs.forEach((o) => {
-        out.push(`| ${mdCell(o.target)} | ${mdCell(o.path)} |`);
+        // ⑤「输出影响」行去代号（只留报表项名，与 ⑥ 同一去代号口径）
+        out.push(`| ${mdCell(normReportText(o.target, { gloss: true }))} | ${mdCell(normReportText(o.path, { gloss: true }))} |`);
       });
       out.push('');
     }
@@ -510,25 +725,41 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
   }
 
   // ⑥ 财务报表项转换规则（仅登记的表单输出，无登记则整节省略）。
-  //     内容逐字取自 XML <events>（该节点由 FINANCIAL_STATEMENT_CONVERSION 字典逐字迁移而来，
-  //     与 ResearchSummaryView 渲染 ⑥ 同源同文；不 import 组件以避免把 React 依赖拉进本脚本）。
-  //     页面 ⑥ 卡片逐行渲染：事件 / 字段（等宽小字）/ 取数说明 / 损益表 PL / 资产负债表 BS /
-  //     现金流量表 CF / 科目影响（有则显示）/ 其他备注（有则显示）。
+  //     形态（定稿）：节首一句共用口径（<events><common>，可选）→ 报表取数表 → 科目（报表项）入账表。
+  //     全部单元格只用报表项名（去代号：科目码与现金流量表行代号在渲染层剥除），
+  //     不再渲染原「取数说明 / 其他备注」（note 里有共用价值的口径已上提到 <common>，其余删除）。
+  //     三表列单元格另做两步归一：① 删掉与节首共用口径重复的括号说明（同一口径不在两处各说一遍）；
+  //     ② 斜杠两侧留空，与「科目（报表项）入账」表 collapseToReportItem 的写法一致。
   const conversionEvents = text.events;
   if (conversionEvents.length > 0) {
+    const commonRendered = text.common ? normReportText(text.common) : '';
+    const cell = (s: string): string => spaceSlashes(stripCommonGloss(normReportText(s, { gloss: true }), commonRendered));
     out.push('## ⑥ 财务报表项转换规则');
     out.push('');
+    if (text.common) {
+      out.push(`本表共用口径：${commonRendered}`);
+      out.push('');
+    }
+    out.push('**报表取数**');
+    out.push('');
+    out.push('| 度量/报表项 | 取数字段 | 损益表 PL | 资产负债表 BS | 现金流量表 CF |');
+    out.push('| :--- | :--- | :--- | :--- | :--- |');
     conversionEvents.forEach((item) => {
-      out.push(`**${item.event}** \`${item.field}\``);
-      out.push('');
-      out.push(`- 取数说明：${mdCell(item.source)}`);
-      out.push(`- 损益表 PL：${mdCell(item.pl)}`);
-      out.push(`- 资产负债表 BS：${mdCell(item.bs)}`);
-      out.push(`- 现金流量表 CF：${mdCell(item.cf)}`);
-      if (item.entry) out.push(`- 科目影响：${mdCell(item.entry)}`);
-      if (item.note) out.push(`- 其他备注：${mdCell(item.note)}`);
-      out.push('');
+      out.push(
+        `| ${mdCell(normReportText(item.event))} | ${mdCell(normReportText(item.field, { gloss: true }))} | ` +
+          `${mdCell(cell(item.pl))} | ${mdCell(cell(item.bs))} | ${mdCell(cell(item.cf))} |`,
+      );
     });
+    out.push('');
+    out.push('**科目（报表项）入账**');
+    out.push('');
+    out.push('| 度量/报表项 | 借 | 贷 |');
+    out.push('| :--- | :--- | :--- |');
+    conversionEvents.forEach((item) => {
+      const [debit, credit] = splitEntryToDebitCredit(item.entry);
+      out.push(`| ${mdCell(normReportText(item.event))} | ${mdCell(debit)} | ${mdCell(credit)} |`);
+    });
+    out.push('');
   }
 
   return out.join('\n');
@@ -965,7 +1196,8 @@ function generateA1SpecialDoc(code: string, text: FormText, allTexts: Record<str
       out.push('| 目标报表 | 取数路径 |');
       out.push('| :--- | :--- |');
       rel.outputs.forEach((o) => {
-        out.push(`| ${mdCell(o.target)} | ${mdCell(o.path)} |`);
+        // ⑤「输出影响」行去代号（只留报表项名，与 ⑥ 同一去代号口径）
+        out.push(`| ${mdCell(normReportText(o.target, { gloss: true }))} | ${mdCell(normReportText(o.path, { gloss: true }))} |`);
       });
       out.push('');
     }
@@ -1018,19 +1250,25 @@ function verifyDocVerbatim(code: string, doc: string, textMap?: Record<string, F
       expect(`relation.dataSources[${i}].fields`, s.fields);
       expect(`relation.dataSources[${i}].relation`, s.relation);
     });
-    text.relation.outputs.forEach((o, i) => expect(`relation.outputs[${i}].target`, o.target));
+    // ⑤「输出影响」行同样去代号（渲染层与文档一致；校验用同一归一）
+    text.relation.outputs.forEach((o, i) => expect(`relation.outputs[${i}].target`, normReportText(o.target, { gloss: true })));
     text.relation.keyRules.forEach((k, i) => expect(`relation.keyRules[${i}]`, k));
   }
-  // ⑥ 财务报表项转换规则（XML <events> 逐字，与 FINANCIAL_STATEMENT_CONVERSION 同源）
+  // ⑥ 财务报表项转换规则（XML <events> 逐字；渲染为两段式并去代号——校验用同一归一/拆分口径）
+  const commonRendered = text.common ? normReportText(text.common) : '';
+  // 三表列与渲染端取同一套归一（去代号 → 删与共用口径重复的括注 → 斜杠留空），保证「逐字」口径一致
+  const cellExp = (s: string) => spaceSlashes(stripCommonGloss(normReportText(s, { gloss: true }), commonRendered));
+  if (text.common) expect('events.common', commonRendered);
   text.events.forEach((e, i) => {
-    expect(`events[${i}].event`, e.event);
-    expect(`events[${i}].field`, e.field);
-    expect(`events[${i}].pl`, e.pl);
-    expect(`events[${i}].bs`, e.bs);
-    expect(`events[${i}].cf`, e.cf);
-    expect(`events[${i}].source`, e.source);
-    expect(`events[${i}].entry`, e.entry);
-    expect(`events[${i}].note`, e.note);
+    // 与渲染端取同一归一选项（表体单元格渲染时带 gloss——删分录括注）
+    expect(`events[${i}].event`, normReportText(e.event));
+    expect(`events[${i}].field`, normReportText(e.field, { gloss: true }));
+    expect(`events[${i}].pl`, cellExp(e.pl));
+    expect(`events[${i}].bs`, cellExp(e.bs));
+    expect(`events[${i}].cf`, cellExp(e.cf));
+    const [debit, credit] = splitEntryToDebitCredit(e.entry);
+    expect(`events[${i}].entry.debit`, debit);
+    expect(`events[${i}].entry.credit`, credit);
   });
   // 多 Tab 表单：各 TAB 的子表 XML 字段原文也须逐字出现在文档中
   const tabs = visibleTabCodes(code);
@@ -1140,7 +1378,7 @@ console.log(`${LOG_PREFIX} 表单编码清单：`);
 console.log(generated.join('、'));
 
 if (doVerify || verifyCode) {
-  const sampleCodes = verifyCode ? [verifyCode] : pickSampleCodes(codes, gridCounts);
+  const sampleCodes = verifyCode ? [verifyCode] : (process.env.VERIFY_ALL ? codes : pickSampleCodes(codes, gridCounts));
   console.log(`${LOG_PREFIX} 抽样逐字比对（${sampleCodes.length} 篇）：${sampleCodes.join('、')}`);
   let fail = 0;
   sampleCodes.forEach((code) => {

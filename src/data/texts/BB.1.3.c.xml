@@ -67,7 +67,7 @@
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.1.3.c'].items） -->
   <events>
-    <event event="服务收入确认" field="服务收入">
+    <event event="服务收入确认" field="BB.1.3.c·服务收入">
       <pl><![CDATA[主营业务收入 6001.1 (+)（技术服务）]]></pl>
       <bs><![CDATA[应收账款 (+)]]></bs>
       <cf><![CDATA[—（权责发生制）]]></cf>
@@ -75,7 +75,7 @@
       <entry><![CDATA[应收账款(1122) (+)；主营业务收入(6001.1) (+)]]></entry>
       <note><![CDATA[不含税口径；按签约主体法人归集。]]></note>
     </event>
-    <event event="收预收款" field="预收">
+    <event event="收预收款" field="BB.1.3.c·预收">
       <pl><![CDATA[—]]></pl>
       <bs><![CDATA[货币资金 (+)（合同负债 2204 直接手填，不自动取数）]]></bs>
       <cf><![CDATA[经营活动现金流入 CF-01 (+)]]></cf>
@@ -83,7 +83,7 @@
       <entry><![CDATA[借：货币资金(1001)（合同负债 2204 直接手填）]]></entry>
       <note><![CDATA[与 BB.1.2 预收款口径一致。]]></note>
     </event>
-    <event event="验收回款" field="验收回款">
+    <event event="验收回款" field="BB.1.3.c·验收回款">
       <pl><![CDATA[—]]></pl>
       <bs><![CDATA[货币资金 (+)、应收账款 (−)]]></bs>
       <cf><![CDATA[经营活动现金流入 CF-01 (+)]]></cf>

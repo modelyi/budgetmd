@@ -43,7 +43,7 @@
 
   <!-- ⑥ 财务报表项转换规则（原 FINANCIAL_STATEMENT_CONVERSION['BB.3.2-①'].items） -->
   <events>
-    <event event="基建验收（在建工程按验收额确认）" field="1~12月验收额">
+    <event event="基建验收（在建工程按验收额确认）" field="BB.3.2·验收额">
       <pl><![CDATA[—（验收确认在建工程，不进损益）]]></pl>
       <bs><![CDATA[在建工程 1604 (+)；应付账款 2202 (+)]]></bs>
       <cf><![CDATA[—（工程验收不直接产生现金流）]]></cf>
@@ -51,7 +51,7 @@
       <entry><![CDATA[在建工程(1604) (+)；应付账款(2202) (+)]]></entry>
       <note><![CDATA[验收额是 1604 原值确认口径；不含税口径。]]></note>
     </event>
-    <event event="基建付款" field="1~12月付款额">
+    <event event="基建付款" field="BB.3.2·付款额">
       <pl><![CDATA[—]]></pl>
       <bs><![CDATA[货币资金(1001) (−)；应付账款 2202 (−)]]></bs>
       <cf><![CDATA[投资活动现金流出 CF-14 (+)]]></cf>
