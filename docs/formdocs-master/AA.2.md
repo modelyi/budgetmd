@@ -195,12 +195,6 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
-## ③ 关键规则要点
-
-**AA.2 法人组织架构**
-
-- 法人编码全局唯一，是各编制表"归属法人/主体"下拉的唯一取值来源。
-
 ## ④ 适用业务情形
 
 **适用于**

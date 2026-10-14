@@ -6,7 +6,7 @@
  *   · 退出码 1 = 存在不一致（逐条打印「编码 / 区块 / 字段 / TS 原值 / XML 值」）
  *
  * 校验两层：
- *   ① 结构化逐字比对：每个字段的 登记名+渲染名+数据来源+其他说明 / 每条规则要点 /
+ *   ① 结构化逐字比对：每个字段的 登记名+渲染名+数据来源+其他说明 /
  *      每条适用情形 / 数据关系（summary+dataSources+outputs+keyRules）/ 每个转换事件 8 列 /
  *      无分录说明 / 三表报表行（name+seq+rule+source）/ A1.4.b 规则库（cat+code+name+rule+src）/
  *      科目说明（名称+全称+核算说明）/ 编码规则 / FY 明细科目；
@@ -26,8 +26,6 @@ import { FIXED_EXPENSE_BUDGET_SUBJECTS } from '../src/data/expenseBudgetSubjects
 import { PL_ROWS, BS_ROWS, CF_ROWS, STATEMENT_RULES } from '../src/utils/adapters/financial';
 import {
   BUSINESS_BLOCKS,
-  findRules,
-  findSubRules,
   fieldsForDisplayFromTs,
   APPLICABLE_SCENARIOS,
   FORM_DATA_RELATION_SUMMARY,
@@ -67,7 +65,6 @@ function cmpList(where: string, tsList: string[], xmlList: string[]): void {
 
 // ── 表单文字逐字比对 ─────────────────────────────────────────────────────────
 
-const SUB_ENTRY_CODES = new Set(RESEARCH_SUB_ENTRIES.map((e) => e.code));
 const REGISTRY_FORM_CODES = new Set(BUDGET_FIELD_REGISTRY.map((f) => f.formCode));
 const REG_NAME = new Map<string, string>();
 BUDGET_FIELD_REGISTRY.forEach((f) => REG_NAME.set(`${f.formCode}|${f.fieldCode}`, f.fieldName));
@@ -84,7 +81,7 @@ BUSINESS_BLOCKS.forEach((b) => b.formCodes.forEach((c) => candidates.add(c)));
 
 const specialCodes = new Set(['_statement-rules', '_chart-of-accounts']);
 let comparedForms = 0;
-let sectionCount = { fields: 0, rules: 0, scenarios: 0, relation: 0, events: 0, noVoucher: 0 };
+const sectionCount = { fields: 0, scenarios: 0, relation: 0, events: 0, noVoucher: 0 };
 
 for (const code of [...candidates].sort()) {
   if (!code || specialCodes.has(code) || /[\/\s、]/.test(code)) continue;
@@ -92,16 +89,13 @@ for (const code of [...candidates].sort()) {
 
   const emitFields = REGISTRY_FORM_CODES.has(code) || code.startsWith('BB.4.X.');
   const tsFields = emitFields ? fieldsForDisplayFromTs(code) : [];
-  const subRules = SUB_ENTRY_CODES.has(code) ? findSubRules(code) : null;
-  const ruleCode = SUB_ENTRY_CODES.has(code) ? RESEARCH_SUB_ENTRIES.find((e) => e.code === code)?.parent ?? code : code;
-  const tsRules = subRules && subRules.length > 0 ? subRules : findRules(ruleCode);
   const tsScenario = APPLICABLE_SCENARIOS[code];
   const tsRelation = FORM_DATA_RELATION_SUMMARY[code];
   const tsEvents = FINANCIAL_STATEMENT_CONVERSION[code]?.items ?? [];
   const tsNoVoucher = NO_VOUCHER_FORM_NOTE[code];
 
   const hasAny =
-    tsFields.length > 0 || tsRules.length > 0 ||
+    tsFields.length > 0 ||
     (!!tsScenario && (tsScenario.applies.length > 0 || tsScenario.notApplies.length > 0)) ||
     !!tsRelation || tsEvents.length > 0 || !!tsNoVoucher;
 
@@ -131,15 +125,6 @@ for (const code of [...candidates].sort()) {
     cmp(`${code}.fields[${f.fieldCode}].remark`, f.remark, x.remark);
   });
   sectionCount.fields += tsFields.length;
-
-  // ③ 规则要点（分组 form + points 逐条）
-  cmpList(`${code}.rules.form`, tsRules.map((r) => r.form), ft.rules.map((r) => r.form));
-  tsRules.forEach((r, i) => {
-    const x = ft.rules[i];
-    if (!x) return;
-    cmpList(`${code}.rules[${i}].points`, r.points, x.points);
-  });
-  sectionCount.rules += tsRules.reduce((n, r) => n + r.points.length, 0);
 
   // ④ 适用业务情形
   cmpList(`${code}.applies`, tsScenario?.applies ?? [], ft.applies);
@@ -268,9 +253,6 @@ for (const code of [...candidates].sort()) {
   if (!code || specialCodes.has(code) || /[\/\s、]/.test(code)) continue;
   const emitFields = REGISTRY_FORM_CODES.has(code) || code.startsWith('BB.4.X.');
   const tsFields = emitFields ? fieldsForDisplayFromTs(code) : [];
-  const subRules = SUB_ENTRY_CODES.has(code) ? findSubRules(code) : null;
-  const ruleCode = SUB_ENTRY_CODES.has(code) ? RESEARCH_SUB_ENTRIES.find((e) => e.code === code)?.parent ?? code : code;
-  const tsRules = subRules && subRules.length > 0 ? subRules : findRules(ruleCode);
   const tsScenario = APPLICABLE_SCENARIOS[code];
   const tsRelation = FORM_DATA_RELATION_SUMMARY[code];
   const tsEvents = FINANCIAL_STATEMENT_CONVERSION[code]?.items ?? [];
@@ -278,7 +260,6 @@ for (const code of [...candidates].sort()) {
     // 无分录说明：未登记时不写 XML，故仅在有值时纳入比较
     ...(NO_VOUCHER_FORM_NOTE[code] !== undefined ? [NO_VOUCHER_FORM_NOTE[code]] : []),
     ...tsFields.map((f) => f.remark),
-    ...tsRules.flatMap((r) => r.points),
     ...(tsScenario?.applies ?? []),
     ...(tsScenario?.notApplies ?? []),
     ...(tsRelation ? [tsRelation.summary, ...tsRelation.dataSources.map((d) => d.relation), ...tsRelation.outputs.map((o) => o.path), ...tsRelation.keyRules] : []),
@@ -337,7 +318,7 @@ for (const file of files) {
 console.log(`[validate] XML 文件 ${files.length} 个（含 _statement-rules / _chart-of-accounts）`);
 console.log(`[validate] 逐字比对的表单 ${comparedForms} 个；比对项合计 ${checks} 项；CDATA 原文 ${cdataTotal} 段`);
 console.log(
-  `[validate] 覆盖：字段 ${sectionCount.fields} · 规则要点 ${sectionCount.rules} · ` +
+  `[validate] 覆盖：字段 ${sectionCount.fields} · ` +
   `适用情形 ${sectionCount.scenarios} · 数据关系项 ${sectionCount.relation} · 转换事件 ${sectionCount.events} · 无分录说明 ${sectionCount.noVoucher}`,
 );
 console.log(`[validate] 三表报表行 PL${PL_ROWS.length}/BS${BS_ROWS.length}/CF${CF_ROWS.length} · A1.4.b ${STATEMENT_RULES.length} 行` +

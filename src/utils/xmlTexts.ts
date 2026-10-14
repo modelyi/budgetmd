@@ -1,7 +1,7 @@
 /**
  * XML 文字源解析器（试点：BB.1.1 一张表端到端验证）
  * =============================================================================
- * 目的：把调研页的「文字内容」（字段说明 / 规则要点 / 适用情形 / 数据关系 /
+ * 目的：把调研页的「文字内容」（字段说明 / 适用情形 / 数据关系 /
  * 财务报表项转换规则）从 TS 源码里搬到 src/data/texts/*.xml，让前端渲染与生成脚本
  * 都从同一份 XML 取文字，验证「XML 存文字 → 前端渲染读 XML → 生成脚本读 XML」整条链路。
  *
@@ -34,12 +34,6 @@ export interface XmlFieldText {
   display: string;
   source: string;
   remark: string;
-}
-
-/** ③ 关键规则要点：一张表/一个子表可有多组（form + points） */
-export interface XmlRuleGroup {
-  form: string;
-  points: string[];
 }
 
 /** ⑤ 数据来源（上游） */
@@ -131,7 +125,6 @@ export interface FormText {
   code: string;
   name: string;
   fields: XmlFieldText[];
-  rules: XmlRuleGroup[];
   applies: string[];
   notApplies: string[];
   relation?: XmlRelation;
@@ -214,10 +207,6 @@ export function parseFormTextXml(xml: string, fallbackCode = ''): FormText {
       display: attr(f, 'display'),
       source: attr(f, 'source'),
       remark: text(f),
-    })),
-    rules: asArray(root.rules?.rule).map((r) => ({
-      form: attr(r, 'form'),
-      points: asArray(r.point).map(text).filter(Boolean),
     })),
     applies: asArray(root.scenarios?.applies?.item).map(text).filter(Boolean),
     notApplies: asArray(root.scenarios?.notApplies?.item).map(text).filter(Boolean),

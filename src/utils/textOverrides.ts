@@ -1,7 +1,7 @@
 /**
  * 调研页「文字覆盖」store + 后端写回 + 导出固化
  * =============================================================================
- * 目的：页面上直接点编辑改文字（②字段说明 / ③规则要点 / ④适用情形 /
+ * 目的：页面上直接点编辑改文字（②字段说明 / ④适用情形 /
  * ⑤数据关系 / ⑥转换规则），保存时**优先写回服务器磁盘 XML**（开发期后端 =
  * vite 中间件 POST /api/save-text，见 scripts/saveTextPlugin.ts）—— AI 直接改
  * src/data/texts/*.xml 与人工在页面改，改的是同一份文字源；写盘后 dev server
@@ -16,8 +16,6 @@
  * 覆盖键约定：`${formCode}::${kind}::…`（见 textKey），例如
  *   · BB.1.1::field::contractCode#0::name —— ②字段说明的字段名（#n = 同 code 第 n 次出现）
  *       槽位：name（登记名/渲染名）、source（数据来源）、remark（其他说明）
- *   · BB.1.1::rule::0::form               —— ③规则要点·规则分组标题
- *   · BB.1.1::rule::0::point::2           —— ③规则要点·第 3 条要点
  *   · BB.1.1::applies::0 / notApplies::0  —— ④适用业务情形（适用 / 不适用）
  *   · BB.1.1::relation::summary           —— ⑤数据关系·总结
  *   · BB.1.1::relation::source::0::name|code|fields|relation —— ⑤上游来源行各列
@@ -26,8 +24,7 @@
  *   · BB.1.1::event::0::event|field|pl|bs|cf|source|entry|note —— ⑥转换规则各行
  *   · BB.1.1::noVoucher                   —— ⑥「不生成分录」说明文案
  *
- * 无法写回 XML 的文字（未登记 XML 的表、`::rulesBlock` 这类把多组规则合成一段的
- * 聚合键、文字里含 `]]>`）→ 后端返回 ok:false + reason，前端降级成 localStorage
+ * 无法写回 XML 的文字（未登记 XML 的表、文字里含 `]]>`）→ 后端返回 ok:false + reason，前端降级成 localStorage
  * 覆盖并在提示条里说明原因，导出 zip 时计入 unmappedKeys。
  *
  * 两端共用：本模块在 Node（tsx 跑生成脚本）下 import 不报错——localStorage / window /
@@ -53,10 +50,6 @@ export const textKey = {
   /** occ：同 fieldCode 在字段清单里的出现序号（从 0 起，对应 XML 同 code 的第 n 个节点） */
   field: (code: string, fieldCode: string, occ: number, slot: 'name' | 'source' | 'remark') =>
     `${code}::field::${fieldCode}#${occ}::${slot}`,
-  ruleForm: (code: string, ruleIdx: number) => `${code}::rule::${ruleIdx}::form`,
-  rulePoint: (code: string, ruleIdx: number, pointIdx: number) => `${code}::rule::${ruleIdx}::point::${pointIdx}`,
-  /** ③关键规则要点整块编辑（一个编辑按钮，覆盖整个 rules 区块为纯文本） */
-  rulesBlock: (code: string) => `${code}::rulesBlock`,
   applies: (code: string, idx: number) => `${code}::applies::${idx}`,
   notApplies: (code: string, idx: number) => `${code}::notApplies::${idx}`,
   relationSummary: (code: string) => `${code}::relation::summary`,
@@ -671,7 +664,7 @@ async function postSaveText(key: string, value: string): Promise<SaveTextApiResp
 /** 失败原因 → 中文提示（写盘没成功时告诉用户为什么，以及该怎么固化） */
 const SAVE_REASON_TEXT: Record<string, string> = {
   'empty-value': '新值为空',
-  unmapped: '这处文字在 XML 里定位不到对应节点（该表未登记 XML，或属于「整块规则要点」这类聚合文字）',
+  unmapped: '这处文字在 XML 里定位不到对应节点（该表未登记 XML，或文字为聚合生成）',
   'cdata-unsafe': '文字里含 CDATA 结束符 ]]>，无法写入 XML',
   'code-mismatch': '覆盖键的表单编码与 XML 文件不一致（拿错文件）',
   'not-found': 'XML 原文与页面文字不一致，定位不到可替换的原文',

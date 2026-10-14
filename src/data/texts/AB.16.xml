@@ -8,7 +8,7 @@
     · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
     · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
 
-  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  迁移源：ResearchSummaryView.tsx（字段说明/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
   解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
     前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
     脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
@@ -21,13 +21,6 @@
     <field code="leaseTermName" name="租赁期限名称" source="本表维护"><![CDATA[可选值：一年以内 / 一年以上（边界＝租赁期限月数：≤12 个月→一年以内＝费用化；>12 个月→一年以上＝资本化）]]></field>
     <field code="scope" name="适用范围与资本化判定说明" source="本表维护"><![CDATA[取值边界：租赁期限月数 ≤12 个月→一年以内（费用化）；>12 个月→一年以上（资本化）；与③资本化判据一一对应。判定结果口径：一年以上→资本化（形成使用权资产 1621 与租赁负债 2602，由 BB.4.2.b.1 / BB.4.2.a.1 按月测算折旧与利息）；一年以下（含 12 个月）→费用化（月租金直接进费用，不形成使用权资产、不确认租赁负债）]]></field>
   </fields>
-
-  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
-  <rules>
-    <rule form="AB.16 租赁期限">
-      <point><![CDATA[租赁期限(AB.16)为租赁期限固定值域字典（一年以内/一年以上），供 BB.4.2.a 外部职场租赁与 BB.4.2.b 内部职场租赁「租赁期限」列共同引用（两表同名、同说明、同录入方式）——系统按「租赁期终止月 − 租赁期起始月 + 1」的月数自动落档、不可手工选，并作为资本化判定依据（≤12 个月→一年以内＝费用化、>12 个月→一年以上＝资本化，与③资本化判据一一对应；结果口径：一年以上→资本化：形成使用权资产 1621 与租赁负债 2602，由 BB.4.2.b.1 / BB.4.2.a.1 按月测算利息与负债（折旧由 BB.4.5 计提）；一年以下（含 12 个月）→费用化：月租金直接进费用，不进 1621/2602），不可在编制表内新增值。]]></point>
-    </rule>
-  </rules>
 
   <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['AB.16']） -->
   <scenarios>

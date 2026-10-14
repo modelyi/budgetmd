@@ -3,14 +3,14 @@
  * =============================================================================
  * 用法：npx tsx scripts/verifyXmlFirstRender.ts
  *
- * 目的：证明把调研页六处文字取数改成「XML 优先、TS 兜底」后，**取数结果与迁移前逐字相同**：
+ * 目的：证明把调研页内容取数改成「XML 优先、TS 兜底」后，**取数结果与迁移前逐字相同**：
  *   ① 基线（迁移前行为）：不注册任何 XML，全部取 TS 常量；
  *   ② 现状（迁移后行为）：注册 src/data/texts/*.xml 后，按前端同款表达式取数
  *      （getFormText(code)?.xxx ?? TS 兜底）。
  *   两者对每张表逐字段深比较，必须完全一致（含各区块「有/无」语义）。
  *
  * 覆盖：②字段说明（调用组件真实函数 fieldsForDisplay vs fieldsForDisplayFromTs）/
- *       ③规则要点（含配色按 TS 分组下标）/ ④适用情形 / ⑤数据关系 / ⑥转换事件 + 无分录说明。
+ *       ④适用情形 / ⑤数据关系 / ⑥转换事件 + 无分录说明。
  * 另：A1.2 列登记簿、三表取数规则、科目说明的 XML 优先覆盖，由
  *     scripts/generateResearchMarkdownContent.ts 产物 md5 与迁移前一致来证明（见任务报告）。
  */
@@ -25,8 +25,6 @@ import { BUDGET_FIELD_REGISTRY } from '../src/data/budgetFormRegistry';
 import { RESEARCH_SUB_ENTRIES } from '../src/data/researchSubEntries';
 import {
   BUSINESS_BLOCKS,
-  findRules,
-  findSubRules,
   fieldsForDisplay,
   fieldsForDisplayFromTs,
   APPLICABLE_SCENARIOS,
@@ -60,7 +58,6 @@ interface RenderText {
   relation: unknown;
   conversion: { items: unknown[] } | undefined;
   noVoucher: string | undefined;
-  rules: { form: string; points: string[]; color: string }[];
   fields: { fieldCode: string; fieldName: string; source: string; remark: string }[];
 }
 
@@ -72,12 +69,6 @@ function baseline(code: string): RenderText {
   const parent = PARENT.get(code) ?? code;
   const isSub = PARENT.has(code);
   // 与组件内 formLevelNoteKey / scenarioKey / relationKey / conversionKey 的「迁移前」表达式一致
-  const subRules = isSub ? findSubRules(code) : null;
-  const fromTsRules = (subRules && subRules.length > 0 ? subRules : findRules(parent)).map((r) => ({
-    form: r.form,
-    points: r.points,
-    color: r.color,
-  }));
   const scenarioKey = isSub && APPLICABLE_SCENARIOS[code] ? code : parent;
   const relationKey = isSub && FORM_DATA_RELATION_SUMMARY[code] ? code : parent;
   const conversionKey =
@@ -87,25 +78,12 @@ function baseline(code: string): RenderText {
     relation: FORM_DATA_RELATION_SUMMARY[relationKey],
     conversion: FINANCIAL_STATEMENT_CONVERSION[conversionKey],
     noVoucher: NO_VOUCHER_FORM_NOTE[conversionKey],
-    rules: fromTsRules,
     fields: normFields(fieldsForDisplayFromTs(code)),
   };
 }
 
 /** 迁移后行为：与 ResearchSummaryView 组件内完全相同的 XML 优先取数表达式 */
 function xmlFirst(code: string, parent: string): RenderText {
-  // ③ 规则要点：子条目无专属规则时回退父表单编码（组件 rules useMemo 同款）
-  const xmlRuleCode = PARENT.has(code) && (getFormText(code)?.rules.length ?? 0) > 0 ? code : parent;
-  const fromTsRules = (PARENT.has(code) && findSubRules(code) ? findSubRules(code)! : findRules(parent)).map((r) => ({
-    form: r.form,
-    points: r.points,
-    color: r.color,
-  }));
-  const xmlRules = getFormText(xmlRuleCode)?.rules;
-  const rules = xmlRules && xmlRules.length > 0
-    ? xmlRules.map((r, i) => ({ form: r.form, points: r.points, color: fromTsRules[i]?.color ?? fromTsRules[0]?.color ?? '#2563eb' }))
-    : fromTsRules;
-
   // ④⑤⑥：子条目有内容时用子条目编码，否则回退父表单编码
   const scenarioKey = PARENT.has(code) && (APPLICABLE_SCENARIOS[code] || (getFormText(code)?.applies.length ?? 0)) ? code : parent;
   const relationKey = PARENT.has(code) && (FORM_DATA_RELATION_SUMMARY[code] || getFormText(code)?.relation) ? code : parent;
@@ -124,7 +102,7 @@ function xmlFirst(code: string, parent: string): RenderText {
   })();
   const noVoucher = getFormText(conversionKey)?.noVoucher || NO_VOUCHER_FORM_NOTE[conversionKey];
 
-  return { scenario, relation, conversion, noVoucher, rules, fields: normFields(fieldsForDisplay(code)) };
+  return { scenario, relation, conversion, noVoucher, fields: normFields(fieldsForDisplay(code)) };
 }
 
 // ── ① 先算基线（此刻 xmlTexts 未注册任何 XML，glob 在 Node 下为空 → 纯 TS 行为）──
@@ -152,7 +130,7 @@ for (const code of codes) {
   });
 }
 
-console.log(`[verify] 已注册 XML ${files.length} 个；比对表单/TAB 编码 ${compared} 个 × 6 类取数（字段/规则要点/适用情形/数据关系/转换规则/无分录说明）`);
+console.log(`[verify] 已注册 XML ${files.length} 个；比对表单/TAB 编码 ${compared} 个 × 5 类取数（字段/适用情形/数据关系/转换规则/无分录说明）`);
 if (bad.length === 0) {
   console.log('[verify] ✅ XML 优先取数与 TS 兜底取数逐字一致：渲染结果与迁移前完全相同（0 处差异）');
   process.exit(0);

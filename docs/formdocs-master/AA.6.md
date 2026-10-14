@@ -597,12 +597,6 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
-## ③ 关键规则要点
-
-**AA.6 预算项目主数据**
-
-- 项目类型引用AB.7字典；同一项目编码可被多张编制表引用（如BB.3.1、BAA.8）。
-
 ## ④ 适用业务情形
 
 **适用于**

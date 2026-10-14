@@ -8,7 +8,7 @@
  *      —— 属性值大量重复（22 个字段的 source 都是「本表维护」）时，首处命中会改错节点；
  *   ② 回读：目标槽位读出来 = 写入值（属性转义 / CDATA 都过一遍）；
  *   ③ 无损：正向写新值 → 反向写回原文，结果必须与原文件**逐字节一致**（证明没误伤别的节点）；
- *   ④ 边角：特殊字符转义、含 ]]> 拒绝、聚合键 rulesBlock 定位不到、空值拒绝、
+ *   ④ 边角：特殊字符转义、含 ]]> 拒绝、未知聚合键定位不到、空值拒绝、
  *      同键连续两次写入、编码与文件不符拒绝。
  *
  * 只读校验（全部在内存里做文本替换），不写任何文件；
@@ -42,10 +42,6 @@ function openKeys(code: string, ft: ReturnType<typeof parseFormTextXml>): string
     occ.set(f.code, n + 1);
     for (const slot of ['name', 'source', 'remark'] as const) keys.push(`${code}::field::${f.code}#${n}::${slot}`);
   }
-  ft.rules.forEach((r, i) => {
-    keys.push(`${code}::rule::${i}::form`);
-    r.points.forEach((_, j) => keys.push(`${code}::rule::${i}::point::${j}`));
-  });
   ft.applies.forEach((_, i) => keys.push(`${code}::applies::${i}`));
   ft.notApplies.forEach((_, i) => keys.push(`${code}::notApplies::${i}`));
   if (ft.relation) {
@@ -105,7 +101,7 @@ for (const file of files) {
     // ② 结构：节点数、行数不变
     if (res.xml.split('\n').length !== rawLines) failures.push(`${tag} → 行数被改变`);
     if (ft2.fields.length !== ft.fields.length || ft2.events.length !== ft.events.length
-      || ft2.rules.length !== ft.rules.length || ft2.applies.length !== ft.applies.length
+      || ft2.applies.length !== ft.applies.length
       || ft2.relation?.dataSources.length !== ft.relation?.dataSources.length) {
       failures.push(`${tag} → 节点数被改变`);
     }
@@ -137,7 +133,7 @@ const edge = (label: string, ok: boolean, detail = '') => {
   edge('CDATA 特殊字符原样写入', rc.ok && !!rc.xml && rc.xml.includes(special));
   edge('CDATA 特殊字符回读', !!rc.xml && resolveSlotOriginal(parseFormTextXml(rc.xml, 'BB.1.1'), cdataKey)?.original === special);
   edge('含 ]]> 被拒', applyOverrideToXml(raw, cdataKey, 'x ]]> y', 'BB.1.1').reason === 'cdata-unsafe');
-  edge('聚合键 rulesBlock 定位不到', applyOverrideToXml(raw, 'BB.1.1::rulesBlock', 'x', 'BB.1.1').reason === 'unmapped');
+  edge('未知聚合键定位不到', applyOverrideToXml(raw, 'BB.1.1::unknownBlock', 'x', 'BB.1.1').reason === 'unmapped');
   edge('空值被拒', applyOverrideToXml(raw, cdataKey, '   ', 'BB.1.1').reason === 'empty-value');
   edge('编码与文件不符被拒', applyOverrideToXml(raw, 'ZZ.9::noVoucher', 'x', 'ZZ.9').reason === 'code-mismatch');
   const cdataOriginal = resolveSlotOriginal(ft, cdataKey)?.original ?? '';

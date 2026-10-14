@@ -8,7 +8,7 @@
     · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
     · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
 
-  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  迁移源：ResearchSummaryView.tsx（字段说明/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
   解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
     前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
     脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
@@ -30,15 +30,6 @@
     <field code="annualPayment" name="全年付款额合计" source="本表公式"><![CDATA[=SUM(12个月付款额)]]></field>
     <field code="annualTransferAmount" name="全年转固金额合计" source="本表公式"><![CDATA[=SUM(12个月转固金额)]]></field>
   </fields>
-
-  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
-  <rules>
-    <rule form="BB.3.2 基建工程采购预算">
-      <point><![CDATA[主表：维度=预算项目、部门（默认二级部门）、法人公司、业务类型（土建/装修/土地购买，位于法人公司之后、供应商之前）、供应商；月度验收额/付款额手工填报；转固金额为公式字段（按月汇总基建转固明细表同月转固原值）。]]></point>
-      <point><![CDATA[附表（参照BB.4.1.d自制设备转固明细表逻辑）：基建转固明细表，维度=序号/预算项目(基建工程)/部门/转固月份/资产类别，度量=原值，末列=资产描述（转固资产的描述（建筑物/工程名称、用途），仅用于人眼识别、不参与任何测算与分录，与 BB.4.1.d/BB.4.3/BB.4.4.b/BB.4.5 的资产描述同口径）；用户直接填报各笔基建工程达到可使用状态的转固原值，按月合计自动汇总至主表转固金额，转固资产按AA.9资产类别参数下月起提折旧。]]></point>
-      <point><![CDATA[【三口径分离】验收额 → 在建工程 1604 发生额增加（工程验收确认在建工程原值）；付款额 → 仅驱动 CF-14 购建固定资产支付的现金，不构成在建工程原值；转固金额 → 1604 转出、1601 固定资产原值增加（按 BB.3.2.b 基建转固明细表的转固月份），三者不得互相引用为金额来源。]]></point>
-    </rule>
-  </rules>
 
   <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.3.2']） -->
   <scenarios>

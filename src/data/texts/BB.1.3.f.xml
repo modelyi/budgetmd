@@ -8,7 +8,7 @@
     · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
     · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
 
-  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  迁移源：ResearchSummaryView.tsx（字段说明/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
   解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
     前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
     脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
@@ -37,15 +37,6 @@
     <field code="serviceMaterials.monthlyCosts" name="成本" source="当月数量×BAA.4 物料标准成本"><![CDATA[1~12月各一列；系统计算，不可手工修改；物料成本按服务方所在法人采集（成本数据来源口径）；报表（6401.1）归集按签约主体（法人公司）与对外收入同法人配比]]></field>
     <field code="notes" name="备注" source="本表录入"><![CDATA[补充说明本行服务物料消耗的口径与特殊事项]]></field>
   </fields>
-
-  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
-  <rules>
-    <rule form="BB.1.3.f 物料明细_财务查询">
-      <point><![CDATA[汇总 .d 物料明细（存量+增量，订单编号区分）的物料成本，按物料编码+好坏件聚合，只读查询。]]></point>
-      <point><![CDATA[「内部供应商」列随填报明细的存量+增量自动合并带出（只读）：留空或=签约主体（同法人）=自供（不构成内部交易、不触发），填 AA.10 内部供应商=其他法人提供（跨法人内部购销）；「内部供应商」列由交易路径管理岗在 .d 物料明细维护。]]></point>
-      <point><![CDATA[内部交易取数（真实购销模型，替代原「平移+加成分离」；本表为物料侧分录与取数生成点）：各行「内部供应商」非空且≠签约主体（法人公司）时触发——①内部供应商出库（出库成本=数量×BAA.4 标准成本，存货 1405 减少）并按完整内部销售价=出库成本+加成款（加成款=出库成本×BAA.11 加成比例）确认其他业务收入-内部往来 6001.2、结转其他业务成本 6401.2（出库成本）；②签约主体按采购价（出库成本+加成款）采购入库 1405，随后随服务消耗结转 6401.1 服务成本-物料（加成进成本，不再走 6602 管理费用-内部往来）；③往来挂其他应收款-内部往来 1221.1（提供方）/其他应付款-内部往来 2241.1（签约主体），按合同账期真实现金付款结算、期末保留真实余额；④增值税：货物 13%，双方分别计销项/进项、各法人独立申报，并在 BF.4.b 增值税计提附表「内部交易销项税额/内部交易进项税额」两行取数；⑤集团合并层 6001.2（出库成本+加成款）↔6401.1（出库成本+加成款）全额抵销、1221.1↔2241.1 互抵、销项↔进项对冲，合并后只保留内部供应商的真实出库成本。]]></point>
-    </rule>
-  </rules>
 
   <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.1.3.f']） -->
   <scenarios>

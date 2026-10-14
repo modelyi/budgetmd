@@ -98,12 +98,6 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
-## ③ 关键规则要点
-
-**AA.4 客户主数据**
-
-- 客户类型引用AB.8字典。
-
 ## ④ 适用业务情形
 
 **适用于**

@@ -8,7 +8,7 @@
     · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
     · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
 
-  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  迁移源：ResearchSummaryView.tsx（字段说明/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
   解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
     前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
     脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
@@ -25,15 +25,6 @@
     <field code="annualTotal" name="全年合计" source="本表公式"><![CDATA[=SUM(1~12月消耗金额)]]></field>
     <field code="notes" name="备注说明" source="本表录入"><![CDATA[补充研发长期物料消耗的业务假设或特殊事项]]></field>
   </fields>
-
-  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
-  <rules>
-    <rule form="BAP.3 物料消耗需求汇总表_研发长期">
-      <point><![CDATA[归属编制前提(BAP)；表样逻辑与BAP.2一致（维度=预算部门、物料编码、物料名称、物料类别（固定「研发物料」，关联 AB.9 存货物料类别字典）；度量=全年合计+1~12月分月金额）。]]></point>
-      <point><![CDATA[核心定位：需要在需求采集模块专门做「研发长期物料消耗需求采集」功能，待研发长期物料消耗需求数据采集后，再抽取汇总生成此表。]]></point>
-      <point><![CDATA[物料类别固定为「研发物料」（关联 AB.9 存货物料类别字典），本表仅承载研发长期物料消耗需求、不承载其他物料类别消耗，无需逐行判断。]]></point>
-    </rule>
-  </rules>
 
   <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BAP.3']） -->
   <scenarios>

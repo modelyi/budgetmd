@@ -150,12 +150,6 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
-## ③ 关键规则要点
-
-**AA.7 预算产品主数据**
-
-- 产品类别（财务口径）引用AB.3字典，决定默认收入确认方式与成本率。
-
 ## ④ 适用业务情形
 
 **适用于**

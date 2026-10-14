@@ -535,12 +535,6 @@ export function clipFormText(t: any): any {
       source: clipT3aText(f.source ?? ''),
       remark: clipT3aText(f.remark ?? ''),
     }));
-  out.rules = (t.rules ?? [])
-    .map((r: any) => ({
-      ...r,
-      points: r.points.filter((p: string) => !isDroppedT3aItem(p)).map(clipT3aText).filter(Boolean),
-    }))
-    .filter((r: any) => r.points.length > 0);
   out.applies = (t.applies ?? []).filter((p: string) => !isDroppedT3aItem(p)).map(clipT3aText).filter(Boolean);
   out.notApplies = (t.notApplies ?? []).filter((p: string) => !isDroppedT3aItem(p)).map(clipT3aText).filter(Boolean);
   if (t.relation) {

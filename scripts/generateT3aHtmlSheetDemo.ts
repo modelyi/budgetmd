@@ -4,7 +4,7 @@
  *
  * 背景：Markdown 表格无法表达两行表头、【全年合计】+【1~12月】时间组、度量子列这类复杂表头；
  * 本脚本从表样分片 JSON 自动生成 <table>（rowspan/colspan）片段，表头内容与现有表样逐格一致、
- * 零手写；概述/规则/适用情形等普通文字保持纯 Markdown（取自 src/data/texts/{code}.xml 文字源）。
+ * 零手写；适用情形等普通文字保持纯 Markdown（取自 src/data/texts/{code}.xml 文字源）。
  *
  * 用法：npx tsx scripts/generateT3aHtmlSheetDemo.ts [表单编码...]
  *   默认示范 BB.1.1（合同签约额，两行表头+时间组）、BB.1.2（软硬件收入与成本，时间组+度量子列）。
@@ -122,7 +122,7 @@ function gridToHtmlTable(grid: Grid): string {
   return lines.join('\n');
 }
 
-// ── 单表单段落（概述 / 表样 / ③ 关键规则 / ④ 适用情形：普通文字纯 Markdown） ──
+// ── 单表单段落（表样 / ④ 适用情形：普通文字纯 Markdown） ──
 
 function formSection(code: string): string {
   const shardPath = resolve(__dirname, `../src/data/sheets/${code}.json`);
@@ -143,13 +143,6 @@ function formSection(code: string): string {
     out.push('');
   });
 
-  const rulePoints = text.rules.flatMap((r) => r.points);
-  if (rulePoints.length > 0) {
-    out.push('### ③ 关键规则要点');
-    out.push('');
-    rulePoints.forEach((p) => out.push(`- ${p}`));
-    out.push('');
-  }
   if (text.applies.length > 0 || text.notApplies.length > 0) {
     out.push('### ④ 适用业务情形');
     out.push('');
@@ -166,13 +159,13 @@ const header = `# T3A 表样示范：Markdown + 内嵌 HTML 表头
 
 > 本篇示范「Markdown + 表头 HTML 嵌入」的表样表达模式：两行表头、【全年合计】+【1~12月】时间组、
 > 度量子列这类 Markdown 表格表达不了的复杂表头，用内嵌 HTML \`<table>\`（rowspan/colspan）表达；
-> 概述、规则、适用情形等普通内容保持纯 Markdown。
+> 适用情形等普通内容保持纯 Markdown。
 
 ## 一、这个模式解决什么问题
 
 | 内容 | 表达方式 | 原因 |
 | :--- | :--- | :--- |
-| 概述、关键规则、适用情形 | 纯 Markdown（标题/列表） | 普通文字，Markdown 足够 |
+| 适用情形 | 纯 Markdown（标题/列表） | 普通文字，Markdown 足够 |
 | 单行表头的简单表格 | 纯 Markdown 表格 | Markdown 原生支持 |
 | 两行表头/时间组/度量子列 | 内嵌 HTML \`<table>\` | Markdown 表格无法跨行跨列合并表头 |
 

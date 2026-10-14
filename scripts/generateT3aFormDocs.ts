@@ -32,7 +32,7 @@
  *
  * 每篇文档结构（固定，章节顺序与调研页 ResearchSummaryView 完全一致，表样置首）：
  *   H1 表单编码+名称 → ① 预算表样（内嵌 HTML，多子表多段）
- *   → ② 字段与值说明 → ③ 关键规则要点 → ④ 适用业务情形（适用于/不适用于两组）
+ *   → ② 字段与值说明 → ④ 适用业务情形（适用于/不适用于两组）
  *   → ⑤ 预算编制视角：数据关系总结（数据来源（上游）/输出影响（下游）/关键编制规则）
  *   → ⑥ 财务报表项转换规则（仅登记的表单输出，无则整节省略）
  *
@@ -450,20 +450,6 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
     sec.fields.forEach((f) => {
       out.push(`| ${mdCell(f.display || f.name)} | ${mdCell(f.source)} | ${mdCell(f.remark)} |`);
     });
-    out.push('');
-  });
-
-  // 三、③ 关键规则要点
-  out.push('## ③ 关键规则要点');
-  out.push('');
-  text.rules.forEach((r, ri) => {
-    // 规则组的 form 标题（如「BB.1.3 技术服务收入与成本预算」）属原文，始终保留；
-    // 单一规则组时也不省略，保证逐字一致（页面在 rules 面板同样显示 form 标题行）
-    if (r.form) {
-      out.push(`**${r.form}**`);
-      out.push('');
-    }
-    r.points.forEach((p) => out.push(`- ${p}`));
     out.push('');
   });
 
@@ -936,20 +922,6 @@ function generateA1SpecialDoc(code: string, text: FormText, allTexts: Record<str
     out.push('');
   }
 
-  // ③ 关键规则要点
-  if (text.rules.length > 0) {
-    out.push('## ③ 关键规则要点');
-    out.push('');
-    text.rules.forEach((r) => {
-      if (r.form) {
-        out.push(`**${r.form}**`);
-        out.push('');
-      }
-      r.points.forEach((p) => out.push(`- ${p}`));
-      out.push('');
-    });
-  }
-
   // ④ 适用业务情形
   if (text.applies.length > 0 || text.notApplies.length > 0) {
     out.push('## ④ 适用业务情形');
@@ -1012,7 +984,7 @@ function generateA1SpecialDoc(code: string, text: FormText, allTexts: Record<str
 
 /**
  * 抽样校验：重新解析 XML 并逐字比对生成的文档中出现的每段原文
- * （字段 name、source、remark / 规则要点 / 适用情形 / 数据关系全部字段 / ⑥ events）。
+ * （字段 name、source、remark / 适用情形 / 数据关系全部字段 / ⑥ events）。
  * 全部 must be contained verbatim（mdCell 转义除外——校验用同样的转义口径）。
  */
 function verifyDocVerbatim(code: string, doc: string, textMap?: Record<string, FormText>): { ok: boolean; missing: string[] } {
@@ -1036,10 +1008,6 @@ function verifyDocVerbatim(code: string, doc: string, textMap?: Record<string, F
     expectName(`fields[${i}].name`, f.name, f.display);
     expect(`fields[${i}].source`, f.source);
     expect(`fields[${i}].remark`, f.remark);
-  });
-  text.rules.forEach((r, ri) => {
-    expect(`rules[${ri}].form`, r.form);
-    r.points.forEach((p, pi) => expect(`rules[${ri}].points[${pi}]`, p));
   });
   text.applies.forEach((p, i) => expect(`applies[${i}]`, p));
   text.notApplies.forEach((p, i) => expect(`notApplies[${i}]`, p));

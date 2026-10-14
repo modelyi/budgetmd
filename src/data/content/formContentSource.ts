@@ -2,7 +2,7 @@
  * 表单「内容源」适配器
  * =============================================================================
  * 把一张预算表（src/data/texts/<code>.xml 解析后的 FormText）的全部可编辑文本
- * （字段名·来源·说明 / 规则 / 适用情形 / 数据关系 / 报表项转换）
+ * （字段名·来源·说明 / 适用情形 / 数据关系 / 报表项转换）
  * 转成 MdField；编辑结果写回表单覆盖层（textOverrides），渲染端据此生效。
  */
 import type { ContentSource } from './contentSource';
@@ -27,12 +27,6 @@ function collectFormFields(code: string, ft: FormText): MdField[] {
     push(textKey.field(code, f.code, occ, 'name'), 'title', f.name, '② 字段说明');
     if (f.source) push(textKey.field(code, f.code, occ, 'source'), 'label', f.source);
     if (f.remark) push(textKey.field(code, f.code, occ, 'remark'), 'text', f.remark);
-  });
-
-  // ③ 关键规则
-  ft.rules.forEach((rg, ri) => {
-    if (rg.form) push(textKey.ruleForm(code, ri), 'title', rg.form, '③ 关键规则');
-    rg.points.forEach((pt, pi) => push(textKey.rulePoint(code, ri, pi), 'line', pt));
   });
 
   // ④ 适用 / 不适用情形

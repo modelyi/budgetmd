@@ -8,7 +8,7 @@
     · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
     · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
 
-  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  迁移源：ResearchSummaryView.tsx（字段说明/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
   解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
     前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
     脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
@@ -20,14 +20,6 @@
     <field code="section" name="章节" source="本方案文档固定章节"><![CDATA[固定 10 章：1.一句话结论 / 2.业务模块与涉及表单（四个模块）/ 3.业务流程（端到端七步）/ 4.表单 ER 关系 / 5.输入与输出（逐表）/ 6.财务视角：科目与落点（对外 vs 内部）/ 7.合并报表与抵销 / 8.勾稽与校验（系统自动）/ 9.价值 / 10.前提与风险；章节名固定、不随年度变化]]></field>
     <field code="content" name="内容" source="本方案文档正文"><![CDATA[该章节的白话正文（销售预算及内部交易处理口径说明，含规则要点与前后衔接）；文档式表样不做金额、公式与示例数据，不参与任何表间取数]]></field>
   </fields>
-
-  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
-  <rules>
-    <rule form="A2B 销售预算及内部交易处理方案">
-      <point><![CDATA[【三条线】销售预算＝签约额备查（BB.1.1，不进三表）+ 软硬件销售（BB.1.2：硬件销售/软件销售）+ 技术服务（BB.1.3），收入均按「签约主体（法人公司）」出对外口径。]]></point>
-      <point><![CDATA[【手工三行】2203 预收款项、2204 合同负债、1407 合同资产直接在三表手工调整列填报（默认 0），不与销售表自动联动。]]></point>
-    </rule>
-  </rules>
 
   <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['A2B']） -->
   <scenarios>

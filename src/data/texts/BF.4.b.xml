@@ -8,7 +8,7 @@
     · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
     · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
 
-  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  迁移源：ResearchSummaryView.tsx（字段说明/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
   解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
     前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
     脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
@@ -30,17 +30,6 @@
     <field code="actualPayment" name="本期实际缴纳增值税" source="本表公式"><![CDATA[=上月「本期应纳增值税（计提）」（当月计提、次月申报缴纳；1月缴上年12月、12月计提数在次年1月缴）；即征即退为先征后退、本行不作扣减；带出至 BF.4.a 缴纳列，并作为城建税7%与教育费附加3%+地方教育附加2%的计税基数（以实际缴纳数为基数，非计提数）]]></field>
     <field code="remark" name="备注" source="本表录入"><![CDATA[口径说明；增值税按法人公司分别申报缴纳，集团合并时各法人之间不得相互抵减；内部交易（关联交易）为应税交易：卖方/提供方计销项、买方/接受方计进项，同额同率（货物 13%、服务 6%、不动产租赁 9%、有形动产租赁 13%，取 AB.15）；增值税为价外税，不影响损益、不影响存货/资产成本（1405/1601/1701 保持不含税），只影响含税现金流与内部往来（1221/2241）含税额；集团合并层销项与进项自然对冲（净 0）（按进项当期全额抵扣的简化测算，不考虑时间差与留抵）、内部结算现金流互抵（净 0）]]></field>
   </fields>
-
-  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
-  <rules>
-    <rule form="BF.4.b 增值税计提预算表">
-      <point><![CDATA[【表定位与独立表样】增值税计提辅助测算表：有完整独立的 31 列表样结构（Row0 为时间组，Row1 为「计税基数(不含税)」与「税额」双度量子列，12 项字段规范登记），按月展开测算。]]></point>
-      <point><![CDATA[【销项税额测算】货物与整机销售收入 13% 取自 BB.1.2.c，技术服务收入 6% 取自 BB.1.3.c；不单列软件销售；按不含税基数 × 适用税率测算。]]></point>
-      <point><![CDATA[【进项税额测算】物料采购 13% 取自 BB.3.3.C，设备采购 13% 取自 BB.3.1.C + BB.4.3，基建工程 9% 取自 BB.3.2；费用类可抵扣进项税额与减：不可抵扣及进项税额转出由编制人员手工填报。]]></point>
-      <point><![CDATA[【应纳税额与即征即退】应纳税额 = MAX(0, 销项合计 − 进项合计 − 上期留抵)；上期留抵税额结转行：1月由财务手工补填上年末期初留抵数，2~12月按上月期末留抵自动滚动结转；「增值税即征即退/专项返还」由编制人员根据软件产品、半导体/集成电路及先进制造税收优惠政策手工填报预计数（属先征后退）；次月申报缴纳。]]></point>
-      <point><![CDATA[【测算结果应用】本表测算的「本期应纳增值税（计提）」作为主表 BF.4.a「增值税」行「预算计提」列的默认初始值（允许主表手工调整覆盖）；不单独生成会计分录（由主表集中生成）。]]></point>
-    </rule>
-  </rules>
 
   <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BF.4.b']） -->
   <scenarios>

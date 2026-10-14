@@ -8,7 +8,7 @@
     · 结构化元数据（inputMode / required / dataType 等）不写在本文件，继续留在 TS 源；
     · 文字只搬不改：内容与 TS 文字源逐字一致（校验见 scripts/validateTextsXml.ts）。
 
-  迁移源：ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
+  迁移源：ResearchSummaryView.tsx（字段说明/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）
   解析：src/utils/xmlTexts.ts（两端共用 parseFormTextXml）
     前端 —— import.meta.glob('/src/data/texts/*.xml', { as: 'raw' })
     脚本 —— scripts/generateResearchMarkdownContent.ts（readdirSync/readFileSync → registerRawTexts）
@@ -35,17 +35,6 @@
     <field code="yearAfterNextContractAmount" name="后年签约额" source="本表录入"><![CDATA[按合同填报后年签约额；金额不含税，单位万元]]></field>
     <field code="notes" name="编制说明" source="本表录入"><![CDATA[补充合同签约预算的业务假设或特殊事项]]></field>
   </fields>
-
-  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->
-  <rules>
-    <rule form="BB.1.1 合同签约额预算表">
-      <point><![CDATA[字段及表样按列序填写：A列合同编码、B列合同名称、C列合同性质、D列客户、E列预算项目、F列预算产品、G列机台（文本，用户必输）、H列区域、I列预算部门、J列法人公司、K列产品类别、L列收入方式，后接本年签约额（全年合计+1~12月）、下年签约额、后年签约额和编制说明；「内部供应商」为备查字段，不在表样中占列。]]></point>
-      <point><![CDATA[合同编码、合同名称、客户、预算项目、预算产品、机台、区域、预算部门、法人公司等维度按表样列序填写；合同性质仅允许「存量框架合同 / 新增商业机会」两值。]]></point>
-      <point><![CDATA[预算产品选择后自动带出产品类别与收入方式，允许按业务需要修改；机台字段为文本，由用户输入，说明里强调用户必输；I列为「预算部门」口径，默认明细到二级部门。]]></point>
-      <point><![CDATA[金额（本年 1~12 月、下年、后年）均不含税，不允许负数或留空，未发生填 0。]]></point>
-      <point><![CDATA[本年签约额合计由 1~12 月签约额自动汇总，不可直接编辑；三年签约额均为 0 时给出确认提示。]]></point>
-    </rule>
-  </rules>
 
   <!-- ④ 适用业务情形（原 APPLICABLE_SCENARIOS['BB.1.1']） -->
   <scenarios>

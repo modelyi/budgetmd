@@ -12,7 +12,6 @@
  *   1. ②字段说明        fieldsForDisplayFromTs()（= BUDGET_FIELD_REGISTRY + 调研页投影/就地声明字段）
  *                       name=登记名（BUDGET_FIELD_REGISTRY.fieldName，供 A1.2 列登记簿）；
  *                       display=渲染名（投影与登记名不同时写出，缺省渲染名取 name）
- *   2. ③规则要点        findRules(parentCode) / findSubRules(subCode) 聚合结果
  *   3. ④适用情形        APPLICABLE_SCENARIOS
  *   4. ⑤数据关系        FORM_DATA_RELATION_SUMMARY
  *   5. ⑥转换规则        FINANCIAL_STATEMENT_CONVERSION + NO_VOUCHER_FORM_NOTE
@@ -37,8 +36,6 @@ import { FIXED_EXPENSE_BUDGET_SUBJECTS } from '../src/data/expenseBudgetSubjects
 import { PL_ROWS, BS_ROWS, CF_ROWS, STATEMENT_RULES } from '../src/utils/adapters/financial';
 import {
   BUSINESS_BLOCKS,
-  findRules,
-  findSubRules,
   fieldsForDisplayFromTs,
   APPLICABLE_SCENARIOS,
   FORM_DATA_RELATION_SUMMARY,
@@ -91,12 +88,10 @@ const FILE_HEADER = (code: string, name: string, source: string) =>
   `-->\n`;
 
 const SOURCE_NOTE =
-  'ResearchSummaryView.tsx（字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）';
+  'ResearchSummaryView.tsx（字段说明/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）';
 
 // ── 表单文字：按 formCode 组织 ───────────────────────────────────────────────
 
-/** 子条目编码集合（TAB 级目录条目），用于区分「子表专属规则」与「父表单聚合规则」 */
-const SUB_ENTRY_CODES = new Set(RESEARCH_SUB_ENTRIES.map((e) => e.code));
 const REGISTRY_FORM_CODES = new Set(BUDGET_FIELD_REGISTRY.map((f) => f.formCode));
 const REGISTRY_FIELD_NAME = new Map<string, string>();
 BUDGET_FIELD_REGISTRY.forEach((f) => REGISTRY_FIELD_NAME.set(`${f.formCode}|${f.fieldCode}`, f.fieldName));
@@ -104,7 +99,7 @@ BUDGET_FIELD_REGISTRY.forEach((f) => REGISTRY_FIELD_NAME.set(`${f.formCode}|${f.
 /** 一张表的 XML 正文（各区块：有内容才写，保证渲染取数语义与迁移前一致） */
 function buildFormXml(code: string, name: string): { xml: string; stat: string } {
   const parts: string[] = [];
-  const count = { fields: 0, rules: 0, scenarios: 0, relation: 0, events: 0, noVoucher: 0 };
+  const count = { fields: 0, scenarios: 0, relation: 0, events: 0, noVoucher: 0 };
 
   // ② 字段与值说明（文字：登记名 / 渲染名 / 数据来源 / 其他说明）
   const emitFields = REGISTRY_FORM_CODES.has(code) || code.startsWith('BB.4.X.');
@@ -118,21 +113,6 @@ function buildFormXml(code: string, name: string): { xml: string; stat: string }
     });
     parts.push(`  <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='${code}'） -->\n  <fields>\n${lines.join('\n')}\n  </fields>\n`);
     count.fields = fields.length;
-  }
-
-  // ③ 关键规则要点（与前端 rules 取数完全一致：子条目专属规则优先，无专属规则时用父表单聚合规则）
-  const subRules = SUB_ENTRY_CODES.has(code) ? findSubRules(code) : null;
-  const ruleCode = SUB_ENTRY_CODES.has(code) ? RESEARCH_SUB_ENTRIES.find((e) => e.code === code)?.parent ?? code : code;
-  const ruleGroups = subRules && subRules.length > 0 ? subRules : findRules(ruleCode);
-  if (ruleGroups.length > 0) {
-    const groups = ruleGroups.map(
-      (g) =>
-        `    <rule ${attr('form', g.form)}>\n` +
-        g.points.map((p) => `      <point>${cdata(p)}</point>`).join('\n') +
-        `\n    </rule>`,
-    );
-    parts.push(`  <!-- ③ 关键规则要点（原 BUSINESS_BLOCKS 按表单编码聚合） -->\n  <rules>\n${groups.join('\n')}\n  </rules>\n`);
-    count.rules = ruleGroups.length;
   }
 
   // ④ 适用业务情形
@@ -194,7 +174,7 @@ function buildFormXml(code: string, name: string): { xml: string; stat: string }
   const xml = hasContent
     ? FILE_HEADER(code, name, SOURCE_NOTE) + `<form ${attr('code', code)} ${attr('name', name)}>\n\n` + parts.join('\n') + `\n</form>\n`
     : '';
-  const stat = `字段${count.fields} 规则组${count.rules} 情形${count.scenarios} 关系项${count.relation} 事件${count.events} 无分录${count.noVoucher}`;
+  const stat = `字段${count.fields} 情形${count.scenarios} 关系项${count.relation} 事件${count.events} 无分录${count.noVoucher}`;
   return { xml, stat };
 }
 
@@ -298,8 +278,8 @@ const stale = existsSync(textsDir) ? readdirSync(textsDir).filter((f) => f.toLow
 stale.forEach((f) => unlinkSync(resolve(textsDir, f)));
 console.log(`[migrate] 已清理旧 XML ${stale.length} 个：${stale.join('、') || '（无）'}`);
 
-// 候选表单编码：注册表表单 + TAB 子条目 + 六个文字区块的登记编码 + 业务分组登记的表单编码
-// （不收集规则 form 的首 token：其中含组合写法/分组标签，不是可选中表单编码；findRules 已按编码聚合规则）
+// 候选表单编码：注册表表单 + TAB 子条目 + 五个文字区块的登记编码 + 业务分组登记的表单编码
+// （不收集规则 form 的首 token：其中含组合写法/分组标签，不是可选中表单编码）
 const candidates = new Set<string>();
 BUDGET_FIELD_REGISTRY.forEach((f) => candidates.add(f.formCode));
 RESEARCH_SUB_ENTRIES.forEach((e) => {

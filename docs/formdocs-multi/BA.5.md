@@ -108,12 +108,6 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
-## ③ 关键规则要点
-
-**BA.5 费用预算汇总表（显示为BAP.1）**
-
-- 归属编制前提(BAP)；按预算项目、预算部门（默认明细到二级部门）、费用科目维度录入全年及1~12月费用金额。
-
 ## ④ 适用业务情形
 
 **适用于**

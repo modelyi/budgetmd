@@ -60,14 +60,6 @@ export function resolveSlotOriginal(ft: FormText, key: string): SlotSource | nul
       if (slot === 'remark') return t(f.remark);
       return null;
     }
-    case 'rule': {
-      const idx = Number(parts[2]) || 0;
-      const g = ft.rules[idx];
-      if (!g) return null;
-      if (parts[3] === 'form') return a(g.form, 'form');
-      if (parts[3] === 'point') return t(g.points[Number(parts[4]) || 0]);
-      return null;
-    }
     case 'applies':
       return t(ft.applies[Number(parts[2]) || 0]);
     case 'notApplies':
@@ -111,8 +103,8 @@ export function resolveSlotOriginal(ft: FormText, key: string): SlotSource | nul
       return null;
     }
     default:
-      // 含 rulesBlock（整块规则要点，页面把多组规则合成一段纯文本）等聚合键：
-      // XML 里没有对应的单个节点 → 无法定位，调用方降级（浏览器覆盖 / 提示人工处理）。
+      // 其余未知/聚合键在 XML 里没有对应的单个节点 → 无法定位，调用方降级
+      // （浏览器覆盖 / 提示人工处理）。
       return null;
   }
 }
@@ -233,17 +225,6 @@ export function resolveNodeScope(xml: string, key: string): NodeScope | null {
       return scopeOf(
         nthElementByAttr(xml, 'field', 'code', code, Number(occRaw) || 0, fields.bodyStart, fields.bodyEnd),
       );
-    }
-    case 'rule': {
-      const rules = nthElement(xml, 'rules', 0);
-      if (!rules) return null;
-      const rule = nthElement(xml, 'rule', num(parts[2]), rules.bodyStart, rules.bodyEnd);
-      if (!rule) return null;
-      if (parts[3] === 'form') return scopeOf(rule);
-      if (parts[3] === 'point') {
-        return scopeOf(nthElement(xml, 'point', num(parts[4]), rule.bodyStart, rule.bodyEnd));
-      }
-      return null;
     }
     case 'applies':
     case 'notApplies': {
@@ -469,7 +450,7 @@ export function patchXml(
 export type ApplyOverrideReason =
   /** 新值为空（应走「还原原文」而不是写入空串） */
   | 'empty-value'
-  /** 覆盖键在 XML 里定位不到对应节点（未登记 XML / 聚合键如 rulesBlock / 节点文字为空） */
+  /** 覆盖键在 XML 里定位不到对应节点（未登记 XML / 未知聚合键 / 节点文字为空） */
   | 'unmapped'
   /** 覆盖键的表单编码与 XML 根节点编码不一致（拿错文件了） */
   | 'code-mismatch'

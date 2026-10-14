@@ -160,12 +160,6 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
-## ③ 关键规则要点
-
-**AA.10 供应商主数据**
-
-- 供应商类型与归属主体供BB.3.1"供应商"下拉引用。
-
 ## ④ 适用业务情形
 
 **适用于**

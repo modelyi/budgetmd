@@ -248,12 +248,6 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
-## ③ 关键规则要点
-
-**AA.1 预算年度与期间**
-
-- 预算年度与月度期间为全系统统一时间轴；期间锁定后不可再编辑已锁定月份的数据。
-
 ## ④ 适用业务情形
 
 **适用于**

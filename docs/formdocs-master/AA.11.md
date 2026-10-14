@@ -108,12 +108,6 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
-## ③ 关键规则要点
-
-**AA.11 物料主数据**
-
-- 物料编码为唯一身份来源，不区分法人；供BAA.4标准成本引用。
-
 ## ④ 适用业务情形
 
 **适用于**
