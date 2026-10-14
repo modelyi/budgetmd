@@ -2,7 +2,7 @@
  * 表单「内容源」适配器
  * =============================================================================
  * 把一张预算表（src/data/texts/<code>.xml 解析后的 FormText）的全部可编辑文本
- * （表概述 / 字段名·来源·说明 / 规则 / 适用情形 / 数据关系 / 报表项转换）
+ * （字段名·来源·说明 / 规则 / 适用情形 / 数据关系 / 报表项转换）
  * 转成 MdField；编辑结果写回表单覆盖层（textOverrides），渲染端据此生效。
  */
 import type { ContentSource } from './contentSource';
@@ -18,9 +18,6 @@ function collectFormFields(code: string, ft: FormText): MdField[] {
   const push = (key: string, kind: MdKind, original: string, section?: string) => {
     out.push({ key, kind, original, value: ovMap[key] ?? original, section });
   };
-
-  // ① 表概述
-  if (ft.overview) push(textKey.overview(code), 'text', ft.overview, '① 表概述');
 
   // ② 字段说明（同 code 重复时用 occ 序号）
   const occSoFar: Record<string, number> = {};

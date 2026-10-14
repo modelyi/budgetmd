@@ -46,8 +46,6 @@ export function resolveSlotOriginal(ft: FormText, key: string): SlotSource | nul
     v ? { original: v, attr: true, attrName } : null;
 
   switch (kind) {
-    case 'overview':
-      return t(ft.overview);
     case 'noVoucher':
       return t(ft.noVoucher);
     case 'field': {
@@ -225,8 +223,6 @@ export function resolveNodeScope(xml: string, key: string): NodeScope | null {
   const num = (v: string | undefined): number => Number(v) || 0;
 
   switch (kind) {
-    case 'overview':
-      return scopeOf(nthElement(xml, 'overview', 0));
     case 'noVoucher':
       return scopeOf(nthElement(xml, 'noVoucher', 0));
     case 'field': {

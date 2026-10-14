@@ -9,7 +9,7 @@
  *      （getFormText(code)?.xxx ?? TS 兜底）。
  *   两者对每张表逐字段深比较，必须完全一致（含各区块「有/无」语义）。
  *
- * 覆盖：表概述 / ②字段说明（调用组件真实函数 fieldsForDisplay vs fieldsForDisplayFromTs）/
+ * 覆盖：②字段说明（调用组件真实函数 fieldsForDisplay vs fieldsForDisplayFromTs）/
  *       ③规则要点（含配色按 TS 分组下标）/ ④适用情形 / ⑤数据关系 / ⑥转换事件 + 无分录说明。
  * 另：A1.2 列登记簿、三表取数规则、科目说明的 XML 优先覆盖，由
  *     scripts/generateResearchMarkdownContent.ts 产物 md5 与迁移前一致来证明（见任务报告）。
@@ -29,7 +29,6 @@ import {
   findSubRules,
   fieldsForDisplay,
   fieldsForDisplayFromTs,
-  FORM_LEVEL_NOTES,
   APPLICABLE_SCENARIOS,
   FORM_DATA_RELATION_SUMMARY,
   FINANCIAL_STATEMENT_CONVERSION,
@@ -46,7 +45,6 @@ RESEARCH_SUB_ENTRIES.forEach((e) => {
   candidates.add(e.code);
   candidates.add(e.parent);
 });
-Object.keys(FORM_LEVEL_NOTES).forEach((c) => candidates.add(c));
 Object.keys(APPLICABLE_SCENARIOS).forEach((c) => candidates.add(c));
 Object.keys(FORM_DATA_RELATION_SUMMARY).forEach((c) => candidates.add(c));
 Object.keys(FINANCIAL_STATEMENT_CONVERSION).forEach((c) => candidates.add(c));
@@ -58,7 +56,6 @@ const codes = [...candidates].sort().filter((c) => c && !/[\/\s、]/.test(c));
 const PARENT = new Map(RESEARCH_SUB_ENTRIES.map((e) => [e.code, e.parent]));
 
 interface RenderText {
-  formLevelNote: string | undefined;
   scenario: { applies: string[]; notApplies: string[] } | undefined;
   relation: unknown;
   conversion: { items: unknown[] } | undefined;
@@ -81,13 +78,11 @@ function baseline(code: string): RenderText {
     points: r.points,
     color: r.color,
   }));
-  const formLevelNoteKey = isSub && FORM_LEVEL_NOTES[code] ? code : parent;
   const scenarioKey = isSub && APPLICABLE_SCENARIOS[code] ? code : parent;
   const relationKey = isSub && FORM_DATA_RELATION_SUMMARY[code] ? code : parent;
   const conversionKey =
     isSub && (FINANCIAL_STATEMENT_CONVERSION[code] || NO_VOUCHER_FORM_NOTE[code]) ? code : parent;
   return {
-    formLevelNote: FORM_LEVEL_NOTES[formLevelNoteKey],
     scenario: APPLICABLE_SCENARIOS[scenarioKey],
     relation: FORM_DATA_RELATION_SUMMARY[relationKey],
     conversion: FINANCIAL_STATEMENT_CONVERSION[conversionKey],
@@ -111,13 +106,11 @@ function xmlFirst(code: string, parent: string): RenderText {
     ? xmlRules.map((r, i) => ({ form: r.form, points: r.points, color: fromTsRules[i]?.color ?? fromTsRules[0]?.color ?? '#2563eb' }))
     : fromTsRules;
 
-  // ④⑤⑥ + 表概述：子条目有内容时用子条目编码，否则回退父表单编码
+  // ④⑤⑥：子条目有内容时用子条目编码，否则回退父表单编码
   const scenarioKey = PARENT.has(code) && (APPLICABLE_SCENARIOS[code] || (getFormText(code)?.applies.length ?? 0)) ? code : parent;
   const relationKey = PARENT.has(code) && (FORM_DATA_RELATION_SUMMARY[code] || getFormText(code)?.relation) ? code : parent;
   const conversionKey = PARENT.has(code) && (FINANCIAL_STATEMENT_CONVERSION[code] || NO_VOUCHER_FORM_NOTE[code] || (getFormText(code)?.events.length ?? 0) || getFormText(code)?.noVoucher) ? code : parent;
-  const formLevelNoteKey = PARENT.has(code) && (FORM_LEVEL_NOTES[code] || getFormText(code)?.overview) ? code : parent;
 
-  const formLevelNote = getFormText(formLevelNoteKey)?.overview || FORM_LEVEL_NOTES[formLevelNoteKey];
   const scenario = (() => {
     const t = getFormText(scenarioKey);
     if (t && (t.applies.length > 0 || t.notApplies.length > 0)) return { applies: t.applies, notApplies: t.notApplies };
@@ -131,7 +124,7 @@ function xmlFirst(code: string, parent: string): RenderText {
   })();
   const noVoucher = getFormText(conversionKey)?.noVoucher || NO_VOUCHER_FORM_NOTE[conversionKey];
 
-  return { formLevelNote, scenario, relation, conversion, noVoucher, rules, fields: normFields(fieldsForDisplay(code)) };
+  return { scenario, relation, conversion, noVoucher, rules, fields: normFields(fieldsForDisplay(code)) };
 }
 
 // ── ① 先算基线（此刻 xmlTexts 未注册任何 XML，glob 在 Node 下为空 → 纯 TS 行为）──
@@ -159,7 +152,7 @@ for (const code of codes) {
   });
 }
 
-console.log(`[verify] 已注册 XML ${files.length} 个；比对表单/TAB 编码 ${compared} 个 × 7 类取数（表概述/字段/规则要点/适用情形/数据关系/转换规则/无分录说明）`);
+console.log(`[verify] 已注册 XML ${files.length} 个；比对表单/TAB 编码 ${compared} 个 × 6 类取数（字段/规则要点/适用情形/数据关系/转换规则/无分录说明）`);
 if (bad.length === 0) {
   console.log('[verify] ✅ XML 优先取数与 TS 兜底取数逐字一致：渲染结果与迁移前完全相同（0 处差异）');
   process.exit(0);

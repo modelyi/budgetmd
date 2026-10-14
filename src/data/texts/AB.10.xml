@@ -15,9 +15,6 @@
 -->
 <form code="AB.10" name="资产账簿字典">
 
-  <!-- 表概述（原 FORM_LEVEL_NOTES['AB.10']） -->
-  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅字典参数维护：资产账簿字典，供资产折旧默认账簿与折旧参数取值，不生成分录）。【法人口径】④不区分法人：静态数据字典，不按法人编制。]]></overview>
-
   <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='AB.10'） -->
   <fields>
     <field code="code" name="账簿编码" source="本表维护"><![CDATA[]]></field>

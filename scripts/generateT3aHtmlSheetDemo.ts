@@ -134,10 +134,6 @@ function formSection(code: string): string {
   const out: string[] = [];
   out.push(`## ${code} ${text.name}`);
   out.push('');
-  out.push('### 表概述');
-  out.push('');
-  out.push(text.overview);
-  out.push('');
 
   shard.grids.forEach((raw) => {
     const grid = raw as Grid;

@@ -15,9 +15,6 @@
 -->
 <form code="AB.2" name="国资委行业字典">
 
-  <!-- 表概述（原 FORM_LEVEL_NOTES['AB.2']） -->
-  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅字典参数维护：国资委行业分类字典，为各表维度取值提供值域，不生成分录）。【法人口径】④不区分法人：静态数据字典，不按法人编制。]]></overview>
-
   <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='AB.2'） -->
   <fields>
     <field code="industryCode" name="行业代码" source="本表维护"><![CDATA[国资委行业分类]]></field>

@@ -1,7 +1,7 @@
 /**
  * XML 文字源解析器（试点：BB.1.1 一张表端到端验证）
  * =============================================================================
- * 目的：把调研页的「文字内容」（表概述 / 字段说明 / 规则要点 / 适用情形 / 数据关系 /
+ * 目的：把调研页的「文字内容」（字段说明 / 规则要点 / 适用情形 / 数据关系 /
  * 财务报表项转换规则）从 TS 源码里搬到 src/data/texts/*.xml，让前端渲染与生成脚本
  * 都从同一份 XML 取文字，验证「XML 存文字 → 前端渲染读 XML → 生成脚本读 XML」整条链路。
  *
@@ -130,8 +130,6 @@ export interface XmlExpenseSubject {
 export interface FormText {
   code: string;
   name: string;
-  /** 表概述 */
-  overview: string;
   fields: XmlFieldText[];
   rules: XmlRuleGroup[];
   applies: string[];
@@ -210,7 +208,6 @@ export function parseFormTextXml(xml: string, fallbackCode = ''): FormText {
   return {
     code,
     name: attr(root, 'name'),
-    overview: text(root.overview),
     fields: asArray(root.fields?.field).map((f) => ({
       code: attr(f, 'code'),
       name: attr(f, 'name'),

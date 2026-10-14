@@ -15,9 +15,6 @@
 -->
 <form code="BAA.8" name="经营费用转换比例表">
 
-  <!-- 表概述（原 FORM_LEVEL_NOTES['BAA.8']） -->
-  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅参数：经营费用转换比例表，供 BB.5.2 由 BAP.1 计算各法人公司经营费用，不生成分录）。【法人口径】④不区分法人：转换比例参数表，不按法人编制（比例在下游 BB.5.2 按法人落点计算）。]]></overview>
-
   <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BAA.8'） -->
   <fields>
     <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据字典"><![CDATA[部分项目（如产能项目、产品化项目）不归属到具体部门]]></field>

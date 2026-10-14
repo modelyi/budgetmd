@@ -54,10 +54,6 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 </table>
 </div>
 
-## 表概述
-
-【会计处理】本表不涉及会计处理（仅参数：服务人工标准成本（工时费率），供 BB.1.3 服务人工成本测算取数，不生成分录）。【法人口径】④不区分法人：标准成本参数表，不按法人编制。
-
 ## ③ 关键规则要点
 
 **BAA.2/BAA.3/BAA.4 标准成本设置**

@@ -528,7 +528,6 @@ export function isDroppedT3aDataSource(name: string, fields: string): boolean {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function clipFormText(t: any): any {
   const out = { ...t };
-  out.overview = clipT3aText(t.overview ?? '');
   out.fields = (t.fields ?? [])
     .filter((f: any) => !isDroppedT3aField(f.display || f.name, f.name))
     .map((f: any) => ({

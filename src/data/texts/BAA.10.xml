@@ -15,9 +15,6 @@
 -->
 <form code="BAA.10" name="进销存按法人拆分比例表">
 
-  <!-- 表概述（原 FORM_LEVEL_NOTES['BAA.10']） -->
-  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅参数：进销存按法人兜底拆分比例，供 BB.3.3.C 无PO 兜底拆分到法人取值，不生成分录）。【法人口径】④不区分法人：兜底比例参数表本身（本年度不启用、为后续年度预留），不按法人编制。]]></overview>
-
   <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BAA.10'） -->
   <fields>
     <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据字典"><![CDATA[进销存按法人拆分比例对应的预算项目]]></field>

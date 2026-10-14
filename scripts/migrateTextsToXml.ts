@@ -9,16 +9,15 @@
  *   · src/data/texts/_chart-of-accounts.xml —— 科目说明（unifiedBudgetChartOfAccounts.ts + expenseBudgetSubjectsData.ts）
  *
  * 文字来源（逐字取值，取的都是「渲染实际使用的文字」）：
- *   1. 表概述           ResearchSummaryView.tsx FORM_LEVEL_NOTES
- *   2. ②字段说明        fieldsForDisplayFromTs()（= BUDGET_FIELD_REGISTRY + 调研页投影/就地声明字段）
+ *   1. ②字段说明        fieldsForDisplayFromTs()（= BUDGET_FIELD_REGISTRY + 调研页投影/就地声明字段）
  *                       name=登记名（BUDGET_FIELD_REGISTRY.fieldName，供 A1.2 列登记簿）；
  *                       display=渲染名（投影与登记名不同时写出，缺省渲染名取 name）
- *   3. ③规则要点        findRules(parentCode) / findSubRules(subCode) 聚合结果
- *   4. ④适用情形        APPLICABLE_SCENARIOS
- *   5. ⑤数据关系        FORM_DATA_RELATION_SUMMARY
- *   6. ⑥转换规则        FINANCIAL_STATEMENT_CONVERSION + NO_VOUCHER_FORM_NOTE
- *   7. 三表取数规则      src/utils/adapters/financial.ts
- *   8. 科目说明          src/data/unifiedBudgetChartOfAccounts.ts（+ src/data/expenseBudgetSubjectsData.ts 的 FY 明细科目）
+ *   2. ③规则要点        findRules(parentCode) / findSubRules(subCode) 聚合结果
+ *   3. ④适用情形        APPLICABLE_SCENARIOS
+ *   4. ⑤数据关系        FORM_DATA_RELATION_SUMMARY
+ *   5. ⑥转换规则        FINANCIAL_STATEMENT_CONVERSION + NO_VOUCHER_FORM_NOTE
+ *   6. 三表取数规则      src/utils/adapters/financial.ts
+ *   7. 科目说明          src/data/unifiedBudgetChartOfAccounts.ts（+ src/data/expenseBudgetSubjectsData.ts 的 FY 明细科目）
  *
  * 逐字校验：npx tsx scripts/validateTextsXml.ts（把 XML 解析结果与上述 TS 原值逐字段比对）
  * 结构化元数据（inputMode / required / dataType / 层级 / 是否列报行等）不迁移，继续留在 TS。
@@ -41,7 +40,6 @@ import {
   findRules,
   findSubRules,
   fieldsForDisplayFromTs,
-  FORM_LEVEL_NOTES,
   APPLICABLE_SCENARIOS,
   FORM_DATA_RELATION_SUMMARY,
   FINANCIAL_STATEMENT_CONVERSION,
@@ -93,7 +91,7 @@ const FILE_HEADER = (code: string, name: string, source: string) =>
   `-->\n`;
 
 const SOURCE_NOTE =
-  'ResearchSummaryView.tsx（表概述/字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）';
+  'ResearchSummaryView.tsx（字段说明/规则要点/适用情形/数据关系/⑥转换规则）、budgetFormRegistry.ts（字段登记名）';
 
 // ── 表单文字：按 formCode 组织 ───────────────────────────────────────────────
 
@@ -106,14 +104,7 @@ BUDGET_FIELD_REGISTRY.forEach((f) => REGISTRY_FIELD_NAME.set(`${f.formCode}|${f.
 /** 一张表的 XML 正文（各区块：有内容才写，保证渲染取数语义与迁移前一致） */
 function buildFormXml(code: string, name: string): { xml: string; stat: string } {
   const parts: string[] = [];
-  const count = { overview: 0, fields: 0, rules: 0, scenarios: 0, relation: 0, events: 0, noVoucher: 0 };
-
-  // ① 表概述
-  const overview = FORM_LEVEL_NOTES[code];
-  if (overview) {
-    parts.push(`  <!-- 表概述（原 FORM_LEVEL_NOTES['${code}']） -->\n  <overview>${cdata(overview)}</overview>\n`);
-    count.overview = 1;
-  }
+  const count = { fields: 0, rules: 0, scenarios: 0, relation: 0, events: 0, noVoucher: 0 };
 
   // ② 字段与值说明（文字：登记名 / 渲染名 / 数据来源 / 其他说明）
   const emitFields = REGISTRY_FORM_CODES.has(code) || code.startsWith('BB.4.X.');
@@ -203,7 +194,7 @@ function buildFormXml(code: string, name: string): { xml: string; stat: string }
   const xml = hasContent
     ? FILE_HEADER(code, name, SOURCE_NOTE) + `<form ${attr('code', code)} ${attr('name', name)}>\n\n` + parts.join('\n') + `\n</form>\n`
     : '';
-  const stat = `概述${count.overview} 字段${count.fields} 规则组${count.rules} 情形${count.scenarios} 关系项${count.relation} 事件${count.events} 无分录${count.noVoucher}`;
+  const stat = `字段${count.fields} 规则组${count.rules} 情形${count.scenarios} 关系项${count.relation} 事件${count.events} 无分录${count.noVoucher}`;
   return { xml, stat };
 }
 
@@ -315,7 +306,6 @@ RESEARCH_SUB_ENTRIES.forEach((e) => {
   candidates.add(e.code);
   candidates.add(e.parent);
 });
-Object.keys(FORM_LEVEL_NOTES).forEach((c) => candidates.add(c));
 Object.keys(APPLICABLE_SCENARIOS).forEach((c) => candidates.add(c));
 Object.keys(FORM_DATA_RELATION_SUMMARY).forEach((c) => candidates.add(c));
 Object.keys(FINANCIAL_STATEMENT_CONVERSION).forEach((c) => candidates.add(c));

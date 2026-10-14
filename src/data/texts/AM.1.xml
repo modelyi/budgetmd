@@ -15,9 +15,6 @@
 -->
 <form code="AM.1" name="产品与收入方式映射">
 
-  <!-- 表概述（原 FORM_LEVEL_NOTES['AM.1']） -->
-  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅参数/映射维护：产品类别（财务口径）与收入映射，为 BB.1.2 收入按主营业务收入—硬件销售(600101)/软件销售(600103) 路由提供映射，不生成分录）。【法人口径】④不区分法人：映射主数据，不按其归集或拆分法人。]]></overview>
-
   <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='AM.1'） -->
   <fields>
     <field code="productCode" name="产品编码" source="AA.7 预算产品主数据"><![CDATA[]]></field>

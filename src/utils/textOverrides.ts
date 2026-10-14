@@ -1,7 +1,7 @@
 /**
  * 调研页「文字覆盖」store + 后端写回 + 导出固化
  * =============================================================================
- * 目的：页面上直接点编辑改文字（表概述 / ②字段说明 / ③规则要点 / ④适用情形 /
+ * 目的：页面上直接点编辑改文字（②字段说明 / ③规则要点 / ④适用情形 /
  * ⑤数据关系 / ⑥转换规则），保存时**优先写回服务器磁盘 XML**（开发期后端 =
  * vite 中间件 POST /api/save-text，见 scripts/saveTextPlugin.ts）—— AI 直接改
  * src/data/texts/*.xml 与人工在页面改，改的是同一份文字源；写盘后 dev server
@@ -14,7 +14,6 @@
  * 解压覆盖磁盘 src/data/texts/*.xml 即完成降级改动的固化。
  *
  * 覆盖键约定：`${formCode}::${kind}::…`（见 textKey），例如
- *   · BB.1.1::overview                    —— 表概述
  *   · BB.1.1::field::contractCode#0::name —— ②字段说明的字段名（#n = 同 code 第 n 次出现）
  *       槽位：name（登记名/渲染名）、source（数据来源）、remark（其他说明）
  *   · BB.1.1::rule::0::form               —— ③规则要点·规则分组标题
@@ -50,7 +49,6 @@ export type TextOverrideMap = Record<string, string>;
  * 键结构：`${formCode}::${kind}::…`，formCode 内不含 `::`，故可按 `::` 反解。
  */
 export const textKey = {
-  overview: (code: string) => `${code}::overview`,
   noVoucher: (code: string) => `${code}::noVoucher`,
   /** occ：同 fieldCode 在字段清单里的出现序号（从 0 起，对应 XML 同 code 的第 n 个节点） */
   field: (code: string, fieldCode: string, occ: number, slot: 'name' | 'source' | 'remark') =>

@@ -15,9 +15,6 @@
 -->
 <form code="AM.2" name="部门属性映射表">
 
-  <!-- 表概述（原 FORM_LEVEL_NOTES['AM.2']） -->
-  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅参数/映射维护：部门属性映射表，为 BB.4.4 按资产领用部门自动带出费用归属提供映射，不生成分录）。【法人口径】④不区分法人：映射主数据，不按其归集或拆分法人。]]></overview>
-
   <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='AM.2'） -->
   <fields>
     <field code="department" name="部门" source="AA.5 行政部门主数据字典"><![CDATA[二级/三级部门维护费用属性映射，一级部门不维护]]></field>

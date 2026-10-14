@@ -34,7 +34,7 @@ const reasonCount: Record<string, number> = {};
 let skippedUnsafe = 0;
 
 function openKeys(code: string, ft: ReturnType<typeof parseFormTextXml>): string[] {
-  const keys: string[] = [`${code}::overview`];
+  const keys: string[] = [];
   if (ft.noVoucher) keys.push(`${code}::noVoucher`);
   const occ = new Map<string, number>();
   for (const f of ft.fields) {
@@ -122,7 +122,7 @@ for (const file of files) {
 const raw = readFileSync(resolve(textsDir, 'BB.1.1.xml'), 'utf-8');
 const ft = parseFormTextXml(raw, 'BB.1.1');
 const attrKey = 'BB.1.1::field::contractCode#0::name';
-const cdataKey = 'BB.1.1::overview';
+const cdataKey = 'BB.1.1::field::contractCode#0::remark';
 const edge = (label: string, ok: boolean, detail = '') => {
   checks += 1;
   if (!ok) failures.push(`边角[${label}] 未通过 ${detail}`);
@@ -139,8 +139,9 @@ const edge = (label: string, ok: boolean, detail = '') => {
   edge('含 ]]> 被拒', applyOverrideToXml(raw, cdataKey, 'x ]]> y', 'BB.1.1').reason === 'cdata-unsafe');
   edge('聚合键 rulesBlock 定位不到', applyOverrideToXml(raw, 'BB.1.1::rulesBlock', 'x', 'BB.1.1').reason === 'unmapped');
   edge('空值被拒', applyOverrideToXml(raw, cdataKey, '   ', 'BB.1.1').reason === 'empty-value');
-  edge('编码与文件不符被拒', applyOverrideToXml(raw, 'ZZ.9::overview', 'x', 'ZZ.9').reason === 'code-mismatch');
-  edge('同一值不改盘', applyOverrideToXml(raw, cdataKey, ft.overview, 'BB.1.1').changed === false);
+  edge('编码与文件不符被拒', applyOverrideToXml(raw, 'ZZ.9::noVoucher', 'x', 'ZZ.9').reason === 'code-mismatch');
+  const cdataOriginal = resolveSlotOriginal(ft, cdataKey)?.original ?? '';
+  edge('同一值不改盘', cdataOriginal !== '' && applyOverrideToXml(raw, cdataKey, cdataOriginal, 'BB.1.1').changed === false);
 
   // 重复文字：22 个字段里 source="本表录入" 重复出现 —— 只应改到目标字段
   const dupSource = '本表录入';

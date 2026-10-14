@@ -31,7 +31,7 @@
  *     生成器 existsSync 优雅跳过——其文档无「① 表样」节，属预期）。
  *
  * 每篇文档结构（固定，章节顺序与调研页 ResearchSummaryView 完全一致，表样置首）：
- *   H1 表单编码+名称 → ① 预算表样（内嵌 HTML，多子表多段）→ 表概述（无编号）
+ *   H1 表单编码+名称 → ① 预算表样（内嵌 HTML，多子表多段）
  *   → ② 字段与值说明 → ③ 关键规则要点 → ④ 适用业务情形（适用于/不适用于两组）
  *   → ⑤ 预算编制视角：数据关系总结（数据来源（上游）/输出影响（下游）/关键编制规则）
  *   → ⑥ 财务报表项转换规则（仅登记的表单输出，无则整节省略）
@@ -417,15 +417,6 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
         out.push('');
       });
     }
-  }
-
-  // 表概述（无编号，位于 ① 表样 与 ② 字段说明 之间；文字逐字取自 XML。
-  //     T4 基础静态数据为纯字典/口径表，无「会计处理/法人口径」长篇套话可读价值，故不生成此节）
-  if (SCOPE !== 't4') {
-    out.push('## 表概述');
-    out.push('');
-    out.push(text.overview);
-    out.push('');
   }
 
   // 二、② 字段与值说明（含来源/说明；文字逐字取自 XML。总览类表单（A1.1/A1.2 等）无字段登记时整节省略，
@@ -933,14 +924,6 @@ function generateA1SpecialDoc(code: string, text: FormText, allTexts: Record<str
     out.push('');
   }
 
-  // 表概述（无编号）
-  if (text.overview) {
-    out.push('## 表概述');
-    out.push('');
-    out.push(text.overview);
-    out.push('');
-  }
-
   // ② 字段与值说明
   if (text.fields.length > 0) {
     out.push('## ② 字段与值说明');
@@ -1029,7 +1012,7 @@ function generateA1SpecialDoc(code: string, text: FormText, allTexts: Record<str
 
 /**
  * 抽样校验：重新解析 XML 并逐字比对生成的文档中出现的每段原文
- * （overview / 字段 name、source、remark / 规则要点 / 适用情形 / 数据关系全部字段 / ⑥ events）。
+ * （字段 name、source、remark / 规则要点 / 适用情形 / 数据关系全部字段 / ⑥ events）。
  * 全部 must be contained verbatim（mdCell 转义除外——校验用同样的转义口径）。
  */
 function verifyDocVerbatim(code: string, doc: string, textMap?: Record<string, FormText>): { ok: boolean; missing: string[] } {
@@ -1049,8 +1032,6 @@ function verifyDocVerbatim(code: string, doc: string, textMap?: Record<string, F
       expect(label, name);
     }
   };
-  // 表概述：与生成端一致——T4 基础静态数据不生成「表概述」节，逐字校验同步跳过该断言
-  if (SCOPE !== 't4') expect('overview', text.overview);
   text.fields.forEach((f, i) => {
     expectName(`fields[${i}].name`, f.name, f.display);
     expect(`fields[${i}].source`, f.source);

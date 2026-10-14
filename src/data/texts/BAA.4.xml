@@ -15,9 +15,6 @@
 -->
 <form code="BAA.4" name="服务物料定额标准">
 
-  <!-- 表概述（原 FORM_LEVEL_NOTES['BAA.4']） -->
-  <overview><![CDATA[【会计处理】本表不涉及会计处理（仅参数：服务物料定额标准（好件/坏件标准成本），供 BB.1.3 直接物料成本测算取数，不生成分录）。【法人口径】④不区分法人：定额标准参数表，不按法人编制。]]></overview>
-
   <!-- ② 字段与值说明（原 BUDGET_FIELD_REGISTRY / 调研页字段投影，formCode='BAA.4'） -->
   <fields>
     <field code="partCategory" name="部件类别" source="AB.6 物料好坏件字典"><![CDATA[好件/坏件；同一物料可分别维护]]></field>
