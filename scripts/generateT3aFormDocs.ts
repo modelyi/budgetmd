@@ -339,12 +339,15 @@ function gridToHtmlTable(grid: Grid): string {
         c.rowSpan > 1 ? ` rowspan="${c.rowSpan}"` : '',
         c.colSpan > 1 ? ` colspan="${c.colSpan}"` : '',
       ].join('');
+      // ① 表样逐格去行代号（含表内「编制说明/汇总口径」等说明行）：只把 CF 行代号换成报表项名，
+      // 不动科目码与表样结构；「报表行编码」列的纯行代号单元格由 decodeCfRowCodes 原样保留。
+      const cellText = decodeCfRowCodes(c.text);
       if (c.isHeader) {
         const cls = c.bg === '#001e4a' ? ' class="t3a-th t3a-th--time"' : ' class="t3a-th"';
-        lines.push(`      <th${cls}${span}>${escapeHtml(c.text)}</th>`);
+        lines.push(`      <th${cls}${span}>${escapeHtml(cellText)}</th>`);
       } else {
-        const cls = isNumericText(c.text) ? ' class="t3a-num"' : '';
-        lines.push(`      <td${cls}${span}>${escapeHtml(c.text)}</td>`);
+        const cls = isNumericText(cellText) ? ' class="t3a-num"' : '';
+        lines.push(`      <td${cls}${span}>${escapeHtml(cellText)}</td>`);
       }
     });
     lines.push(`    </tr>`);
@@ -451,19 +454,100 @@ function fillRequirementFor(formCode: string, fieldCode: string, sourceText = ''
 }
 
 /**
- * ②「填报要求」列去现金流量表行代号：CF-01/CF-14… → 该行报表项名（取自 _statement-rules.xml 的
+ * 全篇渲染输出统一去现金流量表行代号：CF-01/CF-14… → 该行报表项名（取自 _statement-rules.xml 的
  * CF 家族报表行，单一来源），与 ⑥ / ⑤「输出影响」同一去代号口径——科目颗粒度止于报表项目行，
- * 表格单元格不留裸码。同一格已出现某 CF 行名时直接删除代号，避免重复。
+ * 表格单元格不留裸码。适用范围＝② 字段与值说明（来源/说明/填报要求三列）· ④ 适用业务情形 ·
+ * ⑤ 数据关系总结（小节说明 + 上游/下游两表）· ① 预算表样逐格与表下注（表内「编制说明/汇总口径」
+ * 行同办）。同一格已出现某 CF 行名时直接删除代号、避免重复；「报表行编码」列的纯行代号单元格
+ * 属报表本体行标识，保留（见 IDENTITY_CF_CODE_RE）。
  */
+/** 行代号「标识格」：整格只由行代号（可含 ~/／、/ 连接的行代号串）＋可选括注组成——
+ *  报表本体的「报表行编码」列、AA.3.a「科目编码/上级编码」列、AA.3.c 科目编码规则表的
+ *  行代号区间（CF-01~CF-26（现金流量表直接法报表项目编号））都属行标识，去代号时原样保留
+ *  （手册 §4.2.1「表样每一行都有报表行编码与取数规则」）。 */
+const IDENTITY_CF_CODE_RE = /^(?:CF-\d+(?:\.\d+)*\s*[~～/\u3001,\uFF0C-]?\s*)+(?:[（(][^（）()]*[)）])?$/;
+/** 行代号探测（非全局，避免 /g 的 lastIndex 副作用）：无行代号时整串原样返回，绝不改写 */
+const CF_CODE_TEST_RE = /CF-\d+(?:\.\d+)*/;
+
 function decodeCfRowCodes(s: string): string {
   if (!s) return s;
-  const hasAnyCfRowName = Array.from(CF_NAME_BY_CODE.values()).some((n) => s.includes(n));
-  return s.replace(CF_CODE_RE, (code) => {
+  if (IDENTITY_CF_CODE_RE.test(s.trim())) return s;
+  // 无行代号 → 一个字都不动（表样单元格的全角缩进空格等必须原样保留）
+  if (!CF_CODE_TEST_RE.test(s)) return s;
+  // 判「行名是否已在同格出现」时忽略顿号逗号差异（「销售商品提供劳务收到的现金」＝行名去顿号写法）；
+  // 距离在「去顿号」串里度量，再把行代号的位置映射过去，两边同一坐标系。
+  const nz = (x: string) => x.replace(/[、，,]/g, '');
+  const sNz = nz(s);
+  const normIdx: number[] = new Array(s.length).fill(-1);
+  for (let i = 0, k = 0; i < s.length; i++) {
+    if (/[、，,]/.test(s[i])) continue;
+    normIdx[i] = k++;
+  }
+  const names = Array.from(CF_NAME_BY_CODE.values());
+  /** 行代号后 12 字内出现「本行行名口径的定名词尾」且本行名也含该词尾时，判定后面那段就是本行行名的
+   *  简写（如「CF-13.1 处置长期资产收回的现金净额」「CF-06职工薪酬支付现金」）——代号属冗余标注，
+   *  直接删除、保留后面那段可读简写，避免「…现金职工薪酬支付现金」这类粘连。 */
+  const TAIL_TOKENS = ['现金及现金等价物', '现金流入', '现金流出', '净增加额', '现金', '净额', '税费', '收入', '支出', '余额', '小计'];
+  const followedByOwnShortName = (codeEnd: number, name: string): boolean => {
+    const win = s.slice(codeEnd, codeEnd + 12).replace(/^[ \t]/, '');
+    // 后面那段必须是「汉字名头 + 口径词尾」（「处置长期资产收回的现金净额」「职工薪酬支付现金」）；
+    // 以标点/括号起头（「（购建固定资产支付的现金）」「；自制在建工程为非现金投入」）或词尾紧跟代号的
+    // 类别词（「仅驱动 CF-14 现金流出」）都不算行名简写——据此才删除代号。
+    return TAIL_TOKENS.some((tok) => {
+      const idx = win.indexOf(tok);
+      if (idx < 2 || !name.includes(tok)) return false;
+      return /^[\u4e00-\u9fa5]+$/.test(win.slice(0, idx));
+    });
+  };
+  /** 某行代号（或其去顿号行名写法）距「本行代号」的最小字符距离：邻近（≤12 字）说明该代号只是
+   *  附近那个行名的冗余标注 → 删代号（如「支付其他与经营活动有关的现金 CF-07」「「投资支付的现金
+   *  CF-15」」）；远离（如「利息部分归 CF-21，本金…」「同时从 CF-15 剔除」）则是独立引用 →
+   *  回填本行报表项名。
+   */
+  const distToNearestCodename = (at: number, len: number): number => {
+    const atN = normIdx[at];
+    if (atN < 0) return Infinity;
+    const endN = atN + len;
+    let best = Infinity;
+    for (const n of names) {
+      const nn = nz(n);
+      let p = sNz.indexOf(nn);
+      while (p !== -1) {
+        const d = p >= endN ? p - endN : atN - (p + nn.length);
+        if (d < best) best = d;
+        p = sNz.indexOf(nn, p + 1);
+      }
+    }
+    return best;
+  };
+  let removedCode = false;
+  // 行代号连同紧邻的一个空格一起匹配：删除时把空格一并吃掉（免得留下「计入 （…）」这类悬空空格），
+  // 回填报表项名时保留原有空格（「进 CF-01」→「进 销售商品、提供劳务收到的现金」，与上一轮 ② 一致）
+  let t = s.replace(/( ?)(CF-\d+(?:\.\d+)*)( ?)/g, (whole: string, sp1: string, code: string, _sp2: string, offset: number) => {
     const name = CF_NAME_BY_CODE.get(code);
-    if (!name) return '';
-    if (hasAnyCfRowName) return '';
-    return s.includes(name) ? '' : name;
+    const at = offset + sp1.length;
+    if (!name || distToNearestCodename(at, code.length) <= 12 || followedByOwnShortName(at + code.length, name)) {
+      removedCode = true; // 无映射 / 该代号是邻近行名的冗余标注 / 后面就是本行名简写：直接删除（连同邻接空格）
+      // 例外：代号前是拉丁字母/数字/「/」（如「…BO.CF CF-06」「…现金 / CF-05」）——保住这个分隔、
+      // 只吃后随空格，免得把「BO.CF」与后面汉字粘在一起
+      const lead = offset > 0 ? s[offset - 1] : '';
+      if (sp1 && /[A-Za-z0-9/／]/.test(lead)) return ' ';
+      return '';
+    }
+    return whole.replace(code, name);
   });
+  // 仅在有「删除」发生时，清理去代号遗留的悬空标点与空格（如「校验： CF-01 =」删码成「校验： =」）
+  if (removedCode) {
+    t = t.replace(/[：:]\s*[=＝]\s*/g, '：');
+    t = t.replace(/[=＝]\s*(?=[，。；、）)])/g, '');
+    t = t.replace(/[（(]\s*[)）]/g, '');
+    t = t.replace(/([，。；：、）])[ \t]+/g, '$1'); // 标点后的遗留空格（「；CF-03 收到」→「； 收到」；
+    // 只吃中文标点后的空格，保留公式里「) × (」「) + 」的排版空格
+    t = t.replace(/[ \t]+(?=[」』】》])/g, ''); // 「「投资支付的现金 CF-15」」删码后「…现金 」
+    t = t.replace(/^[ \t]+/, '').replace(/[ \t]+$/, '');
+    t = t.replace(/[ \t]{2,}/g, ' ');
+  }
+  return t;
 }
 
 /** 表级下注：T3A 逐句裁剪（剔除多主体残留句），其余范围原样 */
@@ -719,7 +803,7 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
         // ① 表下注：表级系统行为（自动汇总/不可直接编辑/确认提示/汇总口径等）——
         // 文字源为登记表 BUDGET_TABLE_BEHAVIOR_NOTES（按表样名取），T3A 逐句裁剪。
         tableBehaviorNotes(grid.name).forEach((n) => {
-          out.push(n);
+          out.push(decodeCfRowCodes(n));
           out.push('');
         });
       });
@@ -760,7 +844,7 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
       out.push('| :--- | :--- | :--- | :--- |');
       sec.fields.forEach((f) => {
         out.push(
-          `| ${mdCell(f.display || f.name)} | ${mdCell(f.source)} | ${mdCell(f.remark)} | ` +
+          `| ${mdCell(f.display || f.name)} | ${mdCell(decodeCfRowCodes(f.source))} | ${mdCell(decodeCfRowCodes(f.remark))} | ` +
             `${mdCell(decodeCfRowCodes(fillRequirementFor(sec.tabCode, f.code, f.source)))} |`,
         );
       });
@@ -768,7 +852,9 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
       out.push('| 字段 | 来源 | 说明 |');
       out.push('| :--- | :--- | :--- |');
       sec.fields.forEach((f) => {
-        out.push(`| ${mdCell(f.display || f.name)} | ${mdCell(f.source)} | ${mdCell(f.remark)} |`);
+        out.push(
+          `| ${mdCell(f.display || f.name)} | ${mdCell(decodeCfRowCodes(f.source))} | ${mdCell(decodeCfRowCodes(f.remark))} |`,
+        );
       });
     }
     out.push('');
@@ -781,13 +867,13 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
     if (text.applies.length > 0) {
       out.push('**适用于**');
       out.push('');
-      text.applies.forEach((p) => out.push(`- ${p}`));
+      text.applies.forEach((p) => out.push(`- ${decodeCfRowCodes(p)}`));
       out.push('');
     }
     if (text.notApplies.length > 0) {
       out.push('**不适用于**');
       out.push('');
-      text.notApplies.forEach((p) => out.push(`- ${p}`));
+      text.notApplies.forEach((p) => out.push(`- ${decodeCfRowCodes(p)}`));
       out.push('');
     }
   }
@@ -799,7 +885,7 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
     out.push('## ⑤ 预算编制视角：数据关系总结');
     out.push('');
     if (rel.summary) {
-      out.push(rel.summary);
+      out.push(decodeCfRowCodes(rel.summary));
       out.push('');
     }
     if (rel.dataSources.length > 0) {
@@ -808,7 +894,10 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
       out.push('| 来源表 | 编码 | 取数字段 | 关系说明 |');
       out.push('| :--- | :--- | :--- | :--- |');
       rel.dataSources.forEach((s) => {
-        out.push(`| ${mdCell(s.name)} | ${mdCell(s.code)} | ${mdCell(s.fields)} | ${mdCell(s.relation)} |`);
+        out.push(
+          `| ${mdCell(decodeCfRowCodes(s.name))} | ${mdCell(s.code)} | ${mdCell(decodeCfRowCodes(s.fields))} | ` +
+            `${mdCell(decodeCfRowCodes(s.relation))} |`,
+        );
       });
       out.push('');
     }
@@ -1264,7 +1353,9 @@ function generateA1SpecialDoc(code: string, text: FormText, allTexts: Record<str
     out.push('| 字段 | 来源 | 说明 |');
     out.push('| :--- | :--- | :--- |');
     text.fields.forEach((f) => {
-      out.push(`| ${mdCell(f.display || f.name)} | ${mdCell(f.source)} | ${mdCell(f.remark)} |`);
+      out.push(
+        `| ${mdCell(f.display || f.name)} | ${mdCell(decodeCfRowCodes(f.source))} | ${mdCell(decodeCfRowCodes(f.remark))} |`,
+      );
     });
     out.push('');
   }
@@ -1276,13 +1367,13 @@ function generateA1SpecialDoc(code: string, text: FormText, allTexts: Record<str
     if (text.applies.length > 0) {
       out.push('**适用于**');
       out.push('');
-      text.applies.forEach((p) => out.push(`- ${p}`));
+      text.applies.forEach((p) => out.push(`- ${decodeCfRowCodes(p)}`));
       out.push('');
     }
     if (text.notApplies.length > 0) {
       out.push('**不适用于**');
       out.push('');
-      text.notApplies.forEach((p) => out.push(`- ${p}`));
+      text.notApplies.forEach((p) => out.push(`- ${decodeCfRowCodes(p)}`));
       out.push('');
     }
   }
@@ -1293,7 +1384,7 @@ function generateA1SpecialDoc(code: string, text: FormText, allTexts: Record<str
     out.push('## ⑤ 预算编制视角：数据关系总结');
     out.push('');
     if (rel.summary) {
-      out.push(rel.summary);
+      out.push(decodeCfRowCodes(rel.summary));
       out.push('');
     }
     if (rel.dataSources.length > 0) {
@@ -1302,7 +1393,10 @@ function generateA1SpecialDoc(code: string, text: FormText, allTexts: Record<str
       out.push('| 来源表 | 编码 | 取数字段 | 关系说明 |');
       out.push('| :--- | :--- | :--- | :--- |');
       rel.dataSources.forEach((s) => {
-        out.push(`| ${mdCell(s.name)} | ${mdCell(s.code)} | ${mdCell(s.fields)} | ${mdCell(s.relation)} |`);
+        out.push(
+          `| ${mdCell(decodeCfRowCodes(s.name))} | ${mdCell(s.code)} | ${mdCell(decodeCfRowCodes(s.fields))} | ` +
+            `${mdCell(decodeCfRowCodes(s.relation))} |`,
+        );
       });
       out.push('');
     }
@@ -1348,17 +1442,18 @@ function verifyDocVerbatim(code: string, doc: string, textMap?: Record<string, F
   };
   text.fields.forEach((f, i) => {
     expectName(`fields[${i}].name`, f.name, f.display);
-    expect(`fields[${i}].source`, f.source);
-    expect(`fields[${i}].remark`, f.remark);
+    // ② 来源/说明列同样去 CF 行代号（渲染层与文档一致；校验用同一归一）
+    expect(`fields[${i}].source`, decodeCfRowCodes(f.source));
+    expect(`fields[${i}].remark`, decodeCfRowCodes(f.remark));
   });
-  text.applies.forEach((p, i) => expect(`applies[${i}]`, p));
-  text.notApplies.forEach((p, i) => expect(`notApplies[${i}]`, p));
+  text.applies.forEach((p, i) => expect(`applies[${i}]`, decodeCfRowCodes(p)));
+  text.notApplies.forEach((p, i) => expect(`notApplies[${i}]`, decodeCfRowCodes(p)));
   if (text.relation) {
-    expect('relation.summary', text.relation.summary);
+    expect('relation.summary', decodeCfRowCodes(text.relation.summary));
     text.relation.dataSources.forEach((s, i) => {
-      expect(`relation.dataSources[${i}].name`, s.name);
-      expect(`relation.dataSources[${i}].fields`, s.fields);
-      expect(`relation.dataSources[${i}].relation`, s.relation);
+      expect(`relation.dataSources[${i}].name`, decodeCfRowCodes(s.name));
+      expect(`relation.dataSources[${i}].fields`, decodeCfRowCodes(s.fields));
+      expect(`relation.dataSources[${i}].relation`, decodeCfRowCodes(s.relation));
     });
     // ⑤「输出影响」行同样去代号（渲染层与文档一致；校验用同一归一）
     text.relation.outputs.forEach((o, i) => expect(`relation.outputs[${i}].target`, normReportText(o.target, { gloss: true })));
@@ -1386,8 +1481,8 @@ function verifyDocVerbatim(code: string, doc: string, textMap?: Record<string, F
       const tabText = texts[tabCode];
       tabText?.fields.forEach((f, i) => {
         expectName(`${tabCode}.fields[${i}].name`, f.name, f.display);
-        expect(`${tabCode}.fields[${i}].source`, f.source);
-        expect(`${tabCode}.fields[${i}].remark`, f.remark);
+        expect(`${tabCode}.fields[${i}].source`, decodeCfRowCodes(f.source));
+        expect(`${tabCode}.fields[${i}].remark`, decodeCfRowCodes(f.remark));
       });
     });
   }
