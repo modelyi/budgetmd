@@ -26,6 +26,13 @@
             "bg": "#002f6c"
           },
           {
+            "text": "受益主体",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
             "text": "PO标记",
             "isHeader": true,
             "rowSpan": 2,
@@ -622,6 +629,12 @@
             "colSpan": 1
           },
           {
+            "text": "蓝莓蛋挞-核心制造单元",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "有PO",
             "isHeader": false,
             "rowSpan": 1,
@@ -1056,6 +1069,12 @@
             "colSpan": 1
           },
           {
+            "text": "草莓慕斯-泛烘焙装备制造单元",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "有PO",
             "isHeader": false,
             "rowSpan": 1,
@@ -1472,7 +1491,7 @@
         ]
       ],
       "rowCount": 4,
-      "colCount": 72
+      "colCount": 73
     },
     {
       "name": "BB.3.3.B 无PO-物料类采购预算",
@@ -1494,6 +1513,13 @@
           },
           {
             "text": "下单主体",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
+            "text": "受益主体",
             "isHeader": true,
             "rowSpan": 2,
             "colSpan": 1,
@@ -2096,6 +2122,12 @@
             "colSpan": 1
           },
           {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "无PO",
             "isHeader": false,
             "rowSpan": 1,
@@ -2519,6 +2551,12 @@
           },
           {
             "text": "研发中心",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -2964,6 +3002,12 @@
             "colSpan": 1
           },
           {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "无PO",
             "isHeader": false,
             "rowSpan": 1,
@@ -3398,6 +3442,12 @@
             "colSpan": 1
           },
           {
+            "text": "",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "无PO",
             "isHeader": false,
             "rowSpan": 1,
@@ -3814,7 +3864,7 @@
         ]
       ],
       "rowCount": 6,
-      "colCount": 72
+      "colCount": 73
     },
     {
       "name": "BB.3.3.D 关联交易视角（物料类采购）",

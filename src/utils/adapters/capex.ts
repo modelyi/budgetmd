@@ -149,7 +149,9 @@ export function buildMaterialProcurementSheet(
 
 /**
  * BB.3.3.A 有PO-物料类采购预算（采购视角）——只含「PO标记=有PO」的采购行，与 BB.3.1.A 同模式：
- *   ①维度=预算项目｜预算部门｜下单主体｜PO标记（本表恒为「有PO」的固定值列，不可修改）｜物料类别｜供应商（受益主体列已按两岗接力代采购模型移除——由关联交易预算员在 BB.3.3.D 关联交易视角补填）；
+ *   ①维度=预算项目｜预算部门｜下单主体｜受益主体（物料实际使用方，值域 AA.8 管理单元；不填默认与下单主体相同）｜PO标记（本表恒为「有PO」的固定值列，不可修改）｜物料类别｜供应商；
+ *     「受益主体」列使物料采购视角同时可见下单方与实际使用方——与「下单主体」比对各自关联法人即可识别是否触发跨法人代采购
+ *     （BB.3.3.D 关联交易视角的受益主体即自本列带出、可人工修正）；
  *   ②度量=到货额/下单额/预付款比例/预付款/验收付款（各按【全年合计】+1~12月展开，5×13=65 列），列结构与拆分前 BB.3.3.A 完全一致
  *     （预付款比例位于每月「下单额」之后、「预付款」之前；「付款金额」列已移除，付款总额由预付款+验收付款承载，CF-05 取数=预付款+验收付款）；
  *   ③有PO行按下单主体（AA.8 管理单元）与法人一一对应，直接带出归属法人，无需比例拆分；
@@ -162,7 +164,7 @@ export function buildMaterialProcurementWithPoSheet(
   year: string = '2027'
 ) {
   const withPo = items.filter((it) => String((it as any).poFlag ?? '').trim() === '有PO');
-  return buildCapexLikeSheet(withPo, org, year, '物料类别', 'BB.3.3.A 有PO-物料类采购预算', false, false, true, false, '有PO');
+  return buildCapexLikeSheet(withPo, org, year, '物料类别', 'BB.3.3.A 有PO-物料类采购预算', false, false, true, false, '有PO', true);
 }
 
 /**
@@ -179,7 +181,7 @@ export function buildMaterialProcurementNoPoSheet(
   year: string = '2027'
 ) {
   const noPo = items.filter((it) => String((it as any).poFlag ?? '').trim() === '无PO');
-  return buildCapexLikeSheet(noPo, org, year, '物料类别', 'BB.3.3.B 无PO-物料类采购预算', false, false, true, false, '无PO');
+  return buildCapexLikeSheet(noPo, org, year, '物料类别', 'BB.3.3.B 无PO-物料类采购预算', false, false, true, false, '无PO', true);
 }
 
 
@@ -188,11 +190,13 @@ export function buildMaterialProcurementNoPoSheet(
 //
 // 字段名：本视角「下单主体」（对外下单签约付款方）、
 // 「受益主体」（实际使用方）。
-// 两岗分工：采购人员编预算时在采购视角（BB.3.1.A/.B、BB.3.3.A/.B）只填下单主体、不填受益主体；
-// 关联交易预算员在本视角（.D）补填受益主体；系统比对下单主体/受益主体各自关联的法人公司
+// 两岗分工：设备及无形资产采购视角（BB.3.1.A/.B）只填下单主体、不填受益主体，由关联交易预算员在本视角（BB.3.1.D）补填受益主体；
+// 物料类采购视角（BB.3.3.A/.B）在「下单主体」后已设「受益主体」列（不填默认与下单主体相同），
+// 本视角（BB.3.3.D）的受益主体即自该列带出、可人工修正（下单主体/受益主体同一来源口径，避免两处主数据）。
+// 系统比对下单主体/受益主体各自关联的法人公司
 // （经 AA.8 管理单元主数据的「关联法人公司」）——同法人=自购自用、不触发代采购；不同法人=跨法人代采购，
 // 带出 BAA.11 加成比例、按「到货额×加成比例」测算加成款。
-// 读法：本视角是代采购的填报源（两岗接力第二岗：关联交易预算员补填受益主体、系统判定代采购并登记到货额/加成款），
+// 读法：本视角是代采购的填报源（两岗接力第二岗：确认受益主体、系统判定代采购并登记到货额/加成款），
 //     据此生成资产平移、存货转移、内部往来、加成款与三表后续处理（分录见⑥转换规则）；BJ.C.a/BJ.C.e 为只读查询表
 //     （只读镜像本视角、表样完全一致；不做业务生成、不做会计分录生成），采购自身的法人分录由 BB.3.1.C/BB.3.3.C 财务视角汇总生成。
 // ─────────────────────────────────────────────────────────────────────────────
@@ -292,6 +296,8 @@ export function buildCapexIntercompanyViewSheet(name?: string, rowsSample?: any[
  * BB.3.3.D 关联交易视角（物料类采购）——采购视角（BB.3.3.A/.B）的关联交易补填报表，与 BB.3.1.D 同结构，
  * 两处差异：①「资产类别」换为「物料类别」（AB.9 存货物料类别字典，决定平价转移在 BB.3.X 进销存的存货类别归属：
  * 下单方法人该类别存货转出 − / 受益方法人同类别转入 +）；②「代采购对象」=物料名称/备注。
+ *   维度来源口径：下单主体与受益主体均系统带出自 BB.3.3.A/.B 采购视角同一明细行（采购视角已含「受益主体」列；
+ * 不填默认与下单主体相同），本视角只读、允许人工修正，避免两处主数据。
  *   判定口径同 BB.3.1.D：同法人=自购自用不触发；不同法人=跨法人代采购（BAA.11 加成比例、加成款=到货额×加成比例）。
  *   本表是代采购的填报源（两岗接力第二岗），据此生成存货转移、内部往来、加成款与三表后续处理（分录见⑥转换规则）；
  *   BJ.C.a 代采购物料查询表为只读查询表（只读镜像本表，表样完全一致；不做业务生成、不做会计分录生成），
@@ -2057,19 +2063,29 @@ function buildCapexLikeSheet(
   includeAdvanceRatioColumn: boolean = false,
   monthlyAdvanceRatio: boolean = false,  // BB.3.1 新模式：预付款比例作为月度子列（不要付款金额）
   includeAssetName: boolean = false,       // BB.3.1 加「资产名称或备注」列
-  fixedPoFlag?: string                     // BB.3.1.A/.B 拆表后：PO标记 为固定值列（恒为「有PO」/「无PO」，不可修改）
+  fixedPoFlag?: string,                    // BB.3.1.A/.B 拆表后：PO标记 为固定值列（恒为「有PO」/「无PO」，不可修改）
+  includeBenefitEntity: boolean = false    // BB.3.3.A/.B：在「下单主体」后加「受益主体」列（物料类采购视角同时可见下单方与实际使用方）
 ) {
   const celldata: any[] = [];
   const merge: Record<string, { r: number; c: number; rs: number; cs: number }> = {};
 
-  // ── 表样: 维度列(+可选 预付款比例) + 全年合计(N_MET) + 12月×N_MET 度量 + 备注说明 ──
-  // 采购视角不设「受益主体」列（由关联交易预算员在 BB.3.1.D / BB.3.3.D 关联交易视角补填——
-  // 两岗接力代采购模型：采购人员只填下单主体，受益主体在 .D 视角登记）。
-  const baseCols = ['序号', '预算项目', '预算部门', '下单主体', 'PO标记', categoryColumnLabel];
+  // ── 表样: 维度列(+可选 受益主体) + 全年合计(N_MET) + 12月×N_MET 度量 + 备注说明 ──
+  // 设备及无形资产采购视角（BB.3.1.A/.B）不设「受益主体」列（受益主体在 BB.3.1.D 关联交易视角登记）；
+  // 物料类采购视角（BB.3.3.A/.B）设「受益主体」列——紧跟「下单主体」，值域 AA.8 管理单元主数据，
+  // 不填默认与下单主体相同；与下单主体比对各自关联法人即可识别是否触发跨法人代采购，
+  // BB.3.3.D 关联交易视角的受益主体即自本列带出（可人工修正），避免两处主数据。
+  const baseCols = ['序号', '预算项目', '预算部门', '下单主体'];
+  if (includeBenefitEntity) baseCols.push('受益主体');
+  baseCols.push('PO标记', categoryColumnLabel);
   if (includeAssetName) baseCols.push('资产名称或备注');
   baseCols.push('供应商');
   if (includeAdvanceRatioColumn) baseCols.push('预付款比例');
   const postCols = ['备注说明'];
+  // 维度列位次（受益主体插入后顺移）：
+  const COL_PO = includeBenefitEntity ? 5 : 4;            // PO标记
+  const COL_CATEGORY = COL_PO + 1;                        // 资产类别/物料类别
+  const COL_ASSET_NAME = includeAssetName ? COL_CATEGORY + 1 : -1;
+  const COL_SUPPLIER = includeAssetName ? COL_CATEGORY + 2 : COL_CATEGORY + 1;
   // 全站统一模式（BB.3.1 与 BB.3.3 一致）：每月子列=到货额/下单额/预付款比例/预付款/验收付款。
   // 预付款比例从整年维度列转入每月（位于下单额之后、预付款之前），「付款金额/付款额」列已按用户要求移除，
   // 付款总额不再单独展示，由预付款+验收付款承载（CF-05 取数=BB.3.3.预付款+BB.3.3.验收付款）。
@@ -2171,10 +2187,11 @@ function buildCapexLikeSheet(
     setCell(1, anyIt.budgetProject ?? '');                                     // 预算项目 (AA.6)
     setCell(2, item.department ?? '');                                         // 预算部门 (AA.5，默认二级部门)
     setCell(3, item.orderingEntity || (item.legalEntity ? `${item.legalEntity}-管理单元` : '')); // 下单主体(AA.8 管理单元)
-    setCell(4, fixedPoFlag ?? anyIt.poFlag ?? '');                             // PO标记（BB.3.1.A/.B 为固定值列：恒为有PO/无PO）
-    setCell(5, item.assetCategory || '设备类采购');                            // 资产类别/物料类别 (AA.9/AB.9)
-    if (includeAssetName) setCell(6, anyIt.assetNameOrRemark ?? '');           // 资产名称或备注 (BB.3.1)
-    setCell(includeAssetName ? 7 : 6, item.supplier ?? '');                    // 供应商 (AA.10, 可选)
+    if (includeBenefitEntity) setCell(4, anyIt.benefitEntity ?? '');                           // 受益主体(AA.8 管理单元；不填默认与下单主体相同)
+    setCell(COL_PO, fixedPoFlag ?? anyIt.poFlag ?? '');                        // PO标记（BB.3.1.A/.B 为固定值列：恒为有PO/无PO）
+    setCell(COL_CATEGORY, item.assetCategory || '设备类采购');                  // 资产类别/物料类别 (AA.9/AB.9)
+    if (includeAssetName) setCell(COL_ASSET_NAME, anyIt.assetNameOrRemark ?? '');           // 资产名称或备注 (BB.3.1)
+    setCell(COL_SUPPLIER, item.supplier ?? '');                               // 供应商 (AA.10, 可选)
     if (includeAdvanceRatioColumn) {
       const ratio = anyIt.advancePaymentRatio ?? 0;
       // 预付款比例：数值存 0.3（供公式乘法），显示为百分比串 30.00%
@@ -2239,10 +2256,13 @@ function buildCapexLikeSheet(
     setCell(COL_NOTES, item.notes || '');
   });
 
-  // ── 列宽 ──
+  // ── 列宽（按列取值；「受益主体」插入后其右侧各列位次顺移） ──
   const columnlen: Record<number, number> = {
-    0: 45, 1: 150, 2: 110, 3: 170, 4: 70, 5: 120, 6: 180, 7: 140, 8: 90
+    0: 45, 1: 150, 2: 110, 3: 170,
+    [COL_PO]: 70, [COL_CATEGORY]: 120, [COL_SUPPLIER]: 180,
   };
+  if (includeBenefitEntity) columnlen[4] = 170;
+  if (includeAssetName) columnlen[COL_ASSET_NAME] = 180;
   for (let c = COL_SUM; c < COL_NOTES; c++) columnlen[c] = 85;
   columnlen[COL_NOTES] = 140;
 
@@ -2263,14 +2283,17 @@ function buildCapexLikeSheet(
     .map((s: any) => s.name)
     .filter(Boolean)
     .join(',');
-  const capexDropdownCols = [
+  const capexDropdownCols: { col: number; val: string; prohibit?: boolean }[] = [
     { col: 1, val: budgetProjectOptions4capex },            // 预算项目 (AA.6)
     { col: 2, val: ADMIN_LEVEL2_DEPARTMENT_OPTIONS },       // 预算部门 (AA.5，默认二级部门)
     { col: 3, val: MANAGEMENT_UNITS.map((u) => u.name).join(',') }, // 下单主体(AA.8 管理单元)
-    // 受益主体列已从采购视角移除：由关联交易预算员在 BB.3.1.D / BB.3.3.D 关联交易视角补填
-    { col: 4, val: fixedPoFlag ?? '有PO,无PO', prohibit: Boolean(fixedPoFlag) }, // PO标记（BB.3.1.A/.B 为固定值列：只允许该固定值，不可修改）
-    { col: 5, val: assetCategoryOptions4capex },            // 资产类别/物料类别 (AA.9/AB.9)
-    { col: includeAssetName ? 7 : 6, val: supplierOptions4capex }  // 供应商 (AA.10, 可选)
+    // 受益主体（BB.3.3.A/.B 物料类采购视角）：值域同下单主体（AA.8 管理单元主数据）；不填默认与下单主体相同
+    ...(includeBenefitEntity
+      ? [{ col: 4, val: MANAGEMENT_UNITS.map((u) => u.name).join(',') }]
+      : []),
+    { col: COL_PO, val: fixedPoFlag ?? '有PO,无PO', prohibit: Boolean(fixedPoFlag) }, // PO标记（BB.3.1.A/.B 为固定值列：只允许该固定值，不可修改）
+    { col: COL_CATEGORY, val: assetCategoryOptions4capex },  // 资产类别/物料类别 (AA.9/AB.9)
+    { col: COL_SUPPLIER, val: supplierOptions4capex }        // 供应商 (AA.10, 可选)
   ];
   for (let r = 2; r < maxCapexRows; r++) {
     capexDropdownCols.forEach(({ col, val, prohibit }) => {

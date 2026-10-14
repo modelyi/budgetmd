@@ -4,7 +4,7 @@
   <!-- ② 字段与值说明 -->
   <fields>
     <field code="orderingEntity" name="下单主体" source="AA.8 管理单元主数据"><![CDATA[下单主体（对外下单签约付款方）；系统带出自 BB.3.3.A/.B 采购视角，本视角只读]]></field>
-    <field code="benefitEntity" name="受益主体" source="AA.8 管理单元主数据"><![CDATA[受益主体（实际使用方）；由关联交易预算员补填；系统比对下单主体与本列的法人公司，同法人=自购自用不触发代采购，不同法人=跨法人代采购（带出 BAA.11 加成比例、测算加成款）]]></field>
+    <field code="benefitEntity" name="受益主体" source="BB.3.3.A/.B 采购视角"><![CDATA[受益主体（实际使用方）；系统带出自 BB.3.3.A/.B 采购视角同一明细行（与「下单主体」同一来源口径），本视角只读、可人工修正；系统比对下单主体与本列的法人公司，同法人=自购自用不触发代采购，不同法人=跨法人代采购（带出 BAA.11 加成比例、测算加成款）]]></field>
     <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据"><![CDATA[系统带出自 BB.3.3.A/.B 采购视角同一明细行]]></field>
     <field code="budgetDepartment" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[系统带出自采购视角同一明细行；预算部门原则上明细到二级部门]]></field>
     <field code="materialCategory" name="物料类别" source="AB.9 存货物料类别字典"><![CDATA[系统带出自采购视角同一明细行；决定内部转移在 BB.3.X 进销存的存货类别归属（下单方法人该类别转出 − / 受益方法人同类别转入 +）；取值：生产物料/研发物料/服务物料/专项储备/其他物料/自制设备用料]]></field>
@@ -30,9 +30,9 @@
 
   <!-- ⑤ 预算编制视角：数据关系总结 -->
   <relation>
-    <summary><![CDATA[本表作为物料代采购的核心业务协同表，只读继承采购视角数据并补填受益主体，联动 BB.3.X 进销存（下单方出库、受益方入库），并向 BJ.C.a 及 BO.ELIM 传递抵销数据。]]></summary>
+    <summary><![CDATA[本表作为物料代采购的核心业务协同表，只读继承采购视角数据（下单主体与受益主体均自 BB.3.3.A/.B 同一明细行带出、可人工修正），联动 BB.3.X 进销存（下单方出库、受益方入库），并向 BJ.C.a 及 BO.ELIM 传递抵销数据。]]></summary>
     <dataSources>
-      <source code="BB.3.3.A / BB.3.3.B" name="物料采购预算采购视角" fields="下单主体、预算项目、预算部门、物料类别、到货额"><![CDATA[只读继承对外采购订单明细与月度到货额]]></source>
+      <source code="BB.3.3.A / BB.3.3.B" name="物料采购预算采购视角" fields="下单主体、受益主体、预算项目、预算部门、物料类别、到货额"><![CDATA[只读继承对外采购订单明细与月度到货额（受益主体自采购视角同一明细行带出，与下单主体同一来源口径、可人工修正）]]></source>
       <source code="BAA.11" name="关联交易加成比例" fields="加成比例(%)"><![CDATA[按内部交易类型=代采购物料带出加成参数]]></source>
     </dataSources>
     <outputs>

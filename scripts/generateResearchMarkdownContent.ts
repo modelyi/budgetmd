@@ -403,7 +403,7 @@ const FORM_SHEET_BUILDERS: Record<string, () => SpreadsheetSheetFixture[]> = {
   'BB.3.3': () => [
     buildMaterialProcurementWithPoSheet([
       // ① 有PO物料采购 —— P1项目生产物料，分批下单、分批到货，预付款比例30%
-      { budgetProject: 'P1 高功率平板光纤激光切割机', department: '采购与供应链管理部', orderingEntity: '草莓慕斯-泛烘焙装备制造单元', benefitEntity: '', poFlag: '有PO', assetCategory: '生产物料', supplier: '普雷茨特光学核心件供应商',
+      { budgetProject: 'P1 高功率平板光纤激光切割机', department: '采购与供应链管理部', orderingEntity: '草莓慕斯-泛烘焙装备制造单元', benefitEntity: '蓝莓蛋挞-核心制造单元', poFlag: '有PO', assetCategory: '生产物料', supplier: '普雷茨特光学核心件供应商',
         months: {
           m1: { orderAmount: 40, acceptanceAmount: 36, advancePaymentRatio: 0.3, advancePayment: 12,   acceptancePayment: 36 },
           m2: { orderAmount: 42, acceptanceAmount: 38, advancePaymentRatio: 0.3, advancePayment: 12.6, acceptancePayment: 38 },
@@ -420,7 +420,7 @@ const FORM_SHEET_BUILDERS: Record<string, () => SpreadsheetSheetFixture[]> = {
         },
         totalOrderAmount: 514, totalAcceptanceAmount: 484, totalAdvancePayment: 154.2, totalAcceptancePayment: 484 },
       // ② 有PO物料采购（补充示例）—— 产线扩建配套原材料及零部件，按月下单到货，预付款比例30%
-      { budgetProject: '整机总装与联调产线扩建（一期）', department: '采购与供应链管理部', orderingEntity: '草莓慕斯-泛烘焙装备制造单元', benefitEntity: '', poFlag: '有PO', assetCategory: '生产物料', supplier: '柏楚数控核心部件供应商',
+      { budgetProject: '整机总装与联调产线扩建（一期）', department: '采购与供应链管理部', orderingEntity: '草莓慕斯-泛烘焙装备制造单元', benefitEntity: '草莓慕斯-泛烘焙装备制造单元', poFlag: '有PO', assetCategory: '生产物料', supplier: '柏楚数控核心部件供应商',
         months: {
           m1: { orderAmount: 24, acceptanceAmount: 22, advancePaymentRatio: 0.3, advancePayment: 7.2, acceptancePayment: 22 },
           m2: { orderAmount: 26, acceptanceAmount: 25, advancePaymentRatio: 0.3, advancePayment: 7.8, acceptancePayment: 25 },

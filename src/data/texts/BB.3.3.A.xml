@@ -20,6 +20,7 @@
     <field code="budgetProject" name="预算项目" source="AA.6 预算项目主数据"><![CDATA[]]></field>
     <field code="department" name="预算部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[预算部门原则上明细到二级部门]]></field>
     <field code="orderingEntity" name="下单主体" source="AA.8 管理单元主数据"><![CDATA[选择管理单元；后续根据管理单元与法人的对应关系，得到所属法人公司的订单]]></field>
+    <field code="benefitEntity" name="受益主体" source="AA.8 管理单元主数据"><![CDATA[受益主体=物料实际使用方（管理单元）；与「下单主体」比对各自关联的法人公司即可识别是否触发跨法人代采购（不同法人=跨法人代采购，驱动 BJ.C.a 代采购物料汇总底稿、并由 BB.3.3.C 财务视角按法人生成物料采购分录）；不填时默认与下单主体相同]]></field>
     <field code="poFlag" name="PO标记" source="本表录入"><![CDATA[固定值列：本表恒为「有PO」，不可修改（原 PO标记 枚举「有PO/无PO」已按 PO 拆为 BB.3.3.A 有PO / BB.3.3.B 无PO 两张采购视角表样，本表为有PO表样）]]></field>
     <field code="materialCategory" name="物料类别" source="ERP 物料类别字典"><![CDATA[来自 ERP 字典；结构与BB.3.1资产类别一致，仅字典来源不同]]></field>
     <field code="supplier" name="供应商" source="AA.10 供应商主数据"><![CDATA[]]></field>
