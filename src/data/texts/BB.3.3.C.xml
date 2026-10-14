@@ -23,7 +23,7 @@
     <field code="poFlag" name="PO标记" source="BB.3.3.A/BB.3.3.B 采购视角 PO标记"><![CDATA[维度列（位于法人公司/预算项目/预算部门之后、物料类别之前）；下拉枚举：有PO/无PO，本列为非固定值列（与采购视角两张表样的固定值列不同）——区分本行金额是按下单主体（AA.8 管理单元）直接指认法人（有PO，同一法人行），还是按 BAA.10 进销存按法人兜底拆分比例拆分到法人（无PO，同一预算项目/预算部门可能落到多个法人行；BAA.10 本年度不启用）]]></field>
     <field code="materialCategory" name="物料类别" source="AB.9 存货物料类别字典"><![CDATA[维度列（位于 PO标记 之后）；从两张采购视角表样（BB.3.3.A 有PO / BB.3.3.B 无PO）按法人×项目×部门×物料类别汇总]]></field>
     <field code="arrivalAmount" name="到货额(万元)" source="BB.3.3.A/BB.3.3.B 采购视角到货额"><![CDATA[全年合计+1~12月；到货额入库（存货 1405 增加）为非现金事件，不形成现金流出]]></field>
-    <field code="advancePayment" name="预付款(万元)" source="BB.3.3.A/BB.3.3.B 采购视角预付款"><![CDATA[全年合计+1~12月；现金流出，进 CF-05（同时增加预付账款 1123）]]></field>
+    <field code="advancePayment" name="预付款(万元)" source="BB.3.3.A/BB.3.3.B 采购视角预付款"><![CDATA[全年合计+1~12月；现金流出，进 CF-05（同时增加预付款项 1123）]]></field>
     <field code="acceptancePayment" name="验收付款(万元)" source="BB.3.3.A/BB.3.3.B 采购视角验收付款"><![CDATA[全年合计+1~12月；现金流出，进 CF-05（同时减少应付账款 2202）]]></field>
   </fields>
 
@@ -45,7 +45,7 @@
       <source code="BB.3.3.B" name="无PO采购" fields="到货额/预付款/验收付款"><![CDATA[按 BAA.10 兜底拆分到法人]]></source>
     </dataSources>
     <outputs>
-      <output target="BO.BS 资产负债表"><![CDATA[到货增加存货(1405)；预付款增加预付账款(1123)；验收付款减少应付账款(2202)]]></output>
+      <output target="BO.BS 资产负债表"><![CDATA[到货增加存货(1405)；预付款增加预付款项(1123)；验收付款减少应付账款(2202)]]></output>
       <output target="BB.3.X 进销存预算"><![CDATA[到货额→本期采购入库，按 AB.9 类别转入各物料大类]]></output>
       <output target="BO.CF 现金流量表—CF-05"><![CDATA[预付款+验收付款→购买商品、接受劳务支付的现金]]></output>
     </outputs>
@@ -66,7 +66,7 @@
     </event>
     <event event="预付款（物料）" field="BB.3.3.C·预付款(万元)">
       <pl><![CDATA[—]]></pl>
-      <bs><![CDATA[预付账款 1123 (+)；货币资金(1001) (−)]]></bs>
+      <bs><![CDATA[预付款项 1123 (+)；货币资金(1001) (−)]]></bs>
       <cf><![CDATA[经营活动现金流出 CF-05 (+)]]></cf>
       <source><![CDATA[月度手工填报，按 .C 法人×预算项目×预算部门×PO标记×物料类别汇总]]></source>
       <entry><![CDATA[预付款项(1123) (+)；货币资金(1001) (−)]]></entry>

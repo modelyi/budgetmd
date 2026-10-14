@@ -299,4 +299,4 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 
 | 度量/报表项 | 借 | 贷 |
 | :--- | :--- | :--- |
-| 其他固定资产新增 | 固定资产、无形资产 | 货币资金 |
+| 其他固定资产新增 | 固定资产、无形资产、预付款项 | 货币资金 |

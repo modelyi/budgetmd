@@ -920,6 +920,21 @@ function a1FlowCategoryOf(code: string): string | null {
 function a1IsNoEffect(text: string): boolean {
   return /^—/.test((text ?? '').trim());
 }
+/**
+ * A1.3 图D/图E 标签去代号：图注已自述「不展开到精确科目码/报表行编码」，故标签一律只留
+ * 报表项/科目名——科目码（括号码与行内裸码）与现金流量表行代号（CF-xx）全部删除，
+ * 「预付账款」随全库统一为「预付款项」（与 ⑥ 渲染层同一去代号口径）。
+ */
+function a1CleanLabel(s: string): string {
+  return tidyText(
+    (s ?? '')
+      .replace(/预付账款/g, '预付款项')
+      .replace(CF_CODE_RE, '')
+      .replace(PAREN_CODE_RE, '')
+      .replace(BARE_CODE_RE, '')
+      .replace(/[，、；：）)]\s*$/g, ''),
+  );
+}
 function a1ExtractStatementLabels(raw: string): string[] {
   if (a1IsNoEffect(raw)) return [];
   let text = raw.replace(/^按[^：]*：/, '');
@@ -929,7 +944,7 @@ function a1ExtractStatementLabels(raw: string): string[] {
     let label = c.split('→')[0];
     label = label.split(/[（(]/)[0];
     label = label.split(/[，,]/)[0];
-    label = label.replace(/^[，,\s]+/, '').trim();
+    label = a1CleanLabel(label.replace(/^[，,\s]+/, '').trim());
     if (label) labels.push(label);
   }
   return Array.from(new Set(labels)).slice(0, 3);
@@ -943,7 +958,7 @@ function a1ExtractSubjects(entry: string): string[] {
     const tokens = m[1].split('/');
     for (const t of tokens) {
       let name = t.split(/[（(]/)[0].trim();
-      name = name.replace(/^[、\s]+/, '');
+      name = a1CleanLabel(name.replace(/^[、\s]+/, ''));
       if (name) subjects.push(name);
     }
   }

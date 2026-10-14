@@ -44,7 +44,7 @@
       <source code="BB.3.1.B" name="无PO采购" fields="到货额/预付款/验收付款"><![CDATA[按 BAA.9.a 拆分到法人]]></source>
     </dataSources>
     <outputs>
-      <output target="BO.BS 资产负债表"><![CDATA[到货增加固定资产(1601)/无形资产(1701)；预付款增加预付账款(1123)；验收付款减少应付账款(2202)]]></output>
+      <output target="BO.BS 资产负债表"><![CDATA[到货增加固定资产(1601)/无形资产(1701)；预付款增加预付款项(1123)；验收付款减少应付账款(2202)]]></output>
       <output target="BO.CF 现金流量表—CF-14"><![CDATA[预付款+验收付款→购建固定资产支付的现金]]></output>
       <output target="BB.4.X 资本性支出汇总表"><![CDATA[到货额→原值（到货即转固）]]></output>
     </outputs>
@@ -65,7 +65,7 @@
     </event>
     <event event="预付款（设备）" field="BB.3.1.C·预付款(万元)">
       <pl><![CDATA[—]]></pl>
-      <bs><![CDATA[预付账款 1123 (+)；货币资金(1001) (−)]]></bs>
+      <bs><![CDATA[预付款项 1123 (+)；货币资金(1001) (−)]]></bs>
       <cf><![CDATA[投资活动现金流出 CF-14 (+)]]></cf>
       <source><![CDATA[月度手工填报，按 .C 法人×预算项目×预算部门×PO标记汇总]]></source>
       <entry><![CDATA[借：预付款项(1123)；贷：货币资金(1001)]]></entry>
