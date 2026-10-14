@@ -35480,6 +35480,62 @@
             "colSpan": 1
           },
           {
+            "text": "accumulatedDepreciation",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "累计折旧(万元)",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "number",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "手工",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "是",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "业务维度/明细字段",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          }
+        ],
+        [
+          {
+            "text": "634",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "BB.4.4.b",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "BB.4.4.b",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "activationDate",
             "isHeader": false,
             "rowSpan": 1,
@@ -35518,7 +35574,7 @@
         ],
         [
           {
-            "text": "634",
+            "text": "635",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -35574,7 +35630,7 @@
         ],
         [
           {
-            "text": "635",
+            "text": "636",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -35630,7 +35686,7 @@
         ],
         [
           {
-            "text": "636",
+            "text": "637",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -35686,7 +35742,7 @@
         ],
         [
           {
-            "text": "637",
+            "text": "638",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -35742,7 +35798,7 @@
         ],
         [
           {
-            "text": "638",
+            "text": "639",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -35798,7 +35854,7 @@
         ],
         [
           {
-            "text": "639",
+            "text": "640",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -35854,7 +35910,7 @@
         ],
         [
           {
-            "text": "640",
+            "text": "641",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -35910,7 +35966,7 @@
         ],
         [
           {
-            "text": "641",
+            "text": "642",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -35966,7 +36022,7 @@
         ],
         [
           {
-            "text": "642",
+            "text": "643",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36022,7 +36078,7 @@
         ],
         [
           {
-            "text": "643",
+            "text": "644",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36078,7 +36134,7 @@
         ],
         [
           {
-            "text": "644",
+            "text": "645",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36134,7 +36190,7 @@
         ],
         [
           {
-            "text": "645",
+            "text": "646",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36190,7 +36246,7 @@
         ],
         [
           {
-            "text": "646",
+            "text": "647",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36246,7 +36302,7 @@
         ],
         [
           {
-            "text": "647",
+            "text": "648",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36302,7 +36358,7 @@
         ],
         [
           {
-            "text": "648",
+            "text": "649",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36358,7 +36414,7 @@
         ],
         [
           {
-            "text": "649",
+            "text": "650",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36414,7 +36470,7 @@
         ],
         [
           {
-            "text": "650",
+            "text": "651",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36470,7 +36526,7 @@
         ],
         [
           {
-            "text": "651",
+            "text": "652",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36526,7 +36582,7 @@
         ],
         [
           {
-            "text": "652",
+            "text": "653",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36582,7 +36638,7 @@
         ],
         [
           {
-            "text": "653",
+            "text": "654",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36638,7 +36694,7 @@
         ],
         [
           {
-            "text": "654",
+            "text": "655",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36694,7 +36750,7 @@
         ],
         [
           {
-            "text": "655",
+            "text": "656",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36750,7 +36806,7 @@
         ],
         [
           {
-            "text": "656",
+            "text": "657",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36806,7 +36862,7 @@
         ],
         [
           {
-            "text": "657",
+            "text": "658",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36862,7 +36918,7 @@
         ],
         [
           {
-            "text": "658",
+            "text": "659",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36918,7 +36974,7 @@
         ],
         [
           {
-            "text": "659",
+            "text": "660",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -36974,7 +37030,7 @@
         ],
         [
           {
-            "text": "660",
+            "text": "661",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37030,7 +37086,7 @@
         ],
         [
           {
-            "text": "661",
+            "text": "662",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37086,7 +37142,7 @@
         ],
         [
           {
-            "text": "662",
+            "text": "663",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37142,7 +37198,7 @@
         ],
         [
           {
-            "text": "663",
+            "text": "664",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37198,7 +37254,7 @@
         ],
         [
           {
-            "text": "664",
+            "text": "665",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37254,7 +37310,7 @@
         ],
         [
           {
-            "text": "665",
+            "text": "666",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37310,7 +37366,7 @@
         ],
         [
           {
-            "text": "666",
+            "text": "667",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37366,7 +37422,7 @@
         ],
         [
           {
-            "text": "667",
+            "text": "668",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37422,7 +37478,7 @@
         ],
         [
           {
-            "text": "668",
+            "text": "669",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37478,7 +37534,7 @@
         ],
         [
           {
-            "text": "669",
+            "text": "670",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37534,7 +37590,7 @@
         ],
         [
           {
-            "text": "670",
+            "text": "671",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37590,7 +37646,7 @@
         ],
         [
           {
-            "text": "671",
+            "text": "672",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37646,7 +37702,7 @@
         ],
         [
           {
-            "text": "672",
+            "text": "673",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37702,7 +37758,7 @@
         ],
         [
           {
-            "text": "673",
+            "text": "674",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37758,7 +37814,7 @@
         ],
         [
           {
-            "text": "674",
+            "text": "675",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37814,7 +37870,7 @@
         ],
         [
           {
-            "text": "675",
+            "text": "676",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37870,7 +37926,7 @@
         ],
         [
           {
-            "text": "676",
+            "text": "677",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37926,7 +37982,7 @@
         ],
         [
           {
-            "text": "677",
+            "text": "678",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -37982,7 +38038,7 @@
         ],
         [
           {
-            "text": "678",
+            "text": "679",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38038,7 +38094,7 @@
         ],
         [
           {
-            "text": "679",
+            "text": "680",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38094,7 +38150,7 @@
         ],
         [
           {
-            "text": "680",
+            "text": "681",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38150,7 +38206,7 @@
         ],
         [
           {
-            "text": "681",
+            "text": "682",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38206,7 +38262,7 @@
         ],
         [
           {
-            "text": "682",
+            "text": "683",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38262,7 +38318,7 @@
         ],
         [
           {
-            "text": "683",
+            "text": "684",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38318,7 +38374,7 @@
         ],
         [
           {
-            "text": "684",
+            "text": "685",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38374,7 +38430,7 @@
         ],
         [
           {
-            "text": "685",
+            "text": "686",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38430,7 +38486,7 @@
         ],
         [
           {
-            "text": "686",
+            "text": "687",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38486,7 +38542,7 @@
         ],
         [
           {
-            "text": "687",
+            "text": "688",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38542,7 +38598,7 @@
         ],
         [
           {
-            "text": "688",
+            "text": "689",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38598,7 +38654,7 @@
         ],
         [
           {
-            "text": "689",
+            "text": "690",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38654,7 +38710,7 @@
         ],
         [
           {
-            "text": "690",
+            "text": "691",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38710,7 +38766,7 @@
         ],
         [
           {
-            "text": "691",
+            "text": "692",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38766,7 +38822,7 @@
         ],
         [
           {
-            "text": "692",
+            "text": "693",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38822,7 +38878,7 @@
         ],
         [
           {
-            "text": "693",
+            "text": "694",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38878,7 +38934,7 @@
         ],
         [
           {
-            "text": "694",
+            "text": "695",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38934,7 +38990,7 @@
         ],
         [
           {
-            "text": "695",
+            "text": "696",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -38990,7 +39046,7 @@
         ],
         [
           {
-            "text": "696",
+            "text": "697",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39046,7 +39102,7 @@
         ],
         [
           {
-            "text": "697",
+            "text": "698",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39102,7 +39158,7 @@
         ],
         [
           {
-            "text": "698",
+            "text": "699",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39158,7 +39214,7 @@
         ],
         [
           {
-            "text": "699",
+            "text": "700",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39214,7 +39270,7 @@
         ],
         [
           {
-            "text": "700",
+            "text": "701",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39270,7 +39326,7 @@
         ],
         [
           {
-            "text": "701",
+            "text": "702",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39326,7 +39382,7 @@
         ],
         [
           {
-            "text": "702",
+            "text": "703",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39382,7 +39438,7 @@
         ],
         [
           {
-            "text": "703",
+            "text": "704",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39438,7 +39494,7 @@
         ],
         [
           {
-            "text": "704",
+            "text": "705",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39494,7 +39550,7 @@
         ],
         [
           {
-            "text": "705",
+            "text": "706",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39550,7 +39606,7 @@
         ],
         [
           {
-            "text": "706",
+            "text": "707",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39606,7 +39662,7 @@
         ],
         [
           {
-            "text": "707",
+            "text": "708",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39662,7 +39718,7 @@
         ],
         [
           {
-            "text": "708",
+            "text": "709",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39718,7 +39774,7 @@
         ],
         [
           {
-            "text": "709",
+            "text": "710",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39774,7 +39830,7 @@
         ],
         [
           {
-            "text": "710",
+            "text": "711",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39830,7 +39886,7 @@
         ],
         [
           {
-            "text": "711",
+            "text": "712",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39886,7 +39942,7 @@
         ],
         [
           {
-            "text": "712",
+            "text": "713",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39942,7 +39998,7 @@
         ],
         [
           {
-            "text": "713",
+            "text": "714",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -39998,7 +40054,7 @@
         ],
         [
           {
-            "text": "714",
+            "text": "715",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40054,7 +40110,7 @@
         ],
         [
           {
-            "text": "715",
+            "text": "716",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40110,7 +40166,7 @@
         ],
         [
           {
-            "text": "716",
+            "text": "717",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40166,7 +40222,7 @@
         ],
         [
           {
-            "text": "717",
+            "text": "718",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40222,7 +40278,7 @@
         ],
         [
           {
-            "text": "718",
+            "text": "719",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40278,7 +40334,7 @@
         ],
         [
           {
-            "text": "719",
+            "text": "720",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40334,7 +40390,7 @@
         ],
         [
           {
-            "text": "720",
+            "text": "721",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40390,7 +40446,7 @@
         ],
         [
           {
-            "text": "721",
+            "text": "722",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40446,7 +40502,7 @@
         ],
         [
           {
-            "text": "722",
+            "text": "723",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40502,7 +40558,7 @@
         ],
         [
           {
-            "text": "723",
+            "text": "724",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40558,7 +40614,7 @@
         ],
         [
           {
-            "text": "724",
+            "text": "725",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40614,7 +40670,7 @@
         ],
         [
           {
-            "text": "725",
+            "text": "726",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40670,7 +40726,7 @@
         ],
         [
           {
-            "text": "726",
+            "text": "727",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40726,7 +40782,7 @@
         ],
         [
           {
-            "text": "727",
+            "text": "728",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40782,7 +40838,7 @@
         ],
         [
           {
-            "text": "728",
+            "text": "729",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40838,7 +40894,7 @@
         ],
         [
           {
-            "text": "729",
+            "text": "730",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40894,7 +40950,7 @@
         ],
         [
           {
-            "text": "730",
+            "text": "731",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -40950,7 +41006,7 @@
         ],
         [
           {
-            "text": "731",
+            "text": "732",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -41006,7 +41062,7 @@
         ],
         [
           {
-            "text": "732",
+            "text": "733",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -41062,7 +41118,7 @@
         ],
         [
           {
-            "text": "733",
+            "text": "734",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -41118,7 +41174,7 @@
         ],
         [
           {
-            "text": "734",
+            "text": "735",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -41174,7 +41230,7 @@
         ],
         [
           {
-            "text": "735",
+            "text": "736",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -41230,7 +41286,7 @@
         ],
         [
           {
-            "text": "736",
+            "text": "737",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -41286,7 +41342,7 @@
         ],
         [
           {
-            "text": "737",
+            "text": "738",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -41341,7 +41397,7 @@
           }
         ]
       ],
-      "rowCount": 738,
+      "rowCount": 739,
       "colCount": 9
     }
   ]

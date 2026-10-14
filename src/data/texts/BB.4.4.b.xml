@@ -25,6 +25,7 @@
     <field code="assetBook" name="资产账簿" source="AA.8 管理单元主数据"><![CDATA[按管理单元关联带出对应资产账簿，该账簿对应的折旧参数用于存量资产折旧计算]]></field>
     <field code="department" name="资产领用部门" source="AA.5 行政部门主数据字典（一级部门-二级部门）"><![CDATA[]]></field>
     <field code="originalValue" name="原值(万元)" source="本表录入"><![CDATA[]]></field>
+    <field code="accumulatedDepreciation" name="累计折旧(万元)" source="本表录入"><![CDATA[存量资产卡片由 ERP 导入，登记截至上年末的累计折旧（万元）；与「原值(万元)」配对，净值 = 原值 − 累计折旧；用于固定资产按净值列报与后续月折旧测算（月折旧 = 原值 ×(1−预计净残值率)÷剩余年限(月数)，折旧参数取该资产账簿对应的 AA.9）]]></field>
     <field code="activationDate" name="启用日期" source="本表录入"><![CDATA[当月新增下月起提，据此确定折旧起始月]]></field>
     <field code="expenseAttribution" name="费用归属" source="AM.2 部门属性映射"><![CDATA[按资产领用部门属性自动带出，不允许手工修改；直接制造费用、间接制造费用均视为制造费用]]></field>
     <field code="annualDepreciation" name="全年折旧（四大费用）" source="AA.9 折旧参数"><![CDATA[全年折旧按费用归属拆四大费用：制造费用折旧/研发费用折旧与摊销/管理费用折旧与摊销/销售费用折旧与摊销，各列=SUM(1~12月对应费用子列)]]></field>

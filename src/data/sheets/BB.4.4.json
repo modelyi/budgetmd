@@ -61,6 +61,13 @@
             "bg": "#002f6c"
           },
           {
+            "text": "累计折旧(万元)",
+            "isHeader": true,
+            "rowSpan": 2,
+            "colSpan": 1,
+            "bg": "#002f6c"
+          },
+          {
             "text": "启用日期",
             "isHeader": true,
             "rowSpan": 2,
@@ -582,6 +589,12 @@
             "colSpan": 1
           },
           {
+            "text": "540.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "2024-03-15",
             "isHeader": false,
             "rowSpan": 1,
@@ -951,6 +964,12 @@
           },
           {
             "text": "360.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
+            "text": "180.0",
             "isHeader": false,
             "rowSpan": 1,
             "colSpan": 1
@@ -1330,6 +1349,12 @@
             "colSpan": 1
           },
           {
+            "text": "285.0",
+            "isHeader": false,
+            "rowSpan": 1,
+            "colSpan": 1
+          },
+          {
             "text": "2026-11-05",
             "isHeader": false,
             "rowSpan": 1,
@@ -1656,7 +1681,7 @@
         ]
       ],
       "rowCount": 5,
-      "colCount": 62
+      "colCount": 63
     }
   ]
 }

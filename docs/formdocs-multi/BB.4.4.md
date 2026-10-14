@@ -35,6 +35,7 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
       <th class="t3a-th" rowspan="2">资产账簿</th>
       <th class="t3a-th" rowspan="2">资产领用部门</th>
       <th class="t3a-th" rowspan="2">原值(万元)</th>
+      <th class="t3a-th" rowspan="2">累计折旧(万元)</th>
       <th class="t3a-th" rowspan="2">启用日期</th>
       <th class="t3a-th" rowspan="2">费用归属</th>
       <th class="t3a-th t3a-th--time" colspan="4">【全年折旧】</th>
@@ -114,6 +115,7 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
       <td>甲资产账簿</td>
       <td>生产部</td>
       <td class="t3a-num">1,800.0</td>
+      <td class="t3a-num">540.0</td>
       <td>2024-03-15</td>
       <td>制造费用</td>
       <td class="t3a-num">171.0</td>
@@ -178,6 +180,7 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
       <td>甲资产账簿</td>
       <td>行政部</td>
       <td class="t3a-num">360.0</td>
+      <td class="t3a-num">180.0</td>
       <td>2023-06-20</td>
       <td>管理费用</td>
       <td class="t3a-num">0.0</td>
@@ -242,6 +245,7 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
       <td>甲资产账簿</td>
       <td>研发部</td>
       <td class="t3a-num">950.0</td>
+      <td class="t3a-num">285.0</td>
       <td>2026-11-05</td>
       <td>研发费用</td>
       <td class="t3a-num">0.0</td>
@@ -313,7 +317,7 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 
 ## ⑤ 预算编制视角：数据关系总结
 
-存量资产折旧计算表：登记上一年度未报废的存量资产卡片（含资产类别=使用权资产的存量部分，一律来自 ERP 导入；10维度列+4×13=62列），按 AA.9 参数与启用日期（当月新增下月起提）测算本年折旧，并按费用归属拆入制造/研发/管理/销售四大费用；是存量折旧的唯一计提表，折旧汇入 BB.4.X.A 折旧费用汇总表四大费用小计，期初净值提供 BO.BS 1601/1701 年初余额。
+存量资产折旧计算表：登记上一年度未报废的存量资产卡片（含资产类别=使用权资产的存量部分，一律来自 ERP 导入；11维度列+4×13=63列），按 AA.9 参数与启用日期（当月新增下月起提）测算本年折旧，并按费用归属拆入制造/研发/管理/销售四大费用；是存量折旧的唯一计提表，折旧汇入 BB.4.X.A 折旧费用汇总表四大费用小计，期初净值提供 BO.BS 1601/1701 年初余额。
 
 **数据来源（上游）**
 
