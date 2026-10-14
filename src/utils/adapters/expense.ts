@@ -3951,47 +3951,49 @@ export function buildTaxBudgetSheet(
   };
 
   // -------------------------------------------------------------
-  // Row 0 & Row 1: Two-row header matching user's image exactly
+  // Row 0 & Row 1: 两行表头（口径与全库统一：维度列/月列/子表头用 deepBlueHeader #002f6c、
+  // 全年汇总组用 deepBlueSumHeader #001e4a）——表头底色必须落在
+  // markdownTableConverter.HEADER_BG_COLORS 表头色域内，生成器与调研页才能把这两行判为 <th>。
   // -------------------------------------------------------------
 
   // Col 0: 序号 (rs: 2)
-  setCell(0, 0, '序号', { bg: '#0066cc', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
-  setCell(1, 0, '', { bg: '#0066cc', fc: '#ffffff', bd: borderHeader });
+  setCell(0, 0, '序号', { bg: '#002f6c', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
+  setCell(1, 0, '', { bg: '#002f6c', fc: '#ffffff', bd: borderHeader });
   merges['0_0'] = { r: 0, c: 0, rs: 2, cs: 1 };
 
   // Col 1: 预算分类 (rs: 2)
-  setCell(0, 1, '预算分类', { bg: '#0066cc', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
-  setCell(1, 1, '', { bg: '#0066cc', fc: '#ffffff', bd: borderHeader });
+  setCell(0, 1, '预算分类', { bg: '#002f6c', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
+  setCell(1, 1, '', { bg: '#002f6c', fc: '#ffffff', bd: borderHeader });
   merges['0_1'] = { r: 0, c: 1, rs: 2, cs: 1 };
 
   // Col 2: 2026年预计数 (rs: 2)
   const priorYearLabel = `${budgetYear - 1}年预计数`;
-  setCell(0, 2, priorYearLabel, { bg: '#0066cc', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
-  setCell(1, 2, '', { bg: '#0066cc', fc: '#ffffff', bd: borderHeader });
+  setCell(0, 2, priorYearLabel, { bg: '#002f6c', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
+  setCell(1, 2, '', { bg: '#002f6c', fc: '#ffffff', bd: borderHeader });
   merges['0_2'] = { r: 0, c: 2, rs: 2, cs: 1 };
 
   // Col 3~4: 全年 (cs: 2) -> [预算计提, 缴纳预算]
-  setCell(0, 3, '全年', { bg: '#0052a3', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
-  setCell(0, 4, '', { bg: '#0052a3', fc: '#ffffff', bd: borderHeader });
+  setCell(0, 3, '全年', { bg: '#001e4a', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
+  setCell(0, 4, '', { bg: '#001e4a', fc: '#ffffff', bd: borderHeader });
   merges['0_3'] = { r: 0, c: 3, rs: 1, cs: 2 };
-  setCell(1, 3, '预算计提', { bg: '#e0f2fe', fc: '#0369a1', b: 1, ht: 1, bd: borderHeader });
-  setCell(1, 4, '缴纳预算', { bg: '#bae6fd', fc: '#0284c7', b: 1, ht: 1, bd: borderHeader });
+  setCell(1, 3, '预算计提', { bg: '#002f6c', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
+  setCell(1, 4, '缴纳预算', { bg: '#002f6c', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
 
   // Col 5~28: 1月 ~ 12月 (各月 cs: 2)
   for (let m = 1; m <= 12; m++) {
     const startCol = 3 + m * 2; // m=1 -> col 5, m=2 -> col 7...
     const monthName = `${m}月`;
-    setCell(0, startCol, monthName, { bg: '#0066cc', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
-    setCell(0, startCol + 1, '', { bg: '#0066cc', fc: '#ffffff', bd: borderHeader });
+    setCell(0, startCol, monthName, { bg: '#002f6c', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
+    setCell(0, startCol + 1, '', { bg: '#002f6c', fc: '#ffffff', bd: borderHeader });
     merges[`0_${startCol}`] = { r: 0, c: startCol, rs: 1, cs: 2 };
 
-    setCell(1, startCol, '预算计提', { bg: '#f0f9ff', fc: '#0369a1', b: 1, ht: 1, bd: borderHeader });
-    setCell(1, startCol + 1, '缴纳预算', { bg: '#e0f2fe', fc: '#0284c7', b: 1, ht: 1, bd: borderHeader });
+    setCell(1, startCol, '预算计提', { bg: '#002f6c', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
+    setCell(1, startCol + 1, '缴纳预算', { bg: '#002f6c', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
   }
 
   // Col 29: 备注 (rs: 2)
-  setCell(0, 29, '备注', { bg: '#0066cc', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
-  setCell(1, 29, '', { bg: '#0066cc', fc: '#ffffff', bd: borderHeader });
+  setCell(0, 29, '备注', { bg: '#002f6c', fc: '#ffffff', b: 1, ht: 1, bd: borderHeader });
+  setCell(1, 29, '', { bg: '#002f6c', fc: '#ffffff', bd: borderHeader });
   merges['0_29'] = { r: 0, c: 29, rs: 2, cs: 1 };
 
   // Filter items by currentOrg if not 集团合并

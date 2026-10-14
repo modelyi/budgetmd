@@ -27,50 +27,50 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 <table class="t3a-html-sheet">
   <tbody>
     <tr>
-      <td rowspan="2">预算分类</td>
-      <td rowspan="2">2026年预计数</td>
-      <td colspan="2">全年</td>
-      <td colspan="2">1月</td>
-      <td colspan="2">2月</td>
-      <td colspan="2">3月</td>
-      <td colspan="2">4月</td>
-      <td colspan="2">5月</td>
-      <td colspan="2">6月</td>
-      <td colspan="2">7月</td>
-      <td colspan="2">8月</td>
-      <td colspan="2">9月</td>
-      <td colspan="2">10月</td>
-      <td colspan="2">11月</td>
-      <td colspan="2">12月</td>
-      <td rowspan="2">备注</td>
+      <th class="t3a-th" rowspan="2">预算分类</th>
+      <th class="t3a-th" rowspan="2">2026年预计数</th>
+      <th class="t3a-th t3a-th--time" colspan="2">全年</th>
+      <th class="t3a-th" colspan="2">1月</th>
+      <th class="t3a-th" colspan="2">2月</th>
+      <th class="t3a-th" colspan="2">3月</th>
+      <th class="t3a-th" colspan="2">4月</th>
+      <th class="t3a-th" colspan="2">5月</th>
+      <th class="t3a-th" colspan="2">6月</th>
+      <th class="t3a-th" colspan="2">7月</th>
+      <th class="t3a-th" colspan="2">8月</th>
+      <th class="t3a-th" colspan="2">9月</th>
+      <th class="t3a-th" colspan="2">10月</th>
+      <th class="t3a-th" colspan="2">11月</th>
+      <th class="t3a-th" colspan="2">12月</th>
+      <th class="t3a-th" rowspan="2">备注</th>
     </tr>
     <tr>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
-      <td>预算计提</td>
-      <td>缴纳预算</td>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
+      <th class="t3a-th">预算计提</th>
+      <th class="t3a-th">缴纳预算</th>
     </tr>
     <tr>
       <td>增值税</td>
@@ -1137,7 +1137,7 @@ table td{border:1px solid #cbd5e1;padding:6px 10px;vertical-align:top}
 | 字段 | 来源 | 说明 | 填报要求 |
 | :--- | :--- | :--- | :--- |
 | 测算项目 | 本表维护 | 按固定行次维护：销项（产品与整机装备销售13%、技术服务6%）、进项（物料采购13%、设备及资本性采购13%、基建工程采购9%、费用类可抵扣（手工填报）、减:不可抵扣及进项税额转出（手工填报））、应纳税额测算（销项减进项差额/上期留抵/本期应纳计提/期末留抵）、税收优惠与申报缴纳（增值税即征即退/专项返还/本期实际缴纳） | 必输；下拉选择 |
-| 计税基数取数来源 | 上游业务编制表（BB.1.2/BB.1.3/BB.3.1/BB.3.2/BB.3.3）/ 本表手工填报 | 说明本行计税基数（不含税口径）的来源表与口径：销项取 BB.1.2.c/BB.1.3.c；设备及资本性采购 13% 行基数含 BB.3.1.C 原值与 BB.4.3 资产原值；费用类可抵扣与不可抵扣转出由编制人员手工填报 | 系统带出 |
+| 计税基数取数来源 | 上游业务编制表（BB.1.2/BB.1.3/BB.3.1/BB.3.2/BB.3.3）/ 本表手工填报 | 说明本行计税基数（不含税口径）的来源表与口径：销项取 BB.1.2.c/BB.1.3.c；设备及资本性采购 13% 行基数含 BB.3.1.C 原值与 BB.4.3 资产原值；费用类可抵扣与不可抵扣转出由编制人员手工填报 | 系统带出为主；费用类可抵扣与不可抵扣转出由编制人员手工填报 |
 | 上游自动取数（基数） | 上游业务编制表（BB.1.2.c/BB.1.3.c/BB.3.1.C/BB.3.2/BB.3.3.C/BB.4.3/BB.5.2） | 从上游编制表自动带出的不含税计税基数，分月+全年合计，与「税额」度量子列并列，供编制人员逐月验算「基数×适用税率=税额」；合计行与应纳税额测算行不填基数 | 系统带出 |
 | 适用税率 | AB.15 税率及附加税比率字典（ASS-TAX-07=13%、ASS-TAX-09=6%、ASS-TAX-10=9%） | 货物与整机装备销售/物料及设备采购13%；建筑服务（基建工程）9%；现代服务/技术服务6%；费用类可抵扣不得按单一税率，须按费用科目逐项标注（咨询/广告/租赁服务6%、旅客运输/不动产租赁9%、办公用品/水电13%） | 系统带出 |
 | 全年合计金额 | 本表公式 | =SUM(1~12月)；各测算项按不含税计税基数×适用税率测算 | 公式自动计算 |

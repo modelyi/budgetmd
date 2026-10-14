@@ -450,6 +450,22 @@ function fillRequirementFor(formCode: string, fieldCode: string, sourceText = ''
   return joined || fallbackFromSource(sourceText);
 }
 
+/**
+ * ②「填报要求」列去现金流量表行代号：CF-01/CF-14… → 该行报表项名（取自 _statement-rules.xml 的
+ * CF 家族报表行，单一来源），与 ⑥ / ⑤「输出影响」同一去代号口径——科目颗粒度止于报表项目行，
+ * 表格单元格不留裸码。同一格已出现某 CF 行名时直接删除代号，避免重复。
+ */
+function decodeCfRowCodes(s: string): string {
+  if (!s) return s;
+  const hasAnyCfRowName = Array.from(CF_NAME_BY_CODE.values()).some((n) => s.includes(n));
+  return s.replace(CF_CODE_RE, (code) => {
+    const name = CF_NAME_BY_CODE.get(code);
+    if (!name) return '';
+    if (hasAnyCfRowName) return '';
+    return s.includes(name) ? '' : name;
+  });
+}
+
 /** 表级下注：T3A 逐句裁剪（剔除多主体残留句），其余范围原样 */
 function tableBehaviorNotes(gridName: string): string[] {
   const notes = TABLE_NOTES_BY_GRID.get(gridName) ?? [];
@@ -745,7 +761,7 @@ function generateFormDoc(code: string, text: FormText, allTexts: Record<string, 
       sec.fields.forEach((f) => {
         out.push(
           `| ${mdCell(f.display || f.name)} | ${mdCell(f.source)} | ${mdCell(f.remark)} | ` +
-            `${mdCell(fillRequirementFor(sec.tabCode, f.code, f.source))} |`,
+            `${mdCell(decodeCfRowCodes(fillRequirementFor(sec.tabCode, f.code, f.source)))} |`,
         );
       });
     } else {

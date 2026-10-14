@@ -572,6 +572,11 @@ export const BUDGET_FIELD_FILL_REQUIREMENTS: BudgetFieldFillRequirement[] = [
   { formCode: 'BB.1.1', fieldCode: 'monthlyContractAmount', requirement: '金额不含税，不允许负数或留空，未发生填 0' },
   { formCode: 'BB.1.1', fieldCode: 'nextYearContractAmount', requirement: '金额不含税，不允许负数或留空，未发生填 0' },
   { formCode: 'BB.1.1', fieldCode: 'yearAfterNextContractAmount', requirement: '金额不含税，不允许负数或留空，未发生填 0' },
+  // 来源为「合同主数据 / 本表录入」：存量按编码带出，新增商机手工补录——不得只写「系统带出」。
+  { formCode: 'BB.1.1', fieldCode: 'contractName', requirement: '存量合同按编码带出；新增商机可手工补录', overrideBase: true },
+  // 说明含「允许修改」：带出后允许改，要求须给出可修改后缀。
+  { formCode: 'BB.1.1', fieldCode: 'productCategory', requirement: '系统带出，允许按业务需要修改', overrideBase: true },
+  { formCode: 'BB.1.1', fieldCode: 'revenueMethod', requirement: '系统带出，允许按业务需要修改', overrideBase: true },
 
   // ── BB.3.1.A 有PO-设备及无形资产采购预算（采购视角） ──
   { formCode: 'BB.3.1.A', fieldCode: 'poFlag', requirement: '固定值列：本表恒为「有PO」，由表样固定、不可修改', overrideBase: true },
@@ -720,8 +725,8 @@ export const BUDGET_FIELD_FILL_REQUIREMENTS: BudgetFieldFillRequirement[] = [
   { formCode: 'BB.4.6', fieldCode: 'disposalType', requirement: '枚举（两类）：对外出售、报废变卖' },
   { formCode: 'BB.4.6', fieldCode: 'netBookValue', requirement: '行内公式 = 资产原值 − 累计折旧，不允许手工改数' },
   { formCode: 'BB.4.6', fieldCode: 'disposalGainLoss', requirement: '行内公式 = 处置收款(不含税) − 资产净值（正数收益、负数损失），不允许手工改数' },
-  { formCode: 'BB.4.6', fieldCode: 'originalValue', requirement: '金额一律填在处置月份列，全年合计自动求和' },
-  { formCode: 'BB.4.6', fieldCode: 'accumulatedDep', requirement: '金额一律填在处置月份列，全年合计自动求和' },
+  { formCode: 'BB.4.6', fieldCode: 'originalValue', requirement: '必输；本表填报或按资产卡片带出；金额一律填在处置月份列，全年合计自动求和', overrideBase: true },
+  { formCode: 'BB.4.6', fieldCode: 'accumulatedDep', requirement: '必输；本表填报或按资产卡片带出；金额一律填在处置月份列，全年合计自动求和', overrideBase: true },
   { formCode: 'BB.4.6', fieldCode: 'disposalRevenueExTax', requirement: '金额一律填在处置月份列，全年合计自动求和' },
   { formCode: 'BB.4.6', fieldCode: 'disposalRevenueIncTax', requirement: '金额一律填在处置月份列，全年合计自动求和' },
   { formCode: 'BB.4.X', fieldCode: 'assetCategory', requirement: '取值域 AA.9 的层级写法「大类-小类」；表样含「固定资产-使用权资产」行' },
@@ -774,7 +779,8 @@ export const BUDGET_FIELD_FILL_REQUIREMENTS: BudgetFieldFillRequirement[] = [
   { formCode: 'BAA.11', fieldCode: 'markupRatePct', requirement: '加成比例仅对集团内跨法人交易生效；同一法人内部自购自用或调拨时系统自动置为 0；一经年度预算下达锁定，年内不得随意篡改' },
   { formCode: 'BAP.2', fieldCode: 'department', requirement: '一般明细到二级部门' },
   { formCode: 'BAP.2', fieldCode: 'demandType', requirement: '下拉：常规 / 研发长期（默认常规）；表内区分常规与研发长期两类物料消耗需求' },
-  { formCode: 'BAP.2', fieldCode: 'materialCode', requirement: '研发长期行必填（从 AA.11 物料主数据选择）；常规物料消耗无编码时留空' },
+  { formCode: 'BAP.2', fieldCode: 'materialCode', requirement: '选填；从 AA.11 物料主数据选择（研发长期行必填、由物料名称按物料主数据带出）；常规物料消耗无编码时留空', overrideBase: true },
+  { formCode: 'BAP.2', fieldCode: 'materialName', requirement: '必输；从 AA.11 物料主数据选择（按物料编码带出）', overrideBase: true },
   { formCode: 'BAP.2', fieldCode: 'materialCategory', requirement: '关联 AB.9 存货物料类别字典（生产物料/研发物料/服务物料/专项储备/其他物料）' },
   { formCode: 'BAP.2', fieldCode: 'usage', requirement: '4 类：生产类/研发类/销售类/管理类及其他，决定物料消耗去向；可由预算项目的项目属性自动映射带出，无需人工逐行判断' },
   { formCode: 'BAP.2', fieldCode: 'annualTotal', requirement: '全年合计 = SUM(1~12月)' },
@@ -823,6 +829,29 @@ export const BUDGET_FIELD_FILL_REQUIREMENTS: BudgetFieldFillRequirement[] = [
   { formCode: 'BB.1.3.g', fieldCode: 'laborHours', requirement: '工时(小时)，手工填报' },
   { formCode: 'BB.1.3.i', fieldCode: 'laborCost', requirement: '＝工时 × BAA.3 工时费率；汇入 BB.5.1 财务视角「服务人工成本」并等额冲减原费用计提' },
   { formCode: 'AB.10', fieldCode: 'isDefault', requirement: '全表仅一条为默认（是/否），默认账簿对应的折旧参数用于新增资产折旧计算' },
+
+  // ── 本轮修正：②「来源/说明/填报要求」一致性（doc-UAT 内容类）──
+  // 口径：同一字段的来源、说明与填报要求必须一致——说明含「允许修改/可手工覆写」的带出字段，
+  // 要求列须显式给出可修改后缀；混合来源（带出 + 本表填报）不得只写「系统带出」。
+  { formCode: 'BB.1.3.a', fieldCode: 'revenueMethod', requirement: '系统带出，允许按业务需要修改', overrideBase: true },
+  { formCode: 'BB.4.2.b', fieldCode: 'unitPrice', requirement: '系统带出，允许手工覆写', overrideBase: true },
+  { formCode: 'BF.4.b', fieldCode: 'baseSource', requirement: '系统带出为主；费用类可抵扣与不可抵扣转出由编制人员手工填报', overrideBase: true },
+  { formCode: 'BB.4.1.c', fieldCode: 'materialName', requirement: '必输；从 AA.11 物料主数据选择', overrideBase: true },
+
+  // ── BB.1.2.d 产品内部调拨预算安排（多主体跨法人附表；② 表体与主表同构，逐字段补齐第四列）──
+  // 该子表字段未登记 BUDGET_FIELD_REGISTRY（无派生「必输/录入方式」），故逐字段直接给出要求文本。
+  { formCode: 'BB.1.2.d', fieldCode: 'seq', requirement: '行次序号，展示列（调研页渲染时统一不显示）' },
+  { formCode: 'BB.1.2.d', fieldCode: 'fromEntity', requirement: '必输；从 AA.2 法人组织架构选择（生产并调出产品的销售方/供货方法人）' },
+  { formCode: 'BB.1.2.d', fieldCode: 'toEntity', requirement: '必输；从 AA.2 法人组织架构选择（接收产品、对外签约销售的采购方法人）' },
+  { formCode: 'BB.1.2.d', fieldCode: 'product', requirement: '必输；从 AA.7 预算产品主数据选择' },
+  { formCode: 'BB.1.2.d', fieldCode: 'department', requirement: '必输；默认明细到二级部门' },
+  { formCode: 'BB.1.2.d', fieldCode: 'monthlyQty', requirement: '必输；按月填报 1~12 月内部调拨数量，全年合计自动求和' },
+  { formCode: 'BB.1.2.d', fieldCode: 'unitCost', requirement: '取 BAA.2 产品标准成本，允许按实际调整' },
+  { formCode: 'BB.1.2.d', fieldCode: 'markupRate', requirement: '系统按内部交易类型=内部销售从 BAA.11 自动带出加成比例，不可手工修改' },
+  { formCode: 'BB.1.2.d', fieldCode: 'transferPrice', requirement: '公式自动计算（＝调出单位成本 ×（1 + 加成比例））' },
+  { formCode: 'BB.1.2.d', fieldCode: 'transferCost', requirement: '公式自动计算（＝调拨数量 × 调出单位成本）' },
+  { formCode: 'BB.1.2.d', fieldCode: 'markupAmount', requirement: '公式自动计算（＝调出成本额 × 加成比例）' },
+  { formCode: 'BB.1.2.d', fieldCode: 'internalSalesAmount', requirement: '公式自动计算（＝调出成本额 + 加成额）' },
 ];
 
 // ==========================================================================
@@ -1422,6 +1451,14 @@ export const BUDGET_TABLE_BEHAVIOR_NOTES: BudgetTableBehaviorNote[] = [
     gridName: 'AM.2 部门属性映射表',
     notes: [
       '按二级/三级部门维护费用属性（基于 AB.14 费用属性字典），供 BAA.8 按部门自动带出费用性质，可人工修改；二级/三级部门维护费用属性映射，一级部门不维护。',
+    ],
+  },
+  {
+    // 多主体（跨法人）内部调拨附表：仅 T3B（multi）范围渲染，t3a 随原型隐藏集剔除。
+    gridName: 'BB.1.2.d 产品内部调拨预算安排',
+    notes: [
+      '本表为多主体（跨法人）内部调拨附表，填报要求同主表 BB.1.2：一行一笔调拨安排，仅登记集团内法人之间的产品调拨。',
+      '加成比例、内部调拨单价、调出成本额、加成额、内部销售额均由系统按 BAA.2 标准成本与 BAA.11 加成比例自动测算，不可手工改数。',
     ],
   },
 ];

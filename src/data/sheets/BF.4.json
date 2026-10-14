@@ -6,257 +6,299 @@
         [
           {
             "text": "预算分类",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 2,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "2026年预计数",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 2,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "全年",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#001e4a"
           },
           {
             "text": "1月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "2月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "3月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "4月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "5月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "6月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "7月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "8月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "9月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "10月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "11月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "12月",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 2
+            "colSpan": 2,
+            "bg": "#002f6c"
           },
           {
             "text": "备注",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 2,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           }
         ],
         [
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "预算计提",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           },
           {
             "text": "缴纳预算",
-            "isHeader": false,
+            "isHeader": true,
             "rowSpan": 1,
-            "colSpan": 1
+            "colSpan": 1,
+            "bg": "#002f6c"
           }
         ],
         [
