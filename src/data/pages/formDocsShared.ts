@@ -1,11 +1,9 @@
 /**
- * T3A/T3B/T4「表单文档页」共享数据源件
+ * T2「预算编制套表」共享数据源件
  * =============================================================================
- * 供三份文档源模块共用（formDocsMarkdown.ts = T3A 37 篇、formDocsMarkdownMulti.ts =
- * T3B 43 篇、formDocsMarkdownMaster.ts = T4 29 篇）：FormDoc 模型、分组顺序（组序参数，
- * 缺省 ['BA','BB','BF','BO'] 与 T3A/T3B 一致；T4 传入 ['AA','AB','AM']）、分组判定
- * （BJ → BF 归组）、一级标题解析、编码自然序排序、内嵌 <style> 块剥除，以及
- * 「glob 原始文本 → 文档数组」的装配函数（各文档源共用同一装配口径，防口径漂移）。
+ * 供文档源模块共用（formDocsMarkdownSuite.ts、formDocsMarkdownMulti.ts、formDocsMarkdownMaster.ts）：
+ * FormDoc 模型、统一分组顺序（['BA','BB','BF','BO','AA','AB','AM']）、分组判定（BJ → BF 归组）、
+ * 一级标题解析、编码自然序排序、内嵌 <style> 块剥除，以及「glob 原始文本 → 文档数组」的统一装配函数。
  */
 
 export interface FormDoc {
@@ -15,14 +13,16 @@ export interface FormDoc {
   code: string;
   /** 表单名（取自首个标题 `# 编码 名称` 的「名称」部分） */
   name: string;
-  /** 分组（BA / BB / BF / BO；BJ.* 归编入 BF 组） */
+  /** 分组（BA / BB / BF / BO / AA / AB / AM；BJ.* 归编入 BF 组） */
   group: string;
   /** 文档正文（Markdown 原文，已剥除内嵌 <style> 块） */
   markdown: string;
+  /** 文档所属源目录（如 docs/formdocs-multi、docs/formdocs-master） */
+  sourceDir?: string;
 }
 
-/** 分组的展示顺序（页签左侧目录按此归组；T4 文档源传入 ['AA','AB','AM']，见 formDocsMarkdownMaster.ts） */
-export const FORM_DOC_GROUPS = ['BA', 'BB', 'BF', 'BO'] as const;
+/** 分组的展示顺序（页签左侧目录按此归组） */
+export const FORM_DOC_GROUPS = ['BA', 'BB', 'BF', 'BO', 'AA', 'AB', 'AM'] as const;
 
 /** 剥除文档内嵌 <style>…</style> 块（含多行内容）；避免样式块被当正文显示。 */
 export function stripStyleBlocks(markdown: string): string {
@@ -80,11 +80,13 @@ export function groupOf(code: string, fallback: string): string {
 
 /**
  * glob 原始文本 → 文档数组（剥样式块；按传入分组顺序归组，组内按编码自然序）。
- * @param groups 分组展示顺序；缺省 = T3A/T3B 的 ['BA','BB','BF','BO']，T4 传 ['AA','AB','AM']。
+ * @param groups 分组展示顺序；缺省 = ['BA','BB','BF','BO','AA','AB','AM']。
+ * @param sourceDir 来源目录标识（如 'docs/formdocs-multi'）
  */
 export function assembleFormDocs(
   rawDocs: Record<string, string>,
   groups: readonly string[] = FORM_DOC_GROUPS,
+  sourceDir?: string,
 ): FormDoc[] {
   return Object.entries(rawDocs)
     .map(([path, raw]) => {
@@ -96,6 +98,7 @@ export function assembleFormDocs(
         name,
         group: groupOf(code, file),
         markdown: stripStyleBlocks(raw),
+        sourceDir,
       };
     })
     .sort((a, b) => {

@@ -3,8 +3,7 @@ import { SpecialSolutionsView } from './components/SpecialSolutionsView';
 import { IntercompanySolutionView } from './components/IntercompanySolutionView';
 import { FormDocsView } from './components/FormDocsView';
 import { formDocsA1 } from './data/pages/formDocsMarkdownA1';
-import { formDocsMulti } from './data/pages/formDocsMarkdownMulti';
-import { formDocsMaster } from './data/pages/formDocsMarkdownMaster';
+import { formDocsSuite } from './data/pages/formDocsMarkdownSuite';
 import { PptView } from './components/PptView';
 import { FlowView } from './components/FlowView';
 import { LogicView } from './components/LogicView';
@@ -12,9 +11,7 @@ import { Moon, Sun } from 'lucide-react';
 
 const TABS = [
   { key: 'overview', label: 'T1 总览', groups: ['A1'] },
-  { key: 'budget-proto', label: 'T3A 编制套表原型', groups: ['BA', 'BB', 'BF', 'BO'], mode: 'prototype' as const },
-  { key: 'budget-multi', label: 'T3B 多主体编制套表', groups: ['BA', 'BB', 'BF', 'BO'], mode: 'multi' as const },
-  { key: 'master', label: 'T4 基础静态数据', groups: ['AA', 'AB', 'AM'] },
+  { key: 'budget-suite', label: 'T2 预算编制套表', groups: ['BA', 'BB', 'BF', 'BO', 'AA', 'AB', 'AM'] },
   { key: 'solution', label: 'T5 专项方案说明', groups: [] },
   { key: 'intercompany', label: 'T5BB 关联交易专项方案说明', groups: [] },
   { key: 'flow', label: 'T6 整体编制流程图', groups: [] },
@@ -34,7 +31,7 @@ function readStoredTab(): TabKey {
   } catch {
     /* 忽略 */
   }
-  return 'logic';
+  return 'budget-suite';
 }
 
 export default function App() {
@@ -80,11 +77,7 @@ export default function App() {
           </button>
         ))}
         <div className="flex-1"></div>
-        <div className="flex items-center gap-2 mr-2">
-          <span className="hidden sm:inline-flex text-[11px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium">
-            需求文档系统 · 轻验证松耦合 · 财务逻辑专业优先
-          </span>
-        </div>
+
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
           className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors cursor-pointer"
@@ -106,21 +99,12 @@ export default function App() {
             storageKey="budgetdemo:a1-doc:v1"
             sourceDir="docs/formdocs-a1"
           />
-        ) : activeTab === 'budget-proto' ? (
-          <FormDocsView key="docs-t3a" /> // 三套表单文档页各用独立 key（docs-t3a/docs-t3b/docs-t4）隔离实例：防止切换页签时 React 复用同一实例、把阅读位置跨页签携带（P1 修复）
-        ) : activeTab === 'budget-multi' ? (
+        ) : activeTab === 'budget-suite' ? (
           <FormDocsView
-            key="docs-t3b"
-            docSet={formDocsMulti}
-            storageKey="budgetdemo:t3b-doc:v1"
-            sourceDir="docs/formdocs-multi"
-          />
-        ) : activeTab === 'master' ? (
-          <FormDocsView
-            key="docs-t4"
-            docSet={formDocsMaster}
-            storageKey="budgetdemo:t4-doc:v1"
-            sourceDir="docs/formdocs-master"
+            key="docs-t2"
+            docSet={formDocsSuite}
+            storageKey="budgetdemo:t2-doc:v1"
+            sourceDir="docs/formdocs"
           />
         ) : (
           <FlowView />

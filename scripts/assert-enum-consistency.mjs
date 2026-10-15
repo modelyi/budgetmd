@@ -177,6 +177,7 @@ function expandFiles(patterns) {
       continue;
     }
     const dir = p.slice(0, p.lastIndexOf('/'));
+    if (!existsSync(resolve(root, dir))) continue;
     const glob = p.slice(p.lastIndexOf('/') + 1);
     const re = new RegExp(`^${glob.replace(/\./g, '\\.').replace(/\*/g, '.*')}$`);
     for (const f of readdirSync(resolve(root, dir)).sort()) {
